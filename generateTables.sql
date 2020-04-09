@@ -66,7 +66,7 @@ CREATE TABLE User(
 
 CREATE TABLE Photo(
         idPhoto Int  Auto_increment  NOT NULL ,
-        url     Varchar (128) NOT NULL ,
+        photoUrl     Varchar (128) NOT NULL ,
         order   Smallint NOT NULL ,
         idUser  Int NOT NULL
 	,CONSTRAINT Photo_PK PRIMARY KEY (idPhoto)
@@ -126,7 +126,7 @@ CREATE TABLE interestedSexe(
 CREATE TABLE dislike(
         idUser         Int NOT NULL ,
         idUser_dislike Int NOT NULL ,
-        dateMatch      Date NOT NULL
+        dateDislike      Date NOT NULL
 	,CONSTRAINT dislike_PK PRIMARY KEY (idUser,idUser_dislike)
 
 	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES User(idUser)
@@ -156,7 +156,7 @@ CREATE TABLE contact(
 
 CREATE TABLE TypeRestaurant(
         idRestaurant Int  Auto_increment  NOT NULL ,
-        name         Varchar (500) NOT NULL
+        name         Varchar (500) NOT NULL UNIQUE 
 	,CONSTRAINT TypeRestaurant_PK PRIMARY KEY (idRestaurant)
 )ENGINE=InnoDB;
 
@@ -167,8 +167,8 @@ CREATE TABLE TypeRestaurant(
 
 CREATE TABLE Dish(
         idDish Int  Auto_increment  NOT NULL ,
-        name   Varchar (64) NOT NULL ,
-        icon   Varchar (5) NOT NULL
+        name   Varchar (64) NOT NULL UNIQUE,
+        iconURL   Varchar (64) NOT NULL
 	,CONSTRAINT Dish_PK PRIMARY KEY (idDish)
 )ENGINE=InnoDB;
 
@@ -180,8 +180,8 @@ CREATE TABLE Dish(
 CREATE TABLE PersonalityDish(
         idDish      Int NOT NULL ,
         description Varchar (128) NOT NULL ,
-        name        Varchar (64) NOT NULL ,
-        icon        Varchar (5) NOT NULL
+        name        Varchar (64) NOT NULL UNIQUE,
+        iconURL        Varchar (5) NOT NULL
 	,CONSTRAINT PersonalityDish_PK PRIMARY KEY (idDish)
 
 	,CONSTRAINT PersonalityDish_Dish_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)
@@ -194,7 +194,7 @@ CREATE TABLE PersonalityDish(
 
 CREATE TABLE Hobby(
         idHobby Int  Auto_increment  NOT NULL ,
-        name    Varchar (128) NOT NULL
+        name    Varchar (128) NOT NULL UNIQUE
 	,CONSTRAINT Hobby_PK PRIMARY KEY (idHobby)
 )ENGINE=InnoDB;
 
