@@ -12,12 +12,22 @@ class ProfilController extends Controller{
     }
 
     public function execute($action){
-
+        switch(strtolower($action)){
+            case "edit":
+                edit();
+            break;
+            case "view":
+                view();
+            break;
+            default:
+                //page 404
+        break;
+        }
     }
 
-    private function modify(){
+    private function edit(){
         $data = $this->modele->getInfo();
-        $this->setViewModel('ProfilModify',$data);
+        $this->setViewModel('ProfilEdit',$data);
 
     }
 

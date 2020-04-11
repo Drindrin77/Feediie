@@ -18,7 +18,7 @@ if(file_exists($controllerPath)){
     $viewModel = $controller->execute($action);
     $viewModel->render();
 }else{
-    //Renvoit page 404
+    //Renvoie page 404
 }
 
 ?>
