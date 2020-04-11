@@ -51,6 +51,7 @@ CREATE TABLE User(
         notificationMailActivated Bool NOT NULL ,
         distanceMaxActivated      Bool NOT NULL ,
         distanceMax               Int NOT NULL ,
+        isAdmin                   Bool NOT NULL ,
         idCity                    Int ,
         idSexe                    Int NOT NULL
 	,CONSTRAINT User_PK PRIMARY KEY (idUser)
