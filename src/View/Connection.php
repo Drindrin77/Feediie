@@ -1,9 +1,15 @@
 
 <?php
+    session_start();
+    /*if( isset($_COOKIE(['token'])) ){
+        //Test si c'est le bon
+    }else{
+
+    }*/
     include 'header.php';
     $mail = "";
-    if(isset($_POST['email'])){
-        $mail = $_POST['email'];
+    if(isset($_GET['email'])){
+        $mail = $_GET['email'];
     }
 ?>
 <div class="container col-xl-8">
@@ -18,12 +24,16 @@
                         <!-- Connection-->
                         <label for="emailInput">Email</label>
                         <br>
-                        <input type="email" id="email" required size="50" class="form-control w-75" placeholder="email@mail.com" value=<?php $mail?>>
+                        <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com" value=<?php $mail?>>
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Mot de passe</label>
                         <br>
-                        <input class="w-75" required type="password" id="password" placeholder="Mot de passe">
+                        <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Se rappeler de moi</label>
                     </div>
                     <input type="submit" id="btnSubmit" value="Connexion" required class="btn btn-primary"/>
                 </form>
@@ -38,9 +48,9 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="/forgottenPassword" enctype="x-www-form-urlencoded">
+                            <form method="post" action="/forgottenPassword" enctype="x-www-form-urlencoded">
                                 <label for="emailForgottenPassword">Email</label><br>
-                                <input type="email" required placeholder="email@mail.com">
+                                <input type="email" name="emailForgotten" required placeholder="email@mail.com">
                                 <button type="submit" class="btn btn-danger">Envoyer le mail</button>
                             </form>
                         </div>

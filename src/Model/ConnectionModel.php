@@ -10,7 +10,9 @@ class ConnectionModel extends Model{
    public function exemple(){
       $req = self::$connexion -> prepare("insert into user values(default,?,?,null,?,false,?,?,default,null,null,null)");
       $req->execute(array("test","test")); 
-   }   
+   }
+   
+   public function getSessionToken(){}
 }
 
 ?>
