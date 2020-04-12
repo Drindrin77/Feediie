@@ -1,12 +1,4 @@
-
 <?php
-    session_start();
-    /*if( isset($_COOKIE(['token'])) ){
-        //Test si c'est le bon
-    }else{
-
-    }*/
-    include 'header.php';
     $mail = "";
     if(isset($_GET['email'])){
         $mail = $_GET['email'];
@@ -73,6 +65,3 @@
         </div>
     </div>
 </div> 
-<?php
-    include 'footer.php';
-?>

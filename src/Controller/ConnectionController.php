@@ -17,26 +17,21 @@ class ConnectionController extends Controller{
     }
 
     public function execute($action){
-
+        $this->setViewModel('Connection');
     }
     
     private function createToken($email){
-        session_start();
-        if(isset($_COOKIE['token']) && isset($_COOKIE['email'])){
-            setcookie("token", $_COOKIE['token'], mktime().time()+60*60*24*30);//expiration dans 30j
-            setcookie("email", $_COOKIE['email'], mktime().time()+60*60*24*30);//expiration dans 30j
-        }else{
-            $token = $this->model->getSessionToken($email);
-            setcookie("token", $token, mktime().time()+60*60*24*30);
-            setcookie("token", $email, mktime().time()+60*60*24*30);//expiration dans 30j
-
-        }
+        $token = $this->model->getSessionToken($email);
+        setcookie("token", $token, mktime().time()+60*60*24*30);
+        setcookie("token", $email, mktime().time()+60*60*24*30);//expiration dans 30j
+        $_SESSION['uniqid'] = bin2hex(random_bytes(32));
     }
 
     private function verifyToken(){
         session_start();
         if(isset($_COOKIE['token']) && isset($_COOKIE['email'])){
             if($_COOKIE['token'] == $this->model->getSessionToken($_COOKIE['email'])){
+                createToken($_COOKIE['email']);
                 return true;
             }else{
                 return false;
@@ -48,24 +43,22 @@ class ConnectionController extends Controller{
 
     //Verification CSRF
     public function verifyConnection(){
-        if(verifyToken()){
-            createToken($_COOKIE['email']);
-            header("Location: /restaurant");
-            return;
-        }
         if(isset($_POST['email']) && $_POST['password']){
             $mail = $_POST['email'];
             $password = $_POST['password'];
-            $passwordCrypted = $this->model->getPasswordByEmail($mail);
+            $passwordCrypted = password_hash($password, PASSWORD_DEFAULT);
+            $res = $this->model->verifyUserConnection($mail, $passwordCrypted);
             //Test pour bien parser les inputs pour pas d'injection
-            if(password_verify($password, $passwordCrypted)){
+            if($res){
                 if( isset($_POST['rememberMe']) ){
                     if($_POST['rememberMe'] == "on"){
                         $this->createToken($mail);
                     }
+                }else{
+                    $_SESSION['uniqid'] = bin2hex(random_bytes(32));
                 }
                 //Go To Pécho
-                header("Location: /restaurant");
+                header("Location: /");
             }else{
                 header("Location: /connection?email=$mail");
                 //Return to Connection
