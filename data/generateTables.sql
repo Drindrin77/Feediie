@@ -7,7 +7,7 @@
 ------------------------------------------------------------
 -- Table: Category
 ------------------------------------------------------------
-CREATE TABLE public.Category(
+CREATE TABLE Category(
 	idCategory   SERIAL NOT NULL ,
 	nom          VARCHAR (128) NOT NULL  ,
 	CONSTRAINT Category_PK PRIMARY KEY (idCategory)
@@ -17,7 +17,7 @@ CREATE TABLE public.Category(
 ------------------------------------------------------------
 -- Table: City
 ------------------------------------------------------------
-CREATE TABLE public.City(
+CREATE TABLE City(
 	idCity   SERIAL NOT NULL ,
 	name     VARCHAR (128) NOT NULL  ,
 	CONSTRAINT City_PK PRIMARY KEY (idCity)
@@ -27,125 +27,125 @@ CREATE TABLE public.City(
 ------------------------------------------------------------
 -- Table: Sexe
 ------------------------------------------------------------
-CREATE TABLE public.Sexe(
-	idSexe   SERIAL NOT NULL ,
-	name     VARCHAR (128) NOT NULL  ,
-	CONSTRAINT Sexe_PK PRIMARY KEY (idSexe)
+CREATE TABLE Sexe(
+	name     VARCHAR (128) NOT NULL UNIQUE,
+	CONSTRAINT Sexe_PK PRIMARY KEY (name)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: User
+-- Table: FeediieUser
 ------------------------------------------------------------
-CREATE TABLE public.User(
+CREATE TABLE FeediieUser(
 	idUser                      SERIAL NOT NULL ,
 	firstName                   VARCHAR (50) NOT NULL ,
 	lastName                    VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
 	password                    VARCHAR (128) NOT NULL ,
-	description                 VARCHAR (2000)  NOT NULL ,
-	needPhotoOther              BOOL  NOT NULL ,
-	notificationMailActivated   BOOL  NOT NULL ,
-	distanceMaxActivated        BOOL  NOT NULL ,
-	distanceMax                 INT  NOT NULL ,
-	isAdmin                     BOOL  NOT NULL ,
-	idCity                      INT   ,
-	idSexe                      INT  NOT NULL  ,
+	description                 VARCHAR (500) ,
+	needPhotoOther              BOOL  NOT NULL DEFAULT FALSE,
+	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
+	distanceMaxActivated        BOOL  NOT NULL DEFAULT TRUE,
+	distanceMax                 INT  NOT NULL DEFAULT 15,
+    token                       VARCHAR (128),
+	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
+	idCity                      INT   NOT NULL,
+	sexe                        VARCHAR  NOT NULL  ,
 	CONSTRAINT User_PK PRIMARY KEY (idUser)
 
-	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES public.City(idCity)
-	,CONSTRAINT User_Sexe0_FK FOREIGN KEY (idSexe) REFERENCES public.Sexe(idSexe)
+	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
+	,CONSTRAINT User_Sexe0_FK FOREIGN KEY (sexe) REFERENCES Sexe(name)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: Photo
 ------------------------------------------------------------
-CREATE TABLE public.Photo(
+CREATE TABLE Photo(
 	idPhoto    SERIAL NOT NULL ,
 	url        VARCHAR (128) NOT NULL ,
 	priority   INT2  NOT NULL ,
 	idUser     INT  NOT NULL  ,
 	CONSTRAINT Photo_PK PRIMARY KEY (idPhoto)
 
-	,CONSTRAINT Photo_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
+	,CONSTRAINT Photo_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: like
 ------------------------------------------------------------
-CREATE TABLE public.like(
+CREATE TABLE likedUser(
 	idUser        INT  NOT NULL ,
 	idUser_like   INT  NOT NULL ,
 	dateMatch     DATE  NOT NULL ,
 	matched       BOOL  NOT NULL  ,
 	CONSTRAINT like_PK PRIMARY KEY (idUser,idUser_like)
 
-	,CONSTRAINT like_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_like) REFERENCES public.User(idUser)
+	,CONSTRAINT like_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_like) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: interestedCategory
 ------------------------------------------------------------
-CREATE TABLE public.interestedCategory(
+CREATE TABLE interestedCategory(
 	idUser       INT  NOT NULL ,
 	idCategory   INT  NOT NULL  ,
 	CONSTRAINT interestedCategory_PK PRIMARY KEY (idUser,idCategory)
 
-	,CONSTRAINT interestedCategory_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT interestedCategory_Category0_FK FOREIGN KEY (idCategory) REFERENCES public.Category(idCategory)
+	,CONSTRAINT interestedCategory_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT interestedCategory_Category0_FK FOREIGN KEY (idCategory) REFERENCES Category(idCategory)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: interestedSexe
 ------------------------------------------------------------
-CREATE TABLE public.interestedSexe(
+CREATE TABLE interestedSexe(
 	idUser   INT  NOT NULL ,
-	idSexe   INT  NOT NULL  ,
-	CONSTRAINT interestedSexe_PK PRIMARY KEY (idUser,idSexe)
+	sexe   VARCHAR(24)  NOT NULL  ,
+	CONSTRAINT interestedSexe_PK PRIMARY KEY (idUser,sexe)
 
-	,CONSTRAINT interestedSexe_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT interestedSexe_Sexe0_FK FOREIGN KEY (idSexe) REFERENCES public.Sexe(idSexe)
+	,CONSTRAINT interestedSexe_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT interestedSexe_Sexe0_FK FOREIGN KEY (sexe) REFERENCES Sexe(name)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: dislike
 ------------------------------------------------------------
-CREATE TABLE public.dislike(
+CREATE TABLE dislike(
 	idUser           INT  NOT NULL ,
 	idUser_dislike   INT  NOT NULL ,
 	dateMatch        DATE  NOT NULL  ,
 	CONSTRAINT dislike_PK PRIMARY KEY (idUser,idUser_dislike)
 
-	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT dislike_User0_FK FOREIGN KEY (idUser_dislike) REFERENCES public.User(idUser)
+	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT dislike_User0_FK FOREIGN KEY (idUser_dislike) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: contact
 ------------------------------------------------------------
-CREATE TABLE public.contact(
+CREATE TABLE contact(
 	idUser           INT  NOT NULL ,
 	idUser_contact   INT  NOT NULL ,
-	message          VARCHAR (2000)  NOT NULL ,
+	message          VARCHAR (500)  NOT NULL ,
 	dateMessage      DATE  NOT NULL ,
 	isRead           BOOL  NOT NULL  ,
 	CONSTRAINT contact_PK PRIMARY KEY (idUser,idUser_contact)
 
-	,CONSTRAINT contact_User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT contact_User0_FK FOREIGN KEY (idUser_contact) REFERENCES public.User(idUser)
+	,CONSTRAINT contact_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT contact_User0_FK FOREIGN KEY (idUser_contact) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 ------------------------------------------------------------
 -- Table: TypeRestaurant
 ------------------------------------------------------------
-CREATE TABLE public.TypeRestaurant(
+CREATE TABLE TypeRestaurant(
 	idRestaurant   SERIAL NOT NULL ,
 	name           VARCHAR (500) NOT NULL  ,
 	CONSTRAINT TypeRestaurant_PK PRIMARY KEY (idRestaurant)
@@ -155,7 +155,7 @@ CREATE TABLE public.TypeRestaurant(
 ------------------------------------------------------------
 -- Table: Dish
 ------------------------------------------------------------
-CREATE TABLE public.Dish(
+CREATE TABLE Dish(
 	idDish    SERIAL NOT NULL ,
 	name      VARCHAR (64) NOT NULL ,
 	iconURL   VARCHAR (64) NOT NULL  ,
@@ -166,21 +166,21 @@ CREATE TABLE public.Dish(
 ------------------------------------------------------------
 -- Table: PersonalityDish
 ------------------------------------------------------------
-CREATE TABLE public.PersonalityDish(
+CREATE TABLE PersonalityDish(
 	idDish        INT  NOT NULL ,
 	description   VARCHAR (128) NOT NULL ,
 	name          VARCHAR (64) NOT NULL ,
 	iconURL       VARCHAR (64) NOT NULL  ,
 	CONSTRAINT PersonalityDish_PK PRIMARY KEY (idDish)
 
-	,CONSTRAINT PersonalityDish_Dish_FK FOREIGN KEY (idDish) REFERENCES public.Dish(idDish)
+	,CONSTRAINT PersonalityDish_Dish_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: Hobby
 ------------------------------------------------------------
-CREATE TABLE public.Hobby(
+CREATE TABLE Hobby(
 	idHobby   SERIAL NOT NULL ,
 	name      VARCHAR (128) NOT NULL  ,
 	CONSTRAINT Hobby_PK PRIMARY KEY (idHobby)
@@ -189,52 +189,52 @@ CREATE TABLE public.Hobby(
 ------------------------------------------------------------
 -- Table: firstDate
 ------------------------------------------------------------
-CREATE TABLE public.firstDate(
+CREATE TABLE firstDate(
 	idUser         INT  NOT NULL ,
 	idRestaurant   INT  NOT NULL  ,
 	CONSTRAINT firstDate_PK PRIMARY KEY (idUser,idRestaurant)
 
-	,CONSTRAINT firstDate__User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT firstDate_TypeRestaurant0_FK FOREIGN KEY (idRestaurant) REFERENCES public.TypeRestaurant(idRestaurant)
+	,CONSTRAINT firstDate__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT firstDate_TypeRestaurant0_FK FOREIGN KEY (idRestaurant) REFERENCES TypeRestaurant(idRestaurant)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: likeEat
 ------------------------------------------------------------
-CREATE TABLE public.likeEat(
+CREATE TABLE likeEat(
 	idUser   INT  NOT NULL ,
 	idDish   INT  NOT NULL  ,
 	CONSTRAINT likeEat_PK PRIMARY KEY (idUser,idDish)
 
-	,CONSTRAINT likeEat__User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT likeEat_Dish0_FK FOREIGN KEY (idDish) REFERENCES public.Dish(idDish)
+	,CONSTRAINT likeEat__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT likeEat_Dish0_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: looklike
 ------------------------------------------------------------
-CREATE TABLE public.looklike(
+CREATE TABLE looklike(
 	idUser   INT  NOT NULL ,
 	idDish   INT  NOT NULL  ,
 	CONSTRAINT looklike_PK PRIMARY KEY (idUser,idDish)
 
-	,CONSTRAINT looklike__User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT looklike_PersonalityDish0_FK FOREIGN KEY (idDish) REFERENCES public.PersonalityDish(idDish)
+	,CONSTRAINT looklike__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT looklike_PersonalityDish0_FK FOREIGN KEY (idDish) REFERENCES PersonalityDish(idDish)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
 -- Table: practice
 ------------------------------------------------------------
-CREATE TABLE public.practice(
+CREATE TABLE practice(
 	idUser    INT  NOT NULL ,
 	idHobby   INT  NOT NULL  ,
 	CONSTRAINT practice_PK PRIMARY KEY (idUser,idHobby)
 
-	,CONSTRAINT practice__User_FK FOREIGN KEY (idUser) REFERENCES public.User(idUser)
-	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES public.Hobby(idHobby)
+	,CONSTRAINT practice__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)
 )WITHOUT OIDS;
 
 
