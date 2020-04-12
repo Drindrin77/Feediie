@@ -4,18 +4,13 @@ if(!defined('CONST_INCLUDE'))
 
 abstract class Controller {
 
-	protected $model;
 	protected $viewModel;
-
-	function getModel(){
-		return $this->modele;
-	}
 
 	function getViewModel(){
 		return $this->viewModel;
 	}
 
-	protected function setViewModel($path, $data){
+	protected function setViewModel($path, $data=null){
 		$this->viewModel = new ViewModel($path, $data);
 	}
 

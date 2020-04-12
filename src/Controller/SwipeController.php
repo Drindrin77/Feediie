@@ -3,9 +3,7 @@
 if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-include_once ("UserModel.php");
-
-class RegisterController extends Controller{
+class SwipeController extends Controller{
 
     private $userModel;
 	
@@ -14,9 +12,9 @@ class RegisterController extends Controller{
     }
 
     public function execute($action){
-        switch(strtolower($action)){
-        }
+
     }
+
 }
 
 ?>

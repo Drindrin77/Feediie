@@ -3,36 +3,34 @@
 if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-include_once ("ProfilModel.php");
-
 class ProfilController extends Controller{
+
+    private $userModel;
 	
 	public function __construct() {
-		$this->modele = new ConnectionModel();
+		$this->userModel = new UserModel();
     }
 
     public function execute($action){
-        switch(strtolower($action)){
+        switch($action){
             case "edit":
                 edit();
             break;
-            case "view":
-                view();
-            break;
+            
             default:
-                //page 404
-        break;
+                view($action);
+            break;
         }
     }
 
     private function edit(){
-        $data = $this->modele->getInfo();
+        $data = $this->userModel->getInfo();
         $this->setViewModel('ProfilEdit',$data);
 
     }
 
     private function view($identifier){
-        $data = $this->modele->getInfoByIdentifier($identifier);
+        $data = $this->userModel->getInfoByIdentifier($identifier);
         $this->setViewModel('ProfilView',$data);
 
     }
