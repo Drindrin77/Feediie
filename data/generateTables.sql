@@ -20,16 +20,17 @@ CREATE TABLE Category(
 CREATE TABLE City(
 	idCity   SERIAL NOT NULL ,
 	name     VARCHAR (128) NOT NULL  ,
+    zipCode  VARCHAR (24) NOT NULL,
 	CONSTRAINT City_PK PRIMARY KEY (idCity)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: Sexe
+-- Table: sex
 ------------------------------------------------------------
-CREATE TABLE Sexe(
+CREATE TABLE sex(
 	name     VARCHAR (128) NOT NULL UNIQUE,
-	CONSTRAINT Sexe_PK PRIMARY KEY (name)
+	CONSTRAINT sex_PK PRIMARY KEY (name)
 )WITHOUT OIDS;
 
 
@@ -50,11 +51,11 @@ CREATE TABLE FeediieUser(
     token                       VARCHAR (128),
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
 	idCity                      INT   NOT NULL,
-	sexe                        VARCHAR  NOT NULL  ,
+	sex                        VARCHAR  NOT NULL  ,
 	CONSTRAINT User_PK PRIMARY KEY (idUser)
 
 	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
-	,CONSTRAINT User_Sexe0_FK FOREIGN KEY (sexe) REFERENCES Sexe(name)
+	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
 )WITHOUT OIDS;
 
 
@@ -101,15 +102,15 @@ CREATE TABLE interestedCategory(
 
 
 ------------------------------------------------------------
--- Table: interestedSexe
+-- Table: interestedsex
 ------------------------------------------------------------
-CREATE TABLE interestedSexe(
+CREATE TABLE interestedsex(
 	idUser   INT  NOT NULL ,
-	sexe   VARCHAR(24)  NOT NULL  ,
-	CONSTRAINT interestedSexe_PK PRIMARY KEY (idUser,sexe)
+	sex   VARCHAR(24)  NOT NULL  ,
+	CONSTRAINT interestedsex_PK PRIMARY KEY (idUser,sex)
 
-	,CONSTRAINT interestedSexe_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT interestedSexe_Sexe0_FK FOREIGN KEY (sexe) REFERENCES Sexe(name)
+	,CONSTRAINT interestedsex_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT interestedsex_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
 )WITHOUT OIDS;
 
 
