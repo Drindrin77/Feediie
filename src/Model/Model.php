@@ -5,9 +5,9 @@ if(!defined('CONST_INCLUDE'))
 class Model{
 
 	static protected $connexion;
-	private static $dns = "";
-    private static $user=""; 
-    private static $password="";
+	private static $dns = getenv('DB_NAME');
+    private static $user= getenv('DB_USER');
+    private static $password= getenv('DB_PASSWORD');
 	
 	public function __construct() {}	
 
