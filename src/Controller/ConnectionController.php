@@ -3,12 +3,12 @@
 if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-include_once ("ConnectionModel.php");
-
 class ConnectionController extends Controller{
-	
+    
+    private $model;
+    
 	public function __construct() {
-		$this->model = new ConnectionModel();
+		$this->model = new UserModel();
     }
 
     public function example(){

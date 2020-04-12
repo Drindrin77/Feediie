@@ -11,7 +11,7 @@
         </div>
         <div class="col mt-4 mb-4">
             <div class="border rounded border-primary pl-4 pt-2">
-                <form method="post" action="/verifyConnection" enctype="x-www-form-urlencoded">
+                <form method="post" action="/Connection/verifyConnection" enctype="x-www-form-urlencoded">
                     <div class="form-group">
                         <!-- Connection-->
                         <label for="emailInput">Email</label>
