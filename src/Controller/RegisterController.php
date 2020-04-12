@@ -3,20 +3,43 @@
 if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-include_once ("UserModel.php");
-
 class RegisterController extends Controller{
 
-    private $userModel;
+    private $cityModel;
+    private $sexModel;
 	
 	public function __construct() {
-		$this->userModel = new UserModel();
+        $this->cityModel = new CityModel();
+        $this->sexModel = new SexModel();
     }
 
     public function execute($action){
-        switch(strtolower($action)){
+        switch($action){
+            case 'adduser':
+                $this->addUser();
+            break;
+
+            default:
+                $this->pageRegister();
+            break;
         }
     }
+
+    public function addUser(){
+        
+    }
+
+    public function pageRegister(){
+        
+        $cities = $this->cityModel->getAllCity();
+        $sexs = $this->sexModel->getAllSex();
+        $data = [
+            "cities"=>$cities,
+            "sexs"=>$sexs
+        ];
+        $this->viewModel = new ViewModel("Register", $data);
+    }
+
 }
 
 ?>

@@ -5,23 +5,23 @@ if(session_status() == PHP_SESSION_NONE)
 
 define('CONST_INCLUDE', NULL);
 
-require_once("../src/Controller/Controller.php");
-require_once("../src/Model/Model.php");
 require_once("../src/ViewModel.php");
-require_once("../src/Service/AuthService.php");
-require_once("../src/Model/UserModel.php");
 
-Model::initConnexionBD();
+require_once("../src/Controller/Controller.php");
+require_once("../src/Service/DBConnection.php");
+require_once("../src/Service/AuthService.php");
+
+require_once("../src/Model/UserModel.php");
+require_once("../src/Model/CityModel.php");
+require_once("../src/Model/SexModel.php");
 
 $urlWithoutParams = explode ('?', $_SERVER['REQUEST_URI']);
 $routes = explode('/',$urlWithoutParams[0]);
 $controllerName = ucfirst($routes[1]). 'Controller';
-$controllerPath = "../src/Controller/$controllerName";
+$controllerPath = "../src/Controller/$controllerName.php";
 
 if(empty($routes[1]) || file_exists($controllerPath)){
-
     //URL : "/" 
-
     if(empty($routes[1])){
         if(AuthService::isAuthenticated()){
             $controllerName = "SwipeController";

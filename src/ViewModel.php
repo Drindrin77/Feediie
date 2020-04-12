@@ -41,7 +41,8 @@ class ViewModel {
           }
           ?>
           <div class="pageContainer">
-            <?php include_once 'View/'.$this->viewPath.'.php' ?>
+            <?php 
+            include_once 'View/'.$this->viewPath.'.php' ?>
           </div>
           <?php
           if ($this->shouldShowHeaders()) {
@@ -54,8 +55,7 @@ class ViewModel {
     
     private function shouldShowHeaders()
     {
-        //return $this->currentUser !== null;
-        return true;
+        return AuthService::isAuthenticated();
     }
 
 
