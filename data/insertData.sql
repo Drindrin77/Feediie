@@ -1,3 +1,6 @@
+INSERT INTO Category VALUES(default, 'Femme');
+INSERT INTO Category VALUES(default, 'Homme');
+
 INSERT INTO User VALUES(
     'Test',
     'Test',
@@ -10,7 +13,7 @@ INSERT INTO User VALUES(
     15,
     TRUE,
     NULL,
-    NULL
+    1
 )
 INSERT INTO User VALUES(
     'Test2',

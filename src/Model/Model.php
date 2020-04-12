@@ -4,22 +4,24 @@ if(!defined('CONST_INCLUDE'))
 
 class Model{
 
-	static protected $connexion;
-	private static $dns = getenv('DB_NAME');
-    private static $user= getenv('DB_USER');
-    private static $password= getenv('DB_PASSWORD');
+	protected static $connection;
 	
-	public function __construct() {}	
+	public function __construct() {
+	}	
 
   	public static function initConnexionBD(){
 
+		$dbName = getenv('DB_NAME');
+    	$dbUser = getenv('DB_USER');
+    	$dbPassword = getenv('DB_PASSWORD');
+
   		try{
-  			self::$connexion= new PDO(self::$dns,self::$user,self::$password);
+  			self::$connection= new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
   			
   		}catch(exeption $e){
   			echo "Erreur de connexion à la BD : ".$e;
   		}	
-  	}	
+	  }	
 }
 
 ?>

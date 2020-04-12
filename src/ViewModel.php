@@ -17,7 +17,7 @@ class ViewModel {
      */
     private $currentUser;
 
-    public function __construct($viewPath, $data)
+    public function __construct($viewPath, $data=null)
     {
         $this->viewPath = $viewPath;
         $this->data = $data;
@@ -43,15 +43,15 @@ class ViewModel {
           
           <?php 
           if ($this->shouldShowHeaders()) {
-            include_once '../src/View/Layout/header.php'; 
+            include_once 'View/Layout/header.php'; 
           }
           ?>
           <div class="pageContainer">
-            <?php include_once '../src/View/'.$this->viewPath.'.php' ?>
+            <?php include_once 'View/'.$this->viewPath.'.php' ?>
           </div>
           <?php
           if ($this->shouldShowHeaders()) {
-            include_once '../src/View/Layout/footer.php';
+            include_once 'View/Layout/footer.php';
           }
           ?>
         </html>
@@ -60,7 +60,8 @@ class ViewModel {
     
     private function shouldShowHeaders()
     {
-        return $this->currentUser !== null;
+        //return $this->currentUser !== null;
+        return true;
     }
 
 
