@@ -8,30 +8,31 @@ class ProfilController extends Controller{
     private $userModel;
 	
 	public function __construct() {
+
 		$this->userModel = new UserModel();
     }
 
     public function execute($action){
-        switch($action){
-            case "edit":
-                edit();
-            break;
-            
-            default:
-                view($action);
-            break;
+        if(AuthService::isAuthenticated()){
+            switch($action){
+                case "edit":
+                    $viewModel = $this->edit();
+                break;
+                
+                default:
+                    $viewModel = $this->view($action);
+                break;
+            }
+            return $viewModel;
+        }else{
+            return new ViewModel('Error403');
         }
+        
     }
 
     private function edit(){
-        $data = $this->userModel->getInfo();
-        $this->setViewModel('ProfilEdit',$data);
-
-    }
-
-    private function view($identifier){
-        $data = $this->userModel->getInfoByIdentifier($identifier);
-        $this->setViewModel('ProfilView',$data);
+        //$data = $this->userModel->getInfo();
+        return new ViewModel('ProfilEdit');
 
     }
 }

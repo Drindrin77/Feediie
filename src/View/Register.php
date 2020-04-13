@@ -6,7 +6,6 @@
 <div class="container col-xl-8 justify-content-center">
     <div class="col mt-4 mb-4">
         <div class="border rounded border-primary pl-4 pt-2">
-            <form method="post" action="/register/addUser" enctype="x-www-form-urlencoded">
                 <div class="form-group">
                     <label for="emailInput">Email</label>
                     <br>
@@ -70,8 +69,7 @@
                     </div>
                 </div>
 
-                <input type="submit" id="btnSubmit" value="Connexion" required class="btn btn-primary"/>
-            </form>
+                <input type="button" id="btnSubmit" value="Connexion" required class="btn btn-primary"/>
         </div>
     </div>
 </div> 

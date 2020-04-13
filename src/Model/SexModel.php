@@ -3,12 +3,12 @@
 if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-class SexModel{
+class SexModel extends DBConnection{
     public function __construct () {
     }
   
     public function getAllSex(){
-        $req = DBConnection::initConnexionBD()->prepare("select * from sex");
+        $req = self::$pdo->prepare("select * from sex");
         $req->execute();    
         return $req->fetchAll();
     }

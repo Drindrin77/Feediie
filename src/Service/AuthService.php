@@ -2,11 +2,8 @@
 
 class AuthService
 {
-    private $userModel;
-
     public function __construct() 
     {
-        $this->userModel = new UserModel();
     }
 
     public static function isAuthenticated(): bool
@@ -17,7 +14,8 @@ class AuthService
     public static function getCurrentUser()
     {
         if (self::isAuthenticated()) {
-            return $this->userModel->findByAuthentToken(self::getAuthToken());
+            $userModel = new UserModel();
+            return $userModel->findByAuthentToken(self::getAuthToken());
         }
         return null;
     }
@@ -25,6 +23,7 @@ class AuthService
     private static function getAuthToken()
     {
         return $_SESSION['uniqid'];
+        //return 'token';
     }
     
 }

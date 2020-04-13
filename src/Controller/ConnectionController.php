@@ -13,18 +13,13 @@ class ConnectionController extends Controller{
 
 
     public function execute($action){
-
-        var_dump($action);
         switch($action){
-            case "verifyconnection":
-                $this->verifyConnection();
-            break;
             default:
-                $this->viewModel = new ViewModel("Connection");
+                return new ViewModel("Connection");
             break;
         }
     }
-
+/*
     private function setUniqSession(){
         //TODO: DATABASE SET 
         $_SESSION['uniqid'] = bin2hex(random_bytes(32));
@@ -73,11 +68,10 @@ class ConnectionController extends Controller{
                 $this->viewModel = new ViewModel("Connection",$data);
             }
         }else{
-            echo "????";
             $this->viewModel = new ViewModel("Connection");
         }
         //$passwordCrypted = password_hash($password, PASSWORD_DEFAULT); (Pour register)
-    }
+    }*/
 
 }
 
