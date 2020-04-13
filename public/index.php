@@ -15,6 +15,11 @@ require_once("../src/Model/UserModel.php");
 require_once("../src/Model/CityModel.php");
 require_once("../src/Model/SexModel.php");
 
+DBConnection::initConnexionDB();
+
+$tet1 = password_hash('test', PASSWORD_DEFAULT);
+$tet2 = password_hash('test', PASSWORD_DEFAULT);
+
 $urlWithoutParams = explode ('?', $_SERVER['REQUEST_URI']);
 $routes = explode('/',$urlWithoutParams[0]);
 $controllerName = ucfirst($routes[1]). 'Controller';
@@ -37,8 +42,7 @@ if(empty($routes[1]) || file_exists($controllerPath)){
     else{
         $action = null;
     }
-    $controller->execute($action); //ViewModel is set 
-    $viewModel = $controller->getViewModel();
+    $viewModel = $controller->execute($action); //ViewModel is set 
 }
 else{
     $viewModel = new ViewModel('Error404');
