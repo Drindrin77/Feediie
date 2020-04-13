@@ -15,18 +15,11 @@ class RegisterController extends Controller{
 
     public function execute($action){
         switch($action){
-            case 'adduser':
-                $this->addUser();
-            break;
-
             default:
-                $this->pageRegister();
+                $viewModel = $this->pageRegister();
             break;
         }
-    }
-
-    public function addUser(){
-        
+        return $viewModel;
     }
 
     public function pageRegister(){
@@ -37,7 +30,7 @@ class RegisterController extends Controller{
             "cities"=>$cities,
             "sexs"=>$sexs
         ];
-        $this->viewModel = new ViewModel("Register", $data);
+        return new ViewModel("Register", $data);
     }
 
 }
