@@ -51,7 +51,8 @@ CREATE TABLE FeediieUser(
     token                       VARCHAR (128),
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
 	idCity                      INT   NOT NULL,
-	sex                        VARCHAR  NOT NULL  ,
+    nbReport                    INT DEFAULT 0,
+	sex                         VARCHAR  NOT NULL,
 	CONSTRAINT User_PK PRIMARY KEY (idUser)
 
 	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
