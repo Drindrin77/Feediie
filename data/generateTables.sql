@@ -42,6 +42,7 @@ CREATE TABLE FeediieUser(
 	firstName                   VARCHAR (50) NOT NULL ,
 	lastName                    VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
+	email						VARCHAR (128) NOT NULL UNIQUE,
 	password                    VARCHAR (128) NOT NULL ,
 	description                 VARCHAR (500) ,
 	needPhotoOther              BOOL  NOT NULL DEFAULT FALSE,
