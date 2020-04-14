@@ -2,7 +2,7 @@
 if(!defined('CONST_INCLUDE'))
 	die('Acces direct interdit !'); 
 
-class UserRequest extends Request{
+class UserRequest extends RequestService{
 
     private $userModel;
 	

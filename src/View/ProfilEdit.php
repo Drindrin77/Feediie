@@ -56,9 +56,17 @@
                     {   
                         'oldPassword': oldPassword,
                         'newPassword': newPassword
-                    }
-                    ,function(data){
-                        console.log(data);
+                    })
+                    .fail(function(e){
+                        console.log("fail",e)
+                    })
+                    .done(function(e){
+                        console.log("done",e)
+                        if(e['status']==='success'){
+                            console.log("success")
+                        }else{
+                            console.log("error")
+                        }
                     })
 
                 }
