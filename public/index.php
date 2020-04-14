@@ -17,12 +17,9 @@ require_once("../src/Model/SexModel.php");
 
 DBConnection::initConnexionDB();
 
-$tet1 = password_hash('test', PASSWORD_DEFAULT);
-$tet2 = password_hash('test', PASSWORD_DEFAULT);
-
 $urlWithoutParams = explode ('?', $_SERVER['REQUEST_URI']);
 $routes = explode('/',$urlWithoutParams[0]);
-$controllerName = ucfirst($routes[1]). 'Controller';
+$controllerName = ucfirst(strtolower($routes[1])). 'Controller';
 $controllerPath = "../src/Controller/$controllerName.php";
 
 if(empty($routes[1]) || file_exists($controllerPath)){
@@ -42,7 +39,7 @@ if(empty($routes[1]) || file_exists($controllerPath)){
     else{
         $action = null;
     }
-    $viewModel = $controller->execute($action); //ViewModel is set 
+    $viewModel = $controller->execute($action); //return ViewModel 
 }
 else{
     $viewModel = new ViewModel('Error404');
