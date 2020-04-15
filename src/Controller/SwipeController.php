@@ -17,7 +17,7 @@ class SwipeController extends Controller{
             switch($action){
                 //TODO
                 default:
-                    $viewModel = new ViewModel('Swipe'); // A DEFINIR 
+                    $viewModel = $this->pageSwipe();
                 break;
             }
             return $viewModel;
@@ -25,6 +25,14 @@ class SwipeController extends Controller{
             return new ViewModel('Error403');
         }
         
+    }
+    public function pageSwipe(){
+
+        $users = $this->userModel->getAllUser();
+        $data = [
+            "users"=>$users
+        ];
+        return new ViewModel("Swipe", $data);
     }
 }
 
