@@ -14,27 +14,35 @@ class PasswordService{
     private static $maxCharacter = 20;
 	
 	public function __construct() {
-    }	
+    }
+
+    public static function samePassword($password, $encodedPassword){
+        return password_verify($password,$encodedPassword);
+    }
+
+    public static function hashPassword($password){
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
 
     public static function policyToString(){
         $policy = "Le mot de passe doit contenir:\n";
-        if($atLeastOneUppercase){
+        if(self::$atLeastOneUppercase){
             $policy .= '-Au moins une majuscule\n';
         }
-        if($atLeastOneNumber){
+        if(self::$atLeastOneNumber){
             $policy .= '-Au moins un chiffre\n';
         }
-        if($atLeastOneLetter){
+        if(self::$atLeastOneLetter){
             $policy .= '-Au moins une lettre\n';
         }
-        if($atLeastOneSpecialChar){
+        if(self::$atLeastOneSpecialChar){
             $policy .= '-Au moins un caractère spécial\n';
         }
-        if($needMinCharacter){
-            $policy .= '-Au moins ' . $minCharacter . 'caractères\n';
+        if(self::$needMinCharacter){
+            $policy .= '-Au moins ' . self::$minCharacter . 'caractères\n';
         }
-        if($needMaxCharacter){
-            $policy .= '-Au maximum ' . $maxCharacter . 'caractères\n';
+        if(self::$needMaxCharacter){
+            $policy .= '-Au maximum ' . self::$maxCharacter . 'caractères\n';
         }
         return $policy;
     }
@@ -42,26 +50,26 @@ class PasswordService{
     //return true if password complies with policy
     public static function isConform($password){
         $regex = '';
-        if($atLeastOneUppercase){
+        if(self::$atLeastOneUppercase){
             $regex.='';
         }
-        if($atLeastOneNumber){
-            $regex.='';
-
-        }
-        if($atLeastOneLetter){
+        if(self::$atLeastOneNumber){
             $regex.='';
 
         }
-        if($atLeastOneSpecialChar){
+        if(self::$atLeastOneLetter){
             $regex.='';
 
         }
-        if($needMinCharacter){
+        if(self::$atLeastOneSpecialChar){
             $regex.='';
 
         }
-        if($needMaxCharacter){
+        if(self::$needMinCharacter){
+            $regex.='';
+
+        }
+        if(self::$needMaxCharacter){
             $regex.='';
 
         }
