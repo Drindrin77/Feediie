@@ -8,4 +8,4 @@ INSERT INTO FeediieUser VALUES
 
 INSERT INTO FeediieUser VALUES
     (default, 'arjaze98e58a5ab','Leanna', 'Ji', '1999-04-11','leiina77185@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal', 
-        default, default, default, default, 'token', default, 1, default, 'Femme');
+        default, default, default, default, 'token2', default, 1, default, 'Femme');
