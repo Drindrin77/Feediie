@@ -39,6 +39,7 @@ CREATE TABLE sex(
 ------------------------------------------------------------
 CREATE TABLE FeediieUser(
 	idUser                      SERIAL NOT NULL ,
+	uniqID						VARCHAR(50) NOT NULL UNIQUE,
 	firstName                   VARCHAR (50) NOT NULL ,
 	lastName                    VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
@@ -49,7 +50,7 @@ CREATE TABLE FeediieUser(
 	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
 	distanceMaxActivated        BOOL  NOT NULL DEFAULT TRUE,
 	distanceMax                 INT  NOT NULL DEFAULT 15,
-    token                       VARCHAR (128),
+    token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
 	idCity                      INT   NOT NULL,
     nbReport                    INT DEFAULT 0,
