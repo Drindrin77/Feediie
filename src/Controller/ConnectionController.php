@@ -10,42 +10,21 @@ class ConnectionController extends Controller{
 	public function __construct() {
         $this->userModel = new UserModel();
     }
-
-
     public function execute($action){
+        if(AuthService::isConnected()){
+            $this->redirectUser();
+        }
         switch($action){
-            default:
+            case null:
                 return new ViewModel("Connection");
             break;
+            default:
+                $this->redirectUser();
         }
     }
+
+    //TODO IMPORTANT : Appeller AuthService::connectUser() si le mec se connecte
 /*
-    private function setUniqSession(){
-        //TODO: DATABASE SET 
-        $_SESSION['uniqid'] = bin2hex(random_bytes(32));
-    }
-
-    private function createToken($email){
-        $token = $this->model->getSessionToken($email);
-        setcookie("token", $token, time()+60*60*24*30);
-        setcookie("token", $email, time()+60*60*24*30);//expiration dans 30j
-    }
-
-    private function verifyToken(){
-        session_start();
-        if(isset($_COOKIE['token']) && isset($_COOKIE['email'])){
-            if($_COOKIE['token'] == $this->model->getSessionToken($_COOKIE['email'])){
-                createToken($_COOKIE['email']);
-                $this->setUniqSession();
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
     //Verification CSRF
     public function verifyConnection(){
         if(isset($_POST['email']) && $_POST['password']){
