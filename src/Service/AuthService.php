@@ -3,11 +3,8 @@
 class AuthService
 {
 
-    private $userModel;
-
     public function __construct() 
     {
-        $userModel = new UserModel();
     }
 
     public static function isAuthenticated(): bool
@@ -16,12 +13,19 @@ class AuthService
         return true;
     }
 
+    public static function connectUser(){
+
+    }
+
     public static function getCurrentUser()
     {
         if (self::isAuthenticated()) {
-            return $this->userModel->findByAuthentToken(self::getAuthToken());
+            $userModel = new UserModel();
+            return $userModel->findByAuthentToken(self::getAuthToken());
         }
         return null;
+
+        //return $this->currentUser;
     }
 
     private static function getAuthToken()
@@ -30,12 +34,12 @@ class AuthService
         return 'token';
     }
 
-    private function setUniqSession(){
+    private static function setUniqSession(){
         //TODO: DATABASE SET 
         //$_SESSION['uniqid'] = bin2hex(random_bytes(32));
     }
 
-    private function createToken($email){
+    private static function createToken($email){
         /*$token = $this->model->getSessionToken($email);
         setcookie("token", $token, time()+60*60*24*30);
         setcookie("token", $email, time()+60*60*24*30);//expiration dans 30j*/
@@ -55,7 +59,7 @@ class AuthService
         }*/
     }
 
-    public function setNewToken($token)
+    public static function setNewToken($token)
     {
         //TODO : Cookie
         //Todo : $_SESSION 

@@ -43,8 +43,8 @@ class ViewModel {
           }
           ?>
           <div class="pageContainer">
-            <?php 
-            include_once 'View/'.$this->viewPath.'.php' ?>
+            <style><?php include 'View/Style/'.$this->viewPath.'.css'; ?></style>
+            <?php include 'View/'.$this->viewPath.'.php' ?>
           </div>
           <?php
           if ($this->shouldShowHeaders()) {

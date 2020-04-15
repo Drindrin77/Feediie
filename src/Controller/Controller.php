@@ -4,5 +4,11 @@ if(!defined('CONST_INCLUDE'))
 
 abstract class Controller {
 	abstract public function execute($action);
+
+	//
+	public function redirectUser(){
+        header('/');
+	}
+	
 }
 ?>

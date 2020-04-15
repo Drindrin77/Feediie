@@ -2,7 +2,7 @@
 <div class="form-group">
     <label for="passwordInput">Ancien mot de passe</label>
     <br>
-    <input class="w-75" required type="password" id="oldPassword" name="password" placeholder="Mot de passe">
+    <input class="w-75" required type="password" class="toto" id="oldPassword" name="password" placeholder="Mot de passe">
 </div>
 
 <div class="form-group">

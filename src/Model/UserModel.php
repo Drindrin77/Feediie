@@ -19,8 +19,14 @@ class UserModel extends DBConnection{
     }    
     
     public function resetPassword($encodedNewPassword){
-        $req = self::$pdo->prepare("update feediieuser set password = ? where email = ?");
-        $req->execute(array($encodedNewPassword, AuthService::getCurrentUser()['email'])); 
+        $req = self::$pdo->prepare("update feediieuser set password = ? where iduser = ?");
+        $req->execute(array($encodedNewPassword, AuthService::getCurrentUser()['iduser'])); 
+    }
+
+    public function getUserByUniqID($uniqID){
+        $req = self::$pdo->prepare("select * from feediieuser where uniqID = ?");
+        $req->execute(array($uniqID)); 
+        return $req->fetch();
     }
 }
 

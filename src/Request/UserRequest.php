@@ -20,16 +20,17 @@ class UserRequest extends RequestService{
         }
     }    
 
+    //XSS HACK : HTMLSPECIALCHARS ?
     private function resetPassword(){
         $oldPassword = isset($_POST['oldPassword']) && !empty($_POST['oldPassword']) ? $_POST['oldPassword'] : null;
         $newPassword = isset($_POST['newPassword']) && !empty($_POST['newPassword']) ? $_POST['newPassword'] : null;
         $actualPassword = AuthService::getCurrentUser()['password'];
         
-        if(!password_verify($oldPassword,$actualPassword)){
+        if(!PasswordService::samePassword($oldPassword,$actualPassword)){
             $this->addMessageError(['old'=>'L\'ancien mot de passe est incorrect.']);  
         }  
         else{
-            $this->userModel->resetPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+            $this->userModel->resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
