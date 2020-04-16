@@ -9,7 +9,7 @@
         <div class="col mt-4 mb-4">
             <div class="border rounded border-primary pl-4 pt-2">
             
-            <p class="error" id='matchError' hidden>L'email ou le mot de passe est incorret</p>
+            <p class="error" id='matchError' hidden>L'email ou le mot de passe est incorrect</p>
             <p class="error" id='emailError' hidden>L'adresse mail n'est pas valide</p>
                 <div class="form-group">
                     <!-- Connection-->

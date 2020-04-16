@@ -37,13 +37,13 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public function getUserByMail($mail){
+    public static function getUserByMail($mail){
         $req = self::$pdo->prepare("select * from feediieuser where email = ?");
         $req->execute(array($mail)); 
         return $req->fetch();
     }
 
-    public function setSessionTokenByMail($sessionToken, $mail){
+    public static function setSessionTokenByMail($sessionToken, $mail){
         $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }

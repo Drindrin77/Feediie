@@ -41,18 +41,19 @@ class UserRequest extends RequestService{
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null;
-        
-        $passwordEncrypted = UserModel::getUserByMail($email)['password'];
-        if(!isset($passwordEncrypted))$this->addMessageSuccess("Raté");
-        if(password_verify($password, $passwordEncrypted)){
-            $length = 32;
-            $_SESSION['s_token'] = bin2hex(random_bytes($length));
-            UserModel::setSessionToken($_SESSION['s_token'], $email);
-            $_COOKIE['c_token'] = UserModel::getUserByMail($email)['token'];
-            $this->addMessageSuccess("Connecté");
-        }else{
-            $this->addMessageSuccess("Raté");
-        }
+        if(isset(UserModel::getUserByMail($email)['password'])){
+            $passwordEncrypted = UserModel::getUserByMail($email)['password'];
+            if(password_verify($password, $passwordEncrypted)){
+                $length = 32;
+                $_SESSION['s_token'] = bin2hex(random_bytes($length));
+                UserModel::setSessionToken($_SESSION['s_token'], $email);
+                $_COOKIE['c_token'] = UserModel::getUserByMail($email)['token'];
+                $this->addMessageSuccess("connect");
+            }else{
+                $this->addMessageSuccess("rate");
+            }
+        } 
+        $this->addMessageSuccess("rate");
     }
 
     private function passwordForgotten(){
