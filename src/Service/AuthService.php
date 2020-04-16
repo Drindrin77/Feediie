@@ -3,6 +3,8 @@
 class AuthService
 {
 
+    private static $currentUser;
+
     public function __construct() 
     {
     }
@@ -14,18 +16,20 @@ class AuthService
     }
 
     public static function connectUser(){
+        self::setCurrentUser();
+    }
 
+    public static function setCurrentUser(){
+        if (self::isAuthenticated()) {
+            self::$currentUser = UserModel::findByAuthentToken(self::getAuthToken());
+        }else{
+            self::$currentUser = null;   
+        }
     }
 
     public static function getCurrentUser()
     {
-        if (self::isAuthenticated()) {
-            $userModel = new UserModel();
-            return $userModel->findByAuthentToken(self::getAuthToken());
-        }
-        return null;
-
-        //return $this->currentUser;
+        return self::$currentUser;
     }
 
     private static function getAuthToken()
