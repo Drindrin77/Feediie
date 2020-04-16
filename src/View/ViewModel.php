@@ -45,17 +45,17 @@ class ViewModel {
             
             <?php 
             if ($this->shouldShowHeaders()) {
-              include_once 'View/Layout/header.php'; 
+              include_once 'Layout/header.php'; 
             }
             ?>
             <div class="pageContainer">
 
-              <?php include 'View/Pages'.$this->page.'.php' ?>
+              <?php include 'Pages/'.$this->page.'.php' ?>
 
               <style>
                 <?php 
                   if(file_exists($this->path.'Style/'.$this->page.'.css')){
-                    include 'View/Style/'.$this->page.'.css';
+                    include 'Style/'.$this->page.'.css';
                   }
                 ?>
               </style>
@@ -63,7 +63,7 @@ class ViewModel {
               <script>
                 <?php 
                   if(file_exists($this->path.'Script/'.$this->page.'.js')){
-                    include 'View/Script/'.$this->page.'.js';
+                    include 'Script/'.$this->page.'.js';
                   }
                 ?>
               </script>   
@@ -72,7 +72,7 @@ class ViewModel {
 
             <?php
               if ($this->shouldShowHeaders()) {
-                include_once 'View/Layout/footer.php';
+                include_once 'Layout/footer.php';
               }
             ?>
         </html>
