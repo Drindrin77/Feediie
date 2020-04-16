@@ -1,8 +1,6 @@
 <?php
-    $mail = "";
-    if(isset($_GET['email'])){
-        $mail = $_GET['email'];
-    }
+    $mail = isset($this->data['mail']) ? $this->data['mail'] : null;
+    $errors = isset($this->data['errors']) ? $this->data['errors'] : null;
 ?>
 <div class="container col-xl-8">
     <div class="row">
@@ -11,12 +9,13 @@
         </div>
         <div class="col mt-4 mb-4">
             <div class="border rounded border-primary pl-4 pt-2">
-                <form method="post" action="/Connection/verifyConnection" enctype="x-www-form-urlencoded">
+                <form method="post" action="/connection/verifyConnection" enctype="x-www-form-urlencoded">
                     <div class="form-group">
                         <!-- Connection-->
                         <label for="emailInput">Email</label>
                         <br>
-                        <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com" value=<?php $mail?>>
+                        <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com" value=<?= $mail?>>
+                    
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Mot de passe</label>
@@ -27,8 +26,15 @@
                         <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                         <label class="form-check-label" for="rememberMe">Se rappeler de moi</label>
                     </div>
+
+                    
+                        <p class="error"><?= $errors ?></p>
+
                     <input type="submit" id="btnSubmit" value="Connexion" required class="btn btn-primary"/>
                 </form>
+
+
+
 
                 <div class="modal fade" id="forgottenPassword" tabindex="-1" role="dialog" aria-labelledby="forgottenPassword" aria-hidden="true">
                     <div class="modal-dialog" role="document">
