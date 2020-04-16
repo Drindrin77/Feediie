@@ -2,15 +2,15 @@
 
 class ViewModel {
 
-    private $viewPath;
+    private $page;
     private $title;
     private $path = '/var/www/html/src/View/';
     private $data;
 
-    public function __construct($viewPath, $data=null, $title='Feediie')
+    public function __construct($page, $data=null, $title='Feediie')
 
     {
-        $this->viewPath = $viewPath;
+        $this->page = $page;
         $this->title = $title;
         $this->data = $data;
     }
@@ -50,20 +50,20 @@ class ViewModel {
             ?>
             <div class="pageContainer">
 
-              <?php include 'View/'.$this->viewPath.'.php' ?>
+              <?php include 'View/Pages'.$this->page.'.php' ?>
 
               <style>
                 <?php 
-                  if(file_exists($this->path.'Style/'.$this->viewPath.'.css')){
-                    include 'View/Style/'.$this->viewPath.'.css';
+                  if(file_exists($this->path.'Style/'.$this->page.'.css')){
+                    include 'View/Style/'.$this->page.'.css';
                   }
                 ?>
               </style>
 
               <script>
                 <?php 
-                  if(file_exists($this->path.'Script/'.$this->viewPath.'.js')){
-                    include 'View/Script/'.$this->viewPath.'.js';
+                  if(file_exists($this->path.'Script/'.$this->page.'.js')){
+                    include 'View/Script/'.$this->page.'.js';
                   }
                 ?>
               </script>   

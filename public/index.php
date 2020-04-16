@@ -5,16 +5,17 @@ if(session_status() == PHP_SESSION_NONE)
 
 define('CONST_INCLUDE', NULL);
 
-require_once("../src/ViewModel.php");
-
-require_once("../src/Controller/Controller.php");
 require_once("../src/Service/DBConnection.php");
 require_once("../src/Service/AuthService.php");
 require_once("../src/Service/PasswordService.php");
 
+require_once("../src/Controller/Controller.php");
+
 require_once("../src/Model/UserModel.php");
 require_once("../src/Model/CityModel.php");
 require_once("../src/Model/SexModel.php");
+
+require_once("../src/View/ViewModel.php");
 
 DBConnection::initConnexionDB();
 AuthService::setCurrentUser();
