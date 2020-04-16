@@ -24,7 +24,6 @@
     <p>sexe : <?= $infoUser['sex']?></p>
     <p>ville : <?= $infoUser['city'].' ('. $infoUser['zipcode']. ')' ?> </p>
     <p>admin : <?= $infoUser['isadmin']?></p>
-
 </div>
 
 likeEat
