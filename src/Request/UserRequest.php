@@ -17,6 +17,12 @@ class UserRequest extends RequestService{
             case "resetpassword":
                 $this->resetPassword();
             break;
+            case "connection":
+                $this->connection();
+            break;
+            case "passwordforgotten":
+                $this->passwordForgotten();
+            break;
         }
     }    
 
@@ -34,6 +40,32 @@ class UserRequest extends RequestService{
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
+
+    private function connection(){
+        $email = isset($_POST['email'])? $_POST['email'] : null;
+        $password = isset($_POST['password'])? $_POST['password'] : null;
+        
+        $passwordEncrypted = UserModel::getUserByMail($email)['password'];
+        if(!isset($passwordEncrypted))$this->addMessageSuccess("Raté");
+        if(password_verify($password, $passwordEncrypted)){
+            $length = 32;
+            $_SESSION['s_token'] = bin2hex(random_bytes($length));
+            UserModel::setSessionToken($_SESSION['s_token'], $email);
+            $_COOKIE['c_token'] = UserModel::getUserByMail($email)['token'];
+            $this->addMessageSuccess("Connecté");
+        }else{
+            $this->addMessageSuccess("Raté");
+        }
+    }
+
+    private function passwordForgotten(){
+        $email = isset($_POST['emailForgotten'])? $_POST['emailForgotten'] : null;
+
+        $token = UserModel::getUserByMail($email)['token'];
+        $link = "https://www.feediie.com/resetpassword/$token";
+        mail(str($email) , "Reset Password Feediie", "Follow this link to reset your password : $link");
+    }
+
 }
 
 ?>

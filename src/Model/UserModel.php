@@ -27,8 +27,6 @@ class UserModel extends DBConnection{
         $req = self::$pdo->prepare("select * from feediieuser where uniqID = ?");
         $req->execute(array($uniqID)); 
         return $req->fetch();
-        $req = self::$pdo->prepare("update feediieuser set password = ? where email = ?");
-        $req->execute(array($encodedNewPassword, AuthService::getCurrentUser()['email']));
     }
 
    public function getAllUser(){
@@ -36,6 +34,18 @@ class UserModel extends DBConnection{
         $req->execute();
         return $req->fetchAll();
     }
+
+    public function getUserByMail($mail){
+        $req = self::$pdo->prepare("select * from feediieuser where email = ?");
+        $req->execute(array($mail)); 
+        return $req->fetch();
+    }
+
+    public function setSessionTokenByMail($sessionToken, $mail){
+        $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
+        $req->execute(array($sessionToken, $mail)); 
+    }
+    
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");
        $req->execute(array($idUser,$firstName,$birthDay,$description));

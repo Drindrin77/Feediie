@@ -11,7 +11,7 @@ class ConnectionController extends Controller{
         $this->userModel = new UserModel();
     }
     public function execute($action){
-        if(AuthService::isConnected()){
+        if(AuthService::isAuthenticated()){
             $this->redirectUser();
         }
         switch($action){
