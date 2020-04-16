@@ -3,11 +3,8 @@ if(!defined('CONST_INCLUDE'))
 	die('Acces direct interdit !'); 
 
 class UserRequest extends RequestService{
-
-    private $userModel;
 	
 	public function __construct() {
-        $this->userModel = new UserModel();
         parent::__construct();
     }	
 
@@ -36,7 +33,7 @@ class UserRequest extends RequestService{
             $this->addMessageError(['old'=>'L\'ancien mot de passe est incorrect.']);  
         }  
         else{
-            $this->userModel->resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
+            UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }

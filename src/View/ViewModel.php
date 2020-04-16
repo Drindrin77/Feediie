@@ -35,22 +35,6 @@ class ViewModel {
                       crossorigin="anonymous"></script>
               <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
               <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-              <script src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-
-            <meta charset='utf-8'>
-            <title><?= $this->title ?></title>
-          </head>
-
-          <body>
-            
-            <?php 
-            if ($this->shouldShowHeaders()) {
-              include_once 'Layout/header.php'; 
-            }
-            ?>
-            <div class="pageContainer">
-
-              <?php include 'Pages/'.$this->page.'.php' ?>
 
               <style>
                 <?php 
@@ -66,8 +50,21 @@ class ViewModel {
                     include 'Script/'.$this->page.'.js';
                   }
                 ?>
-              </script>   
+              </script>  
 
+            <meta charset='utf-8'>
+            <title><?= $this->title ?></title>
+          </head>
+
+          <body>
+            
+            <?php 
+            if ($this->shouldShowHeaders()) {
+              include_once 'Layout/header.php'; 
+            }
+            ?>
+            <div class="pageContainer">
+              <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
             <?php
@@ -75,6 +72,9 @@ class ViewModel {
                 include_once 'Layout/footer.php';
               }
             ?>
+
+          </body>
+ 
         </html>
     <?php
     }

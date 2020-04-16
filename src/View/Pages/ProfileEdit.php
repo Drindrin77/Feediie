@@ -16,5 +16,5 @@
 </div>
 
 <div>
-    <input type="button" id="btnSubmit" value="Confirmer"/>
+    <button id="btnSubmit">Confirmer</button>
 </div>
