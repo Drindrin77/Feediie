@@ -38,8 +38,6 @@ class ProfileController extends Controller{
                 'isCurrentUser'=> $isCurrentUser,
                 'users'=>$userInfo
             ];
-           // var_dump($data);
-
             return new ViewModel('ProfileView',$data);
         }
 
@@ -47,7 +45,7 @@ class ProfileController extends Controller{
 
     private function edit(){
         //$data = $this->userModel->getInfo();
-        return new ViewModel('ProfilEdit');
+        return new ViewModel('ProfileEdit');
     }
 }
 
