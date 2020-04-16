@@ -24,11 +24,11 @@ class UserModel extends DBConnection{
     }
 
     public function getUserByUniqID($uniqID){
-        $req = self::$pdo->prepare("select * from feediieuser where uniqID = ?");
+        $req = self::$pdo->prepare("select firstName, lastName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
+                                                    , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+                                    from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and uniqID=?");
         $req->execute(array($uniqID)); 
         return $req->fetch();
-        $req = self::$pdo->prepare("update feediieuser set password = ? where email = ?");
-        $req->execute(array($encodedNewPassword, AuthService::getCurrentUser()['email']));
     }
 
    public function getAllUser(){

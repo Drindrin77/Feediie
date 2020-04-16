@@ -30,13 +30,16 @@ class ProfileController extends Controller{
 
     private function viewProfile($uniqID){
         $userInfo = $this->userModel->getUserByUniqID($uniqID);
+        //$photos = $this->userModel->getAllPhotos($uniqID);
+        $photos = array('/Images/parameter.png','/Images/parameter.png','/Images/parameter.png');
         if(empty($userInfo)){
             return new ViewModel('UnknownUser');
         }else{
-            $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $userInfo['uniqid'];
+            $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
-                'users'=>$userInfo
+                'user'=>$userInfo,
+                'photos'=>$photos
             ];
             return new ViewModel('ProfileView',$data);
         }
