@@ -7,7 +7,7 @@ class UserModel extends DBConnection{
    public function __construct () {
    }
   
-    public function findByAuthentToken($token){
+    public static function findByAuthentToken($token){
         $req = self::$pdo->prepare("select * from feediieuser where token = ?");
         $req->execute(array($token)); 
         return $req->fetch();
