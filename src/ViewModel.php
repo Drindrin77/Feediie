@@ -2,23 +2,21 @@
 
 class ViewModel {
     
-    /**
-     * @var string
-     */
     private $viewPath;
-
-    /**
-     * @var array
-     */
+    private $title;
+    private $path = '/var/www/html/src/View';
     private $data;
 
-    public function __construct($viewPath, $data=null)
+    public function __construct($viewPath, $data=null, $title='Feediie')
     {
         $this->viewPath = $viewPath;
+        $this->title = $title;
         $this->data = $data;
     }
 
-    public function render()
+    public function render()    /**
+    * @var string
+    */
     {
         ?>
 
@@ -32,7 +30,7 @@ class ViewModel {
           <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 
           <meta charset='utf-8'>
-          <title>Feediie</title>
+          <title><?= $this->title ?></title>
         </head>
         
         <body>
@@ -43,9 +41,27 @@ class ViewModel {
           }
           ?>
           <div class="pageContainer">
-            <style><?php include 'View/Style/'.$this->viewPath.'.css'; ?></style>
+
             <?php include 'View/'.$this->viewPath.'.php' ?>
+
+            <style>
+              <?php 
+                if(file_exists($this->path.'/Style/'.$this->viewPath.'.css')){
+                  include 'View/Style/'.$this->viewPath.'.css';
+                }
+              ?>
+            </style>
+
+            <script>
+              <?php 
+                if(file_exists($this->path.'/Script/'.$this->viewPath.'.js')){
+                  include 'View/Script/'.$this->viewPath.'.js';
+                }
+              ?>
+            </script>   
+
           </div>
+
           <?php
           if ($this->shouldShowHeaders()) {
             include_once 'View/Layout/footer.php';
