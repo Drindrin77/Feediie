@@ -17,6 +17,7 @@ require_once("../src/Model/CityModel.php");
 require_once("../src/Model/SexModel.php");
 
 DBConnection::initConnexionDB();
+AuthService::setCurrentUser();
 
 $urlWithoutParams = explode ('?', $_SERVER['REQUEST_URI']);
 $routes = explode('/',$urlWithoutParams[0]);

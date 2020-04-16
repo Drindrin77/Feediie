@@ -15,6 +15,7 @@ $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':
 $path = "../src/Request/". $entity.".php";
 
 DBConnection::initConnexionDB();
+AuthService::setCurrentUser();
 
 if(file_exists($path)){
     include_once($path);
