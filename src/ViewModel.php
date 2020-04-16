@@ -4,7 +4,7 @@ class ViewModel {
 
     private $viewPath;
     private $title;
-    private $path = '/var/www/html/src/View';
+    private $path = '/var/www/html/src/View/';
     private $data;
 
     public function __construct($viewPath, $data=null, $title='Feediie')
@@ -54,7 +54,7 @@ class ViewModel {
 
               <style>
                 <?php 
-                  if(file_exists($this->path.'/Style/'.$this->viewPath.'.css')){
+                  if(file_exists($this->path.'Style/'.$this->viewPath.'.css')){
                     include 'View/Style/'.$this->viewPath.'.css';
                   }
                 ?>
@@ -62,7 +62,7 @@ class ViewModel {
 
               <script>
                 <?php 
-                  if(file_exists($this->path.'/Script/'.$this->viewPath.'.js')){
+                  if(file_exists($this->path.'Script/'.$this->viewPath.'.js')){
                     include 'View/Script/'.$this->viewPath.'.js';
                   }
                 ?>
