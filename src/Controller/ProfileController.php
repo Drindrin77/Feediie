@@ -26,16 +26,17 @@ class ProfileController extends Controller{
 
     private function viewProfile($uniqID){
         $userInfo = UserModel::getUserByUniqID($uniqID);
-        $idUser = $userInfo['iduser'];
-        $photos = PhotoModel::getAllPhotos($idUser);
-        $personalities = DishModel::getAllPersonnalities($idUser);
-        $hobbies = HobbyModel::getAllHobbies($idUser);
-        $favoriteDish = DishModel::getAllFavoritesDishes($idUser);
-
+        
         if(empty($userInfo)){
             return new ViewModel('UnknownUser');
         }else{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
+            $idUser = $userInfo['iduser'];
+            $photos = PhotoModel::getAllPhotos($idUser);
+            $personalities = DishModel::getAllPersonnalities($idUser);
+            $hobbies = HobbyModel::getAllHobbies($idUser);
+            $favoriteDish = DishModel::getAllFavoritesDishes($idUser);
+
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
                 'user'=>$userInfo,
