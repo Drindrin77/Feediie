@@ -1,6 +1,6 @@
 .background {
     background: #E86B51;
-    height: 1080px;
+    height: 100%;
 }
 #card {
     width: 500px;
@@ -19,12 +19,26 @@
 .buddy {
     display: none;
     background: #fff;
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     color: black;
-    width: 350px;
-    height: 500px;
-    top: 200px;
+    width: 250px;
+    height: 370px;
+    left:50px;
+    top: 60px;
+    position: absolute;
+    cursor: hand;
+}
+.buddyEnd {
+    display: none;
+    background: orangered;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: black;
+    width: 250px;
+    height: 370px;
+    left:50px;
+    top: 60px;
     position: absolute;
     cursor: hand;
 }
@@ -45,37 +59,37 @@
     z-index: 10;
 }
 .avatar {
-    width: 350px;
-    height: 350px;
+    width: 250px;
+    height: 250px;
     display: block;
-    border-radius: 20px;
+    border-radius: 15px;
     background-size: auto 160% !important;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 10;
+    z-index: auto;
 }
 .name {
     color: white;
     font-size: 1.5vw;
-    z-index: 20;
     padding-left: 10px;
     transform: translate(0,-40px);
     left : 10px;
     pointer-events: none;
+    z-index: auto;
 }
 .description {
     font-size: 1vw;
-    z-index: 20;
     padding-left: 10px;
     transform: translate(0,-20px);
     left : 10px;
     pointer-events: none;
+    z-index: auto;
 }
-.like {
-    border-radius: 5px;
+.miam {
+    border-radius: 10px;
     padding: 5px 10px;
-    border: 2px solid green;
-    color: green;
+    border: 2px solid red;
+    color: red;
     text-transform: uppercase;
     font-size: 15px;
     position: absolute;
@@ -83,11 +97,11 @@
     right: 40px;
     text-shadow: none;
 }
-.dislike {
-    border-radius: 5px;
+.beurk {
+    border-radius: 10px;
     padding: 5px 10px;
-    border: 2px solid red;
-    color: red;
+    border: 2px solid dodgerblue;
+    color: dodgerblue;
     text-transform: uppercase;
     font-size: 15px;
     position: absolute;
@@ -97,7 +111,7 @@
 }
 #blockButtons {
     display: flex;
-    margin-top: 150px;
+    margin-top: -130px;
     justify-content: space-evenly;
 }
 .buttons {
@@ -121,4 +135,19 @@
     margin-left: 9px;
     margin-top: 9px;
 
+}
+#parameters {
+    width: 300px;
+    background: white;
+    float: left;
+    height: 600px;
+    position: relative;
+    list-style-type: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index:40;
 }
