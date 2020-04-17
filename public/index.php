@@ -4,6 +4,9 @@ if(session_status() == PHP_SESSION_NONE)
     session_start();
 
 define('CONST_INCLUDE', NULL);
+define('PATH_USER_PHOTO', '/Images/UserUpload');
+define('PATH_DISH_PHOTO', '/Images/Dish');
+define('PATH_ICON_PHOTO', '/Images/Icon');
 
 require_once("../src/Service/DBConnection.php");
 require_once("../src/Service/AuthService.php");
