@@ -26,7 +26,8 @@ if(file_exists($path)){
     $entityRequest->execute();
     $entityRequest->sendRequest();
 }else{
-
+    header("HTTP/1.0 404 Not Found");
+    exit();
 }
     
 ?>
