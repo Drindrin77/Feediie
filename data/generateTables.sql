@@ -68,7 +68,7 @@ CREATE TABLE FeediieUser(
 CREATE TABLE Photo(
 	idPhoto    SERIAL NOT NULL ,
 	url        VARCHAR (128) NOT NULL ,
-	priority   INT2  NOT NULL ,
+	priority   INT  NOT NULL ,
 	idUser     INT  NOT NULL  ,
 	CONSTRAINT Photo_PK PRIMARY KEY (idPhoto)
 
