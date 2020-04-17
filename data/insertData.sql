@@ -11,10 +11,10 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token2', default, 1, default, 'Femme');
 
 INSERT INTO Photo VALUES
-    (default, '/Images/parameter.png', 1, 1), (default, '/Images/test.jpg',2,1);
+    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', 1, 1), (default, '/Images/UserUpload/jzpeerz58aze/2.jpg',2,1);
 
-INSERT INTO Dish VALUES (default, 'Pizza', '/Images/pizza.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/salad.png');
+INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');
 INSERT INTO Hobby VALUES(default, 'Musique');
 
 INSERT INTO likeEat VALUES (1,1);
