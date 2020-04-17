@@ -10,6 +10,12 @@ class PhotoModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function getFirstPhoto($idUser){
+        $req = self::$pdo->prepare("select * from photo where iduser = ? and priority=1");
+        $req->execute(array($idUser));
+        return $req->fetch();
+    }
+
 }
 
 

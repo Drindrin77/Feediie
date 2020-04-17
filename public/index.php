@@ -50,11 +50,12 @@ if(empty($routes[1]) || file_exists($controllerPath)){
         $action = null;
     }
     $viewModel = $controller->execute($action); //return ViewModel 
+    if(AuthService::isAuthenticated()){
+        $viewModel->setHeaderInfo();
+    }
 }
 else{
     $viewModel = new ViewModel('Error404');
 }
 $viewModel->render();
-
-
 ?>

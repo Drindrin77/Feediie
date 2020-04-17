@@ -6,13 +6,20 @@ class ViewModel {
     private $title;
     private $path = '/var/www/html/src/View/';
     private $data;
+    private $headerInfo;
 
     public function __construct($page, $data=null, $title='Feediie')
-
     {
         $this->page = $page;
         $this->title = $title;
         $this->data = $data;
+    }
+
+    public function setHeaderInfo(){
+      $user = AuthService::getCurrentUser();
+      $this->headerInfo = array('firstName'=>$user['firstname'], 
+                                'photo'=>PhotoModel::getFirstPhoto($user['iduser']),
+                                'uniqID'=> $user['uniqid']);
     }
 
     public function render(){
