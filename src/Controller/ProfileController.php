@@ -4,12 +4,8 @@ if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
 class ProfileController extends Controller{
-
-    private $userModel;
 	
 	public function __construct() {
-
-		$this->userModel = new UserModel();
     }
 
     public function execute($action){
@@ -29,18 +25,27 @@ class ProfileController extends Controller{
     }
 
     private function viewProfile($uniqID){
-        $userInfo = $this->userModel->getUserByUniqID($uniqID);
+        $userInfo = UserModel::getUserByUniqID($uniqID);
+        $idUser = $userInfo['iduser'];
+        $photos = PhotoModel::getAllPhotos($idUser);
+        $personalities = DishModel::getAllPersonnalities($idUser);
+        $hobbies = HobbyModel::getAllHobbies($idUser);
+        $favoriteDish = DishModel::getAllFavoritesDishes($idUser);
+
         if(empty($userInfo)){
             return new ViewModel('UnknownUser');
         }else{
-            $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $userInfo['uniqid'];
+            $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
-                'users'=>$userInfo
+                'user'=>$userInfo,
+                'photos'=>$photos,
+                'personalities'=>$personalities,
+                'hobbies'=>$hobbies,
+                'favoriteDish'=>$favoriteDish,
             ];
             return new ViewModel('ProfileView',$data);
         }
-
     }
 
     private function edit(){
