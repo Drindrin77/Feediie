@@ -17,6 +17,9 @@ class UserRequest extends RequestService{
             case "connection":
                 $this->connection();
             break;
+            case "register":
+                $this->register();
+            break;
             case "passwordforgotten":
                 $this->passwordForgotten();
             break;
@@ -68,6 +71,11 @@ class UserRequest extends RequestService{
         $token = UserModel::getUserByMail($email)['token'];
         $link = "https://www.feediie.com/resetpassword/$token";
         mail(str($email) , "Reset Password Feediie", "Follow this link to reset your password : $link");
+    }
+
+    private function register(){
+        $email = isset($_POST['email'])? $_POST['email'] : null;
+        $password = isset($_POST['password'])? $_POST['password'] : null;
     }
 
 }

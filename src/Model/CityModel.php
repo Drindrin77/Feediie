@@ -8,7 +8,7 @@ class CityModel extends DBConnection{
     }
   
     public static function getAllCity(){
-        $req = self::$pdo->prepare("select name,zipcode from city");
+        $req = self::$pdo->prepare("select name,zipcode,idcity from city");
         $req->execute();    
         return $req->fetchAll();
     }

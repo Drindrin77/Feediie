@@ -2,6 +2,9 @@ $(document).ready(function () {
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
+        let birthday = $("#birthday").val()
+        let sex = $("#sex").val()
+        let city = $("#city").val()
 
         document.getElementById("createError").hidden = true;
         
@@ -37,7 +40,10 @@ $(document).ready(function () {
             $.post("/ajax.php?entity=user&action=register",
             {
                 'email': email,
-                'password': password
+                'password': password,
+                'birthday': birthday,
+                'sex': sex,
+                'city': city
             })
             .fail(function (e){
                 console.log("fail", e)

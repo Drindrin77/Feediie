@@ -19,7 +19,7 @@
                     <br>
                     <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
                 </div>
-                
+
                 <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
                 <div class="form-group">
                     <label for="confirmedPasswordInput">Confirmer le mot de passe</label>
@@ -30,34 +30,43 @@
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
                     <br>
-                    <input type="text" required size="50" class="form-control w-75" value=<?php $mail?>>
+                    <input type="text" id="firstname" required size="50" class="form-control w-75">
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Nom</label>
                     <br>
-                    <input type="text" required size="50" class="form-control w-75" value=<?php $mail?>>
+                    <input type="text" id="name" required size="50" class="form-control w-75">
                 </div>
 
                 <div class="form-group">
                 <div class=' date' id='datetimepicker1'>
                     <label>Date de naissance:</label>
-                    <input type='date' class="form-control w-25"/>
+                    <input type='date' id="birthday" class="form-control w-25"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
                 </div>
 
+                <div class="form-group">
+                <label for="sex"> Sexe:</label>
+                    <select class="btn btn-secondary dropdown-toggle">
+                        <?php foreach($sexs as $sex): ?>
+                            <option><?= $sex['name']?></option>
+                        <?php endforeach?>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sexe
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                        <div class="dropdown-menu" id="sex" aria-labelledby="dropdownMenuButton">
                             <?php foreach($sexs as $sex): ?>
-                                <a class="dropdown-item" href="#"><?= $sex['name'] ?></a>
+                                <a class="dropdown-item"><?= $sex['name'] ?></a>
                             <?php endforeach?>
                         </div>
                     </div>
@@ -65,10 +74,10 @@
 
                 <div class="form-group">
                     <div class="col-auto my-1">
-                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <label class="mr-sm-2" for="city">Ville: </label>
+                    <select class="custom-select mr-sm-2 w-50" id="city">
                         <?php foreach($cities as $city): ?>
-                            <option><?= $city['name'].' ('. $city['zipcode']. ')' ?></option>
+                            <option value=<?= $city['idcity']?>><?= $city['name'].' ('. $city['zipcode']. ')' ?></option>
                         <?php endforeach?>
                     </select>
                     </div>
