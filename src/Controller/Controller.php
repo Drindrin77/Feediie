@@ -7,7 +7,7 @@ abstract class Controller {
 
 	//
 	public function redirectUser(){
-        header('/');
+        header('Location: /');
 	}
 	
 }
