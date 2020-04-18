@@ -6,6 +6,9 @@
 <div class="container col-xl-8 justify-content-center">
     <div class="col mt-4 mb-4">
         <div class="border rounded border-primary pl-4 pt-2">
+            
+            <p class="error" id='matchError' hidden>L'email est déjà utilisé</p>
+            <p class="error" id='emailError' hidden>L'adresse mail n'est pas valide</p>
                 <div class="form-group">
                     <label for="emailInput">Email</label>
                     <br>
@@ -16,6 +19,8 @@
                     <br>
                     <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
                 </div>
+                
+                <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
                 <div class="form-group">
                     <label for="confirmedPasswordInput">Confirmer le mot de passe</label>
                     <br>

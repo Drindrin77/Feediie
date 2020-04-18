@@ -8,6 +8,12 @@ class UserModel extends DBConnection{
    }
      
     public static function findByAuthentToken($token){
+        $req = self::$pdo->prepare("select * from feediieuser where session_token = ?");
+        $req->execute(array($token));
+        return $req->fetch();
+    }
+
+    public static function findByCookieToken($token){
         $req = self::$pdo->prepare("select * from feediieuser where token = ?");
         $req->execute(array($token));
         return $req->fetch();
@@ -44,7 +50,7 @@ class UserModel extends DBConnection{
     }
 
     public static function setSessionToken($sessionToken, $mail){
-        $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
+        $req = self::$pdo->prepare("update feediieuser set session_token = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }
     

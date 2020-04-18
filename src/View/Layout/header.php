@@ -38,7 +38,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <?php echo '<a class="dropdown-item" href="/profile/'.$uniqID.'">Voir le profil</a>';?>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Se déconnecter</a>
+                <a class="dropdown-item" href="/connection/signout">Se déconnecter</a>
                 </div>
             </div>
         </div>

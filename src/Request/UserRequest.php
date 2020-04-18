@@ -53,6 +53,7 @@ class UserRequest extends RequestService{
                 if($_POST['rememberMe'] == "true"){
                     setcookie('c_token',UserModel::getUserByMail($email)['token'], time()+60*60*24*30);
                 }
+                AuthService::connectUser();
                 $this->addMessageSuccess("connect");
             }else{
                 $this->addMessageSuccess("rate");

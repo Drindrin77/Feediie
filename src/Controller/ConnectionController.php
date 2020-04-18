@@ -11,18 +11,25 @@ class ConnectionController extends Controller{
         $this->userModel = new UserModel();
     }
     public function execute($action){
-        if(AuthService::isAuthenticated()){
-            $this->redirectUser();
-        }else{
-            switch($action){
-                case null:
-                    return new ViewModel("Connection");
-                break;
-                default:
+        switch($action){
+            case "signout":
+                $this->signout();
+            break;
+            case null:
+                if(AuthService::isAuthenticated()){
                     $this->redirectUser();
-            }
-        }
-        
+                }else{
+                    return new ViewModel("Connection");
+                }
+            break;
+            default:
+                $this->redirectUser();
+        }        
+    }
+
+    private static function signout(){
+        AuthService::disconnect();
+        header("Location: /");
     }
 
     //TODO IMPORTANT : Appeller AuthService::connectUser() si le mec se connecte

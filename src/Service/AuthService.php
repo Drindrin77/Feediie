@@ -31,9 +31,28 @@ class AuthService
         return self::$currentUser;
     }
 
+    private static function setCurrentUserWithCookie(){
+        self::$currentUser = UserModel::findByCookieToken($_COOKIE['c_token']);
+        if(self::$currentUser != null){
+            $length = 32;
+            $s_token = bin2hex(random_bytes($length));
+            setcookie('s_token', $s_token);
+                    
+            UserModel::setSessionToken($s_token, $currentUser['email']);
+            
+            setcookie('c_token',$_COOKIE['c_token'], time()+60*60*24*30);
+        }
+    }
+
     private static function getAuthToken()
     {
+        if(!isset($_COOKIE['s_token']))self::setCurrentUserWithCookie();
         return $_COOKIE['s_token'];
+    }
+
+    public static function disconnect(){
+        setcookie("s_token"," ",time()-3600);
+        setcookie("c_token",' ',time()-3600);
     }
 
     private static function setUniqSession(){
