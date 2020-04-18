@@ -79,13 +79,13 @@ CREATE TABLE Photo(
 ------------------------------------------------------------
 CREATE TABLE likedUser(
 	idUser        INT  NOT NULL ,
-	idUser_like   INT  NOT NULL ,
-	dateMatch     DATE  NOT NULL ,
+	idUser_liked   INT  NOT NULL ,
+	dateMatch    TIMESTAMP ,
 	matched       BOOL  NOT NULL  ,
-	CONSTRAINT like_PK PRIMARY KEY (idUser,idUser_like)
+	CONSTRAINT like_PK PRIMARY KEY (idUser,idUser_liked)
 
 	,CONSTRAINT like_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_like) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_liked) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 

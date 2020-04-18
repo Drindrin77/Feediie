@@ -50,6 +50,27 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         $req->execute(array($sessionToken, $mail)); 
     }
 
+    public static function fetchMatchedUsers($uniqID){
+        $req = self::$pdo->prepare("SELECT
+                                        matchedUser.firstname AS name,
+                                        EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
+                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match
+                                    FROM
+                                        feediieuser matchedUser 
+                                    INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
+                                    INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
+                                        
+                                    WHERE 
+                                        matched = true
+                                    AND currentUser.uniqid = ?
+                                    
+                                    ORDER BY 
+	                                    likedU.datematch DESC");
+        $req->execute(array($uniqID));
+        return $req->fetchAll();
+    }
+
+
     public static function editInfo($args, $idUser){
         $sql = "update feediieuser set ";
         $values = array();
@@ -61,9 +82,9 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         $sql .= " where idUser = ?;";
         array_push($values, $idUser);
         $req = self::$pdo->prepare($sql);
-        return $req->execute($values); 
+        return $req->execute($values);
     }
-    
+
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");
        $req->execute(array($idUser,$firstName,$birthDay,$description));
