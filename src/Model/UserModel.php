@@ -47,7 +47,27 @@ class UserModel extends DBConnection{
         $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }
-    
+
+    public static function fetchMatchedUsers($uniqID){
+        $req = self::$pdo->prepare("SELECT
+                                        matchedUser.firstname AS name,
+                                        EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
+                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match
+                                    FROM
+                                        feediieuser matchedUser 
+                                    INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
+                                    INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
+                                        
+                                    WHERE 
+                                        matched = true
+                                    AND currentUser.uniqid = ?
+                                    
+                                    ORDER BY 
+	                                    likedU.datematch DESC");
+        $req->execute(array($uniqID));
+        return $req->fetchAll();
+    }
+
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");
        $req->execute(array($idUser,$firstName,$birthDay,$description));
