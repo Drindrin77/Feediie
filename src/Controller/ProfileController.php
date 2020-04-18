@@ -26,25 +26,27 @@ class ProfileController extends Controller{
 
     private function viewProfile($uniqID){
         $userInfo = UserModel::getUserByUniqID($uniqID);
-        $idUser = $userInfo['iduser'];
-        //$photos = $this->userModel->getAllPhotos($idUser);
-        //$personnalities = $this->userModel->getAllPersonnalities($idUser);
-        //$hobbies = $this->userModel->getAllHobbies($idUser);
-        //$favoritesDish = $this->userModel->getAllFavoritesDishes($idUser);
-
-        $photos = array('/Images/parameter.png','/Images/parameter.png','/Images/parameter.png');
+        
         if(empty($userInfo)){
             return new ViewModel('UnknownUser');
         }else{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
+            $idUser = $userInfo['iduser'];
+            $photos = PhotoModel::getAllPhotos($idUser);
+            $personalities = DishModel::getAllPersonnalities($idUser);
+            $hobbies = HobbyModel::getAllHobbies($idUser);
+            $favoriteDish = DishModel::getAllFavoritesDishes($idUser);
+
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
                 'user'=>$userInfo,
-                'photos'=>$photos
+                'photos'=>$photos,
+                'personalities'=>$personalities,
+                'hobbies'=>$hobbies,
+                'favoriteDish'=>$favoriteDish,
             ];
             return new ViewModel('ProfileView',$data);
         }
-
     }
 
     private function edit(){

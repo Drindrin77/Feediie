@@ -1,3 +1,6 @@
-#test{
-    background-color: red;
+
+#photos, #info, #edit{
+    display:inline-block;
+    vertical-align: top;
+
 }

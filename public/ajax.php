@@ -10,6 +10,9 @@ require_once("../src/Service/PasswordService.php");
 require_once("../src/Model/UserModel.php");
 require_once("../src/Model/CityModel.php");
 require_once("../src/Model/SexModel.php");
+require_once("../src/Model/DishModel.php");
+require_once("../src/Model/HobbyModel.php");
+require_once("../src/Model/PhotoModel.php");
 
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
 $path = "../src/Request/". $entity.".php";
@@ -23,7 +26,8 @@ if(file_exists($path)){
     $entityRequest->execute();
     $entityRequest->sendRequest();
 }else{
-
+    header("HTTP/1.0 404 Not Found");
+    exit();
 }
     
 ?>

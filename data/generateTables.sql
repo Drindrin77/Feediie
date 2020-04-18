@@ -68,7 +68,7 @@ CREATE TABLE FeediieUser(
 CREATE TABLE Photo(
 	idPhoto    SERIAL NOT NULL ,
 	url        VARCHAR (128) NOT NULL ,
-	priority   INT2  NOT NULL ,
+	priority   INT  NOT NULL ,
 	idUser     INT  NOT NULL  ,
 	CONSTRAINT Photo_PK PRIMARY KEY (idPhoto)
 
@@ -171,13 +171,11 @@ CREATE TABLE Dish(
 -- Table: PersonalityDish
 ------------------------------------------------------------
 CREATE TABLE PersonalityDish(
-	idDish        INT  NOT NULL ,
-	description   VARCHAR (128) NOT NULL ,
+	idDish        SERIAL  NOT NULL ,
+	description   VARCHAR (128) ,
 	name          VARCHAR (64) NOT NULL ,
 	iconURL       VARCHAR (64) NOT NULL  ,
 	CONSTRAINT PersonalityDish_PK PRIMARY KEY (idDish)
-
-	,CONSTRAINT PersonalityDish_Dish_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)
 )WITHOUT OIDS;
 
 
