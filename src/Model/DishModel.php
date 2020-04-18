@@ -19,4 +19,3 @@ class DishModel extends DBConnection{
     }
 }
 ?>
-
