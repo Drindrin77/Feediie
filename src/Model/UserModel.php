@@ -43,7 +43,7 @@ class UserModel extends DBConnection{
         return $req->fetch();
     }
 
-    public static function setSessionTokenByMail($sessionToken, $mail){
+    public static function setSessionToken($sessionToken, $mail){
         $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }

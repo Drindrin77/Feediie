@@ -45,9 +45,14 @@ class UserRequest extends RequestService{
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
             if(password_verify($password, $passwordEncrypted)){
                 $length = 32;
-                $_SESSION['s_token'] = bin2hex(random_bytes($length));
-                UserModel::setSessionToken($_SESSION['s_token'], $email);
-                $_COOKIE['c_token'] = UserModel::getUserByMail($email)['token'];
+                $s_token = bin2hex(random_bytes($length));
+                setcookie('s_token', $s_token);
+                
+                UserModel::setSessionToken($s_token, $email);
+
+                if($_POST['rememberMe'] == "true"){
+                    setcookie('c_token',UserModel::getUserByMail($email)['token'], time()+60*60*24*30);
+                }
                 $this->addMessageSuccess("connect");
             }else{
                 $this->addMessageSuccess("rate");
