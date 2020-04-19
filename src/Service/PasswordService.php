@@ -9,9 +9,9 @@ class PasswordService{
     private static $atLeastOneLetter = true;
     private static $atLeastOneSpecialChar = true;
     private static $needMinCharacter = true;
-    private static $needMaxCharacter = true;
-    private static $minCharacter = 5;
-    private static $maxCharacter = 20;
+    private static $needMaxCharacter = false;
+    private static $minCharacter = 6;
+    private static $maxCharacter = 64;
 	
 	public function __construct() {
     }
@@ -48,34 +48,33 @@ class PasswordService{
     }
 
     //return true if password complies with policy
-    public static function isConform($password){
-        $regex = '';
-        if(self::$atLeastOneUppercase){
-            $regex.='';
-        }
-        if(self::$atLeastOneNumber){
-            $regex.='';
+    public static function checkPasswordFormat($password){
+        $regex = '/(';
+        if(self::$atLeastOneLetter){
+            $regex.='(?=.*[a-z])';
 
         }
-        if(self::$atLeastOneLetter){
-            $regex.='';
+        if(self::$atLeastOneUppercase){
+            $regex.='(?=.*[A-Z])';
+        }
+        if(self::$atLeastOneNumber){
+            $regex.='(?=.*[0-9])';
 
         }
         if(self::$atLeastOneSpecialChar){
-            $regex.='';
+            $regex.="(?=.*[!#$%&'*+-/=?^_`{|}~])";
 
         }
+        $regex.=')';
         if(self::$needMinCharacter){
-            $regex.='';
-
+            $regex.='(?=.{'.$minCharacter.','.$maxCharacter.'})';
         }
         if(self::$needMaxCharacter){
             $regex.='';
 
         }
-        return true;
-        //TODO
-        //return preg_match($regex, $password);
+        $regex.='/';
+        return preg_match($regex, $password);
     }
 }
 

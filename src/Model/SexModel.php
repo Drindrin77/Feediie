@@ -13,6 +13,11 @@ class SexModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public function getSexWithName($name){
+        $req = self::$pdo->prepare("select * from sex where name = ?");
+        $req->execute(array($name));    
+        return $req->fetch();
+    }
 }
 
 ?>

@@ -54,6 +54,12 @@ class UserModel extends DBConnection{
         $req->execute(array($sessionToken, $mail)); 
     }
     
+    public static function signUp($firstName, $name, $email, $password, $birthday, $sex, $city, $uniqID){
+        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ?,null ,?, ?, ?, ?, ?, null, 
+        default, default, default, default, null, default, ?, default, ?)");
+        $req->execute(array($uniqID, $firstName, $name, $birthday, $email, $password, $uniqID, $city, $sex)); 
+    }
+
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");
        $req->execute(array($idUser,$firstName,$birthDay,$description));

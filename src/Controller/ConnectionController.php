@@ -27,9 +27,9 @@ class ConnectionController extends Controller{
         }        
     }
 
-    private static function signout(){
+    private function signout(){
         AuthService::disconnect();
-        header("Location: /");
+        $this->redirectUser();
     }
 
     //TODO IMPORTANT : Appeller AuthService::connectUser() si le mec se connecte

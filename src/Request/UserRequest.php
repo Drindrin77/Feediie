@@ -41,12 +41,13 @@ class UserRequest extends RequestService{
         }
     }
 
+    //Attention aux insertions SQL
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null;
         if(isset(UserModel::getUserByMail($email)['password'])){
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
-            if(password_verify($password, $passwordEncrypted)){
+            if(PasswordService::samePassword($password, $passwordEncrypted)){
                 $length = 32;
                 $s_token = bin2hex(random_bytes($length));
                 setcookie('s_token', $s_token);
@@ -74,8 +75,55 @@ class UserRequest extends RequestService{
     }
 
     private function register(){
+        $errors = array();
+        $isValid = true;
+        $name = isset($_POST['name'])? $_POST['name'] : null;
+        $firstName = isset($_POST['firstname'])? $_POST['firstname'] : null;
         $email = isset($_POST['email'])? $_POST['email'] : null;
-        $password = isset($_POST['password'])? $_POST['password'] : null;
+        $password = isset($_POST['password'])? $_POST['password'] : null; 
+        $birthday = $password = isset($_POST['birthday'])? $_POST['birthday'] : null;
+        $sex = $password = isset($_POST['sex'])? $_POST['sex'] : null;
+        $city = $password = isset($_POST['city'])? $_POST['city'] : null;
+        if( !EmailService::checkEmailFormat($email)){
+            array_push($errors , "Le format de l'email n'est pas valide");
+            $isValid = false;
+        }
+        if( !DateService::checkDateFormat($birthday) ){
+            array_push($errors , "Le format de la date n'est pas valide");
+            $isValid = false;
+        }
+        if( !PasswordService::checkPasswordFormat($password) ){
+            array_push($errors , PasswordService::policyToString());
+            $isValid = false;
+        }
+        if( !empty( SexModel::getSexWithName($sex) ) ){
+            array_push($errors , "Le sexe n'est pas valide");
+            $isValid = false;
+        }
+        if ( !empty( CityModel::getCityWithID($city) ) ){
+            array_push($errors , "La ville n'est pas valide");
+            $isValid = false;
+        }
+        if( !empty( UserModel::getUserByMail($email) ) ) {
+            array_push($errors , "Email déjà utilisée");
+            $isValid = false;
+        }
+        if($isValid){
+            $passwordEncrypted = PasswordService::hashPassword($password);
+            $uniqID = bin2hex(random_bytes(32));
+            while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
+                $uniqID = bin2hex(random_bytes(32));
+            }
+            if ( UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, $city, $uniqID) ){
+                $this->addMessageSuccess("validate");
+            }else{
+                $this->addMessageSuccess("echec");
+            }
+        }else{
+            $this->addMessageSuccess("echec");
+        }
+
+
     }
 
 }
