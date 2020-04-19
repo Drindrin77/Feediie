@@ -14,8 +14,7 @@ abstract class RequestService{
         $this->response['status'] = empty($this->response['error'])?'success':'error';
     }
 
-    public abstract function execute();
-
+    public abstract function execute($action);
 
     protected function addMessageError($message){
         array_push($this->response['error'], $message);
@@ -31,7 +30,6 @@ abstract class RequestService{
 
   	public function sendRequest(){
         $this->addStatus();
-        header('Content-Type: application/json');
         echo json_encode($this->response);
     }
 }
