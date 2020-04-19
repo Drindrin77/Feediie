@@ -8,8 +8,7 @@ class UserRequest extends RequestService{
         parent::__construct();
     }	
 
-    public function execute(){
-        $action = isset($_GET['action'])?$_GET['action']:null;
+    public function execute($action){
         switch($action){
             case "resetpassword":
                 $this->resetPassword();
