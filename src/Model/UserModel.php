@@ -38,6 +38,16 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         return $req->fetchAll();
     }
 
+    public static function getUserByMail($mail){
+        $req = self::$pdo->prepare("select * from feediieuser where email = ?");
+        $req->execute(array($mail)); 
+        return $req->fetch();
+    }
+
+    public static function setSessionToken($sessionToken, $mail){
+        $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
+        $req->execute(array($sessionToken, $mail)); 
+    }
     
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");

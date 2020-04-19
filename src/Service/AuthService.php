@@ -11,7 +11,7 @@ class AuthService
 
     public static function isAuthenticated(): bool
     {
-        //return isset($_SESSION['uniqid']) || isset($_COOKIE['token']);
+        //return isset($_COOKIE['s_token']) || isset($_COOKIE['c_token']);
         return true;
     }
 
@@ -34,8 +34,8 @@ class AuthService
 
     private static function getAuthToken()
     {
-        //return $_SESSION['uniqid'];
         return 'token';
+        //return $_COOKIE['s_token'];
     }
 
     private static function setUniqSession(){

@@ -35,9 +35,9 @@
                 </div>
 
                 <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
+                <div class=' date' id='datetimepicker1'>
                     <label>Date de naissance:</label>
-                    <input type='date' class="form-control" />
+                    <input type='date' class="form-control w-25"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

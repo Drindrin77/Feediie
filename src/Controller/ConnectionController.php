@@ -4,23 +4,25 @@ if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
 class ConnectionController extends Controller{
-    
+
     private $userModel;
 
 	public function __construct() {
         $this->userModel = new UserModel();
     }
     public function execute($action){
-        if(AuthService::isConnected()){
+        if(AuthService::isAuthenticated()){
             $this->redirectUser();
+        }else{
+            switch($action){
+                case null:
+                    return new ViewModel("Connection");
+                break;
+                default:
+                    $this->redirectUser();
+            }
         }
-        switch($action){
-            case null:
-                return new ViewModel("Connection");
-            break;
-            default:
-                $this->redirectUser();
-        }
+        
     }
 
     //TODO IMPORTANT : Appeller AuthService::connectUser() si le mec se connecte
@@ -51,7 +53,6 @@ class ConnectionController extends Controller{
         }
         //$passwordCrypted = password_hash($password, PASSWORD_DEFAULT); (Pour register)
     }*/
-
 }
 
 ?>
