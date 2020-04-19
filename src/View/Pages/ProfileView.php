@@ -10,7 +10,8 @@
 <div>
 
     <div id="parentTop">
-        <div style="width:200px; height:200px;" id="photos">
+
+        <div id="photos">
             <?php include_once('UserPhoto.php'); ?>
         </div>
 
