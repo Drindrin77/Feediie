@@ -94,6 +94,7 @@ $(document).ready(function () {
                 })
                 .done(function (e) {
                     data = JSON.parse(e);
+                    console.log(data);
                     if (data.status == 'success') {
                         document.location.href = "/";
                     } else {

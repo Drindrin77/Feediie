@@ -50,7 +50,6 @@ class UserRequest extends RequestService{
                 $length = 32;
                 $s_token = bin2hex(random_bytes($length));
                 setcookie('s_token', $s_token);
-                
                 UserModel::setSessionToken($s_token, $email);
 
                 if($_POST['rememberMe'] == "true"){
@@ -85,13 +84,8 @@ class UserRequest extends RequestService{
         $sex = isset($_POST['sex'])? $_POST['sex'] : null;
         $city = isset($_POST['city'])? $_POST['city'] : null;
 
-<<<<<<< HEAD
-        if( !empty(UserModel::getUserByMail($email))  ) {
-            array_push($errors , "Email déjà utilisée");
-=======
         if( !EmailService::checkEmailFormat($email)){
             $this->addMessageError("Le format de l'email n'est pas valide");
->>>>>>> 537350befa28e21f653f156ed0a6116aa5de2a50
             $isValid = false;
         }
         if( !empty( UserModel::getUserByMail($email)) ) {

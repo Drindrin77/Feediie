@@ -45,16 +45,12 @@ $(document).ready(function () {
                 console.log("fail", e)
             })
             .done(function (e){
-                if(e['status'] === 'success'){
-                    console.log("Success");
-                    if(e['success'][0] === "rate"){
-                        document.getElementById("matchError").hidden = false;
-                    }else{
-                        document.location.href = "/";
-                    }
-                }else{
-                    console.log("ici3")
-                    //Error
+                data = JSON.parse(e);
+                console.log(data);
+                if (data.status == 'success') {
+                    document.location.href = "/";
+                } else {
+                    document.getElementById("matchError").hidden = false;
                 }
             })
         }
