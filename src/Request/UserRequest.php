@@ -85,7 +85,7 @@ class UserRequest extends RequestService{
         $sex = isset($_POST['sex'])? $_POST['sex'] : null;
         $city = isset($_POST['city'])? $_POST['city'] : null;
 
-        if( !empty( UserModel::getUserByMail($email) ) ) {
+        if( !empty(UserModel::getUserByMail($email))  ) {
             array_push($errors , "Email déjà utilisée");
             $isValid = false;
         }
@@ -117,7 +117,7 @@ class UserRequest extends RequestService{
                 $uniqID = bin2hex(random_bytes(32));
             }
             $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID);
-            echo $firstName."<br>".$name."<br>".$email."<br>".$passwordEncrypted."<br>".$birthday."<br>".$sex."<br>".intval($city)."<br>".$uniqID;
+            //echo $firstName."<br>".$name."<br>".$email."<br>".$passwordEncrypted."<br>".$birthday."<br>".$sex."<br>".intval($city)."<br>".$uniqID;
             if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{

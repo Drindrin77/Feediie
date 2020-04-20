@@ -92,8 +92,8 @@ $(document).ready(function () {
             .fail(function (e){
                 console.log("fail", e)
             })
-            .done(function (e){
-                if(e['status'] === 'success'){
+            .done(function (e){         
+                if(e['status'] == 'success'){
                     console.log("Success");
                     if(e['success'][0] === "echec"){
                         document.getElementById("createError").hidden = false;

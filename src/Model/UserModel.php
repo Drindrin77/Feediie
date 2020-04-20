@@ -47,7 +47,7 @@ class UserModel extends DBConnection{
     public static function getUserByMail($mail){
         $req = self::$pdo->prepare("select * from feediieuser where email = ?");
         $req->execute(array($mail));
-        var_dump($req->fetch());
+        //var_dump($req->fetch());
         return $req->fetch();
     }
 
