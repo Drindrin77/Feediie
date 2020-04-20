@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log("go")   
+    console.log("go")
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
@@ -9,7 +9,7 @@ $(document).ready(function () {
         let city = $("#city option:selected").val();
         let name = $("#name").val()
         let firstName = $("#firstname").val()
-        
+
         var dateFormat = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
         var textFormat = /([a-zA-Z]+)/;
         var numberFormat = /([0-9])/;
@@ -29,12 +29,12 @@ $(document).ready(function () {
             document.getElementById("passwordError").hidden = false;
             isValid = false
         }
-        
-        if( !name.trim()){
+
+        if (!name.trim()) {
             document.getElementById("nameError").hidden = false;
             isValid = false
         }
-        if( !firstName.trim()){
+        if (!firstName.trim()) {
             document.getElementById("fNameError").hidden = false;
             isValid = false
         }
@@ -44,68 +44,63 @@ $(document).ready(function () {
             document.getElementById("emailError").hidden = false;
             isValid = false
         }
-    
+
         var mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-        if(!email.match(mailFormat)){
+        if (!email.match(mailFormat)) {
             document.getElementById("emailError").hidden = false;
             isValid = false;
         }
-        
+
         var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&'*+-/=?^_`{|}~]))(?=.{6,})/;
-        if(!password.match(passwordFormat)){
+        if (!password.match(passwordFormat)) {
             document.getElementById("passwordError").hidden = false;
             isValid = false;
         }
-        
 
-        if(!birthday.match(dateFormat)){
+
+        if (!birthday.match(dateFormat)) {
             document.getElementById("birthdayError").hidden = false;
             isValid = false;
         }
 
-        if(!city.match(numberFormat)){
+        if (!city.match(numberFormat)) {
             document.getElementById("cityError").hidden = false;
             isValid = false;
         }
 
-        if(!sex.match(textFormat)){
+        if (!sex.match(textFormat)) {
             document.getElementById("sexError").hidden = false;
             isValid = false;
         }
-        
-        if(password != passwordConfirmed){
+
+        if (password != passwordConfirmed) {
             document.getElementById("matchPwdError").hidden = false;
             isValid = false;
         }
 
         if (isValid) {
             $.post("/ajax.php?entity=user&action=register",
-            {
-                'name': name,
-                'firstname': firstName,
-                'email': email,
-                'password': password,
-                'birthday': birthday,
-                'sex': sex,
-                'city': city
-            })
-            .fail(function (e){
-                console.log("fail", e)
-            })
-            .done(function (e){         
-                if(e['status'] == 'success'){
-                    console.log("Success");
-                    if(e['success'][0] === "echec"){
-                        document.getElementById("createError").hidden = false;
-                    }else{
+                {
+                    'name': name,
+                    'firstname': firstName,
+                    'email': email,
+                    'password': password,
+                    'birthday': birthday,
+                    'sex': sex,
+                    'city': city
+                })
+                .fail(function (e) {
+                    console.log("fail", e)
+                })
+                .done(function (e) {
+                    data = JSON.parse(e);
+                    if (data.status == 'success') {
                         document.location.href = "/";
+                    } else {
+                        document.getElementById("createError").hidden = false;
                     }
-                }else{
-                    console.log("ici3")
-                    //Error
-                }
-            })
+                })
         }
-    
+
     })
 })

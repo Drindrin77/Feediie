@@ -47,7 +47,6 @@ class UserModel extends DBConnection{
     public static function getUserByMail($mail){
         $req = self::$pdo->prepare("select * from feediieuser where email = ?");
         $req->execute(array($mail));
-        //var_dump($req->fetch());
         return $req->fetch();
     }
 
@@ -62,6 +61,11 @@ class UserModel extends DBConnection{
         $res = $req->execute(array($uniqID, $firstName, $name, $birthday, $email, $password, $uniqID, $city, $sex));
         return $res;
     }
+/*
+    insert into feediieuser VALUES (default,'0bf7cf11709ce61b1861ab55e688d71e7b0bcc1cea0d66e9b6faed536947f583'
+    ,null ,'Léanna', 'Ji', '1999-11-04', 'ji.leanna@outlook.com', '$2y$10$7Eag0hekMyCYm8gGBobdKebFoDcQhxAFsjxqC/ieh79TkEMzxElj6', null, 
+    default, default, default, default, '0bf7cf11709ce61b1861ab55e688d71e7b0bcc1cea0d66e9b6faed536947f583', default, 1, default, 'Femme')
+  */  
 
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");

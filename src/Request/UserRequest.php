@@ -85,28 +85,34 @@ class UserRequest extends RequestService{
         $sex = isset($_POST['sex'])? $_POST['sex'] : null;
         $city = isset($_POST['city'])? $_POST['city'] : null;
 
+<<<<<<< HEAD
         if( !empty(UserModel::getUserByMail($email))  ) {
             array_push($errors , "Email déjà utilisée");
-            $isValid = false;
-        }
+=======
         if( !EmailService::checkEmailFormat($email)){
-            array_push($errors , "Le format de l'email n'est pas valide");
+            $this->addMessageError("Le format de l'email n'est pas valide");
+>>>>>>> 537350befa28e21f653f156ed0a6116aa5de2a50
             $isValid = false;
         }
+        if( !empty( UserModel::getUserByMail($email)) ) {
+            $this->addMessageError("Email déjà utilisée");
+            $isValid = false;
+        }
+
         if( !DateService::checkDateFormat($birthday) ){
-            array_push($errors , "Le format de la date n'est pas valide");
+            $this->addMessageError("Le format de la date n'est pas valide");
             $isValid = false;
         }
         if( !PasswordService::checkPasswordFormat($password) ){
-            array_push($errors , PasswordService::policyToString());
+            $this->addMessageError(PasswordService::policyToString());
             $isValid = false;
         }
         if( empty( SexModel::getSexWithName($sex) ) ){
-            array_push($errors , "Le sexe n'est pas valide");
+            $this->addMessageError("Le sexe n'est pas valide");
             $isValid = false;
         }
         if ( empty( CityModel::getCityWithID($city) ) ){
-            array_push($errors , "La ville n'est pas valide");
+            $this->addMessageError("La ville n'est pas valide");
             $isValid = false;
         }
         
@@ -117,19 +123,13 @@ class UserRequest extends RequestService{
                 $uniqID = bin2hex(random_bytes(32));
             }
             $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID);
-            //echo $firstName."<br>".$name."<br>".$email."<br>".$passwordEncrypted."<br>".$birthday."<br>".$sex."<br>".intval($city)."<br>".$uniqID;
             if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{
-                $this->addMessageSuccess($errors);
+                $this->addMessageError('ERREUR BD');
             }
-        }else{
-            $this->addMessageSuccess($errors);
         }
-
-
     }
-
 }
 
 ?>
