@@ -8,8 +8,8 @@ class DateService{
     }
 
     public static function checkDateFormat($birthday){
-        $regex = '/^([0-9]{2})/([0-9]{2})/([0-9]{4})/';
-        return preg_match($regex, $email);
+        $regex = '/^([0-9]{4})-([0-9]{2})-([0-9]{2})/';
+        return preg_match($regex, $birthday);
     }
 }
 

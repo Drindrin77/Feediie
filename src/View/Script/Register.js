@@ -3,7 +3,7 @@ $(document).ready(function () {
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
-        let passwordConfirmed = $("#passwordConfirmed").val()
+        let passwordConfirmed = $("#confirmedPassword").val()
         let birthday = $("#birthday").val()
         let sex = $("#sex option:selected").val();
         let city = $("#city option:selected").val();
@@ -13,11 +13,6 @@ $(document).ready(function () {
         var dateFormat = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
         var textFormat = /([a-zA-Z]+)/;
         var numberFormat = /([0-9])/;
-
-        console.log(sex);
-        console.log(city);
-        console.log(birthday);
-             
 
         document.getElementById("createError").hidden = true;
         document.getElementById("emailError").hidden = true;
@@ -29,8 +24,6 @@ $(document).ready(function () {
         document.getElementById("nameError").hidden = true;
         document.getElementById("fNameError").hidden = true;
 
-
-        
         let isValid = true
         if (!password.trim()) {
             document.getElementById("passwordError").hidden = false;
@@ -79,13 +72,17 @@ $(document).ready(function () {
             document.getElementById("sexError").hidden = false;
             isValid = false;
         }
-
+        
         if(password != passwordConfirmed){
             document.getElementById("matchPwdError").hidden = false;
+            isValid = false;
         }
+
         if (isValid) {
             $.post("/ajax.php?entity=user&action=register",
             {
+                'name': name,
+                'firstname': firstName,
                 'email': email,
                 'password': password,
                 'birthday': birthday,

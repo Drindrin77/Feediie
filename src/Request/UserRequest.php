@@ -76,13 +76,19 @@ class UserRequest extends RequestService{
     private function register(){
         $errors = array();
         $isValid = true;
+
         $name = isset($_POST['name'])? $_POST['name'] : null;
         $firstName = isset($_POST['firstname'])? $_POST['firstname'] : null;
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null; 
-        $birthday = $password = isset($_POST['birthday'])? $_POST['birthday'] : null;
-        $sex = $password = isset($_POST['sex'])? $_POST['sex'] : null;
-        $city = $password = isset($_POST['city'])? $_POST['city'] : null;
+        $birthday = isset($_POST['birthday'])? $_POST['birthday'] : null;
+        $sex = isset($_POST['sex'])? $_POST['sex'] : null;
+        $city = isset($_POST['city'])? $_POST['city'] : null;
+
+        if( !empty( UserModel::getUserByMail($email) ) ) {
+            array_push($errors , "Email déjà utilisée");
+            $isValid = false;
+        }
         if( !EmailService::checkEmailFormat($email)){
             array_push($errors , "Le format de l'email n'est pas valide");
             $isValid = false;
@@ -95,31 +101,30 @@ class UserRequest extends RequestService{
             array_push($errors , PasswordService::policyToString());
             $isValid = false;
         }
-        if( !empty( SexModel::getSexWithName($sex) ) ){
+        if( empty( SexModel::getSexWithName($sex) ) ){
             array_push($errors , "Le sexe n'est pas valide");
             $isValid = false;
         }
-        if ( !empty( CityModel::getCityWithID($city) ) ){
+        if ( empty( CityModel::getCityWithID($city) ) ){
             array_push($errors , "La ville n'est pas valide");
             $isValid = false;
         }
-        if( !empty( UserModel::getUserByMail($email) ) ) {
-            array_push($errors , "Email déjà utilisée");
-            $isValid = false;
-        }
+        
         if($isValid){
             $passwordEncrypted = PasswordService::hashPassword($password);
             $uniqID = bin2hex(random_bytes(32));
             while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
                 $uniqID = bin2hex(random_bytes(32));
             }
-            if ( UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, $city, $uniqID) ){
+            $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID);
+            echo $firstName."<br>".$name."<br>".$email."<br>".$passwordEncrypted."<br>".$birthday."<br>".$sex."<br>".intval($city)."<br>".$uniqID;
+            if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{
-                $this->addMessageSuccess("echec");
+                $this->addMessageSuccess($errors);
             }
         }else{
-            $this->addMessageSuccess("echec");
+            $this->addMessageSuccess($errors);
         }
 
 
