@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+    $(".nav-link").click(function (e) {
+        let content = $(this).attr('targetIDContent');
+        $(".nav-link").removeClass('active');
+        $(this).addClass('active')
+        $(".navContent").css('display', 'none');
+        $('#' + content).css('display', 'contents');
+    })
+
+
     $(".delete").click(function (e) {
         let url = $(this).parent().parent().find("img").attr('src');
         $.post("/ajax.php?entity=photo&action=delete",

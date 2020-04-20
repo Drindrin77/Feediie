@@ -37,11 +37,15 @@ class ViewModel {
               <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
                 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
               <style>
                 <?php 
                   if(file_exists($this->path.'Style/'.$this->page.'.css')){
                     include 'Style/'.$this->page.'.css';
+                  }
+                  if($this->shouldShowHeaders()){
+                    include 'Style/header.css';
                   }
                 ?>
               </style>
@@ -50,6 +54,9 @@ class ViewModel {
                 <?php 
                   if(file_exists($this->path.'Script/'.$this->page.'.js')){
                     include 'Script/'.$this->page.'.js';
+                  }
+                  if($this->shouldShowHeaders()){
+                    include 'Script/header.js';
                   }
                 ?>
               </script>  
@@ -71,7 +78,7 @@ class ViewModel {
 
             <?php
               if ($this->shouldShowHeaders()) {
-                include_once 'Layout/footer.php';
+               // include_once 'Layout/footer.php';
               }
             ?>
 

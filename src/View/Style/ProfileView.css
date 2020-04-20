@@ -1,9 +1,106 @@
-#photos{
+#userphoto{
     width: 200px;
     height: 200px;
 }
-#photos, #info, #edit{
-    display:inline-block;
-    vertical-align: top;
+#edit{
+    position:absolute;
+    z-index: 1000;
+    top:10;
+    right:10;
+}
 
+#name{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#containerProfile{
+    max-width:720px;
+    margin:auto;
+    position:relative;
+    background-color: white;
+    border-radius: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#background{
+    background-color: lightgrey;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 769px) {
+    #name {
+        position:absolute;
+        bottom:0;
+    }
+}
+@media screen and (max-width: 768px) {
+    #containerProfile {
+        max-width:540px !important;
+    }
+    #containerName{
+        padding-top:10px;
+        text-align:center;
+    }
+    #userPhoto{
+        display:block;
+        margin:auto; 
+    }
+    #editProfileText{
+        display:none;
+    }
+    #containerTitleHobby{
+        text-align: left !important;
+    }
+}
+
+hr.solid {
+    border-top: 3px solid #007bff;
+    opacity: 0.5;
+}
+
+#containerDescription{
+    background-color: rgb(236, 232, 232);
+    border-radius: 5px;
+    padding:10px;
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.titleSection{
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+#titleGeneralInfo, #responseGeneralInfo{
+    display:inline-block;
+}
+
+.containerHobby{
+    background-color:#cce5ff;
+    color: #004085;
+    border-radius: 10px;
+    margin-top:5px;
+    display: inline-block;
+    padding:15px;
+}
+
+#containerTitleHobby{
+    text-align:center;
+}
+
+.titleCardPerso{
+    text-align: center;
+}
+
+.cardImage{
+    padding:10px;
+    width:120px;
+}
+.card{
+    width:120px;
 }
