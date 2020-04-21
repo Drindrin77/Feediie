@@ -18,7 +18,8 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
             <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
             <div>
                 <div class="titleParameter"><h4>Montrer moi</h4></div>
-                <div class="boxSelect">
+                <div class="boxSelectModified">
+                    <div class="showMoreBtn">Montrer plus</div>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="men">
                         <label class="custom-control-label" for="men">Hommes</label>
@@ -27,6 +28,31 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                         <input type="checkbox" class="custom-control-input" id="women">
                         <label class="custom-control-label" for="women">Femmes</label>
                     </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+
                 </div>
                 <div class="titleParameter"><h4>Distance</h4></div>
                 <div class="boxSelect">
@@ -40,7 +66,8 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     <input type="range" class="custom-range" min="18" max="60" id="ageRangemax">
                 </div>
                 <div class="titleParameter"><h4>Régime Alimentaire</h4></div>
-                <div class="boxSelect">
+                <div class="boxSelectModified">
+                    <div class="showMoreBtn">Montrer plus</div>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="vegetarien">
                         <label class="custom-control-label" for="vegetarien">Végétarien</label>
@@ -61,8 +88,37 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                         <input type="checkbox" class="custom-control-input" id="noarachide">
                         <label class="custom-control-label" for="noarachide">Sans arachide</label>
                     </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">Autre</label>
+                    </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-primary" style="width:100%">Valider les réglages !</button>
         </div>
     </div>
 
@@ -110,6 +166,10 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
         };
 
         profilCloseBtn.onclick = function () {
+            backgroundOverlay.style.opacity = "0";
+            backgroundOverlay.style.pointerEvents = "none";
+        };
+        backgroundOverlay.onclick = function () {
             backgroundOverlay.style.opacity = "0";
             backgroundOverlay.style.pointerEvents = "none";
         };
@@ -180,4 +240,69 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
         document.getElementById("ageRangeLabel").innerHTML = ageRangemin+' ans - '+ageRangemax+' ans';
     }
     window.setInterval("refreshing()", 50);
+</script>
+<script>
+    function openSelection() {
+        let showMoreBtn = document.querySelectorAll(".showMoreBtn");
+        let boxSelectModified = document.querySelectorAll(".boxSelectModified");
+        let boxSelect = document.querySelectorAll(".boxSelect");
+        showMoreBtn[0].onclick = function () {
+            if(opened[0]===false) {
+                this.innerHTML = "Montrer moins";
+                boxSelectModified[0].style.height = "auto";
+                boxSelectModified[0].style.transition = "all 2s";
+                for(let i=0;i<nbBoxselect;i++)
+                {
+                    boxSelect[i].style.display ="none";
+                }
+                boxSelectModified[1].style.display = "none";
+                opened[0]=true;
+            }
+            else
+            {
+                this.innerHTML = "Montrer plus";
+                boxSelectModified[0].style.height = "75px";
+                boxSelectModified[0].style.transition = "all 2s";
+                for(let i=0;i<nbBoxselect;i++)
+                {
+                    boxSelect[i].style.display ="block";
+                }
+                boxSelectModified[1].style.display = "block";
+                opened[0]=false;
+
+            }
+        };
+        showMoreBtn[1].onclick = function () {
+            if(opened[1]===false) {
+                this.innerHTML = "Montrer moins";
+                boxSelectModified[1].style.height = "auto";
+                boxSelectModified[1].style.transition = "all 2s";
+                for(let i=0;i<nbBoxselect;i++)
+                {
+                    boxSelect[i].style.display ="none";
+                }
+                boxSelectModified[0].style.display = "none";
+                opened[1]=true;
+            }
+            else
+            {
+                this.innerHTML = "Montrer plus";
+                boxSelectModified[1].style.height = "75px";
+                boxSelectModified[1].style.transition = "all 2s";
+                for(let i=0;i<nbBoxselect;i++)
+                {
+                    boxSelect[i].style.display ="block";
+                }
+                boxSelectModified[0].style.display = "block";
+                opened[1]=false;
+            }
+        }
+    }
+    let opened = [];
+    let nbBoxselectionModified = 2;
+    let nbBoxselect = 2;
+    for(let i=0;i<nbBoxselectionModified;i++) {
+        opened[i] = false;
+    }
+    openSelection();
 </script>

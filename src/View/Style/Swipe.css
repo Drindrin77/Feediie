@@ -177,7 +177,7 @@
 
     margin-top: 10px;
 
-    height: 850px;
+    height: 100%;
 
     width: 400px;
 
@@ -196,137 +196,90 @@
 }
 
 #parameters.active {
-
     margin-top: 10px;
-
     height: 850px;
-
     width: 400px;
-
     border-radius: 20px;
-
     transform: translate(-100px,0);/*-100*/
-
     transition-duration: 1s;
-
     background: #E1E1E1;
-
     float:left;
-
     display: flex;
-
 }
 #parametersBtn {
     z-index: 2000;
     transform: translate(260px,50px);
 }
 .titleParameter {
-
     font-size: 22px;
-
 }
-
+.showMoreBtn {
+    width:105%;
+    background: #E86B51;
+    color:white;
+    font-weight: bold;
+    margin: -5px -5px 5px;
+    text-align: center;
+}
 #spaceBlock {
-
     width: 100px;
-
     height: 100%;
-
 }
 
 #blockParameters {
-
     padding: 10px;
-
     width: 100%;
-
     height: 100%;
-
 }
-
-
-
 .boxSelect {
-
     padding: 5px;
-
     background: white;
-
     border-radius: 10px;
-
     margin-bottom: 10px;
-
+    overflow: hidden;
+}
+.boxSelectModified {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    height: 75px;
 }
 
 #closeBtn {
-
     position: absolute;
-
     transform: translate(270px,-30px);
-
 }
-
-
-
 #overlayProfil {
-
     display: flex;
-
     background: #fff;
-
     margin-left:200px;
-
     border-radius: 20px;
-
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
-
     width: 700px;
-
     height: 500px;
-
     opacity: 100%;
-
     top: 30px;
-
     position: absolute;
-
     cursor: hand;
-
 }
-
 .backgroundOverlay {
-
     display: flex;
-
     position: absolute;
-
     background: rgba(38, 12, 12, 0.8);
-
     height: 100%;
-
     width: 100%;
-
     transform: translate(-15px,0);
-
     z-index:100;
-
     opacity: 0;
-
     transition: 1s;
-
     pointer-events: none;
-
 }
-
 #profilCloseBtn {
-
     transform: translate(870px,10px);
-
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
-
     z-index:1000;
-
-
-
-
 }
