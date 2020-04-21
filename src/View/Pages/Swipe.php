@@ -146,6 +146,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     <div class="col-lg-12">
                     <div id="blockButtons">
                         <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
+                        <div id="parametersBtn" class="buttons"><img src="/Images/Icon/parameter.png" alt=""/></div>
                         <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
                     </div>
                     </div>
@@ -217,6 +218,9 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
 </script>
 <script>
     $(document).ready(function () {
+        $('#parametersBtn').on('click',function () {
+            $('#parameters').toggleClass('active');
+        });
         $('#parameters').toggleClass('active');
         $('#closeBtn').on('click', function () {
             $('#parameters').toggleClass('active');

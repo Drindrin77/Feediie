@@ -208,7 +208,6 @@
 }
 #parametersBtn {
     z-index: 2000;
-    transform: translate(260px,50px);
 }
 .titleParameter {
     font-size: 22px;
