@@ -3,44 +3,181 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
 
 ?>
 <div class="container-fluid background">
+    <div class="backgroundOverlay">
+        <div class="container">
+            <div class="row">
+                <div id="profilCloseBtn" class="buttons"><img src="Images/Icon/croix.png" alt=""/></div>
+                <div id="overlayProfil"></div>
+            </div>
+        </div>
+    </div>
+    <div id="parameters" class="container">
+        <div id="spaceBlock">
+        </div>
+        <div id="blockParameters">
+            <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+            <div>
+                <div class="titleParameter"><h4>Montrer moi</h4></div>
+                <div class="boxSelect">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="men">
+                        <label class="custom-control-label" for="men">Hommes</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="women">
+                        <label class="custom-control-label" for="women">Femmes</label>
+                    </div>
+                </div>
+                <div class="titleParameter"><h4>Distance</h4></div>
+                <div class="boxSelect">
+                    <label id="distanceLabel" for="distance">X km</label>
+                    <input type="range" class="custom-range" min="0" max=10" id="distance">
+                </div>
+                <div class="titleParameter"><h4>Age</h4></div>
+                <div class="boxSelect">
+                    <label id="ageRangeLabel" for="ageRangemin">X ans - Y ans</label>
+                    <input type="range" class="custom-range" min="18" max="60" id="ageRangemin">
+                    <input type="range" class="custom-range" min="18" max="60" id="ageRangemax">
+                </div>
+                <div class="titleParameter"><h4>Régime Alimentaire</h4></div>
+                <div class="boxSelect">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="vegetarien">
+                        <label class="custom-control-label" for="vegetarien">Végétarien</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="noGluten">
+                        <label class="custom-control-label" for="noGluten">Sans gluten</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="halal">
+                        <label class="custom-control-label" for="halal">Halal</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="vegan">
+                        <label class="custom-control-label" for="vegan">Végan</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="noarachide">
+                        <label class="custom-control-label" for="noarachide">Sans arachide</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <div id="parameters"class="float-left">
-                    <div>Montrez moi </div>
-                    <div>
-                        <input type="checkbox" id="man" name="man"
-                               checked>
-                        <label for="scales">Homme</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="woman" name="woman">
-                        <label for="horns">Femme</label>
-                    </div>
-                    <div>Distance</div>
-
-                </div>
+            <div class="col-lg-2">
             </div>
-            <div class="col-lg-3 swipe">
+            <div class="col-lg-8 swipe">
                 <div id="card">
+                    <!-- <div id="parametersBtn" class="buttons"><img src="../../../public/Images/Icon/cookie.png" alt=""/></div>-->
                     <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
                     <?php foreach ($users as $user): ?>
-                        <div class="buddy" style="display: block"> <div class="avatar" style="display: block; background-image: url('https://i1.rgstatic.net/ii/profile.image/299428121464838-1448400635747_Q512/Alain_Faye.jpg')"></div><div class="name"><?= $user['firstname'] ?>, <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div><div class="description"><?= $user['description'] ?></div></div>
+                        <div class="buddy" style="display: block">
+                            <div class="avatar"
+                                 style="display: block;"><?php include_once('UserPhoto.php'); ?></div>
+                            <div class="name"><?= $user['firstname'] ?>
+                                , <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div>
+                            <div class="description"><?= $user['description'] ?>
+                            </div>
+                        </div>
                     <?php endforeach ?>
+                    <div id="profilLink">Afficher le profil</div>
                 </div>
-            </div>
-            <div class="col-lg-4"></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                <div id="blockButtons">
-                    <div id="beurkBtn" class="buttons"><img src="../Images/Icon/beurk.png" alt=""/></div>
-                    <div id="miamBtn" class="buttons"><img src="../Images/Icon/miam.png" alt=""/></div>
+                <div class="row">
+                    <div class="col-lg-12">
+                    <div id="blockButtons">
+                        <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
+                        <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4"></div>
         </div>
     </div>
 </div>
+<script>
+    function selection() {
+        let profilLink = document.getElementById("profilLink");
+        let backgroundOverlay = document.querySelector(".backgroundOverlay");
+        let profilCloseBtn = document.getElementById("profilCloseBtn");
+        profilLink.onclick = function () {
+            backgroundOverlay.style.opacity = "100%";
+            backgroundOverlay.style.pointerEvents = "all";
+        };
 
+        profilCloseBtn.onclick = function () {
+            backgroundOverlay.style.opacity = "0";
+            backgroundOverlay.style.pointerEvents = "none";
+        };
+    }
+    selection();
+</script>
+<script>
+    $(document).ready(function () {
+        $(".buddy").on("swiperight", function () {
+            if ($(this).is(':first-child')) {
+            }
+            else {
+                $(this).addClass('rotate-left').delay(700).fadeOut(1);
+                $(this).append('<div class="status miam">Miam!</div>');
+            }
+        });
+
+        $(".buddy").on("swipeleft", function () {
+            if ($(this).is(':first-child')) {
+            }
+            else {
+                $(this).addClass('rotate-right').delay(700).fadeOut(1);
+                $(this).append('<div class="status beurk">Beurk!</div>');
+            }
+        });
+
+        $('#miamBtn').click(function () {
+            if ($('.buddy:last').is(':first-child')) {
+            }
+            else {
+                $('.buddy:last').addClass('rotate-left').delay(700).fadeOut(1);
+                $('.buddy:last').append('<div class="status miam">Miam!</div>');
+            }
+        });
+        $('#beurkBtn').click(function () {
+            if ($('.buddy:last').is(':first-child')) {
+            }
+            else {
+                $('.buddy:last').addClass('rotate-right').delay(700).fadeOut(1);
+                $('.buddy:last').append('<div class="status beurk">Beurk!</div>');
+            }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#parameters').toggleClass('active');
+        $('#closeBtn').on('click', function () {
+            $('#parameters').toggleClass('active');
+        });
+    });
+    function refreshing() {
+        inputValues();
+        ageValues();
+    }
+    function inputValues() {
+        let distance = document.getElementById("distance").value;
+        document.getElementById("distanceLabel").innerHTML = distance+' km';
+    }
+    function ageValues() {
+        let ageRangemin = document.getElementById("ageRangemin").value;
+        let ageRangemax = document.getElementById("ageRangemax").value;
+        if(ageRangemin >= ageRangemax)
+        {
+            ageRangemin = ageRangemax;
+        }
+        document.getElementById("ageRangeLabel").innerHTML = ageRangemin+' ans - '+ageRangemax+' ans';
+    }
+    window.setInterval("refreshing()", 50);
+</script>

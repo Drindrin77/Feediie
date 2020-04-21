@@ -1,12 +1,13 @@
 .background {
     background: #E86B51;
     height: 100%;
+    user-select: none;
 }
 #card {
     width: 500px;
     margin: auto !important;
     display: block;
-    height: 600px;
+    height: 500px;
     position: relative;
     list-style-type: none;
     -webkit-touch-callout: none;
@@ -22,10 +23,10 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     color: black;
-    width: 250px;
-    height: 370px;
+    width: 275px;
+    height: 400px;
     left:50px;
-    top: 60px;
+    top: 40px;
     position: absolute;
     cursor: hand;
 }
@@ -35,10 +36,10 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     color: black;
-    width: 250px;
-    height: 370px;
+    width: 275px;
+    height: 400px;
     left:50px;
-    top: 60px;
+    top: 40px;
     position: absolute;
     cursor: hand;
 }
@@ -59,8 +60,8 @@
     z-index: 10;
 }
 .avatar {
-    width: 250px;
-    height: 250px;
+    width: 275px;
+    height: 275px;
     display: block;
     border-radius: 15px;
     background-size: auto 160% !important;
@@ -74,7 +75,6 @@
     padding-left: 10px;
     transform: translate(0,-40px);
     left : 10px;
-    pointer-events: none;
     z-index: auto;
 }
 .description {
@@ -82,7 +82,6 @@
     padding-left: 10px;
     transform: translate(0,-20px);
     left : 10px;
-    pointer-events: none;
     z-index: auto;
 }
 .miam {
@@ -110,44 +109,224 @@
     text-shadow: none;
 }
 #blockButtons {
+    width:275px ;
     display: flex;
-    margin-top: -130px;
-    justify-content: space-evenly;
+    margin-left: 50px;
+    margin-top: -50px;
+    justify-content: space-around;
 }
 .buttons {
-    width: 60px;
-    height: 60px;
+
+    width: 50px;
+
+    height: 50px;
+
     background: white;
+
     border-radius: 50px;
 
+    cursor :pointer;
+
 }
+
 .buttons:hover {
-    width: 60px;
-    height: 60px;
+
+    width: 50px;
+
+    height: 50px;
+
     background: white;
+
     border-radius: 50px;
+
     border: solid 5px gray;
 
-}
-.buttons img {
-    width: 70%;
-    height: 70%;
-    margin-left: 9px;
-    margin-top: 9px;
+
 
 }
+
+.buttons img {
+
+    width: 70%;
+
+    height: 70%;
+
+    margin-left: 8px;
+
+    margin-top: 9px;
+
+
+
+}
+
+.buttons:hover img {
+
+    width: 85%;
+
+    height: 85%;
+
+    margin-left: 3px;
+
+    margin-top: 4px;
+
+
+
+}
+
 #parameters {
-    width: 300px;
+
+    margin-top: 10px;
+
+    height: 850px;
+
+    width: 400px;
+
+    border-radius: 20px;
+
+    transform: translate(-500px,0);  /*-500*/
+
+    transition-duration: 1s;
+
+    background: #E1E1E1;
+
+    float:left;
+
+    display: flex;
+
+}
+
+#parameters.active {
+
+    margin-top: 10px;
+
+    height: 850px;
+
+    width: 400px;
+
+    border-radius: 20px;
+
+    transform: translate(-100px,0);/*-100*/
+
+    transition-duration: 1s;
+
+    background: #E1E1E1;
+
+    float:left;
+
+    display: flex;
+
+}
+#parametersBtn {
+    z-index: 2000;
+    transform: translate(260px,50px);
+}
+.titleParameter {
+
+    font-size: 22px;
+
+}
+
+#spaceBlock {
+
+    width: 100px;
+
+    height: 100%;
+
+}
+
+#blockParameters {
+
+    padding: 10px;
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+
+
+.boxSelect {
+
+    padding: 5px;
+
     background: white;
-    float: left;
-    height: 600px;
-    position: relative;
-    list-style-type: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    z-index:40;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+#closeBtn {
+
+    position: absolute;
+
+    transform: translate(270px,-30px);
+
+}
+
+
+
+#overlayProfil {
+
+    display: flex;
+
+    background: #fff;
+
+    margin-left:200px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    width: 700px;
+
+    height: 500px;
+
+    opacity: 100%;
+
+    top: 30px;
+
+    position: absolute;
+
+    cursor: hand;
+
+}
+
+.backgroundOverlay {
+
+    display: flex;
+
+    position: absolute;
+
+    background: rgba(38, 12, 12, 0.8);
+
+    height: 100%;
+
+    width: 100%;
+
+    transform: translate(-15px,0);
+
+    z-index:100;
+
+    opacity: 0;
+
+    transition: 1s;
+
+    pointer-events: none;
+
+}
+
+#profilCloseBtn {
+
+    transform: translate(870px,10px);
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+    z-index:1000;
+
+
+
+
 }

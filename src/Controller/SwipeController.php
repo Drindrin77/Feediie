@@ -22,13 +22,20 @@ class SwipeController extends Controller{
         }
         
     }
-    public function pageSwipe(){
+    public function pageSwipe()
+    {
 
         $users = UserModel::getAllUser();
-        $data = [
-            "users"=>$users
-        ];
-        return new ViewModel("Swipe", $data);
+        foreach ($users as $user) {
+            $idUser = $user['iduser'];
+            $photos = PhotoModel::getAllPhotos($idUser);
+            $data = [
+                'users' => $users,
+                'photos' => $photos,
+            ];
+            return new ViewModel("Swipe", $data);
+        }
+        return 0;
     }
 }
 

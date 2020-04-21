@@ -25,7 +25,7 @@
               else{
                 echo '<div class="carousel-item">';
               }
-                echo '<img class="d-block w-100" src="'. $photo['url'].'">';
+                echo '<img class="d-block w-100" style="border-radius:15px;width:100%;heigth:auto;"src="'. $photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>
