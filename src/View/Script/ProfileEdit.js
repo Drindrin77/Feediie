@@ -14,6 +14,13 @@ $(document).ready(function () {
     let city = $("#cityControl").children("option:selected").val()
     let description = $("#description").val()
 
+    var $j = jQuery.noConflict();
+    // $j is now an alias to the jQuery function; creating the new alias is optional.
+
+    $j(document).ready(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+
     function atLeastOneChange() {
         return changedFirstName || changedLastName || changedBirthday || changedSex || changedCity || changedDescription
     }
