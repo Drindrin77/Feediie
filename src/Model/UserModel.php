@@ -48,6 +48,20 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }
+
+    public static function editInfo($args, $idUser){
+        $sql = "update feediieuser set ";
+        $values = array();
+        foreach($args as $key => $value){
+            $sql .= $key . " = ?,";
+            array_push($values, $value);
+        }
+        $sql = substr($sql, 0, -1);
+        $sql .= " where idUser = ?;";
+        array_push($values, $idUser);
+        $req = self::$pdo->prepare($sql);
+        return $req->execute($values); 
+    }
     
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");

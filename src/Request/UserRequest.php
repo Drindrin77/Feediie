@@ -16,6 +16,9 @@ class UserRequest extends RequestService{
             case "connection":
                 $this->connection();
             break;
+            case "editinfo":
+                $this->editInfo();
+            break;
             case "passwordforgotten":
                 $this->passwordForgotten();
             break;
@@ -36,6 +39,16 @@ class UserRequest extends RequestService{
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
+
+    private function editInfo(){
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        if(!UserModel::editInfo($_POST, $idUser)){
+            $this->addMessageSuccess('Erreur BD');
+        }else{
+            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
+        }
+    }
+
 
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;

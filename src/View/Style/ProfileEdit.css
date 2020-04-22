@@ -79,6 +79,15 @@ span.clear { clear: right; display: block; }
     margin-bottom: 20px;
 }
 
+.activeNav{
+    color:white !important;
+    background-color:#007bff !important;
+}
+
+.nav-link{
+    cursor:pointer;
+}
+
 #titleGeneralInfo, #responseGeneralInfo{
     display:inline-block;
     vertical-align: top;
@@ -157,7 +166,15 @@ PHOTO
     left:28%;
 }
   
+.containerSpinner{
+    position:absolute;
+    top: 40%;
+    left: 40%;
+}
 
+.invisible{
+    display: none;
+}
 .containerBtnAddPhoto{
     position: absolute;
     top:40%;

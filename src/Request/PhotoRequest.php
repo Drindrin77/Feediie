@@ -57,7 +57,6 @@ class PhotoRequest extends RequestService{
                 $filename = $_FILES["file"]["name"];
                 $filetype = $_FILES["file"]["type"];
                 $filesize = $_FILES["file"]["size"];
-                var_dump($filesize);
                 $uploadOk = true;
                 
                 //CHECK TYPE FILE
@@ -96,6 +95,7 @@ class PhotoRequest extends RequestService{
                             $this->addMessageError('Erreur BD');
                         }else{
                             $this->addMessageSuccess('Le fichier a été téléchargé');
+                            $this->addData(substr($target_file,1));
                         }
                     } else {
                         $this->addMessageError('Erreur lors du téléchargement, veuillez réessayer');

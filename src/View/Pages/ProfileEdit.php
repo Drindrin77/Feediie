@@ -15,26 +15,26 @@
     <div id="containerProfile">
 
 
-        <?php  echo '<button id="btnViewProfile" class="btn btn-primary" onclick="location.href=\'/profile/'.$infoUser['uniqid'].'\'">
-                    <i class="fas fa-reply"></i><span id="spanViewProfile"> Voir le profil</span>
-                </button>';
-            ?>
+        <button id="btnViewProfile" class="btn btn-primary" uniqID=<?= $infoUser['uniqid'] ?>>
+            <i class="fas fa-reply"></i><span id="spanViewProfile"> Voir le profil</span>
+        </button>
+        
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" targetIDContent='contentPhoto' href="#">Photo</a>
+                    <span class="nav-link active activeNav" id="firstTab" targetIDContent='contentPhoto'>Photo</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" targetIDContent='contentInfo' href="#">Info</a>
+                    <span class="nav-link" targetIDContent='contentInfo'>Info</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" targetIDContent='contentHobby' href="#">Hobby</a>
+                    <span class="nav-link" targetIDContent='contentHobby'>Hobby</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" targetIDContent='contentPersonality' href="#">Personnalité</a>
+                    <span class="nav-link" targetIDContent='contentPersonality'>Personnalité</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" targetIDContent='contentDish' href="#">Plats</a>
+                    <span class="nav-link" targetIDContent='contentDish'>Plats</span>
                 </li>
             </ul>
         
@@ -52,12 +52,17 @@
                     </div>
                 </div>
                 <?php endforeach ?>
+
                 <?php for($i = count($photos); $i < MAX_USER_PHOTO; $i++){ ?>
-                <div class="containerPhoto">
+                <div class="containerPhoto containerEmptyPhoto">
                     <div class="emptyPhoto"></div>
+
+                    <div class="containerSpinner invisible spinner-border text-primary" role="status"></div>
+
                     <div class="containerBtnAddPhoto">
                         <button class="btn btn-primary btnAddPhoto"><i class="fas fa-plus"></i> Ajouter une photo</button>
                     </div>
+
                 </div> <?php } ?>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <input type="file" name="photo" id="uploadInput" style="display:none" />
@@ -96,16 +101,16 @@
                     <select class="form-control controlSelect" id="cityControl">
                         <?php foreach($allCities as $city): 
                             if($infoUser['city']==$city['name']){
-                                echo '<option selected>'.$city['name'].' ('. $city['zipcode']. ')</option>';
+                                echo '<option selected value='.$city['idcity'].'>'.$city['name'].' ('. $city['zipcode']. ')</option>';
                             }else{
-                                echo '<option>'.$city['name'].' ('. $city['zipcode']. ')</option>';
+                                echo '<option value='.$city['idcity'].'>'.$city['name'].' ('. $city['zipcode']. ')</option>';
                             }
                         endforeach ?>
                     </select>
                 </div>
                 <h5 class="titleSection">Description : </h5>                         
 
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"><?= $infoUser['description'] ?></textarea>
+                <textarea class="form-control" id="description" rows="6"><?= $infoUser['description'] ?></textarea>
                 <div class="btn btn-primary" id="submitInfo">Valider les modifications</div>
                 <span class="clear"></span>
 
@@ -114,6 +119,9 @@
             <div class="navContent" id="contentHobby">
                 <h5 class="titleSection titleAddElement">Mes hobby: </h5> 
                 <button class="btn btn-primary btnAddElement"><i class="fas fa-plus"></i> Ajouter un hobby</button>
+                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" 
+                data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
                 <div>
                     <?php foreach($hobbies as $hobby): ?>
                         <div class="containerHobby">
