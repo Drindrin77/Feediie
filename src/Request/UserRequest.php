@@ -36,6 +36,7 @@ class UserRequest extends RequestService{
         }  
         else{
             UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
+            $this->changeCookieToken(AuthService::getCurrentUser()['email']);
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
@@ -70,6 +71,15 @@ class UserRequest extends RequestService{
         $token = UserModel::getUserByMail($email)['token'];
         $link = "https://www.feediie.com/resetpassword/$token";
         mail(str($email) , "Reset Password Feediie", "Follow this link to reset your password : $link");
+    }
+
+    private function changeCookieToken($mail){
+        $length = 32;
+        $token = bin2hex(random_bytes($length));
+        while (!empty(UserModel::findByCookieToken($token))) {
+            $token = bin2hex(random_bytes($length));
+        }
+        UserModel::setCookieToken($mail);
     }
 
     private function register(){
@@ -113,10 +123,14 @@ class UserRequest extends RequestService{
         if($isValid){
             $passwordEncrypted = PasswordService::hashPassword($password);
             $uniqID = bin2hex(random_bytes(32));
+            $token = bin2hex(random_bytes(32));
             while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
                 $uniqID = bin2hex(random_bytes(32));
             }
-            $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID);
+            while (!empty(UserModel::findByCookieToken($token))) {
+                $token = bin2hex(random_bytes(32));
+            }
+            $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);
             if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{

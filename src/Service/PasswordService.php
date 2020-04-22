@@ -25,24 +25,24 @@ class PasswordService{
     }
 
     public static function policyToString(){
-        $policy = "Le mot de passe doit contenir:\n";
+        $policy = "Le mot de passe doit contenir:"."<br>";
         if(self::$atLeastOneUppercase){
-            $policy .= '-Au moins une majuscule\n';
+            $policy .= '-Au moins une majuscule'."<br>";
         }
         if(self::$atLeastOneNumber){
-            $policy .= '-Au moins un chiffre\n';
+            $policy .= '-Au moins un chiffre'."<br>";
         }
         if(self::$atLeastOneLetter){
-            $policy .= '-Au moins une lettre\n';
+            $policy .= '-Au moins une lettre'."<br>";
         }
         if(self::$atLeastOneSpecialChar){
-            $policy .= '-Au moins un caractère spécial\n';
+            $policy .= '-Au moins un caractère spécial'."<br>";
         }
         if(self::$needMinCharacter){
-            $policy .= '-Au moins ' . self::$minCharacter . 'caractères\n';
+            $policy .= '-Au moins ' . self::$minCharacter . ' caractères'."<br>";
         }
         if(self::$needMaxCharacter){
-            $policy .= '-Au maximum ' . self::$maxCharacter . 'caractères\n';
+            $policy .= '-Au maximum ' . self::$maxCharacter . ' caractères'."<br>";
         }
         return $policy;
     }

@@ -1,6 +1,7 @@
 <?php
     $cities = isset($this->data['cities']) ? $this->data['cities'] : null;
     $sexs = isset($this->data['sexs']) ? $this->data['sexs'] : null;
+    $passwordPolicy = isset($this->data['policy']) ? $this->data['policy'] : null;
 ?>
 
 <div class="container col-xl-8 justify-content-center">
@@ -17,6 +18,9 @@
                 <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
                 <div class="form-group">
                     <label for="passwordInput">Mot de passe</label>
+                    <span  data-toggle="popover" data-placement="right" data-html="true" data-content=<?php echo "\"".$passwordPolicy."\"" ?>>
+                        <i class="fas fa-info-circle"></i>
+                    </span>
                     <br>
                     <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
                 </div>
@@ -31,25 +35,26 @@
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
                     <br>
-                    <input type="text" id="firstname" required size="50" class="form-control w-75">
+                    <input type="text" id="firstname" required size="50" class="form-control w-25">
+                    <label for="lastName">Nom</label>
+                    <br>
+                    <input type="text" id="name" required size="50" class="form-control w-25">
                 </div>
 
                 <p class="error" id='nameError' hidden>Veuillez renseigner votre nom </p>
                 <div class="form-group">
-                    <label for="lastName">Nom</label>
-                    <br>
-                    <input type="text" id="name" required size="50" class="form-control w-75">
+                    
                 </div>
 
                 <p class="error" id='birthdayError' hidden>La date n'a pas le bon format</p>
                 <div class="form-group">
-                <div class=' date' id='datetimepicker1'>
-                    <label>Date de naissance:</label>
-                    <input type='date' id="birthday" class="form-control w-25"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+                    <div class=' date' id='datetimepicker1'>
+                        <label>Date de naissance:</label>
+                        <input type='date' id="birthday" class="form-control w-25"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                 </div>
 
                 <p class="error" id='sexError' hidden>Le format ne correspond pas</p>
@@ -61,10 +66,17 @@
                         ?>
                         <?php endforeach ?>
                     </select>
+                    <p class="error" id='cityError' hidden>Le format ne correspond pas</p>
+                    <label class="mr-sm-2 m-3" for="city">Ville: </label>
+                    <select class="custom-select mr-sm-2 w-25" id="city">
+                        <?php foreach($cities as $city): ?>
+                            <option value=<?= $city['idcity']?>><?= $city['name'].' ('. $city['zipcode']. ')' ?></option>
+                        <?php endforeach?>
+                    </select>
                 </div>
 
-                <p class="error" id='cityError' hidden>Le format ne correspond pas</p>
-                <div class="form-group">
+                
+                <!--div class="form-group">
                     <div class="col-auto my-1">
                     <label class="mr-sm-2" for="city">Ville: </label>
                     <select class="custom-select mr-sm-2 w-50" id="city">
@@ -73,7 +85,7 @@
                         <?php endforeach?>
                     </select>
                     </div>
-                </div>
+                </div-->
 
                 <input type="button" id="btnSubmit" value="S'inscrire" required class="btn btn-primary m-3"/>
         </div>

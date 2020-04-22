@@ -1,5 +1,9 @@
+
 $(document).ready(function () {
     console.log("go")
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
