@@ -26,7 +26,6 @@
               else{
                 echo '<div class="carousel-item">';
               }
-                echo '<img style="height:100%; width:100%" src="'. $photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>
