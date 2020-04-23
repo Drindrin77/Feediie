@@ -1,17 +1,18 @@
 <?php
   $photos = $this->data['photos'];
-  $showOnlyFirst = isset($this->data['showOnlyFirst'])?$this->data['showOnlyFirst']:false;
+?>
 
-  if(count($photos)>1 && !$showOnlyFirst){?>
+<?php 
+  if(count($photos)>1){?>
       <div id="carouselPhoto" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <?php foreach($photos as $photo):
 
-            if($photo['priority']===1){
-              echo '<li data-target="#carouselPhoto" data-slide-to="0" class="active"></li>';
+            if($photo['priority']===true){
+              echo '<li data-target="#carouselPhoto" class="active"></li>';
             }
             else{
-              echo '<li data-target="#carouselPhoto" data-slide-to="1"></li>';
+              echo '<li data-target="#carouselPhoto" ></li>';
             }
             ?>
           <?php endforeach ?>
@@ -19,13 +20,12 @@
         <div class="carousel-inner">
           <?php foreach($photos as $photo):
 
-              if($photo['priority']===1){
+              if($photo['priority']===true){
                 echo '<div class="carousel-item active">';
               }
               else{
                 echo '<div class="carousel-item">';
               }
-                echo '<img class="d-block w-100" style="border-radius:15px;width:100%;heigth:auto;"src="'. $photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>
@@ -40,9 +40,10 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-  <?php
 
-  }else{
-      $photo = count($photos)==0? PATH_DEFAULT_USER_PHOTO: $photos[0]['url'];
-      echo '<img style="width:100%" src="'.$photo.'">';
-  }?>
+
+  <?php }else{
+    $url = count($photos)==0? PATH_DEFAULT_USER_PHOTO: $photos[0]['url'];
+    echo '<img style="height:100%; width:100%" src="'.$url.'">';
+  }
+

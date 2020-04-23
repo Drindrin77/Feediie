@@ -1,4 +1,11 @@
-<nav class="navbar navbar-expand-lg" style="background-color: orange">
+<?php
+    $firstName = $this->headerInfo['firstName'];
+    $uniqID = $this->headerInfo['uniqID'];
+    $photo = empty($this->headerInfo['photo'])?PATH_DEFAULT_USER_PHOTO:$this->headerInfo['photo']['url'];
+?>
+
+
+<nav id="navbar" class="navbar navbar-expand-lg">
     <nav class="navbar">
     <a class="navbar-brand" href="/">
         <img src="/Images/Icon/logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
@@ -13,24 +20,29 @@
     </ul>
 
 
-    <button type="button" class="btn btn-primary">
+    <button type="button" style="margin-right: 50px" class="btn btn-primary">
         Chat <span class="badge badge-light">9</span>
         <span class="sr-only">unread messages</span>
     </button>
 
 
-    <div class="nav-item dropdown my-2 my-lg-0">
+    <div id="parent">
+        <div id="containerHeaderPhoto" style="width:50px; height:50px">
+            <?php echo '<img id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
+        </div>
 
-
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          icon + user name
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/profile/">Voir le profil</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Se déconnecter</a>
+        <div id="dropdown" class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $firstName; ?>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <?php echo '<a class="dropdown-item" href="/profile/'.$uniqID.'">Voir le profil</a>';?>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Se déconnecter</a>
+                </div>
+            </div>
         </div>
     </div>
+    
 
-  </div>
 </nav>

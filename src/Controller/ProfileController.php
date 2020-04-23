@@ -11,7 +11,7 @@ class ProfileController extends Controller{
     public function execute($action){
         switch($action){
             case "edit":
-                $viewModel = $this->edit();
+                $viewModel = $this->editProfile();
             break;
             
             default:
@@ -33,9 +33,9 @@ class ProfileController extends Controller{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $idUser = $userInfo['iduser'];
             $photos = PhotoModel::getAllPhotos($idUser);
-            $personalities = DishModel::getAllPersonnalities($idUser);
-            $hobbies = HobbyModel::getAllHobbies($idUser);
-            $favoriteDish = DishModel::getAllFavoritesDishes($idUser);
+            $personalities = DishModel::getUserPersonalities($idUser);
+            $hobbies = HobbyModel::getUserHobbies($idUser);
+            $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
 
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
@@ -49,9 +49,35 @@ class ProfileController extends Controller{
         }
     }
 
-    private function edit(){
-        //$data = $this->userModel->getInfo();
-        return new ViewModel('ProfileEdit');
+    private function editProfile(){
+
+        $user = AuthService::getCurrentUser();
+        $idUser = $user['iduser'];
+
+        $allHobbies = HobbyModel::getUnpracticedHobbies($idUser);
+        $allSexs = SexModel::getAllSex();
+        $allCities = CityModel::getAllCity();
+        $allPersonalities = DishModel::getAllPersonalities();
+        $allDish = DishModel::getAllDishes();
+        $photos = PhotoModel::getAllPhotos($idUser);
+        $personalities = DishModel::getUserPersonalities($idUser);
+        $hobbies = HobbyModel::getUserHobbies($idUser);
+        $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
+
+        $data = [
+            'user'=>$user,
+            'photos'=>$photos,
+            'personalities'=>$personalities,
+            'hobbies'=>$hobbies,
+            'favoriteDish'=>$favoriteDish,
+            'allHobbies'=>$allHobbies,
+            'allPersonalities'=>$allPersonalities,
+            'allCities'=>$allCities,
+            'allSexs'=>$allSexs,
+            'allDish'=>$allDish
+        ];
+        
+        return new ViewModel('ProfileEdit', $data);
     }
 }
 

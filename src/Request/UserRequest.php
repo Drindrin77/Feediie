@@ -8,11 +8,19 @@ class UserRequest extends RequestService{
         parent::__construct();
     }	
 
-    public function execute(){
-        $action = isset($_GET['action'])?$_GET['action']:null;
+    public function execute($action){
         switch($action){
             case "resetpassword":
                 $this->resetPassword();
+            break;
+            case "connection":
+                $this->connection();
+            break;
+            case "editinfo":
+                $this->editInfo();
+            break;
+            case "passwordforgotten":
+                $this->passwordForgotten();
             break;
         }
     }    
@@ -31,6 +39,48 @@ class UserRequest extends RequestService{
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
+
+    private function editInfo(){
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        if(!UserModel::editInfo($_POST, $idUser)){
+            $this->addMessageSuccess('Erreur BD');
+        }else{
+            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
+        }
+    }
+
+
+    private function connection(){
+        $email = isset($_POST['email'])? $_POST['email'] : null;
+        $password = isset($_POST['password'])? $_POST['password'] : null;
+        if(isset(UserModel::getUserByMail($email)['password'])){
+            $passwordEncrypted = UserModel::getUserByMail($email)['password'];
+            if(password_verify($password, $passwordEncrypted)){
+                $length = 32;
+                $s_token = bin2hex(random_bytes($length));
+                setcookie('s_token', $s_token);
+                
+                UserModel::setSessionToken($s_token, $email);
+
+                if($_POST['rememberMe'] == "true"){
+                    setcookie('c_token',UserModel::getUserByMail($email)['token'], time()+60*60*24*30);
+                }
+                $this->addMessageSuccess("connect");
+            }else{
+                $this->addMessageSuccess("rate");
+            }
+        } 
+        $this->addMessageSuccess("rate");
+    }
+
+    private function passwordForgotten(){
+        $email = isset($_POST['emailForgotten'])? $_POST['emailForgotten'] : null;
+
+        $token = UserModel::getUserByMail($email)['token'];
+        $link = "https://www.feediie.com/resetpassword/$token";
+        mail(str($email) , "Reset Password Feediie", "Follow this link to reset your password : $link");
+    }
+
 }
 
 ?>

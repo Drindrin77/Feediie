@@ -8,7 +8,8 @@ class UserModel extends DBConnection{
    }
      
     public static function findByAuthentToken($token){
-        $req = self::$pdo->prepare("select * from feediieuser where token = ?");
+        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, lastName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
         return $req->fetch();
     }
@@ -37,6 +38,30 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function getUserByMail($mail){
+        $req = self::$pdo->prepare("select * from feediieuser where email = ?");
+        $req->execute(array($mail)); 
+        return $req->fetch();
+    }
+
+    public static function setSessionToken($sessionToken, $mail){
+        $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
+        $req->execute(array($sessionToken, $mail)); 
+    }
+
+    public static function editInfo($args, $idUser){
+        $sql = "update feediieuser set ";
+        $values = array();
+        foreach($args as $key => $value){
+            $sql .= $key . " = ?,";
+            array_push($values, $value);
+        }
+        $sql = substr($sql, 0, -1);
+        $sql .= " where idUser = ?;";
+        array_push($values, $idUser);
+        $req = self::$pdo->prepare($sql);
+        return $req->execute($values); 
+    }
     
    /*public function getAllUser($idUser,$firstName,$birthDay,$description){
        $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");

@@ -252,7 +252,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
         let boxSelect = document.querySelectorAll(".boxSelect");
         showMoreBtn[0].onclick = function () {
             if(opened[0]===false) {
-                this.innerHTML = "Montrer moins";
+                this.innerHTML = "<i style='font-size:18px;color:white' class='fas'>&#xf102;</i>";
                 boxSelectModified[0].style.height = "auto";
                 boxSelectModified[0].style.transition = "all 2s";
                 for(let i=0;i<nbBoxselect;i++)
@@ -265,7 +265,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
             }
             else
             {
-                this.innerHTML = "Montrer plus";
+                this.innerHTML = "<i style='font-size:18px;color:white' class='fas'>&#xf103;</i>";
                 boxSelectModified[0].style.height = "75px";
                 boxSelectModified[0].style.transition = "all 2s";
                 for(let i=0;i<nbBoxselect;i++)
@@ -280,7 +280,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
         };
         showMoreBtn[1].onclick = function () {
             if(opened[1]===false) {
-                this.innerHTML = "Montrer moins";
+                this.innerHTML = "<i style='font-size:18px;color:white' class='fas'>&#xf102;</i>";
                 boxSelectModified[1].style.height = "auto";
                 boxSelectModified[1].style.transition = "all 2s";
                 for(let i=0;i<nbBoxselect;i++)
@@ -293,7 +293,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
             }
             else
             {
-                this.innerHTML = "Montrer plus";
+                this.innerHTML = "<i style='font-size:18px;color:white' class='fas'>&#xf103;</i>";
                 boxSelectModified[1].style.height = "75px";
                 boxSelectModified[1].style.transition = "all 2s";
                 for(let i=0;i<nbBoxselect;i++)

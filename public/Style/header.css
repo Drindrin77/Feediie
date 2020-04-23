@@ -1,0 +1,14 @@
+#navbar{
+    background-color: orange;
+}
+
+#containerHeaderPhoto,#dropdown{
+    display:inline-block;
+    vertical-align: bottom;
+}
+
+#headerProfilePhoto{
+    height: 100%;
+    cursor: pointer;
+}
+
