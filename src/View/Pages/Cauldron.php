@@ -1,5 +1,6 @@
 <?php
 $usersMatchedArray = $this->data["usersMatched"];
+var_dump($usersMatchedArray);
 ?>
 
 <div class="container-fluid col-md-10">
