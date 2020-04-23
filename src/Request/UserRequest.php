@@ -18,6 +18,8 @@ class UserRequest extends RequestService{
             break;
             case "register":
                 $this->register();
+            case "editinfo":
+                $this->editInfo();
             break;
             case "passwordforgotten":
                 $this->passwordForgotten();
@@ -41,7 +43,16 @@ class UserRequest extends RequestService{
         }
     }
 
-    //Attention aux insertions SQL
+    private function editInfo(){
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        if(!UserModel::editInfo($_POST, $idUser)){
+            $this->addMessageSuccess('Erreur BD');
+        }else{
+            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
+        }
+    }
+
+
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null;

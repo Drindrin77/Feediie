@@ -59,6 +59,20 @@ class UserModel extends DBConnection{
         $req = self::$pdo->prepare("update feediieuser set session_token = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
     }
+
+    public static function editInfo($args, $idUser){
+        $sql = "update feediieuser set ";
+        $values = array();
+        foreach($args as $key => $value){
+            $sql .= $key . " = ?,";
+            array_push($values, $value);
+        }
+        $sql = substr($sql, 0, -1);
+        $sql .= " where idUser = ?;";
+        array_push($values, $idUser);
+        $req = self::$pdo->prepare($sql);
+        return $req->execute($values); 
+    }
     
     public static function signUp($firstName, $name, $email, $password, $birthday, $sex, $city, $uniqID, $token){
         $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ?,null ,?, ?, ?, ?, ?, null, 

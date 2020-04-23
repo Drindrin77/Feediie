@@ -5,7 +5,7 @@
 ?>
 
 
-<nav class="navbar navbar-expand-lg" style="background-color: orange">
+<nav id="navbar" class="navbar navbar-expand-lg">
     <nav class="navbar">
     <a class="navbar-brand" href="/">
         <img src="/Images/Icon/logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
@@ -27,8 +27,8 @@
 
 
     <div id="parent">
-        <div id="photo" style="width:50px; height:50px">
-            <?php echo '<img style="width:100%" src="'.$photo.'">';?>
+        <div id="containerHeaderPhoto" style="width:50px; height:50px">
+            <?php echo '<img id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
         </div>
 
         <div id="dropdown" class="dropdown">
@@ -44,12 +44,5 @@
         </div>
     </div>
     
+
 </nav>
-
-<style>
-#photo,#dropdown{
-    display:inline-block;
-    vertical-align: bottom;
-}
-
-</style>
