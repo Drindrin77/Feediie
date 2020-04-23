@@ -53,6 +53,8 @@ $(document).ready(function () {
                     document.getElementById("matchError").hidden = false;
                 }
             })
+        }else{
+            $("html, body").animate({scrollTop: 0},"slow");
         }
     
     })

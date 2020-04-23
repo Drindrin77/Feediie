@@ -84,28 +84,29 @@ $(document).ready(function () {
 
         if (isValid) {
             $.post("/ajax.php?entity=user&action=register",
-                {
-                    'name': name,
-                    'firstname': firstName,
-                    'email': email,
-                    'password': password,
-                    'birthday': birthday,
-                    'sex': sex,
-                    'city': city
-                })
-                .fail(function (e) {
-                    console.log("fail", e)
-                })
-                .done(function (e) {
-                    data = JSON.parse(e);
-                    console.log(data);
-                    if (data.status == 'success') {
-                        document.location.href = "/";
-                    } else {
-                        document.getElementById("createError").hidden = false;
-                    }
-                })
+            {
+                'name': name,
+                'firstname': firstName,
+                'email': email,
+                'password': password,
+                'birthday': birthday,
+                'sex': sex,
+                'city': city
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                data = JSON.parse(e);
+                console.log(data);
+                if (data.status == 'success') {
+                    document.location.href = "/";
+                } else {
+                    document.getElementById("createError").hidden = false;
+                }
+            })
+        }else{
+            $("html, body").animate({scrollTop: 0},"slow");
         }
-
     })
 })
