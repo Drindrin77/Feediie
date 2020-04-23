@@ -47,8 +47,8 @@ class ViewModel {
                     echo '<link rel="stylesheet" href="/Style/header.css">';
                   }
                 ?>
-              </style>
-            <title><?= $this->title ?></title>
+
+              <title><?= $this->title ?></title>
           </head>
 
           <body>
@@ -69,8 +69,6 @@ class ViewModel {
             ?>
 
           </body>
-
-
 
               <!-- $.post needed -->
               <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
