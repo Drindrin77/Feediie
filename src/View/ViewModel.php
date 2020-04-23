@@ -29,7 +29,6 @@ class ViewModel {
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
               <!-- Bootstrap CSS -->
-              <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
               <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
                       crossorigin="anonymous"></script>
@@ -69,14 +68,6 @@ class ViewModel {
             <div class="pageContainer">
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
-
-            <script>
-                <?php
-                if(file_exists($this->path.'Script/'.$this->page.'.js')){
-                    include 'Script/'.$this->page.'.js';
-                }
-                ?>
-            </script>
             <?php
               if ($this->showHeader) {
                 include_once 'Layout/footer.php';

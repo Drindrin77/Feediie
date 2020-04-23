@@ -44,12 +44,14 @@ class UserRequest extends RequestService{
     }
 
     private function editInfo(){
-        $idUser = AuthService::getCurrentUser()['iduser'];
-        if(!UserModel::editInfo($_POST, $idUser)){
-            $this->addMessageSuccess('Erreur BD');
-        }else{
-            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
-        }
+        if(AuthService::isAuthenticated()){
+            $idUser = AuthService::getCurrentUser()['iduser'];
+            if(!UserModel::editInfo($_POST, $idUser)){
+                $this->addMessageSuccess('Erreur BD');
+            }else{
+                $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
+            }
+        }   
     }
 
 
@@ -100,7 +102,6 @@ class UserRequest extends RequestService{
         $errors = array();
         $isValid = true;
 
-        $name = isset($_POST['name'])? $_POST['name'] : null;
         $firstName = isset($_POST['firstname'])? $_POST['firstname'] : null;
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null; 
@@ -144,7 +145,7 @@ class UserRequest extends RequestService{
             while (!empty(UserModel::findByCookieToken($token))) {
                 $token = bin2hex(random_bytes(32));
             }
-            $res = UserModel::signUp($firstName, $name, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);
+            $res = UserModel::signUp($firstName, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);
             if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{

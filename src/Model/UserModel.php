@@ -74,10 +74,10 @@ class UserModel extends DBConnection{
         return $req->execute($values); 
     }
     
-    public static function signUp($firstName, $name, $email, $password, $birthday, $sex, $city, $uniqID, $token){
-        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ?,null ,?, ?, ?, ?, ?, null, 
-        default, default, default, default, ?, default, ?, default, ?)");
-        $res = $req->execute(array($uniqID, $firstName, $name, $birthday, $email, $password, $token, $city, $sex));
+    public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
+        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ?,null ,?, ?, ?, ?, null, 
+        default, default, default, ?, default, ?, default, ?)");
+        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
         return $res;
     }
 /*

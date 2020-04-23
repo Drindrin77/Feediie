@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
     console.log("go")
+
     $(function () {
         $('[data-toggle="popover"]').popover()
       })
@@ -97,6 +98,7 @@ $(document).ready(function () {
                 console.log("fail", e)
             })
             .done(function (e) {
+                console.log(e);
                 data = JSON.parse(e);
                 console.log(data);
                 if (data.status == 'success') {
