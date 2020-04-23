@@ -44,6 +44,6 @@
 
   <?php }else{
     $url = count($photos)==0? PATH_DEFAULT_USER_PHOTO: $photos[0]['url'];
-    echo '<img style="height:100%; width:100%" src="'.$url.'">';
+    echo '<img style="height:100%; width:100%;border-radius:15px" src="'.$url.'">';
   }
 
