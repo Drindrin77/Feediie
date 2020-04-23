@@ -7,7 +7,6 @@
       <div id="carouselPhoto" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <?php foreach($photos as $photo):
-
             if($photo['priority']===true){
               echo '<li data-target="#carouselPhoto" class="active"></li>';
             }
@@ -19,13 +18,14 @@
         </ol>
         <div class="carousel-inner">
           <?php foreach($photos as $photo):
-
               if($photo['priority']===true){
                 echo '<div class="carousel-item active">';
               }
               else{
                 echo '<div class="carousel-item">';
               }
+              echo '<img style="width:100%; height:100%" src="'.$photo['url'].'">';
+
             ?>
             </div>
           <?php endforeach ?>

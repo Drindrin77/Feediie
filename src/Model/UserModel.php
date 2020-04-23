@@ -32,9 +32,10 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         return $req->fetch();
     }
 
-   public static function getAllUser(){
-        $req = self::$pdo->prepare("select * from FeediieUser");
-        $req->execute();
+    //TODO DOUBLE FILTRAGE
+   public static function getAllUser($idUser){
+        $req = self::$pdo->prepare("select * from FeediieUser where idUser <> ?");
+        $req->execute(array($idUser));
         return $req->fetchAll();
     }
 
@@ -47,6 +48,16 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
     public static function setSessionToken($sessionToken, $mail){
         $req = self::$pdo->prepare("update feediieuser set uniqID = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
+    }
+
+    public static function addHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("insert into practice values(?,?)");
+        return $req->execute(array($idUser, $idHobby)); 
+    }
+
+    public static function removeHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("delete from practice where idUser = ? and idHobby = ?");
+        return $req->execute(array($idUser, $idHobby)); 
     }
 
     public static function editInfo($args, $idUser){

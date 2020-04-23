@@ -3,9 +3,11 @@ if(!defined('CONST_INCLUDE'))
 	die('Acces direct interdit !'); 
 
 class UserRequest extends RequestService{
-	
+    
+    private $currentUser;
 	public function __construct() {
         parent::__construct();
+        $this->currentUser = AuthService::getCurrentUser();
     }	
 
     public function execute($action){
@@ -22,14 +24,62 @@ class UserRequest extends RequestService{
             case "passwordforgotten":
                 $this->passwordForgotten();
             break;
+            case "addhobby":
+                $this->addHobby();
+            break;
+            case "removehobby":
+                $this->removeHobby();
+            break;
+            case "filter":
+                $this->filter();
+            break;
         }
     }    
+
+    private function filter(){
+        $distance = $_POST['distance'];
+        $idUser = $this->currentUser['iduser'];
+
+        //UserModel::setFilterParameter($args); 
+        //$newUsersFiltered = UserModel::getUsersFiltered($args)
+        //TODO DOUBLE FILTRAGE
+
+        /*
+        if (REUSSITE BD){
+            $this->addMessageSuccess('Le hobby a été supprimé');
+            $this->addData($newUsersFiltered)
+        }else{
+            $this->addMessageError('Erreur BD');
+        }
+
+        */
+    }
+
+    private function removeHobby(){
+        $idUser = $this->currentUser['iduser'];
+        $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
+        if(UserModel::removeHobby($idUser, $idHobby)){
+            $this->addMessageSuccess('Le hobby a été supprimé');
+        }else{
+            $this->addMessageError('Erreur BD');
+        }
+    }
+
+    private function addHobby(){
+        $idUser = $this->currentUser['iduser'];
+        $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
+        if(UserModel::addHobby($idUser, $idHobby)){
+            $this->addMessageSuccess('Le hobby a été ajouté');
+        }else{
+            $this->addMessageError('Erreur BD');
+        }
+    }
 
     //XSS HACK : HTMLSPECIALCHARS ?
     private function resetPassword(){
         $oldPassword = isset($_POST['oldPassword']) && !empty($_POST['oldPassword']) ? $_POST['oldPassword'] : null;
         $newPassword = isset($_POST['newPassword']) && !empty($_POST['newPassword']) ? $_POST['newPassword'] : null;
-        $actualPassword = AuthService::getCurrentUser()['password'];
+        $actualPassword = $this->currentUser['password'];
         
         if(!PasswordService::samePassword($oldPassword,$actualPassword)){
             $this->addMessageError(['old'=>'L\'ancien mot de passe est incorrect.']);  
@@ -41,7 +91,7 @@ class UserRequest extends RequestService{
     }
 
     private function editInfo(){
-        $idUser = AuthService::getCurrentUser()['iduser'];
+        $idUser = $this->currentUser['iduser'];
         if(!UserModel::editInfo($_POST, $idUser)){
             $this->addMessageSuccess('Erreur BD');
         }else{

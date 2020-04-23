@@ -34,31 +34,25 @@ class ViewModel {
               <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
                     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
                     crossorigin="anonymous">
-              <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-              <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                      crossorigin="anonymous"></script>
-              <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                      crossorigin="anonymous"></script>
-              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                      crossorigin="anonymous"></script>
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 
               <!-- ICON -->
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
                 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+                <style>
                 <?php 
                   if(file_exists('Style/'.$this->page.'.css')){
-                    echo '<link rel="stylesheet" href="/Style/'.$this->page.'.css">';
+                    //echo '<link rel="stylesheet" href="/Style/'.$this->page.'.css">';
+                    include_once('Style/'.$this->page.'.css');
                   }
                   if($this->showHeader){
-                    echo '<link rel="stylesheet" href="/Style/header.css">';
+                    //echo '<link rel="stylesheet" href="/Style/header.css">';
+                    include_once('Style/header.css');
+
                   }
                 ?>
+                </style>
               <title><?= $this->title ?></title>
           </head>
 
@@ -73,13 +67,6 @@ class ViewModel {
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
-            <script>
-                <?php
-                if(file_exists($this->path.'Script/'.$this->page.'.js')){
-                    include 'Script/'.$this->page.'.js';
-                }
-                ?>
-            </script>
             <?php
               if ($this->showHeader) {
                 include_once 'Layout/footer.php';
@@ -107,15 +94,21 @@ class ViewModel {
                       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                       crossorigin="anonymous"></script>
 
+                <script>
+
+                  
                 <?php 
 
                   if(file_exists('Script/'.$this->page.'.js')){
-                    echo '<script type="text/javascript"  src="/Script/'.$this->page.'.js"></script>';
+                    include_once('Script/'.$this->page.'.js');
+                    
+                    //echo '<script type="text/javascript"  src="/Script/'.$this->page.'.js"></script>';
                   }
                   if($this->showHeader){
-                    echo '<script type="text/javascript"  src="/Script/header.js"></script>';
+                    //echo '<script type="text/javascript" src="/Script/header.js"></script>';
                   }
-                ?>
+                  ?>
+                  </script>
 
         </html>
     <?php

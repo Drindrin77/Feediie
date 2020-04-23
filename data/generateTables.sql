@@ -48,7 +48,6 @@ CREATE TABLE FeediieUser(
 	description                 VARCHAR (500) ,
 	needPhotoOther              BOOL  NOT NULL DEFAULT FALSE,
 	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
-	distanceMaxActivated        BOOL  NOT NULL DEFAULT TRUE,
 	distanceMax                 INT  NOT NULL DEFAULT 15,
     token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,

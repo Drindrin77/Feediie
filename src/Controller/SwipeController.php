@@ -24,18 +24,22 @@ class SwipeController extends Controller{
     }
     public function pageSwipe()
     {
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        $users = UserModel::getAllUser($idUser);
+        $filteredUser = array();
 
-        $users = UserModel::getAllUser();
-        foreach ($users as $user) {
+        //TODO GET DEFAULT PARAMETER USER
+        foreach($users as $user) {
             $idUser = $user['iduser'];
-            $photos = PhotoModel::getAllPhotos($idUser);
-            $data = [
-                'users' => $users,
-                'photos' => $photos,
-            ];
-            return new ViewModel("Swipe", $data);
+            $user['photos'] = PhotoModel::getAllPhotos($idUser);
+            array_push($filteredUser,$user);
         }
-        return 0;
+        $data = [
+            'users' => $filteredUser,
+        ];
+
+
+        return new ViewModel("Swipe", $data);
     }
 }
 

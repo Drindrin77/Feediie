@@ -123,16 +123,15 @@
             <div class="navContent" id="contentHobby">
                 <h5 class="titleSection titleAddElement">Mes hobby: </h5> 
 
-
                 <button type="button" class="btn btn-primary btnAddElement" id="btnHobbyPopOver"><i class="fas fa-plus"></i> Ajouter un hobby</button>
                 
-                    <div class="" id='containerUnpracticedHobby'><?php
-                        foreach($allHobbies as $hobby): 
-                            echo '<div id='.$hobby['idhobby'].' class=\'containerHobby hobbiesUnpracticed\'>
-                            <i class="fas fa-plus addHobbyIcon"></i><span> '.$hobby['name'].'</span>
-                            </div>';
-                        endforeach?>
-                    </div>
+                <div id='containerUnpracticedHobby'><?php
+                    foreach($allHobbies as $hobby): 
+                        echo '<div id='.$hobby['idhobby'].' class=\'containerHobby hobbiesUnpracticed\'>
+                        <i class="fas fa-plus addHobbyIcon"></i><span> '.$hobby['name'].'</span>
+                        </div>';
+                    endforeach?>
+                </div>
 
                 <div id="containerPracticedHobby">
                     <?php foreach($hobbies as $hobby): ?>
