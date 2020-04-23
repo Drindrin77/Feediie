@@ -170,7 +170,6 @@
     display: flex;
 }
 #parametersBtn {
-    z-index: 2000;
 }
 .titleParameter {
 }

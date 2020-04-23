@@ -133,7 +133,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     <?php foreach ($users as $user): ?>
                         <div class="buddy" style="display: block">
                             <div class="avatar"
-                                 style="display: block;"><?php include_once('UserPhoto.php'); ?></div>
+                                 style="display: block;width:275px;height: 275px"><?php include_once('UserPhoto.php'); ?></div>
                             <div class="name"><?= $user['firstname'] ?>
                                 , <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div>
                             <div class="description"><?= $user['description'] ?>
