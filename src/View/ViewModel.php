@@ -6,12 +6,17 @@ class ViewModel {
     private $title;
     private $data;
     private $headerInfo;
+    private $showHeader = false;
 
     public function __construct($page, $data=null, $title='Feediie')
     {
         $this->page = $page;
         $this->title = $title;
         $this->data = $data;
+        if(AuthService::isAuthenticated()){
+          $this->showHeader = true;
+          $this->setHeaderInfo();
+        }
     }
 
     public function render(){
@@ -50,7 +55,7 @@ class ViewModel {
                   if(file_exists('Style/'.$this->page.'.css')){
                     echo '<link rel="stylesheet" href="/Style/'.$this->page.'.css">';
                   }
-                  if($this->shouldShowHeaders()){
+                  if($this->showHeader){
                     echo '<link rel="stylesheet" href="/Style/header.css">';
                   }
                 ?>
@@ -60,7 +65,7 @@ class ViewModel {
           <body>
             
             <?php 
-            if ($this->shouldShowHeaders()) {
+            if ($this->showHeader) {
               include_once 'Layout/header.php'; 
             }
             ?>
@@ -76,7 +81,7 @@ class ViewModel {
                 ?>
             </script>
             <?php
-              if ($this->shouldShowHeaders()) {
+              if ($this->showHeader) {
                 include_once 'Layout/footer.php';
               }
             ?>
@@ -107,7 +112,7 @@ class ViewModel {
                   if(file_exists('Script/'.$this->page.'.js')){
                     echo '<script type="text/javascript"  src="/Script/'.$this->page.'.js"></script>';
                   }
-                  if($this->shouldShowHeaders()){
+                  if($this->showHeader){
                     echo '<script type="text/javascript"  src="/Script/header.js"></script>';
                   }
                 ?>
@@ -116,16 +121,11 @@ class ViewModel {
     <?php
     }
 
-    private function shouldShowHeaders()
-    {
-        if(AuthService::isAuthenticated()){
-          $user = AuthService::getCurrentUser();
-          $this->headerInfo = array('firstName'=>$user['firstname'], 
-                                    'photo'=>PhotoModel::getPriorityPhoto($user['iduser']),
-                                    'uniqID'=> $user['uniqid']);
-          return true;
-        }
-        return false;
+    private function setHeaderInfo(){
+      $user = AuthService::getCurrentUser();
+      $this->headerInfo = array('firstName'=>$user['firstname'], 
+                                'photo'=>PhotoModel::getPriorityPhoto($user['iduser']),
+                                'uniqID'=> $user['uniqid']);
     }
 }
 ?>
