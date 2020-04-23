@@ -11,7 +11,7 @@ class AuthService
 
     public static function isAuthenticated(): bool
     {
-        return isset($_COOKIE['s_token']) || isset($_COOKIE['c_token']);
+        return isset($_SESSION['s_token']) || isset($_COOKIE['c_token']);
         //return true;
     }
 
@@ -21,7 +21,12 @@ class AuthService
 
     public static function setCurrentUser(){
         if (self::isAuthenticated()) {
-            self::$currentUser = UserModel::findByAuthentToken(self::getAuthToken());
+            if(isset($_SESSION['s_token'])){
+                self::$currentUser = UserModel::findByAuthentToken(self::getAuthToken());
+            }else{
+                self::setCurrentUserWithCookie();
+            }
+            
         }else{
             self::$currentUser = null;   
         }
@@ -37,9 +42,10 @@ class AuthService
         if(self::$currentUser != null){
             $length = 32;
             $s_token = bin2hex(random_bytes($length));
-            setcookie('s_token', $s_token);
+            $_SESSION['s_token'] = $s_token;
+            //setcookie('s_token', $s_token);
                     
-            UserModel::setSessionToken($s_token, $currentUser['email']);
+            UserModel::setSessionToken($s_token, self::$currentUser['email']);
             
             setcookie('c_token',$_COOKIE['c_token'], time()+60*60*24*30);
         }
@@ -47,13 +53,15 @@ class AuthService
 
     private static function getAuthToken()
     {
-        if(!isset($_COOKIE['s_token']))self::setCurrentUserWithCookie();
-        return $_COOKIE['s_token'];
+        if(!isset($_SESSION['s_token']))self::setCurrentUserWithCookie();
+        return $_SESSION['s_token'];
     }
 
     public static function disconnect(){
-        setcookie("s_token"," ",time()-3600);
-        setcookie("c_token",' ',time()-3600);
+        setcookie('c_token',' ',time()-3600);
+        $_SESSION['s_token'] = null;
+        session_destroy();
+        $currentUser = null;
     }
 
     private static function setUniqSession(){

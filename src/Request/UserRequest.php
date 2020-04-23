@@ -50,12 +50,15 @@ class UserRequest extends RequestService{
             if(PasswordService::samePassword($password, $passwordEncrypted)){
                 $length = 32;
                 $s_token = bin2hex(random_bytes($length));
-                setcookie('s_token', $s_token);
-                UserModel::setSessionToken($s_token, $email);
-
                 if($_POST['rememberMe'] == "true"){
-                    setcookie('c_token',UserModel::getUserByMail($email)['token'], time()+60*60*24*30);
+                    
+                    session_destroy();
+                    session_set_cookie_params(3600*24,"/");
+                    session_start();
                 }
+                $_SESSION['s_token'] = $s_token;
+                //setcookie('s_token', $s_token);
+                UserModel::setSessionToken($s_token, $email);
                 AuthService::connectUser();
                 $this->addMessageSuccess("connect");
             }else{

@@ -1,7 +1,7 @@
 <?php
 
-if(session_status() == PHP_SESSION_NONE)
-    session_start();
+ini_set('session.use_strict_mode',1);
+session_start();
 
 define('CONST_INCLUDE', NULL);
 define('PATH_USER_PHOTO', '/Images/UserUpload/');
