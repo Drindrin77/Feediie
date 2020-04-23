@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     let confirmModification = false;
     let changedFirstName = false;
     let changedLastName = false;
@@ -14,15 +13,39 @@ $(document).ready(function () {
     let city = $("#cityControl").children("option:selected").val()
     let description = $("#description").val()
 
-    var $j = jQuery.noConflict();
     // $j is now an alias to the jQuery function; creating the new alias is optional.
 
-    $j(document).ready(function () {
-        $('[data-toggle="popover"]').popover()
-    });
+    $('[data-toggle="popover"]').popover()
 
     function atLeastOneChange() {
         return changedFirstName || changedLastName || changedBirthday || changedSex || changedCity || changedDescription
+    }
+
+    $(document).on("click", ".hobbiesUnpracticed", function (event) {
+        let id = $(this).attr('id')
+        let name = $(this).children().last().text()
+        $(this).remove()
+        addPracticeHobby(name, id)
+
+        //TODO AJAX
+    })
+
+    $(document).on("click", ".practicedHobby", function (event) {
+        let id = $(this).attr('id')
+        let name = $(this).children().last().text()
+        $(this).remove()
+        addUnpracticedHobby(name, id)
+
+        //TODO AJAX
+    })
+
+    //TODO FIX ICON DOUBLE
+    function addPracticeHobby(name, id) {
+        $("#containerPracticedHobby").append('<div class="containerHobby practicedHobby" id=' + id + '><i class="fas fa-ban deleteHobbyIcon"></i><span> ' + name + '</span></div>')
+    }
+
+    function addUnpracticedHobby(name, id) {
+        $("#containerUnpracticedHobby").append('<div id=' + id + ' class="containerHobby hobbiesUnpracticed"><i class="fas fa-plus addHobbyIcon"></i><span> ' + name + '</span></div>')
     }
 
     $("#btnViewProfile").click(function () {
@@ -129,8 +152,9 @@ $(document).ready(function () {
     })
 
 
-    $(".delete").click(function (e) {
+    $(document).on("click", ".delete", function (evt) {
         let url = $(this).parent().parent().find("img").attr('src');
+        let parent = $(this).parent().parent()
         $.post("/ajax.php?entity=photo&action=delete",
             {
                 'url': url
@@ -141,15 +165,19 @@ $(document).ready(function () {
             .done(function (e) {
                 let data = JSON.parse(e)
                 console.log(data)
+                if (data.success = 'success') {
+                    console.log("success")
+                    parent.remove();
+                    addEmptyPhoto()
+                }
             })
     });
 
-    $(".btnAddPhoto").click(function () {
+    $(document).on("click", ".btnAddPhoto", function (evt) {
         $("#uploadInput").click();
     })
 
     $("#uploadInput").change(function (e) {
-
         var file_data = $('#uploadInput').prop('files')[0];
         var form_data = new FormData();
         form_data.append('file', file_data);
@@ -176,9 +204,17 @@ $(document).ready(function () {
         });
     })
 
+    function addEmptyPhoto() {
+
+        let target = $(".containerNotEmptyPhoto").last()
+        let content = '<div class="containerPhoto containerEmptyPhoto"><div class="emptyPhoto"></div><div class="containerSpinner invisible spinner-border text-primary" role = "status"></div><div class="containerBtnAddPhoto"><button class="btn btn-primary btnAddPhoto"><i class="fas fa-plus"></i> Ajouter une photo</button></div></div>';
+        $(content).insertAfter(target)
+    }
+
     function addPhoto($url) {
         $(".containerEmptyPhoto").first().empty()
         $(".containerEmptyPhoto").first().append('<img src="' + $url + '"><div class="overlay"></div><div class="btnGroupPhoto"><div class="containerBtnPhoto"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div><div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div></div>');
+        $(".containerEmptyPhoto").first().addClass('containerNotEmptyPhoto');
         $(".containerEmptyPhoto").first().removeClass('containerEmptyPhoto');
     }
 })

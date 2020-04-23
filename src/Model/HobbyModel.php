@@ -10,9 +10,15 @@ class HobbyModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public static function getAllHobies(){
+    public static function getAllHobbies(){
         $req = self::$pdo->prepare("select * from hobby order by name");
         $req->execute();
+        return $req->fetchAll(); 
+    }
+
+    public static function getUnpracticedHobbies($idUser){
+        $req = self::$pdo->prepare("select * from hobby where idhobby not in (select idhobby from practice where iduser = ?) order by name");
+        $req->execute(array($idUser));
         return $req->fetchAll(); 
     }
 

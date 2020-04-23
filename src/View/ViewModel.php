@@ -4,7 +4,6 @@ class ViewModel {
 
     private $page;
     private $title;
-    private $path = '/var/www/html/src/View/';
     private $data;
     private $headerInfo;
 
@@ -35,18 +34,15 @@ class ViewModel {
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
                 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-           <style>
                 <?php 
-                  if(file_exists($this->path.'Style/'.$this->page.'.css')){
-                    include 'Style/'.$this->page.'.css';
+                  if(file_exists('Style/'.$this->page.'.css')){
+                    echo '<link rel="stylesheet" href="/Style/'.$this->page.'.css">';
                   }
                   if($this->shouldShowHeaders()){
-                    include 'Style/header.css';
+                    echo '<link rel="stylesheet" href="/Style/header.css">';
                   }
                 ?>
               </style>
-
-
             <title><?= $this->title ?></title>
           </head>
 
@@ -63,7 +59,7 @@ class ViewModel {
 
             <?php
               if ($this->shouldShowHeaders()) {
-               // include_once 'Layout/footer.php';
+                include_once 'Layout/footer.php';
               }
             ?>
 
@@ -79,7 +75,7 @@ class ViewModel {
               <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
                       crossorigin="anonymous"></script>
-              <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+                      
               <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
               <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -90,18 +86,16 @@ class ViewModel {
                       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                       crossorigin="anonymous"></script>
 
-          <script>
                 <?php 
-                  if(file_exists($this->path.'Script/'.$this->page.'.js')){
-                   // echo '<script src="'.$this->path.'Script/'.$this->page.'.js">';
-                    include 'Script/'.$this->page.'.js';
+
+                  if(file_exists('Script/'.$this->page.'.js')){
+                    echo '<script type="text/javascript"  src="/Script/'.$this->page.'.js"></script>';
                   }
                   if($this->shouldShowHeaders()){
-                    include 'Script/header.js';
+                    echo '<script type="text/javascript"  src="/Script/header.js"></script>';
                   }
                 ?>
-              </script>  
- 
+
         </html>
     <?php
     }

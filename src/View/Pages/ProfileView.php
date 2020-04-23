@@ -6,6 +6,19 @@
     $favoriteDish = $this->data['favoriteDish'];
     $hobbies = array(array('name'=>'Musique'),array('name'=>'Jeux-vidéos'),array('name'=>'Dessin')
     ,array('name'=>'Badminton'),array('name'=>'Musique'),array('name'=>'Musique'));
+
+    $favoriteDish = array(array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
+    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
+    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
+    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
+    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),);
+
+
+    $personalities = array(array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
+    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
+    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
+    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
+    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),);
 ?>
 
 <div id="background">
@@ -68,9 +81,9 @@
                 <?php } ?>
             </div>
 
-            <div class="row" style="margin-top:20px">
+            <div class="row" style="margin-top:40px">
                 <?php if(!empty($personalities)) {?>
-                    <div class ="col">
+                    <div class ="col-md-auto">
                         <div id="personalities">
                         <h5 class="titleSection">Ma personnalité: </h5>
                             <?php foreach($personalities as $personality): ?>
@@ -87,11 +100,13 @@
                         </div>
                     </div>
                 <?php } ?>
+            </div>
+            <div class="row" style="margin-top:40px">
 
                 <?php if(!empty($favoriteDish)) {?>
-                    <div class ="col">
+                    <div class ="col-md-auto">
                         <div id="likeeat">
-                            <h5 class="titleSection">Mes plats préférés: </h5>
+                            <h5 class="titleSection" >Mes plats préférés: </h5>
                             <?php foreach($favoriteDish as $favorite): ?>
                                 <div class="card cardFavorite">
                                     <div class="cardImage">

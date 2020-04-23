@@ -54,7 +54,7 @@ class ProfileController extends Controller{
         $user = AuthService::getCurrentUser();
         $idUser = $user['iduser'];
 
-        $allHobbies = HobbyModel::getAllHobies();
+        $allHobbies = HobbyModel::getUnpracticedHobbies($idUser);
         $allSexs = SexModel::getAllSex();
         $allCities = CityModel::getAllCity();
         $allPersonalities = DishModel::getAllPersonalities();

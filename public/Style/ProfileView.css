@@ -15,19 +15,17 @@
 }
 
 #containerProfile{
-    max-width:720px;
+    max-width:800px;
     margin:auto;
     position:relative;
     background-color: white;
-    border-radius: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 20px;
 }
 
 #background{
-    background-color: lightgrey;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    background-color: rgb(248, 245, 245);
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
 }
 
 @media screen and (min-width: 769px) {
@@ -62,7 +60,7 @@ hr.solid {
 }
 
 #containerDescription{
-    background-color: rgb(236, 232, 232);
+    background-color: rgb(248, 245, 245);
     border-radius: 5px;
     padding:10px;
     text-align: center;
@@ -80,6 +78,9 @@ hr.solid {
     display:inline-block;
 }
 
+.cardFavorite{
+    display: inline-block;
+}
 .containerHobby{
     background-color:#cce5ff;
     color: #004085;
@@ -97,6 +98,9 @@ hr.solid {
     text-align: center;
 }
 
+.cardPersonality{
+    display: inline-block;
+}
 .cardImage{
     padding:10px;
     width:120px;

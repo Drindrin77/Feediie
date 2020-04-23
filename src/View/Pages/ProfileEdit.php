@@ -2,6 +2,9 @@
     $infoUser = $this->data['user'];
     $hobbies = $this->data['hobbies'];
     $allHobbies = $this->data['allHobbies'];
+
+    // $allHobbies = array(array('name'=>'Musique'),array('name'=>'Jeux-vidéos'),array('name'=>'Dessin')
+    // ,array('name'=>'Badminton'),array('name'=>'Musique'),array('name'=>'Musique'));
     $allSexs = $this->data['allSexs'];
     $allCities = $this->data['allCities'];
     $personalities = $this->data['personalities'];
@@ -42,8 +45,9 @@
         <div id="navContentContainer">
             <div class="navContent" id="contentPhoto">
                 <h3 class="titleSection">Mes photos</h3>
+                <div class="row justify-content-center">
                 <?php foreach($photos as $photo): ?>
-                <div class="containerPhoto">
+                <div class="containerPhoto containerNotEmptyPhoto">
                     <?= '<img src="'.$photo['url'].'">'; ?>
                     <div class="overlay"></div>
                     <div class="btnGroupPhoto">
@@ -68,7 +72,7 @@
                     <input type="file" name="photo" id="uploadInput" style="display:none" />
                 </form>
             </div>
-
+                </div>
             <div class="navContent" id="contentInfo">
                 <h3 class="titleSection">Mes informations</h3>
 
@@ -118,14 +122,22 @@
 
             <div class="navContent" id="contentHobby">
                 <h5 class="titleSection titleAddElement">Mes hobby: </h5> 
-                <button class="btn btn-primary btnAddElement"><i class="fas fa-plus"></i> Ajouter un hobby</button>
-                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" 
-                data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
 
-                <div>
+
+                <button type="button" class="btn btn-primary btnAddElement" id="btnHobbyPopOver"><i class="fas fa-plus"></i> Ajouter un hobby</button>
+                
+                    <div class="" id='containerUnpracticedHobby'><?php
+                        foreach($allHobbies as $hobby): 
+                            echo '<div id='.$hobby['idhobby'].' class=\'containerHobby hobbiesUnpracticed\'>
+                            <i class="fas fa-plus addHobbyIcon"></i><span> '.$hobby['name'].'</span>
+                            </div>';
+                        endforeach?>
+                    </div>
+
+                <div id="containerPracticedHobby">
                     <?php foreach($hobbies as $hobby): ?>
-                        <div class="containerHobby">
-                            <?= $hobby['name'] ?>
+                        <div class="containerHobby practicedHobby" id="<?= $hobby['idhobby']?>">
+                        <i class="fas fa-ban deleteHobbyIcon"></i><span><?= $hobby['name'] ?></span>
                         </div>
                     <?php endforeach ?>
                 </div>
