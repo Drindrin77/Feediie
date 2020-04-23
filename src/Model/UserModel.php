@@ -15,7 +15,8 @@ class UserModel extends DBConnection{
     }
 
     public static function findByCookieToken($token){
-        $req = self::$pdo->prepare("select * from feediieuser where token = ?");
+        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
         return $req->fetch();
     }
@@ -31,16 +32,17 @@ class UserModel extends DBConnection{
     }
 
     public static function getUserByUniqID($uniqID){
-        $req = self::$pdo->prepare("select idUser, firstName, lastName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
+        $req = self::$pdo->prepare("select idUser, firstName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
                                                     , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
                                     from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and uniqID=?");
         $req->execute(array($uniqID)); 
         return $req->fetch();
     }
 
-   public static function getAllUser(){
-        $req = self::$pdo->prepare("select * from FeediieUser");
-        $req->execute();
+    //TODO DOUBLE FILTRAGE
+   public static function getAllUser($idUser){
+        $req = self::$pdo->prepare("select * from FeediieUser where idUser <> ?");
+        $req->execute(array($idUser));
         return $req->fetchAll();
     }
 
@@ -58,6 +60,16 @@ class UserModel extends DBConnection{
     public static function setSessionToken($sessionToken, $mail){
         $req = self::$pdo->prepare("update feediieuser set session_token = ? where email = ?");
         $req->execute(array($sessionToken, $mail)); 
+    }
+
+    public static function addHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("insert into practice values(?,?)");
+        return $req->execute(array($idUser, $idHobby)); 
+    }
+
+    public static function removeHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("delete from practice where idUser = ? and idHobby = ?");
+        return $req->execute(array($idUser, $idHobby)); 
     }
 
     public static function editInfo($args, $idUser){

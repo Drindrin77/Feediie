@@ -1,11 +1,11 @@
 <?php
     $isCurrentUser = $this->data['isCurrentUser'];
     $infoUser = $this->data['user'];
-   // $hobbies = $this->data['hobbies'];
+    $hobbies = $this->data['hobbies'];
     $personalities = $this->data['personalities'];
     $favoriteDish = $this->data['favoriteDish'];
-    $hobbies = array(array('name'=>'Musique'),array('name'=>'Jeux-vidéos'),array('name'=>'Dessin')
-    ,array('name'=>'Badminton'),array('name'=>'Musique'),array('name'=>'Musique'));
+    // $hobbies = array(array('name'=>'Musique'),array('name'=>'Jeux-vidéos'),array('name'=>'Dessin')
+    // ,array('name'=>'Badminton'),array('name'=>'Musique'),array('name'=>'Musique'));
 
     $favoriteDish = array(array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
     array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div id="containerName" class="col">
-                    <span id="name"><?= $infoUser['lastname'] .' '. $infoUser['firstname']?></span>      
+                    <span id="name"><?= $infoUser['firstname']?></span>      
                 </div>
             </div>
 

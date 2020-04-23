@@ -1,13 +1,11 @@
 $(document).ready(function () {
     let confirmModification = false;
     let changedFirstName = false;
-    let changedLastName = false;
     let changedBirthday = false;
     let changedSex = false;
     let changedCity = false;
     let changedDescription = false;
     let firstName = $("#firstname").val()
-    let lastName = $("#lastname").val()
     let birthday = $("#birthday").val()
     let sex = $("#sexControl").val()
     let city = $("#cityControl").children("option:selected").val()
@@ -18,7 +16,7 @@ $(document).ready(function () {
     $('[data-toggle="popover"]').popover()
 
     function atLeastOneChange() {
-        return changedFirstName || changedLastName || changedBirthday || changedSex || changedCity || changedDescription
+        return changedFirstName || changedBirthday || changedSex || changedCity || changedDescription
     }
 
     $(document).on("click", ".hobbiesUnpracticed", function (event) {
@@ -27,7 +25,19 @@ $(document).ready(function () {
         $(this).remove()
         addPracticeHobby(name, id)
 
-        //TODO AJAX
+        $.post("/ajax.php?entity=user&action=addHobby",
+            {
+                idHobby: id
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                    console.log(data.success[0])
+                }
+            })
     })
 
     $(document).on("click", ".practicedHobby", function (event) {
@@ -35,11 +45,22 @@ $(document).ready(function () {
         let name = $(this).children().last().text()
         $(this).remove()
         addUnpracticedHobby(name, id)
+        $.post("/ajax.php?entity=user&action=removeHobby",
+            {
+                idHobby: id
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                    console.log(data.success[0])
+                }
+            })
 
-        //TODO AJAX
     })
 
-    //TODO FIX ICON DOUBLE
     function addPracticeHobby(name, id) {
         $("#containerPracticedHobby").append('<div class="containerHobby practicedHobby" id=' + id + '><i class="fas fa-ban deleteHobbyIcon"></i><span> ' + name + '</span></div>')
     }
@@ -71,12 +92,6 @@ $(document).ready(function () {
             argsJson.firstname = newFirstName
             changedFirstName = false;
             firstName = newFirstName
-        }
-        if (changedLastName) {
-            let newLastName = $("#lastname").val()
-            argsJson.lastname = newLastName;
-            changedLastName = false;
-            lastName = newLastName
         }
         if (changedBirthday) {
             let newBirthday = $("#birthday").val()
@@ -115,16 +130,10 @@ $(document).ready(function () {
                     }
                 })
         }
-        //AJAX 
-
-    })
-
-    $("#lastname").change(function () {
-        changedFirstName = firstName != this.value;
     })
 
     $("#firstname").change(function () {
-        changedLastName = lastName != this.value;
+        changedFirstName = firstName != this.value;
     })
 
     $("#birthday").change(function () {

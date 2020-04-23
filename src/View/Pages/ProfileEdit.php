@@ -77,12 +77,10 @@
                 <h3 class="titleSection">Mes informations</h3>
 
                 <div id="titleGeneralInfo">
-                    <p>Nom: </p>
                     <p>Prénom: </p>
                     <p>Date <br>de naissance: </p>
                 </div>
                 <div id="responseGeneralInfo">
-                    <p><?= '<input type="text" id="lastname" value="'.$infoUser['lastname'].'"'?></p>
                     <p><?= '<input type="text" id="firstname" value="'.$infoUser['firstname'].'"'?></p>
                     <p><?= '<input type="date" id="birthday" value="'.$infoUser['birthday'].'"'?></p>
                 </div>
@@ -123,16 +121,15 @@
             <div class="navContent" id="contentHobby">
                 <h5 class="titleSection titleAddElement">Mes hobby: </h5> 
 
-
                 <button type="button" class="btn btn-primary btnAddElement" id="btnHobbyPopOver"><i class="fas fa-plus"></i> Ajouter un hobby</button>
                 
-                    <div class="" id='containerUnpracticedHobby'><?php
-                        foreach($allHobbies as $hobby): 
-                            echo '<div id='.$hobby['idhobby'].' class=\'containerHobby hobbiesUnpracticed\'>
-                            <i class="fas fa-plus addHobbyIcon"></i><span> '.$hobby['name'].'</span>
-                            </div>';
-                        endforeach?>
-                    </div>
+                <div id='containerUnpracticedHobby'><?php
+                    foreach($allHobbies as $hobby): 
+                        echo '<div id='.$hobby['idhobby'].' class=\'containerHobby hobbiesUnpracticed\'>
+                        <i class="fas fa-plus addHobbyIcon"></i><span> '.$hobby['name'].'</span>
+                        </div>';
+                    endforeach?>
+                </div>
 
                 <div id="containerPracticedHobby">
                     <?php foreach($hobbies as $hobby): ?>
