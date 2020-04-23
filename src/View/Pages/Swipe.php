@@ -17,9 +17,9 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
         <div id="blockParameters">
             <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
             <div>
-                <div class="titleParameter"><h4>Montrer moi</h4></div>
+                <div class="titleParameter"><h5>Montrer moi</h5></div>
+
                 <div class="boxSelectModified">
-                    <div class="showMoreBtn">Montrer plus</div>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="men">
                         <label class="custom-control-label" for="men">Hommes</label>
@@ -52,22 +52,21 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                         <input type="checkbox" class="custom-control-input" id="other">
                         <label class="custom-control-label" for="other">Autre</label>
                     </div>
-
                 </div>
-                <div class="titleParameter"><h4>Distance</h4></div>
+                <div class="showMoreBtn"><i style='font-size:18px;color:white' class='fas'>&#xf103;</i></div>
+                <div class="titleParameter"><h5>Distance</h5></div>
                 <div class="boxSelect">
                     <label id="distanceLabel" for="distance">X km</label>
                     <input type="range" class="custom-range" min="0" max=10" id="distance">
                 </div>
-                <div class="titleParameter"><h4>Age</h4></div>
+                <div class="titleParameter"><h5>Age</h5></div>
                 <div class="boxSelect">
                     <label id="ageRangeLabel" for="ageRangemin">X ans - Y ans</label>
                     <input type="range" class="custom-range" min="18" max="60" id="ageRangemin">
                     <input type="range" class="custom-range" min="18" max="60" id="ageRangemax">
                 </div>
-                <div class="titleParameter"><h4>Régime Alimentaire</h4></div>
+                <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
                 <div class="boxSelectModified">
-                    <div class="showMoreBtn">Montrer plus</div>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="vegetarien">
                         <label class="custom-control-label" for="vegetarien">Végétarien</label>
@@ -117,6 +116,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                         <label class="custom-control-label" for="other">Autre</label>
                     </div>
                 </div>
+                <div class="showMoreBtn"><i style='font-size:18px;color:white' class='fas'>&#xf103;</i></div>
             </div>
             <button type="button" class="btn btn-primary" style="width:100%">Valider les réglages !</button>
         </div>
@@ -260,6 +260,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     boxSelect[i].style.display ="none";
                 }
                 boxSelectModified[1].style.display = "none";
+                showMoreBtn[1].style.display = "none";
                 opened[0]=true;
             }
             else
@@ -272,6 +273,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     boxSelect[i].style.display ="block";
                 }
                 boxSelectModified[1].style.display = "block";
+                showMoreBtn[1].style.display = "block";
                 opened[0]=false;
 
             }
@@ -286,6 +288,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     boxSelect[i].style.display ="none";
                 }
                 boxSelectModified[0].style.display = "none";
+                showMoreBtn[0].style.display = "none";
                 opened[1]=true;
             }
             else
@@ -298,6 +301,7 @@ $users = isset($this->data['users']) && !empty($this->data['users']) ? $this->da
                     boxSelect[i].style.display ="block";
                 }
                 boxSelectModified[0].style.display = "block";
+                showMoreBtn[0].style.display = "block";
                 opened[1]=false;
             }
         }

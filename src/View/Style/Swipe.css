@@ -116,83 +116,46 @@
     justify-content: space-around;
 }
 .buttons {
-
     width: 50px;
-
     height: 50px;
-
     background: white;
-
     border-radius: 50px;
-
     cursor :pointer;
-
 }
 
 .buttons:hover {
-
     width: 50px;
-
     height: 50px;
-
     background: white;
-
     border-radius: 50px;
-
     border: solid 5px gray;
-
-
-
 }
 
 .buttons img {
-
     width: 70%;
-
     height: 70%;
-
     margin-left: 8px;
-
     margin-top: 9px;
-
-
-
 }
 
 .buttons:hover img {
-
     width: 85%;
-
     height: 85%;
-
     margin-left: 3px;
-
     margin-top: 4px;
-
-
-
 }
 
 #parameters {
 
     margin-top: 10px;
-
     height: 100%;
-
     width: 400px;
-
     border-radius: 20px;
-
     transform: translate(-500px,0);  /*-500*/
-
     transition-duration: 1s;
-
     background: #E1E1E1;
-
     float:left;
-
     display: flex;
-
 }
 
 #parameters.active {
@@ -210,14 +173,15 @@
     z-index: 2000;
 }
 .titleParameter {
-    font-size: 22px;
 }
 .showMoreBtn {
-    width:105%;
+    width:100%;
     background: #E86B51;
     color:white;
-    font-weight: bold;
-    margin: -5px -5px 5px;
+    border-radius: 0 0 10px 10px;
+    margin-top:-10px;
+    margin-bottom: 5px;
+    font-size:14px;
     text-align: center;
 }
 #spaceBlock {
@@ -226,7 +190,9 @@
 }
 
 #blockParameters {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top : 5px;
     width: 100%;
     height: 100%;
 }
@@ -242,10 +208,10 @@
     flex-direction: column;
     padding: 5px;
     background: white;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
     overflow: hidden;
-    height: 75px;
+    height: 80px;
 }
 
 #closeBtn {
