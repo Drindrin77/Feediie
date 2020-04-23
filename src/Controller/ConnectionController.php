@@ -13,14 +13,16 @@ class ConnectionController extends Controller{
     public function execute($action){
         if(AuthService::isAuthenticated()){
             $this->redirectUser();
+        }else{
+            switch($action){
+                case null:
+                    return new ViewModel("Connection");
+                break;
+                default:
+                    $this->redirectUser();
+            }
         }
-        switch($action){
-            case null:
-                return new ViewModel("Connection");
-            break;
-            default:
-                $this->redirectUser();
-        }
+        
     }
 
     //TODO IMPORTANT : Appeller AuthService::connectUser() si le mec se connecte

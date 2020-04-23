@@ -39,7 +39,7 @@ INSERT INTO LikedUser VALUES (6, 1, '2020-04-18 13:54:36', false);
 
 
 INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', 1, 1), (default, '/Images/UserUpload/jzpeerz58aze/2.jpg',2,1);
+    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', true, 1), (default, '/Images/UserUpload/jzpeerz58aze/2.jpg', default,1);
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');

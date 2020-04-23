@@ -1,4 +1,7 @@
-
+#photos{
+    width: 200px;
+    height: 200px;
+}
 #photos, #info, #edit{
     display:inline-block;
     vertical-align: top;

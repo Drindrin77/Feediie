@@ -8,7 +8,8 @@ class UserModel extends DBConnection{
    }
      
     public static function findByAuthentToken($token){
-        $req = self::$pdo->prepare("select * from feediieuser where token = ?");
+        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, lastName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
         return $req->fetch();
     }

@@ -1,6 +1,7 @@
 <?php
 
 define('CONST_INCLUDE', NULL);
+define('PATH_USER_PHOTO', '/Images/UserUpload/');
 
 require_once("../src/Service/DBConnection.php");
 require_once("../src/Service/AuthService.php");
@@ -15,6 +16,8 @@ require_once("../src/Model/HobbyModel.php");
 require_once("../src/Model/PhotoModel.php");
 
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
+$action = isset($_GET['action'])?strtolower($_GET['action']):null;
+
 $path = "../src/Request/". $entity.".php";
 
 DBConnection::initConnexionDB();
@@ -23,7 +26,7 @@ AuthService::setCurrentUser();
 if(file_exists($path)){
     include_once($path);
     $entityRequest = new $entity();
-    $entityRequest->execute();
+    $entityRequest->execute($action);
     $entityRequest->sendRequest();
 }else{
     header("HTTP/1.0 404 Not Found");

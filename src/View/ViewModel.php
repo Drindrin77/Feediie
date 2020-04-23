@@ -15,13 +15,6 @@ class ViewModel {
         $this->data = $data;
     }
 
-    public function setHeaderInfo(){
-      $user = AuthService::getCurrentUser();
-      $this->headerInfo = array('firstName'=>$user['firstname'], 
-                                'photo'=>PhotoModel::getFirstPhoto($user['iduser']),
-                                'uniqID'=> $user['uniqid']);
-    }
-
     public function render(){
         ?>
 
@@ -42,6 +35,8 @@ class ViewModel {
                       crossorigin="anonymous"></script>
               <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
               <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+                integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
               <style>
                 <?php 
@@ -88,7 +83,14 @@ class ViewModel {
 
     private function shouldShowHeaders()
     {
-        return AuthService::isAuthenticated();
+        if(AuthService::isAuthenticated()){
+          $user = AuthService::getCurrentUser();
+          $this->headerInfo = array('firstName'=>$user['firstname'], 
+                                    'photo'=>PhotoModel::getPriorityPhoto($user['iduser']),
+                                    'uniqID'=> $user['uniqid']);
+          return true;
+        }
+        return false;
     }
 }
 ?>

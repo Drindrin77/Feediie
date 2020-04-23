@@ -1,0 +1,73 @@
+.containerPhoto{
+    width:200px; 
+    height:200px;
+    margin-right: 15px;
+    display: inline-block;
+    position: relative;
+}
+
+.containerPhoto img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+}
+  
+.containerPhoto:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+}
+
+.containerBtnPhoto{
+    display:inline-block;
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.btnGroupPhoto{
+    position: absolute;
+    top:40%;
+    left:28%;
+}
+  
+
+.containerBtnAddPhoto{
+    position: absolute;
+    top:40%;
+    left:10%;
+}
+
+.emptyPhoto{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.containerPhoto:hover .containerBtnPhoto {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.btnZoom{
+    background-color: blue;
+    color:white;
+    font-size: 20px;
+}
+.btnTrash{
+    background-color: red;
+    color:white;
+    font-size: 20px;
+}

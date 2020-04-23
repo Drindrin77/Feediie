@@ -9,17 +9,16 @@ class RegisterController extends Controller{
     }
 
     public function execute($action){
-        if(AuthService::isConnected()){
+        if(AuthService::isAuthenticated()){
             $this->redirectUser();
         }
         switch($action){
             case null:
-                $viewModel = $this->pageRegister();
+                return $this->pageRegister();
             break;
             default:
                 $this->redirectUser();
         }
-        return $viewModel;
     }
 
     public function pageRegister(){
