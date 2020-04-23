@@ -54,15 +54,19 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         $req = self::$pdo->prepare("SELECT
                                         matchedUser.firstname AS name,
                                         EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
-                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match
+                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
+                                        CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
+                                        matchedUser.uniqId AS uniq_id
                                     FROM
                                         feediieuser matchedUser 
                                     INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
                                     INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
-                                        
+                                    LEFT OUTER JOIN photo ON photo.idUser = matchedUser.idUser
+                                    
                                     WHERE 
                                         matched = true
                                     AND currentUser.uniqid = ?
+                                    AND (photo.priority = true OR photo IS NULL)
                                     
                                     ORDER BY 
 	                                    likedU.datematch DESC");

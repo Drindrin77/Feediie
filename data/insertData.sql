@@ -11,30 +11,30 @@ INSERT INTO FeediieUser VALUES
         default, default, default , 'token2', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'brjaze98e58a5ab','Naruto', 'Uzumaki', '1992-01-30','naruto@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, 'token3', default, 1, default, 'Homme');
+    (default, 'brjaze98e58a5ab','Naruto', '1992-01-30','naruto@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+        default, default, default, 'token3', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'crjaze98e58a5ab','Sakura', 'Haruno', '1999-04-11','Sakura@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, 'token4', default, 1, default, 'Femme');
+    (default, 'crjaze98e58a5ab','Sakura', '1999-04-11','Sakura@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+        default, default, default, 'token4', default, 1, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'drjaze98e58a5ab','Sasuke', 'Uchiha', '1999-04-11','sasuke@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, 'token5', default, 1, default, 'Homme');
+    (default, 'drjaze98e58a5ab','Sasuke', '1999-04-11','sasuke@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+        default, default, default, 'token5', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'erjaze98e58a5ab','Itachi', 'Uchiha', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, 'token6', default, 1, default, 'Homme');
+    (default, 'erjaze98e58a5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+        default, default, default, 'token6', default, 1, default, 'Homme');
 
-INSERT INTO LikedUser VALUES (1, 3, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (3, 1, '2020-04-18 15:35:36', true);
+INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
+INSERT INTO LikedUser VALUES (3, 2, '2020-04-18 15:35:36', true);
 
-INSERT INTO LikedUser VALUES (1, 4, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (4, 1, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (2, 4, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (4, 2, '2020-04-18 13:54:36', true);
 
-INSERT INTO LikedUser VALUES (1, 5, '2020-04-18 13:54:36', false);
+INSERT INTO LikedUser VALUES (2, 5, '2020-04-18 13:54:36', false);
 
-INSERT INTO LikedUser VALUES (6, 1, '2020-04-18 13:54:36', false);
+INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
 
 
 
@@ -42,7 +42,7 @@ INSERT INTO Photo VALUES
     (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', false, 1);
 
 INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 1);
+    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 2);
 
 INSERT INTO Photo VALUES
     (default, '/Images/UserUpload/crjaze98e58a5ab/1.jpeg', true, 4);
