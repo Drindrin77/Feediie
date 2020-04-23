@@ -8,7 +8,7 @@ class UserModel extends DBConnection{
    }
      
     public static function findByAuthentToken($token){
-        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, lastName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
 from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
         return $req->fetch();
@@ -25,7 +25,7 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
     }
 
     public static function getUserByUniqID($uniqID){
-        $req = self::$pdo->prepare("select idUser, firstName, lastName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
+        $req = self::$pdo->prepare("select idUser, firstName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
                                                     , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
                                     from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and uniqID=?");
         $req->execute(array($uniqID)); 

@@ -1,13 +1,11 @@
 $(document).ready(function () {
     let confirmModification = false;
     let changedFirstName = false;
-    let changedLastName = false;
     let changedBirthday = false;
     let changedSex = false;
     let changedCity = false;
     let changedDescription = false;
     let firstName = $("#firstname").val()
-    let lastName = $("#lastname").val()
     let birthday = $("#birthday").val()
     let sex = $("#sexControl").val()
     let city = $("#cityControl").children("option:selected").val()
@@ -18,7 +16,7 @@ $(document).ready(function () {
     $('[data-toggle="popover"]').popover()
 
     function atLeastOneChange() {
-        return changedFirstName || changedLastName || changedBirthday || changedSex || changedCity || changedDescription
+        return changedFirstName || changedBirthday || changedSex || changedCity || changedDescription
     }
 
     $(document).on("click", ".hobbiesUnpracticed", function (event) {
@@ -95,12 +93,6 @@ $(document).ready(function () {
             changedFirstName = false;
             firstName = newFirstName
         }
-        if (changedLastName) {
-            let newLastName = $("#lastname").val()
-            argsJson.lastname = newLastName;
-            changedLastName = false;
-            lastName = newLastName
-        }
         if (changedBirthday) {
             let newBirthday = $("#birthday").val()
             argsJson.changedBirthday = newBirthday
@@ -140,12 +132,8 @@ $(document).ready(function () {
         }
     })
 
-    $("#lastname").change(function () {
-        changedFirstName = firstName != this.value;
-    })
-
     $("#firstname").change(function () {
-        changedLastName = lastName != this.value;
+        changedFirstName = firstName != this.value;
     })
 
     $("#birthday").change(function () {

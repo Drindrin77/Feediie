@@ -41,7 +41,6 @@ CREATE TABLE FeediieUser(
 	idUser                      SERIAL NOT NULL ,
 	uniqID						VARCHAR(50) NOT NULL UNIQUE,
 	firstName                   VARCHAR (50) NOT NULL ,
-	lastName                    VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
 	email						VARCHAR (128) NOT NULL UNIQUE,
 	password                    VARCHAR (128) NOT NULL ,

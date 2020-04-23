@@ -77,12 +77,10 @@
                 <h3 class="titleSection">Mes informations</h3>
 
                 <div id="titleGeneralInfo">
-                    <p>Nom: </p>
                     <p>Prénom: </p>
                     <p>Date <br>de naissance: </p>
                 </div>
                 <div id="responseGeneralInfo">
-                    <p><?= '<input type="text" id="lastname" value="'.$infoUser['lastname'].'"'?></p>
                     <p><?= '<input type="text" id="firstname" value="'.$infoUser['firstname'].'"'?></p>
                     <p><?= '<input type="date" id="birthday" value="'.$infoUser['birthday'].'"'?></p>
                 </div>
