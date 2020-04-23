@@ -25,7 +25,7 @@ abstract class RequestService{
     }
 
     protected function addData($data){
-        array_merge($this->response['data'], $data);
+        array_push($this->response['data'], $data);
     }
 
   	public function sendRequest(){

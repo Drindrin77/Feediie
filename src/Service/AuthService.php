@@ -34,7 +34,7 @@ class AuthService
 
     private static function getAuthToken()
     {
-        return 'token';
+        return 'token2';
         //return $_COOKIE['s_token'];
     }
 

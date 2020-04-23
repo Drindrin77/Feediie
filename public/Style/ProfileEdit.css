@@ -1,0 +1,261 @@
+
+
+.titleAddElement, .btnAddElement{
+    display:inline-block;
+}
+
+.btnAddElement{
+    float:right;   
+}
+
+#containerProfile{
+    max-width:800px;
+    margin:auto;
+    position:relative;
+    background-color: white;
+    padding: 20px;
+}
+
+#background{
+    background-color: rgb(248, 245, 245);
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
+}
+
+@media screen and (min-width: 769px) {
+    #name {
+        position:absolute;
+        bottom:0;
+    }
+}
+@media screen and (max-width: 768px) {
+    #containerProfile {
+        max-width:540px !important;
+    }
+    #containerName{
+        padding-top:10px;
+        text-align:center;
+    }
+    #spanViewProfile{
+        display:none;
+    }
+    #btnViewProfile{
+        position:absolute;
+        top:5 !important;
+        right:5 !important;
+        z-index:100;
+    }
+}
+
+#submitInfo{
+    margin-top: 20px;
+    float:right;
+}
+
+span.clear { clear: right; display: block; }
+
+
+#btnViewProfile{
+    position:absolute;
+    top:10;
+    right:10;
+    z-index:100;
+}
+
+#containerNav{
+    position:relative;
+}
+#containerDescription{
+    background-color: rgb(236, 232, 232);
+    border-radius: 5px;
+    padding:10px;
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.titleSection{
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.activeNav{
+    color:white !important;
+    background-color:#007bff !important;
+}
+
+.nav-link{
+    cursor:pointer;
+}
+
+#titleGeneralInfo, #responseGeneralInfo{
+    display:inline-block;
+    vertical-align: top;
+}
+
+.containerHobby{
+    background-color:#cce5ff;
+    color: #004085;
+    border-radius: 10px;
+    margin-top:10px;
+    margin-right: 10px;
+    display: inline-block;
+    padding:15px;
+    cursor: pointer;
+}
+
+#containerUnpracticedHobby{
+    border:1px solid black
+}
+.deleteHobbyIcon{
+    display: none;
+}
+
+.practicedHobby:hover > .deleteHobbyIcon{
+    display: contents;
+}
+
+.addHobbyIcon{
+    display: none;
+}
+
+.hobbiesUnpracticed:hover > .addHobbyIcon{
+    display:contents;
+}
+
+.hobbiesUnpracticed:hover{
+    background-color:#647ef0;
+    color: white;
+}
+
+.practicedHobby:hover{
+    background-color:#cd1608;
+    color: white;
+}
+
+#containerTitleHobby{
+    text-align:center;
+}
+
+#info{
+    margin-top: 25px;
+}
+#contentInfo, #contentHobby, #contentPersonality, #contentDish{
+    display: none;
+}
+
+#navContentContainer{
+    margin-top: 30px;
+}
+
+/*
+
+PHOTO
+
+*/
+
+.containerPhoto{
+    width:200px; 
+    height:200px;
+    margin-right: 15px;
+    display: inline-block;
+    position: relative;
+    margin-top: 15px;
+    border-radius: 15px;
+}
+
+.containerPhoto img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+}
+  
+.containerPhoto:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+}
+
+.containerBtnPhoto{
+    display:inline-block;
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.btnGroupPhoto{
+    position: absolute;
+    top:40%;
+    left:28%;
+}
+  
+.containerSpinner{
+    position:absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.invisible{
+    display: none;
+}
+.containerBtnAddPhoto{
+    position: absolute;
+    top:40%;
+    left:10%;
+}
+
+.emptyPhoto{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.containerPhoto:hover .containerBtnPhoto {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.btnZoom{
+    background-color: blue;
+    color:white;
+    font-size: 20px;
+}
+.btnTrash{
+    background-color: red;
+    color:white;
+    font-size: 20px;
+}
+
+
+
+/**
+    CARD
+
+*/
+
+
+.titleCard{
+    text-align: center;
+}
+
+.cardImage{
+    padding:10px;
+    width:120px;
+}
+
+.card{
+    width:120px;
+}
