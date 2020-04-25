@@ -4,21 +4,6 @@
     $hobbies = $this->data['hobbies'];
     $personalities = $this->data['personalities'];
     $favoriteDish = $this->data['favoriteDish'];
-    // $hobbies = array(array('name'=>'Musique'),array('name'=>'Jeux-vidéos'),array('name'=>'Dessin')
-    // ,array('name'=>'Badminton'),array('name'=>'Musique'),array('name'=>'Musique'));
-
-    $favoriteDish = array(array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
-    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
-    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
-    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),
-    array('name'=>'Pizza','iconurl'=>'/Images/Dish/pizza.png'),);
-
-
-    $personalities = array(array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
-    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
-    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
-    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),
-    array('name'=>'Sportif','iconurl'=>'/Images/Dish/salad.png'),);
 ?>
 
 <div id="background">
@@ -89,9 +74,9 @@
                             <?php foreach($personalities as $personality): ?>
                                 <div class="card cardPersonality">
                                     <div class="cardImage">
-                                        <img src=<?=$personality['iconurl']?> class="card-img-top" alt="...">
+                                        <img class="image" src=<?=$personality['iconurl']?> class="card-img-top" alt="...">
                                     </div>      
-                                    <div class="card-header titleCardPerso"><?= $personality['name']?></div>
+                                    <div class="card-header titleCard"><?= $personality['name']?></div>
                                     <!-- <div class="card-body">
                                         <p class="card-text"><?= $personality['description']?></p>
                                     </div> -->
@@ -110,9 +95,9 @@
                             <?php foreach($favoriteDish as $favorite): ?>
                                 <div class="card cardFavorite">
                                     <div class="cardImage">
-                                        <img src=<?=$favorite['iconurl']?> class="card-img-top" alt="...">
+                                        <img class="image" src=<?=$favorite['iconurl']?> class="card-img-top" alt="...">
                                     </div> 
-                                    <div class="card-header titleCardPerso"><?= $favorite['name']?></div>
+                                    <div class="card-header titleCard"><?= $favorite['name']?></div>
                                 </div>
                             <?php endforeach ?>
                         </div>
