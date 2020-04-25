@@ -1,6 +1,5 @@
 <?php
 $usersMatchedArray = $this->data["usersMatched"];
-var_dump($usersMatchedArray);
 ?>
 
 <div class="container-fluid col-md-10">
@@ -23,14 +22,19 @@ var_dump($usersMatchedArray);
                 ?>
             </div>
         </div>
-        <div class="border col-md-9">
+        <div class=" col-md-9">
             <div class="container-fluid">
-                <a id="chatSelectedContact" class="border row align-items-center"
+                <a id="chatSelectedContact" class=" row align-items-center"
                    href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>"
                    data-uniqId="<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
                     <img class="col-2 rounded-circle" src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                     <span class="col-8 offset-1"><?php echo $usersMatchedArray[0]["name"] ?></span>
                 </a>
+                <div id="chatBox" class="row"></div>
+                <div id="userMessageArea" class="row ">
+                    <input class="col-10 form-control">
+                    <button class="col-2 btn btn-primary" type="button">Envoyer</button>
+                </div>
             </div>
         </div>
     </div>

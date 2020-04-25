@@ -1,7 +1,6 @@
 #matchedUserContainer{
-    border : 1px solid gray;
+    border : 0px solid gray;
     overflow-y : scroll;
-    height : 500px  ;
 }
 
 .matchedUser{
