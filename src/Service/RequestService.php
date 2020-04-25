@@ -4,7 +4,7 @@ if(!defined('CONST_INCLUDE'))
 
 abstract class RequestService{
 
-    protected $response;
+    private $response;
 	
 	public function __construct() {
         $this->response=array('status'=>'','error'=>array(),'success'=>array(),'data'=>array());
@@ -24,8 +24,8 @@ abstract class RequestService{
         array_push($this->response['success'], $message);
     }
 
-    protected function addData($data){
-        array_push($this->response['data'], $data);
+    protected function addData($key, $value){
+        $this->response['data'][$key] = $value;
     }
 
   	public function sendRequest(){

@@ -22,6 +22,18 @@ class HobbyModel extends DBConnection{
         return $req->fetchAll(); 
     }
 
+
+    public static function addHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("insert into practice values(?,?)");
+        return $req->execute(array($idUser, $idHobby)); 
+    }
+
+    public static function removeHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("delete from practice where idUser = ? and idHobby = ?");
+        return $req->execute(array($idUser, $idHobby)); 
+    }
+
+
 }
 
 ?>

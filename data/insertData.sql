@@ -24,13 +24,20 @@ INSERT INTO FeediieUser VALUES
         default, default, default , 'token2', default, 1, default, 'Homme');
 
 INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', false, 1);
+    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', true, 1);
 
 INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 1);
+    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 2);
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
+
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Gourmand', '/Images/Dish/chocolat.jpg');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Pas de prise de tête', '/Images/Dish/burger.png');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Partager avant tout', '/Images/Dish/pizza.png');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
+INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Attentionné', '/Images/Dish/pommeAmour.jpg');
+
 INSERT INTO Hobby VALUES(default, 'Musique');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');
 INSERT INTO Hobby VALUES(default, 'Film');
@@ -41,6 +48,12 @@ INSERT INTO Hobby VALUES(default, 'Technologie');
 
 INSERT INTO likeEat VALUES (1,1);
 INSERT INTO looklike VALUES (1,1);
+INSERT INTO looklike VALUES (2,1);
+INSERT INTO looklike VALUES (2,2);
+INSERT INTO looklike VALUES (2,4);
+INSERT INTO looklike VALUES (2,5);
+INSERT INTO looklike VALUES (2,6);
+
 INSERT INTO practice VALUES(1,1);
 INSERT INTO interesteddiet VALUES (1,1);
 
