@@ -14,12 +14,13 @@
     position:relative;
     background-color: white;
     padding: 20px;
+    min-height:100%;
 }
 
 #background{
     background-color: rgb(248, 245, 245);
-    /* padding-top: 20px;
-    padding-bottom: 20px; */
+    height: 100%;
+    overflow: auto;
 }
 
 @media screen and (min-width: 769px) {

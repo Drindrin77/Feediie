@@ -51,7 +51,7 @@ class ViewModel {
                   if($this->showHeader){
                     //echo '<link rel="stylesheet" href="/Style/header.css">';
                     include_once('Style/header.css');
-
+                    include_once('Style/footer.css');
                   }
                 ?>
                 </style>
@@ -65,7 +65,7 @@ class ViewModel {
               include_once 'Layout/header.php'; 
             }
             ?>
-            <div class="pageContainer">
+            <div id="pageContainer">
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
@@ -108,6 +108,7 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<script type="text/javascript" src="/Script/header.js"></script>';
+                    include_once('Script/footer.js');
                   }
                   ?>
                   </script>

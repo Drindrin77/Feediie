@@ -7,7 +7,7 @@
 ?>
 
 <div id="background">
-    <div id="containerProfile" style="background-color:white">
+    <div id="containerProfile">
         <div class="container-fluid">
             <!-- BUTTON EDIT SHOW ONLY IF IT IS THE CURRENT USER-->
             <?php if($isCurrentUser){?>
