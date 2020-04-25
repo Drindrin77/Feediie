@@ -12,7 +12,6 @@ class SexModel extends DBConnection{
         $req->execute();    
         return $req->fetchAll();
     }
-
 }
 
 ?>

@@ -147,7 +147,7 @@
 }
 
 #parameters {
-    margin-top: 50px;
+    margin-top: 20px;
     height: 850px;
     width: 400px;
     border-radius: 20px;
@@ -158,7 +158,6 @@
     display: flex;
 }
 #parametersBtn {
-    z-index: 2000;
 }
 .titleParameter {
 }

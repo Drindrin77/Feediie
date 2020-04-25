@@ -237,5 +237,24 @@ CREATE TABLE practice(
 	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)
 )WITHOUT OIDS;
 
+------------------------------------------------------------
+-- Table: diet
+------------------------------------------------------------
+CREATE TABLE diet(
+    idDiet   SERIAL NOT NULL ,
+    name     VARCHAR (128) NOT NULL,
+    CONSTRAINT diet_PK PRIMARY KEY (idDiet)
+)WITHOUT OIDS;
+-----------------------------------------------------------
+-- Table : interesteddiet
+-----------------------------------------------------------
+CREATE TABLE interesteddiet(
+    idUser   INT  NOT NULL ,
+    idDiet   INT  NOT NULL ,
+    CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
+
+    ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+    ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)
+)WITHOUT OIDS;
 
 
