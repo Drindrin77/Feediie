@@ -1,0 +1,24 @@
+#matchedUserContainer{
+    border : 1px solid gray;
+    overflow-y : scroll;
+    height : 500px  ;
+}
+
+.matchedUser{
+    background-color: aqua;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.matchedUser:hover{
+    cursor:pointer;
+}
+
+#chatSelectedContact{
+    color : inherit;
+}
+
+#chatSelectedContact:hover{
+    color : inherit;
+    text-decoration: none;
+}

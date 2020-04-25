@@ -50,6 +50,40 @@ from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name 
         $req->execute(array($sessionToken, $mail)); 
     }
 
+    public static function fetchMatchedUsers($uniqID){
+        $req = self::$pdo->prepare("SELECT
+                                        matchedUser.firstname AS name,
+                                        EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
+                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
+                                        CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
+                                        matchedUser.uniqId AS uniq_id
+                                    FROM
+                                        feediieuser matchedUser 
+                                    INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
+                                    INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
+                                    LEFT OUTER JOIN photo ON photo.idUser = matchedUser.idUser
+                                    
+                                    WHERE 
+                                        matched = true
+                                    AND currentUser.uniqid = ?
+                                    AND (photo.priority = true OR photo IS NULL)
+                                    
+                                    ORDER BY 
+	                                    likedU.datematch DESC");
+        $req->execute(array($uniqID));
+        return $req->fetchAll();
+    }
+
+    public static function addHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("insert into practice values(?,?)");
+        return $req->execute(array($idUser, $idHobby));
+    }
+
+    public static function removeHobby($idUser, $idHobby) {
+        $req = self::$pdo->prepare("delete from practice where idUser = ? and idHobby = ?");
+        return $req->execute(array($idUser, $idHobby));
+    }
+
     public static function editInfo($args, $idUser){
         $sql = "update feediieuser set ";
         $values = array();
