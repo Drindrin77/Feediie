@@ -23,6 +23,7 @@ $(document).ready(function () {
         let iddish = $(this).attr('data-iddish')
         let name = $(this).attr('data-name')
         let url = $(this).attr('data-url')
+        console.log(name)
         $(this).parent().parent().remove()
 
         $.post("/ajax.php?entity=dish&action=deletePersonality",
@@ -64,19 +65,19 @@ $(document).ready(function () {
 
 
     function addPersonality(name, id, url) {
-        $("#containerUsedPersonality").append('<div class="card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-url=' + url + ' data-name=' + name + '  data-iddish=' + id + ' class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button></div><div class="card-header titleCard">' + name + '</div></div>')
+        $("#containerUsedPersonality").append('<div class="card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-url=' + url + ' data-name="' + name + '"  data-iddish=' + id + ' class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button></div><div class="card-header titleCard">' + name + '</div></div>')
     }
 
     function deletePersonality(name, id, url) {
-        $("#containerUnusedPersonality").append('<div class="card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerAddBtn"><button data-url=' + url + ' data-name=' + name + '  data-iddish=' + id + ' class="btn btnAdd addPersonality"><i class="fa fa-trash"></i> Ajouter</button></div><div class="card-header titleCard">' + name + '</div></div>')
+        $("#containerUnusedPersonality").append('<div class="card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerAddBtn"><button data-url=' + url + ' data-name="' + name + '" data-iddish=' + id + ' class="btn btnAdd addPersonality"><i class="fa fa-trash"></i> Ajouter</button></div><div class="card-header titleCard">' + name + '</div></div>')
     }
 
     function addFavorite(name, id, url) {
-        $("#containerUsedDish").append('<div class= "card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-url=' + url + ' data-name=' + name + ' data-iddish=' + id + ' class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button></div><div class="card-header titleCard">' + name + '</div></div>');
+        $("#containerUsedDish").append('<div class= "card cardPersonality"><div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-url=' + url + ' data-name="' + name + '" data-iddish=' + id + ' class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button></div><div class="card-header titleCard">' + name + '</div></div>');
     }
 
     function deleteFavorite(name, id, url) {
-        $("#containerUnusedDish").append('<div class= "card cardPersonality" > <div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerAddBtn"><button data-url=' + url + ' data-name=' + name + ' data-iddish=' + id + ' class="btn btnAdd addDish"><i class="fa fa-plus"></i> Ajouter</button></div><div class="card-header titleCard">' + name + '</div></div>')
+        $("#containerUnusedDish").append('<div class= "card cardPersonality" > <div class="cardImage"><img src=' + url + ' class="card-img-top image"></div><div class="overlay"></div><div class="containerBtnOverlay containerAddBtn"><button data-url=' + url + ' data-name="' + name + '" data-iddish=' + id + ' class="btn btnAdd addDish"><i class="fa fa-plus"></i> Ajouter</button></div><div class="card-header titleCard">' + name + '</div></div>')
     }
 
     $(document).on("click", ".deleteDish", function (event) {
@@ -253,7 +254,7 @@ $(document).ready(function () {
         if (changedBirthday) {
             let newBirthday = $("#birthday").val()
             $("#birthday").removeClass("errorValue")
-            argsJson.changedBirthday = newBirthday
+            argsJson.birthday = newBirthday
             changedBirthday = false;
             birthday = newBirthday
         }
@@ -280,6 +281,7 @@ $(document).ready(function () {
         }
 
         if (!jQuery.isEmptyObject(argsJson)) {
+            console.log(argsJson)
             $.post("/ajax.php?entity=user&action=editInfo", argsJson)
                 .fail(function (e) {
                     console.log("fail", e)
@@ -387,6 +389,8 @@ $(document).ready(function () {
         var file_data = $('#uploadInput').prop('files')[0];
         var form_data = new FormData();
         form_data.append('file', file_data);
+        $(".containerEmptyPhoto").first().find('.containerSpinner').removeClass('invisible')
+        $(".containerEmptyPhoto").first().find('.containerBtnAddPhoto').addClass('invisible')
         $.ajax({
             url: "/ajax.php?entity=photo&action=add",
             type: "POST",
@@ -397,8 +401,6 @@ $(document).ready(function () {
             success: function (e) {
                 let data = JSON.parse(e)
                 if (data.status == 'success') {
-                    $(".containerEmptyPhoto").first().find('.containerSpinner').removeClass('invisible')
-                    $(".containerEmptyPhoto").first().find('.containerBtnAddPhoto').addClass('invisible')
                     $("#alerteMsgErrorUpload").addClass("invisible")
                     $("#uploadInput").val('')
                     setTimeout(function () {
@@ -408,6 +410,8 @@ $(document).ready(function () {
                     }, 1000);
                 } else {
                     $("#alerteMsgErrorUpload").removeClass("invisible")
+                    $(".containerEmptyPhoto").first().find('.containerSpinner').addClass('invisible')
+                    $(".containerEmptyPhoto").first().find('.containerBtnAddPhoto').removeClass('invisible')
                     let contentsError = ""
                     $.each(data.error, function (key, value) {
                         contentsError += value + "\n"
@@ -449,6 +453,8 @@ $(document).ready(function () {
         $("#confirmPassword").removeClass('errorValue')
         $("#errorConfirmPassword").addClass('invisible')
     })
+
+    // TODO: CHECK PASSWORD POLICY
 
     $("#btnConfirmReset").click(function (e) {
         let oldPassword = $("#oldPassword").val()
