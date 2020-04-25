@@ -24,12 +24,6 @@ class UserRequest extends RequestService{
             case "passwordforgotten":
                 $this->passwordForgotten();
             break;
-            case "addhobby":
-                $this->addHobby();
-            break;
-            case "removehobby":
-                $this->removeHobby();
-            break;
             case "filter":
                 $this->filter();
             break;
@@ -55,26 +49,6 @@ class UserRequest extends RequestService{
         */
     }
 
-    private function removeHobby(){
-        $idUser = $this->currentUser['iduser'];
-        $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
-        if(UserModel::removeHobby($idUser, $idHobby)){
-            $this->addMessageSuccess('Le hobby a été supprimé');
-        }else{
-            $this->addMessageError('Erreur BD');
-        }
-    }
-
-    private function addHobby(){
-        $idUser = $this->currentUser['iduser'];
-        $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
-        if(UserModel::addHobby($idUser, $idHobby)){
-            $this->addMessageSuccess('Le hobby a été ajouté');
-        }else{
-            $this->addMessageError('Erreur BD');
-        }
-    }
-
     //XSS HACK : HTMLSPECIALCHARS ?
     private function resetPassword(){
         $oldPassword = isset($_POST['oldPassword']) && !empty($_POST['oldPassword']) ? $_POST['oldPassword'] : null;
@@ -82,7 +56,7 @@ class UserRequest extends RequestService{
         $actualPassword = $this->currentUser['password'];
         
         if(!PasswordService::samePassword($oldPassword,$actualPassword)){
-            $this->addMessageError(['old'=>'L\'ancien mot de passe est incorrect.']);  
+            $this->addMessageError('L\'ancien mot de passe est incorrect.');  
         }  
         else{
             UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));

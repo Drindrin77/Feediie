@@ -57,8 +57,8 @@ class ProfileController extends Controller{
         $allHobbies = HobbyModel::getUnpracticedHobbies($idUser);
         $allSexs = SexModel::getAllSex();
         $allCities = CityModel::getAllCity();
-        $allPersonalities = DishModel::getAllPersonalities();
-        $allDish = DishModel::getAllDishes();
+        $allPersonalities = DishModel::getUnusedPersonalities($idUser);
+        $allDish = DishModel::getUnusedDishes($idUser);
         $photos = PhotoModel::getAllPhotos($idUser);
         $personalities = DishModel::getUserPersonalities($idUser);
         $hobbies = HobbyModel::getUserHobbies($idUser);

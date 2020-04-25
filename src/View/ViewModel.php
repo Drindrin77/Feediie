@@ -39,6 +39,9 @@ class ViewModel {
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
                 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+
+
+                
                 <style>
                 <?php 
                   if(file_exists('Style/'.$this->page.'.css')){
@@ -48,7 +51,7 @@ class ViewModel {
                   if($this->showHeader){
                     //echo '<link rel="stylesheet" href="/Style/header.css">';
                     include_once('Style/header.css');
-
+                    include_once('Style/footer.css');
                   }
                 ?>
                 </style>
@@ -62,7 +65,7 @@ class ViewModel {
               include_once 'Layout/header.php'; 
             }
             ?>
-            <div class="pageContainer">
+            <div id="pageContainer">
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
@@ -105,6 +108,7 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<script type="text/javascript" src="/Script/header.js"></script>';
+                    include_once('Script/footer.js');
                   }
                   ?>
                   </script>
