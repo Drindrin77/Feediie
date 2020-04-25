@@ -1,12 +1,18 @@
-document.addEventListener("DOMContentLoaded", function (event) {
-    var element = document.getElementById('pageContainer');
-    var height = element.offsetHeight;
-    console.log(height, screen.height)
-    if (height < screen.height) {
-        $("#footer").addClass('stikybottom');
+function replaceFooter(){
+    var docHeight = $(window).height();
+    var footerHeight = $('#footer').height();
+    var footerTop = $('#footer').position().top + footerHeight;
+
+    if (footerTop < docHeight) {
+        $('#footer').css('margin-top', (docHeight - footerTop) + 'px');
     }
+}
 
+$(document).ready(function() {
+    replaceFooter();
+});
 
+$(window).resize(function(){
+    replaceFooter();
 
-
-}, false);
+});
