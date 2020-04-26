@@ -42,7 +42,7 @@ INSERT INTO Photo VALUES
     (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', true, 1);
 
 INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 1);
+    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 2);
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
