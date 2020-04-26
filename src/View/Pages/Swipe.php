@@ -4,16 +4,28 @@ $sexs = isset($this->data['sexs']) ? $this->data['sexs'] : null;
 $diets = isset($this->data['diets']) ? $this->data['diets'] : null;
 $userSelectedDiet = isset($this->data['userSelectedDiet']) ? $this->data['userSelectedDiet'] : null;
 $userSelectedGender = isset($this->data['userSelectedGender']) ? $this->data['userSelectedGender'] : null;
-$userSelectDistance = isset($this->data['userSelectDistance']) ? $this->data['userSelectDistance'] : '50';
+$userSelectDistance = isset($this->data['userSelectDistance']) ? $this->data['userSelectDistance'] : null;
 $userSelectAge = isset($this->data['userSelectAge']) ? $this->data['userSelectAge'] : null;
-foreach ($userSelectDistance as $userDistance)
-{
-    $distance = $userDistance['distance'];
+
+if(!empty($userSelectDistance)) {
+    foreach ($userSelectDistance as $userDistance) {
+        $distance = $userDistance['distance'];
+    }
 }
-foreach ($userSelectAge as $userAges)
+else
 {
-    $ageMin = $userAges['agemin'];
-    $ageMax = $userAges['agemax'];
+    $distance = '50';
+}
+if(!empty($userSelectAge)) {
+    foreach ($userSelectAge as $userAges) {
+        $ageMin = $userAges['agemin'];
+        $ageMax = $userAges['agemax'];
+    }
+}
+else
+{
+    $ageMin = '20';
+    $ageMax = '25';
 }
 ?>
 <div class="container-fluid background">
