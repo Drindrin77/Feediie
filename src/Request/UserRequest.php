@@ -94,7 +94,6 @@ class UserRequest extends RequestService{
     }
 
     private function editInfo(){
-<<<<<<< HEAD
         if(AuthService::isAuthenticated()){
             $idUser = AuthService::getCurrentUser()['iduser'];
             if(!UserModel::editInfo($_POST, $idUser)){
@@ -103,14 +102,6 @@ class UserRequest extends RequestService{
                 $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
             }
         }   
-=======
-        $idUser = $this->currentUser['iduser'];
-        if(!UserModel::editInfo($_POST, $idUser)){
-            $this->addMessageSuccess('Erreur BD');
-        }else{
-            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
-        }
->>>>>>> master
     }
 
 

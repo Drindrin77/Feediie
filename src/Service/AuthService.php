@@ -53,7 +53,6 @@ class AuthService
 
     private static function getAuthToken()
     {
-<<<<<<< HEAD
         if(!isset($_SESSION['s_token']))self::setCurrentUserWithCookie();
         return $_SESSION['s_token'];
     }
@@ -63,10 +62,6 @@ class AuthService
         $_SESSION['s_token'] = null;
         session_destroy();
         $currentUser = null;
-=======
-        return 'token2';
-        //return $_COOKIE['s_token'];
->>>>>>> master
     }
 
     private static function setUniqSession(){
