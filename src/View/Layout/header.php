@@ -6,28 +6,26 @@
 
 
 <nav id="navbar" class="navbar navbar-expand-lg">
-    <nav class="navbar">
     <a class="navbar-brand" href="/">
         <img src="/Images/Icon/logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
     </a>
-    </nav>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-
-
-    <button type="button" style="margin-right: 50px" class="btn btn-primary">
-        Chat <span class="badge badge-light">9</span>
-        <span class="sr-only">unread messages</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="true" aria-label="Toggle navigation">
+        <i class="fa fa-bars"></i>
     </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+    <ul class="navbar-nav mr-auto"></ul>
+    <form class="form-inline my-2 my-lg-0">
 
-    <div id="parent">
-        <div id="containerHeaderPhoto" style="width:50px; height:50px">
+        <button id="btnChat" type="button" style="margin-right: 50px" class="btn btn-primary">
+            <i class="far fa-comments"></i>
+            <div id="containerNotif">
+                <span id="nbNotif">8</span>
+            </div>
+        </button>
+
+        <div id="containerHeaderPhoto">
             <?php echo '<img id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
         </div>
 
@@ -42,7 +40,12 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    </form>
+
+
+
+        
     
 
 </nav>

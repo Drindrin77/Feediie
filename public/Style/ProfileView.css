@@ -13,20 +13,21 @@
     font-size: 30px;
     font-weight: bold;
 }
-
 #containerProfile{
     max-width:800px;
     margin:auto;
     position:relative;
     background-color: white;
     padding: 20px;
+    min-height:100%;
 }
 
 #background{
     background-color: rgb(248, 245, 245);
-    /* padding-top: 20px;
-    padding-bottom: 20px; */
+    height: 100%;
+    overflow: auto;
 }
+
 
 @media screen and (min-width: 769px) {
     #name {
@@ -78,9 +79,6 @@ hr.solid {
     display:inline-block;
 }
 
-.cardFavorite{
-    display: inline-block;
-}
 .containerHobby{
     background-color:#cce5ff;
     color: #004085;
@@ -94,17 +92,29 @@ hr.solid {
     text-align:center;
 }
 
-.titleCardPerso{
+.titleCard{
     text-align: center;
+    height:60px;
+    font-size:13px;
 }
 
-.cardPersonality{
+.card{
     display: inline-block;
 }
+
 .cardImage{
-    padding:10px;
-    width:120px;
+    width:100px;
+    height:100px;
+    margin:auto;
 }
+
 .card{
-    width:120px;
+    width:130px;
+    display:inline-block;
+    vertical-align: bottom;
+}
+
+.image{
+    width:100%;
+    height:100%;
 }
