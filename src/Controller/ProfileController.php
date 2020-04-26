@@ -11,7 +11,11 @@ class ProfileController extends Controller{
     public function execute($action){
         switch($action){
             case "edit":
-                $viewModel = $this->editProfile();
+                if(!AuthService::isAuthenticated()){
+                    $this->redirectUser();
+                }else{
+                    $viewModel = $this->editProfile();
+                }
             break;
             
             default:
