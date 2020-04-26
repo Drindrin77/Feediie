@@ -6,10 +6,10 @@ if(!defined('CONST_INCLUDE'))
 class SexModel extends DBConnection{
     public function __construct () {
     }
-  
+
     public static function getAllSex(){
         $req = self::$pdo->prepare("select * from sex");
-        $req->execute();    
+        $req->execute();
         return $req->fetchAll();
     }
     public static function getUserSelectedGender($idUser){
@@ -17,6 +17,10 @@ class SexModel extends DBConnection{
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
-}
 
-?>
+    public static function getSexWithName($name){
+        $req = self::$pdo->prepare("select * from sex where name = ?");
+        $req->execute(array($name));
+        return $req->fetch();
+    }
+}

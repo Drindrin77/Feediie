@@ -25,11 +25,9 @@ class ViewModel {
         <html>
 
           <head>
-
               <!-- Required meta tags -->
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
               <!-- Bootstrap CSS -->
               <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
                     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -51,7 +49,7 @@ class ViewModel {
                   if($this->showHeader){
                     //echo '<link rel="stylesheet" href="/Style/header.css">';
                     include_once('Style/header.css');
-
+                    include_once('Style/footer.css');
                   }
                 ?>
                 </style>
@@ -65,7 +63,7 @@ class ViewModel {
               include_once 'Layout/header.php'; 
             }
             ?>
-            <div class="pageContainer">
+            <div id="pageContainer">
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
@@ -108,6 +106,7 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<script type="text/javascript" src="/Script/header.js"></script>';
+                    include_once('Script/footer.js');
                   }
                   ?>
                   </script>

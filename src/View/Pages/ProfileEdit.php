@@ -95,8 +95,8 @@
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Revoir les modifications</button>
-                            <button type="button" class="btn btn-secondary">Quitter la page</button>
+                            <button type="button" class="btn btn-primary"  data-dismiss="modal">Revoir les modifications</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.href = '/profile/<?= $infoUser['uniqid'];?>';" >Quitter la page</button>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="overlay"></div>
                                 <div class="containerBtnOverlay containerAddBtn">
-                                    <button data-url=<?=$personality['iconurl']?> data-name=<?= $personality['name']?> data-iddish=<?=$personality['iddish']?> class="btn btnAdd addPersonality"><i class="fa fa-plus"></i> Ajouter</button>
+                                    <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>" data-iddish=<?=$personality['iddish']?> class="btn btnAdd addPersonality"><i class="fa fa-plus"></i> Ajouter</button>
                                 </div>
                                 <div class="card-header titleCard"><?= $personality['name']?></div>
                             </div>
@@ -244,7 +244,7 @@
                             </div>      
                             <div class="overlay"></div>
                             <div class="containerBtnOverlay containerDeleteBtn">
-                                    <button data-url=<?=$personality['iconurl']?> data-name=<?= $personality['name']?>  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
+                                    <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>"  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
                                 </div>
                             <div class="card-header titleCard"><?= $personality['name']?></div>
                         </div>
@@ -266,7 +266,7 @@
                                 </div> 
                                 <div class="overlay"></div>
                                 <div class="containerBtnOverlay containerAddBtn">
-                                    <button data-url=<?=$dish['iconurl']?> data-name=<?= $dish['name']?>  data-iddish=<?=$dish['iddish']?> class="btn btnAdd addDish"><i class="fa fa-plus"></i> Ajouter</button>
+                                    <button data-url=<?=$dish['iconurl']?> data-name="<?= $dish['name']?>"  data-iddish=<?=$dish['iddish']?> class="btn btnAdd addDish"><i class="fa fa-plus"></i> Ajouter</button>
                                 </div>
                                 <div class="card-header titleCard"><?= $dish['name']?></div>
                             </div>  
@@ -281,7 +281,7 @@
                                 </div> 
                                 <div class="overlay"></div>
                                 <div class="containerBtnOverlay containerDeleteBtn">
-                                    <button data-url=<?=$dish['iconurl']?> data-name=<?= $dish['name']?> data-iddish=<?=$dish['iddish']?> class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button>
+                                    <button data-url=<?=$dish['iconurl']?> data-name="<?= $dish['name']?>" data-iddish=<?=$dish['iddish']?> class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button>
                                 </div>
 
                                 <div class="card-header titleCard"><?= $dish['name']?></div>

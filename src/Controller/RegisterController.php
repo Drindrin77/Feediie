@@ -25,9 +25,11 @@ class RegisterController extends Controller{
         
         $cities = CityModel::getAllCity();
         $sexs = SexModel::getAllSex();
+        $passwordPolicy = PasswordService::policyToString();
         $data = [
             "cities"=>$cities,
-            "sexs"=>$sexs
+            "sexs"=>$sexs,
+            "policy"=>$passwordPolicy
         ];
         return new ViewModel("Register", $data);
     }

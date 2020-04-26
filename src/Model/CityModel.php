@@ -12,6 +12,12 @@ class CityModel extends DBConnection{
         $req->execute();    
         return $req->fetchAll();
     }
+
+    public static function getCityWithID($id){
+        $req = self::$pdo->prepare("select * from city where idCity = ?");
+        $req->execute(array($id));    
+        return $req->fetch();
+    }
       
 }
 

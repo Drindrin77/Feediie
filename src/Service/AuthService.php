@@ -11,8 +11,7 @@ class AuthService
 
     public static function isAuthenticated(): bool
     {
-        //return isset($_COOKIE['s_token']) || isset($_COOKIE['c_token']);
-        return true;
+        return isset($_SESSION['token']);
     }
 
     public static function connectUser(){
@@ -21,21 +20,24 @@ class AuthService
 
     public static function setCurrentUser(){
         if (self::isAuthenticated()) {
-            self::$currentUser = UserModel::findByAuthentToken(self::getAuthToken());
+            self::$currentUser = UserModel::findByToken(self::getAuthToken());
         }else{
             self::$currentUser = null;   
         }
     }
 
-    public static function getCurrentUser()
-    {
+    public static function getCurrentUser(){
         return self::$currentUser;
     }
 
-    private static function getAuthToken()
-    {
-        return 'token2';
-        //return $_COOKIE['s_token'];
+    private static function getAuthToken(){
+        return $_SESSION['token'];
+    }
+
+    public static function disconnect(){
+        $_SESSION['s_token'] = null;
+        session_destroy();
+        $currentUser = null;
     }
 
     private static function setUniqSession(){

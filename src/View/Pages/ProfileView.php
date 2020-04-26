@@ -4,10 +4,12 @@
     $hobbies = $this->data['hobbies'];
     $personalities = $this->data['personalities'];
     $favoriteDish = $this->data['favoriteDish'];
+    include_once('../src/View/Pages/UserPhoto.php');
+    $userPhoto = new UserPhoto($this->data['photos']);
 ?>
 
 <div id="background">
-    <div id="containerProfile" style="background-color:white">
+    <div id="containerProfile">
         <div class="container-fluid">
             <!-- BUTTON EDIT SHOW ONLY IF IT IS THE CURRENT USER-->
             <?php if($isCurrentUser){?>
@@ -19,7 +21,7 @@
             <div class="row">
                 <div class="col-md-auto">
                     <div id="userphoto">
-                        <?php include_once('UserPhoto.php'); ?>
+                        <?php $userPhoto->render() ?>
                     </div>
                 </div>
                 <div id="containerName" class="col">
