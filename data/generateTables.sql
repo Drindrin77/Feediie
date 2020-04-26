@@ -39,7 +39,7 @@ CREATE TABLE sex(
 ------------------------------------------------------------
 CREATE TABLE FeediieUser(
 	idUser                      SERIAL NOT NULL ,
-	uniqID						VARCHAR(50) NOT NULL UNIQUE,
+	uniqID						VARCHAR(128) NOT NULL UNIQUE,
 	firstName                   VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
 	email						VARCHAR (128) NOT NULL UNIQUE,

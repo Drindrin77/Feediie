@@ -9,9 +9,9 @@ class PasswordService{
     private static $atLeastOneLetter = true;
     private static $atLeastOneSpecialChar = true;
     private static $needMinCharacter = true;
-    private static $needMaxCharacter = true;
-    private static $minCharacter = 5;
-    private static $maxCharacter = 20;
+    private static $needMaxCharacter = false;
+    private static $minCharacter = 6;
+    private static $maxCharacter = 64;
 	
 	public function __construct() {
     }
@@ -25,57 +25,61 @@ class PasswordService{
     }
 
     public static function policyToString(){
-        $policy = "Le mot de passe doit contenir:\n";
+        $policy = "Le mot de passe doit contenir:"."<br>";
         if(self::$atLeastOneUppercase){
-            $policy .= '-Au moins une majuscule\n';
+            $policy .= '-Au moins une majuscule'."<br>";
         }
         if(self::$atLeastOneNumber){
-            $policy .= '-Au moins un chiffre\n';
+            $policy .= '-Au moins un chiffre'."<br>";
         }
         if(self::$atLeastOneLetter){
-            $policy .= '-Au moins une lettre\n';
+            $policy .= '-Au moins une lettre'."<br>";
         }
         if(self::$atLeastOneSpecialChar){
-            $policy .= '-Au moins un caractère spécial\n';
+            $policy .= '-Au moins un caractère spécial'."<br>";
         }
         if(self::$needMinCharacter){
-            $policy .= '-Au moins ' . self::$minCharacter . 'caractères\n';
+            $policy .= '-Au moins ' . self::$minCharacter . ' caractères'."<br>";
         }
         if(self::$needMaxCharacter){
-            $policy .= '-Au maximum ' . self::$maxCharacter . 'caractères\n';
+            $policy .= '-Au maximum ' . self::$maxCharacter . ' caractères'."<br>";
         }
         return $policy;
     }
 
     //return true if password complies with policy
-    public static function isConform($password){
-        $regex = '';
+    public static function checkPasswordFormat($password){
+        $isValid = 1;
+        //$regex = '/(';
+        if(self::$atLeastOneLetter){
+            //$regex.='(?=.*[a-z])';
+            $isValid = preg_match('/.*[a-z]/',$password) ? 1 : 0;
+        }
         if(self::$atLeastOneUppercase){
-            $regex.='';
+            //$regex.='(?=.\S*[A-Z])';
+            $isValid = preg_match('/.*[A-Z]/',$password)? 1 : 0;
         }
         if(self::$atLeastOneNumber){
-            $regex.='';
-
-        }
-        if(self::$atLeastOneLetter){
-            $regex.='';
+            //$regex.='(?=.\S*[0-9])';
+            $isValid = preg_match('/.*[0-9]/',$password)? 1 : 0;
 
         }
         if(self::$atLeastOneSpecialChar){
-            $regex.='';
-
+            //$regex.="(?=.*[\w])";
+            $isValid = preg_match('/(?=.*[\w])/',$password)? 1 : 0;
         }
+        //$regex.=')';
         if(self::$needMinCharacter){
-            $regex.='';
-
+            //$regex.='(?=.{'.self::$minCharacter.','.self::$maxCharacter.'})';
+            $isValid = preg_match('/\S{6,64}/',$password)? 1 : 0;
         }
         if(self::$needMaxCharacter){
-            $regex.='';
+            //$regex.='';
 
         }
-        return true;
-        //TODO
+        //$regex.='/';
         //return preg_match($regex, $password);
+        return $isValid;
     }
 }
 

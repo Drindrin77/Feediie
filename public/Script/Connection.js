@@ -7,17 +7,7 @@ $(document).ready(function () {
         document.getElementById("matchError").hidden = true;
         
         let isValid = true
-        /*if (!password.trim()) {
-            document.getElementById("passwordError").hidden = false;
-            isValid = false
-        }
-    
-        if (!email.trim()) {
-            console.log(email);
-            document.getElementById("emailError").hidden = false;
-            isValid = false
-        }*/
-    
+
         var mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
         if(!email.match(mailFormat)){
             document.getElementById("emailError").hidden = false;
@@ -25,14 +15,7 @@ $(document).ready(function () {
         }else{
             document.getElementById("emailError").hidden = true;
         }
-        /*
-        var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&'*+-/=?^_`{|}~]))(?=.{6,})/;
-        if(password.match(passwordFormat)){
-            document.getElementById("passwordError").hidden = true;
-        }else{
-            document.getElementById("passwordError").hidden = false;
-            isValid = false;
-        }*/
+
         
         if (isValid) {
             $.post("/ajax.php?entity=user&action=connection",
@@ -45,18 +28,17 @@ $(document).ready(function () {
                 console.log("fail", e)
             })
             .done(function (e){
-                if(e['status'] === 'success'){
-                    console.log("Success");
-                    if(e['success'][0] === "rate"){
-                        document.getElementById("matchError").hidden = false;
-                    }else{
-                        document.location.href = "/";
-                    }
-                }else{
-                    console.log("ici3")
-                    //Error
+                console.log(e);               
+                data = JSON.parse(e);
+                console.log(data);
+                if (data.status == 'success') {
+                    document.location.href = "/";
+                } else {
+                    document.getElementById("matchError").hidden = false;
                 }
             })
+        }else{
+            $("html, body").animate({scrollTop: 0},"slow");
         }
     
     })

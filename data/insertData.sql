@@ -48,6 +48,8 @@ INSERT INTO Photo VALUES
     (default, '/Images/UserUpload/crjaze98e58a5ab/1.jpeg', true, 4);
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
+INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
+INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
 
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Gourmand', '/Images/Dish/chocolat.jpg');

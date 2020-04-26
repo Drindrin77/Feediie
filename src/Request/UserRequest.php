@@ -18,6 +18,8 @@ class UserRequest extends RequestService{
             case "connection":
                 $this->connection();
             break;
+            case "register":
+                $this->register();
             case "editinfo":
                 $this->editInfo();
             break;
@@ -60,17 +62,20 @@ class UserRequest extends RequestService{
         }  
         else{
             UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
+            $this->changeCookieToken(AuthService::getCurrentUser()['email']);
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
 
     private function editInfo(){
-        $idUser = $this->currentUser['iduser'];
-        if(!UserModel::editInfo($_POST, $idUser)){
-            $this->addMessageSuccess('Erreur BD');
-        }else{
-            $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
-        }
+        if(AuthService::isAuthenticated()){
+            $idUser = AuthService::getCurrentUser()['iduser'];
+            if(!UserModel::editInfo($_POST, $idUser)){
+                $this->addMessageSuccess('Erreur BD');
+            }else{
+                $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
+            }
+        }   
     }
 
 
@@ -79,16 +84,15 @@ class UserRequest extends RequestService{
         $password = isset($_POST['password'])? $_POST['password'] : null;
         if(isset(UserModel::getUserByMail($email)['password'])){
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
-            if(password_verify($password, $passwordEncrypted)){
-                $length = 32;
-                $s_token = bin2hex(random_bytes($length));
-                setcookie('s_token', $s_token);
-                
-                UserModel::setSessionToken($s_token, $email);
-
+            if(PasswordService::samePassword($password, $passwordEncrypted)){
+                $token = UserModel::getUserByMail($email)['token'];
                 if($_POST['rememberMe'] == "true"){
-                    setcookie('c_token',UserModel::getUserByMail($email)['token'], time()+60*60*24*30);
+                    session_destroy();
+                    session_set_cookie_params(3600*24,"/");
+                    session_start();
                 }
+                $_SESSION['token'] = $token;
+                AuthService::connectUser();
                 $this->addMessageSuccess("connect");
             }else{
                 $this->addMessageSuccess("rate");
@@ -105,6 +109,70 @@ class UserRequest extends RequestService{
         mail(str($email) , "Reset Password Feediie", "Follow this link to reset your password : $link");
     }
 
+    private function changeCookieToken($mail){
+        $length = 32;
+        $token = bin2hex(random_bytes($length));
+        while (!empty(UserModel::findByToken($token))) {
+            $token = bin2hex(random_bytes($length));
+        }
+        UserModel::setToken($mail);
+    }
+
+    private function register(){
+        $errors = array();
+        $isValid = true;
+
+        $firstName = isset($_POST['firstname'])? $_POST['firstname'] : null;
+        $email = isset($_POST['email'])? $_POST['email'] : null;
+        $password = isset($_POST['password'])? $_POST['password'] : null; 
+        $birthday = isset($_POST['birthday'])? $_POST['birthday'] : null;
+        $sex = isset($_POST['sex'])? $_POST['sex'] : null;
+        $city = isset($_POST['city'])? $_POST['city'] : null;
+
+        if( !EmailService::checkEmailFormat($email)){
+            $this->addMessageError("Le format de l'email n'est pas valide");
+            $isValid = false;
+        }
+        if( !empty( UserModel::getUserByMail($email)) ) {
+            $this->addMessageError("Email déjà utilisée");
+            $isValid = false;
+        }
+
+        if( !DateService::checkDateFormat($birthday) ){
+            $this->addMessageError("Le format de la date n'est pas valide");
+            $isValid = false;
+        }
+        if( !PasswordService::checkPasswordFormat($password) ){
+            $this->addMessageError(PasswordService::policyToString());
+            $isValid = false;
+        }
+        if( empty( SexModel::getSexWithName($sex) ) ){
+            $this->addMessageError("Le sexe n'est pas valide");
+            $isValid = false;
+        }
+        if ( empty( CityModel::getCityWithID($city) ) ){
+            $this->addMessageError("La ville n'est pas valide");
+            $isValid = false;
+        }
+        
+        if($isValid){
+            $passwordEncrypted = PasswordService::hashPassword($password);
+            $uniqID = bin2hex(random_bytes(32));
+            $token = bin2hex(random_bytes(32));
+            while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
+                $uniqID = bin2hex(random_bytes(32));
+            }
+            while (!empty(UserModel::findByToken($token))) {
+                $token = bin2hex(random_bytes(32));
+            }
+            $res = UserModel::signUp($firstName, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);
+            if ( $res ){
+                $this->addMessageSuccess("validate");
+            }else{
+                $this->addMessageError('ERREUR BD');
+            }
+        }
+    }
 }
 
 ?>

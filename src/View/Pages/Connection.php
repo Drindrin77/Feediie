@@ -1,13 +1,15 @@
-<?php
-    $mail = isset($this->data['mail']) ? $this->data['mail'] : null;
-?>
+<nav class="navbar navbar-light" id="navbarHead">
+  <span class="navbar-brand mb-0 h1 mx-auto"><img src="/Images/Icon/logo.png" alt="Feediie" height=25px></span>
+</nav>
+
 <div class="container col-xl-8">
-    <div class="row">
-        <div class="col">
-            <img class="w-100" src="https://cdn.pratico-pratiques.com/app/uploads/sites/3/2018/08/20193108/gateau-mousse-aux-trois-chocolat.jpeg" alt="Gateau au chocolat">
+    <div class="row h-100">
+        <div class="col my-auto pt-5 w-100 h-75" id="logoImg">
+            <img class="w-100" src="/Images/Icon/logo.png" alt="Feediie">
+            <p class="w-100 text-center h1 pt-4" id="slogan">Trouve ton plat</p>
         </div>
         <div class="col mt-4 mb-4">
-            <div class="border rounded border-primary pl-4 pt-2">
+            <div class="border rounded bg-light pl-4 pt-2">
             
             <p class="error" id='matchError' hidden>L'email ou le mot de passe est incorrect</p>
             <p class="error" id='emailError' hidden>L'adresse mail n'est pas valide</p>
@@ -15,7 +17,7 @@
                     <!-- Connection-->
                     <label for="emailInput">Email</label>
                     <br>
-                    <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com" value=<?= $mail?>>
+                    <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com">
                 
                 </div>
                 <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
@@ -56,7 +58,7 @@
                     </small>
                 </p>
             </div>
-            <div class="mt-4 p-4 border rounded border-primary">
+            <div class="mt-4 p-4 border rounded bg-light">
                 <p class="d-flex justify-content-center"> 
                     Pas encore de compte ? <a href="/register"> Inscrivez-vous</a> 
                 </p>
