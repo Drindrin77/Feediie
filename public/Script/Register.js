@@ -50,7 +50,7 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&'*+-/=?^_`{|}~]))(?=.{6,})/;
+        var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&@'*+-/=?^_`{|}~$£µ¨~§]))(?=.{6,})/;
         if (!password.match(passwordFormat)) {
             document.getElementById("passwordError").hidden = false;
             isValid = false;
