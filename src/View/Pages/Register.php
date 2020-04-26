@@ -4,9 +4,14 @@
     $passwordPolicy = isset($this->data['policy']) ? $this->data['policy'] : null;
 ?>
 
+<nav class="navbar navbar-light" id="navbarHead">
+  <span class="navbar-brand mb-0 h1 mx-auto"><img src="/Images/Icon/logo.png" alt="Feediie" height=25px></span>
+</nav>
+
+
 <div class="container col-xl-8 justify-content-center">
     <div class="col mt-4 mb-4">
-        <div class="border rounded border-primary pl-4 pt-2">
+        <div class="border rounded pl-4 pt-2" id="main" >
             
             <p class="error" id='createError' hidden>L'email est déjà utilisé</p>
             <p class="error" id='emailError' hidden>L'adresse mail n'est pas valide</p>
@@ -18,7 +23,7 @@
                 <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
                 <div class="form-group">
                     <label for="passwordInput">Mot de passe</label>
-                    <span  data-toggle="popover" data-placement="right" data-html="true" data-content=<?php echo "\"".$passwordPolicy."\"" ?>>
+                    <span  id="passwordpopup" data-toggle="popover" data-placement="right" data-trigger="hover" data-html="true" data-content=<?php echo "\"".$passwordPolicy."\"" ?>>
                         <i class="fas fa-info-circle"></i>
                     </span>
                     <br>
@@ -30,25 +35,15 @@
                     <br>
                     <input class="w-75" required type="password" name="confirmedPassword" id="confirmedPassword" placeholder="Confirmation du mot de passe">
                 </div>
-
+                
                 <p class="error" id='fNameError' hidden>Veuillez renseigner votre prénom </p>
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
-                    <br>
-                    <input type="text" id="firstname" required size="50" class="form-control w-25">
-                    <label for="lastName">Nom</label>
-                    <br>
-                    <input type="text" id="name" required size="50" class="form-control w-25">
-                </div>
+                    <input type="text" id="firstname" required size="50" class="form-control w-25" placeholder="Votre prénom ou surnom">
 
-                <p class="error" id='nameError' hidden>Veuillez renseigner votre nom </p>
-                <div class="form-group">
-                    
-                </div>
+                    <p class="error" id='birthdayError' hidden>La date n'a pas le bon format</p>
 
-                <p class="error" id='birthdayError' hidden>La date n'a pas le bon format</p>
-                <div class="form-group">
-                    <div class=' date' id='datetimepicker1'>
+                    <div class='date' id='datetimepicker1'>
                         <label>Date de naissance:</label>
                         <input type='date' id="birthday" class="form-control w-25"/>
                         <span class="input-group-addon">
@@ -56,9 +51,13 @@
                         </span>
                     </div>
                 </div>
+               
+                <div class="form-group">
+                    
+                </div>
 
                 <p class="error" id='sexError' hidden>Le format ne correspond pas</p>
-                <div class="form-group" id="sex">
+                <div class="form-group">
                     <label for="sex">Sexe: </label>
                     <select class="form-control custom-select w-25" id="sex">
                         <?php foreach($sexs as $sex): 

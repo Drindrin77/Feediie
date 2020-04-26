@@ -12,7 +12,6 @@ $(document).ready(function () {
         let birthday = $("#birthday").val()
         let sex = $("#sex option:selected").val();
         let city = $("#city option:selected").val();
-        let name = $("#name").val()
         let firstName = $("#firstname").val()
 
         var dateFormat = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
@@ -26,7 +25,6 @@ $(document).ready(function () {
         document.getElementById("birthdayError").hidden = true;
         document.getElementById("sexError").hidden = true;
         document.getElementById("matchPwdError").hidden = true;
-        document.getElementById("nameError").hidden = true;
         document.getElementById("fNameError").hidden = true;
 
         let isValid = true
@@ -35,10 +33,6 @@ $(document).ready(function () {
             isValid = false
         }
 
-        if (!name.trim()) {
-            document.getElementById("nameError").hidden = false;
-            isValid = false
-        }
         if (!firstName.trim()) {
             document.getElementById("fNameError").hidden = false;
             isValid = false
@@ -86,7 +80,6 @@ $(document).ready(function () {
         if (isValid) {
             $.post("/ajax.php?entity=user&action=register",
             {
-                'name': name,
                 'firstname': firstName,
                 'email': email,
                 'password': password,
