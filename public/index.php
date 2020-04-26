@@ -23,6 +23,7 @@ require_once("../src/Model/DishModel.php");
 require_once("../src/Model/DietModel.php");
 require_once("../src/Model/HobbyModel.php");
 require_once("../src/Model/PhotoModel.php");
+require_once("../src/Model/ParameterModel.php");
 
 require_once("../src/View/ViewModel.php");
 

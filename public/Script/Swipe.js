@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log("reaady");
+    console.log("ready");
 
     let statusBtnParameter = 'opened';
 
@@ -50,6 +50,21 @@ $(document).ready(function () {
     });
 
     ///////////////////////RECUPERATION DES DONNEES PARAMETRES////////////////////////
+
+    //ON LOADING PAGE
+    $('#distanceMax').load('input', function () {
+        let value = $(this).val();
+        $("#valueDistance").html(value)
+    });
+    $("#ageRangemin").load('input', function () {
+        let value = $(this).val();
+        $("#valueAgeMin").html(value)
+    });
+    $("#ageRangemax").load('input', function () {
+        let value = $(this).val();
+        $("#valueAgeMax").html(value)
+    });
+    //ON MOVE EVENT
     $('#distanceMax').on('input', function () {
         let value = $(this).val();
         $("#valueDistance").html(value)

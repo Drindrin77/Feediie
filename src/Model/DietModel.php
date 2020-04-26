@@ -12,7 +12,7 @@ class DietModel extends DBConnection{
         return $req->fetchAll();
     }
     public static function getUserSelectedDiet($idUser){
-        $req = self::$pdo->prepare("select * from Diet inner join interesteddiet on diet.idDiet = interesteddiet.idDiet where idUser = ?");
+        $req = self::$pdo->prepare("select * from diet inner join interesteddiet on diet.idDiet = interesteddiet.idDiet where idUser = ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }

@@ -12,6 +12,11 @@ class SexModel extends DBConnection{
         $req->execute();    
         return $req->fetchAll();
     }
+    public static function getUserSelectedGender($idUser){
+        $req = self::$pdo->prepare("select * from sex inner join interestedsex on sex.name = interestedsex.sex where idUser = ?");
+        $req->execute(array($idUser));
+        return $req->fetchAll();
+    }
 }
 
 ?>

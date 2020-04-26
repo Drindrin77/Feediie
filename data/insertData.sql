@@ -56,4 +56,20 @@ INSERT INTO looklike VALUES (2,6);
 
 INSERT INTO practice VALUES(1,1);
 INSERT INTO interesteddiet VALUES (1,1);
+INSERT INTO interesteddiet VALUES (1,2);
+INSERT INTO interesteddiet VALUES (1,3);
+INSERT INTO interesteddiet VALUES (1,4);
+INSERT INTO interesteddiet VALUES (2,1);
+INSERT INTO interesteddiet VALUES (2,2);
+INSERT INTO interesteddiet VALUES (2,3);
+INSERT INTO interesteddiet VALUES (2,4);
+
+INSERT INTO interestedsex VALUES (2,'Femme');
+INSERT INTO interestedsex VALUES (2,'Pangender');
+INSERT INTO interestedsex VALUES (2,'Pinguoin');
+
+INSERT INTO rangeDistance VALUES (2,'66');
+
+INSERT INTO rangeAge VALUES (2,'20','25');
+
 

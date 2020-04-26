@@ -25,12 +25,14 @@ class SwipeController extends Controller{
     public function pageSwipe()
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
+        $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
+        $userSelectedGender = SexModel::getUserSelectedGender($idUser);
+        $userSelectDistance = ParameterModel::getRangeDistance($idUser);
+        $userSelectAge = ParameterModel::getRangeAge($idUser);
         $users = UserModel::getAllUser($idUser);
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
-        $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $filteredUser = array();
-
         //TODO GET DEFAULT PARAMETER USER
         foreach($users as $user) {
             $idUser = $user['iduser'];
@@ -38,13 +40,14 @@ class SwipeController extends Controller{
             array_push($filteredUser,$user);
         }
         $data = [
-            '$userSelectedDiet' => $userSelectedDiet,
+            'userSelectedDiet' => $userSelectedDiet,
+            'userSelectedGender' => $userSelectedGender,
+            'userSelectDistance' => $userSelectDistance,
+            'userSelectAge' => $userSelectAge,
             'users' => $filteredUser,
-            "sexs"=>$sexs,
-            "diets"=>$diets,
+            'sexs'=>$sexs,
+            'diets'=>$diets,
         ];
-        var_dump($userSelectedDiet);
-
         return new ViewModel("Swipe", $data);
     }
 }
