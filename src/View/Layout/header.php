@@ -11,16 +11,18 @@
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="true" aria-label="Toggle navigation">
-        <i class="fa fa-align-justify"></i>
+        <i class="fa fa-bars"></i>
     </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto"></ul>
     <form class="form-inline my-2 my-lg-0">
 
-        <button type="button" style="margin-right: 50px" class="btn btn-primary">
-            Chat <span class="badge badge-light">9</span>
-            <span class="sr-only">unread messages</span>
+        <button id="btnChat" type="button" style="margin-right: 50px" class="btn btn-primary">
+            <i class="far fa-comments"></i>
+            <div id="containerNotif">
+                <span id="nbNotif">8</span>
+            </div>
         </button>
 
         <div id="containerHeaderPhoto">
