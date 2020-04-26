@@ -1,4 +1,4 @@
-function replaceFooter() {
+function replaceFooter(){
     var docHeight = $(window).height();
     var footerHeight = $('#footer').height();
     var footerTop = $('#footer').position().top + footerHeight;
@@ -8,11 +8,11 @@ function replaceFooter() {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     replaceFooter();
 });
 
-$(window).resize(function () {
+$(window).resize(function(){
     replaceFooter();
 
 });
