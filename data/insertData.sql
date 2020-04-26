@@ -23,7 +23,7 @@ INSERT INTO FeediieUser VALUES
         default, default, default, 'token5', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'erjaze98e58a5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'erjaze98e58conta5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
         default, default, default, 'token6', default, 1, default, 'Homme');
 
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
@@ -36,6 +36,11 @@ INSERT INTO LikedUser VALUES (2, 5, '2020-04-18 13:54:36', false);
 
 INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
 
+
+INSERT INTO Contact VALUES (default, 2, 3, 'Salut beau renard', '2020-04-18 17:35:36', true);
+INSERT INTO Contact VALUES (default, 3, 2, 'Salut dattebayo!', '2020-04-18 17:38:36', false);
+
+INSERT INTO Contact VALUES (default, 2, 4, 'Salut la planche!', '2020-04-18 17:35:36', true);
 
 
 INSERT INTO Photo VALUES

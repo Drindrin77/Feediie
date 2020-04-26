@@ -23,6 +23,7 @@ function setChatBoxSize(){
 $(document).ready(function() {
     setMatchedUserContainerHeight();
     setChatBoxSize();
+    fetchMessages( $("#chatSelectedContact").attr("data-uniqid"));
 });
 
 $(window).resize(function(){
@@ -53,3 +54,18 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
 
     setChatBoxSize(); //TODO enlever dès que les images sont de taille fixe
 });
+
+
+function fetchMessages(uniqId){
+    console.log(uniqId);
+    $.post("/ajax.php?entity=chat&action=fetchMessages",
+        {
+            "contactUniqId": uniqId
+        })
+        .fail(function (e) {
+            console.log("fail", e)
+        })
+        .done(function (e) {
+            console.log(e);
+        });
+}

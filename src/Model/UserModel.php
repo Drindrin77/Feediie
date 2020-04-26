@@ -85,6 +85,26 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function fetchMessages($userUniqId, $contactUniqId){
+        $req = self::$pdo->prepare("SELECT
+                                        message,
+                                        author.uniqid,
+                                        datemessage
+                                    
+                                    FROM
+                                        contact
+                                    INNER JOIN feediieUser author ON idauthor = author.iduser
+                                    INNER JOIN feediieUser recipient ON idrecipient = recipient.iduser
+                                    
+                                    WHERE
+                                    (author.uniqId = ? AND recipient.uniqId = ?) OR (author.uniqId = ? AND recipient.uniqId = ?)
+                                    
+                                    ORDER BY idmessage");
+
+        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId));
+        return $req->fetchAll();
+    }
+
 
     public static function editInfo($args, $idUser){
         $sql = "update feediieuser set ";

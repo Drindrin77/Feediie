@@ -133,15 +133,16 @@ CREATE TABLE dislike(
 -- Table: contact
 ------------------------------------------------------------
 CREATE TABLE contact(
-	idUser           INT  NOT NULL ,
-	idUser_contact   INT  NOT NULL ,
+    idMessage        SERIAL NOT NULL,
+	idAuthor         INT  NOT NULL ,
+	idRecipient      INT  NOT NULL ,
 	message          VARCHAR (500)  NOT NULL ,
-	dateMessage      DATE  NOT NULL ,
+	dateMessage      TIMESTAMP  NOT NULL ,
 	isRead           BOOL  NOT NULL  ,
-	CONSTRAINT contact_PK PRIMARY KEY (idUser,idUser_contact)
+	CONSTRAINT contact_PK PRIMARY KEY (idMessage)
 
-	,CONSTRAINT contact_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT contact_User0_FK FOREIGN KEY (idUser_contact) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT contact_User_FK FOREIGN KEY (idAuthor) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT contact_User0_FK FOREIGN KEY (idRecipient) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
 ------------------------------------------------------------
