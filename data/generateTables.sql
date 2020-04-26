@@ -40,7 +40,6 @@ CREATE TABLE sex(
 CREATE TABLE FeediieUser(
 	idUser                      SERIAL NOT NULL ,
 	uniqID						VARCHAR(128) NOT NULL UNIQUE,
-	session_token 				VARCHAR(80), 
 	firstName                   VARCHAR (50) NOT NULL ,
 	birthDay                    DATE   ,
 	email						VARCHAR (128) NOT NULL UNIQUE,

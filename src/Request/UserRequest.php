@@ -85,17 +85,13 @@ class UserRequest extends RequestService{
         if(isset(UserModel::getUserByMail($email)['password'])){
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
             if(PasswordService::samePassword($password, $passwordEncrypted)){
-                $length = 32;
-                $s_token = bin2hex(random_bytes($length));
+                $token = UserModel::getUserByMail($email)['token'];
                 if($_POST['rememberMe'] == "true"){
-                    
                     session_destroy();
                     session_set_cookie_params(3600*24,"/");
                     session_start();
                 }
-                $_SESSION['s_token'] = $s_token;
-                //setcookie('s_token', $s_token);
-                UserModel::setSessionToken($s_token, $email);
+                $_SESSION['token'] = $token;
                 AuthService::connectUser();
                 $this->addMessageSuccess("connect");
             }else{
@@ -116,10 +112,10 @@ class UserRequest extends RequestService{
     private function changeCookieToken($mail){
         $length = 32;
         $token = bin2hex(random_bytes($length));
-        while (!empty(UserModel::findByCookieToken($token))) {
+        while (!empty(UserModel::findByToken($token))) {
             $token = bin2hex(random_bytes($length));
         }
-        UserModel::setCookieToken($mail);
+        UserModel::setToken($mail);
     }
 
     private function register(){
@@ -166,7 +162,7 @@ class UserRequest extends RequestService{
             while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
                 $uniqID = bin2hex(random_bytes(32));
             }
-            while (!empty(UserModel::findByCookieToken($token))) {
+            while (!empty(UserModel::findByToken($token))) {
                 $token = bin2hex(random_bytes(32));
             }
             $res = UserModel::signUp($firstName, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);

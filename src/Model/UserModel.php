@@ -6,15 +6,8 @@ if(!defined('CONST_INCLUDE'))
 class UserModel extends DBConnection{
    public function __construct () {
    }
-     
-    public static function findByAuthentToken($token){
-        $req = self::$pdo->prepare("select idUser, uniqid, birthday, firstName, lastName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
-        from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and session_token =?");
-        $req->execute(array($token));
-        return $req->fetch();
-    }
 
-    public static function findByCookieToken($token){
+    public static function findByToken($token){
         $req = self::$pdo->prepare("select idUser,password, uniqid, birthday, firstName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
         from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
@@ -52,14 +45,9 @@ class UserModel extends DBConnection{
         return $req->fetch();
     }
 
-    public static function setCookieToken($token, $mail){
+    public static function setToken($token, $mail){
         $req = self::$pdo->prepare("update feediieuser set token = ? where email = ?");
         $req->execute(array($token, $mail)); 
-    }
-
-    public static function setSessionToken($sessionToken, $mail){
-        $req = self::$pdo->prepare("update feediieuser set session_token = ? where email = ?");
-        $req->execute(array($sessionToken, $mail)); 
     }
 
     public static function fetchMatchedUsers($uniqID){
@@ -111,7 +99,7 @@ class UserModel extends DBConnection{
     }
     
     public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
-        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ?,null ,?, ?, ?, ?, null, 
+        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ? ,?, ?, ?, ?, null, 
         default, default, default, ?, default, ?, default, ?)");
         $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
         return $res;
