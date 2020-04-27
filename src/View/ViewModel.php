@@ -1,6 +1,5 @@
 <?php
 
-include_once('Pages/SuccessMessage.php');
 
 class ViewModel {
 
@@ -9,14 +8,12 @@ class ViewModel {
     private $data;
     private $headerInfo;
     private $showHeader = false;
-    private $successMessage;
 
     public function __construct($page, $data=null, $title='Feediie')
     {
         $this->page = $page;
         $this->title = $title;
         $this->data = $data;
-        $this->successMessage = new SuccessMessage();
         if(AuthService::isAuthenticated()){
           $this->showHeader = true;
           $this->setHeaderInfo();
@@ -70,8 +67,10 @@ class ViewModel {
             }
             ?>
             <div id="pageContainer">
-              <?php $this->successMessage->render() ?>
-              <?php include 'Pages/'.$this->page.'.php' ?>
+              <?php if ($this->showHeader) {
+                include_once('Pages/SuccessMessage.php');
+              } 
+              include 'Pages/'.$this->page.'.php' ?>
             </div>
 
             <?php
