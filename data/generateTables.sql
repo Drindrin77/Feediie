@@ -146,6 +146,18 @@ CREATE TABLE contact(
 )WITHOUT OIDS;
 
 ------------------------------------------------------------
+-- Table: idea
+------------------------------------------------------------
+CREATE TABLE idea(
+    idIdea        SERIAL NOT NULL,
+	idUser         INT  NOT NULL ,
+	message          VARCHAR (500)  NOT NULL ,
+	CONSTRAINT idea_PK PRIMARY KEY (idIdea)
+
+	,CONSTRAINT idea_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+)WITHOUT OIDS;
+
+------------------------------------------------------------
 -- Table: TypeRestaurant
 ------------------------------------------------------------
 CREATE TABLE TypeRestaurant(
