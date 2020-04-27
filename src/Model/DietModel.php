@@ -16,6 +16,16 @@ class DietModel extends DBConnection{
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
+    public static function removeUserSelectedDiet($idUser){
+        $req = self::$pdo->prepare("delete from interesteddiet where idUser = ?");
+        $req->execute(array($idUser));
+        return $req->fetchAll();
+    }
+    public static function updateUserSelectedDiet($idUser,$dietSelect){
+        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet) values (?,?)");
+        $req->execute(array($idUser,$dietSelect));
+        return $req->fetchAll();
+    }
 
 }
 

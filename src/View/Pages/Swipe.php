@@ -48,7 +48,7 @@ else
                     <div id="boxSelectModified1"class="boxSelectModified">
                         <?php foreach($sexs as $sex): ?>
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="<?= $sex['name'] ?>"
+                            <input type="checkbox" class="custom-control-input" name="sex" id="<?= $sex['name'] ?>"
                                 <?php if(!empty($userSelectedGender)) {
                                     foreach ($userSelectedGender as $usergender)
                                     {
@@ -80,7 +80,7 @@ else
                     <div id="boxSelectModified2" class="boxSelectModified">
                         <?php foreach($diets as $diet): ?>
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="<?= $diet['name'] ?>"
+                                <input type="checkbox" class="custom-control-input" name="diet"  id="<?= $diet['iddiet'] ?>"
                                     <?php if(!empty($userSelectedDiet)) {
                                         foreach ($userSelectedDiet as $userdiet)
                                         {
@@ -91,13 +91,13 @@ else
                                         }
                                     }?>
                                 >
-                                <label class="custom-control-label" for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
+                                <label class="custom-control-label" for="<?= $diet['iddiet'] ?>"><?= $diet['name'] ?></label>
                             </div>
                         <? endforeach;?>
                     </div>
                     <div id="showMore2" class="showMoreBtn"><i style='font-size:18px;color:white' class='fas'>&#xf103;</i></div>
                 </div>
-                <button id="submitParameter" type="button" class="btn btn-primary" style="width:100%">Valider les réglages !</button>
+                <button id="submitParameter" type="button" class="btn btn-primary" style="width:100%">Valider les réglages</button>
             </div>
         </div>
 </div>

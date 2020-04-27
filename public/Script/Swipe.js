@@ -73,33 +73,60 @@ $(document).ready(function () {
         let value = $(this).val();
         $("#valueAgeMin").html(value)
     });
+    $("#ageRangemin").mouseleave('input', function () {
+        if($(this).val()>$("#ageRangemax").val()) {
+            $(this).val($("#ageRangemax").val());
+            let value = $(this).val();
+            $("#valueAgeMin").html(value);
+        }
+    });
+    $("#ageRangemax").mouseleave('input', function () {
+        if($(this).val()<$("#ageRangemin").val()) {
+            $(this).val($("#ageRangemin").val());
+            let value = $(this).val();
+            $("#valueAgeMax").html(value);
+        }
+    });
 
     $("#ageRangemax").on('input', function () {
         let value = $(this).val();
         $("#valueAgeMax").html(value)
     });
-
     $("#submitParameter").click(function () {
         let distanceMax = $("#distanceMax").val();
         let ageRangemin = $("#ageRangemin").val();
         let ageRangemax = $("#ageRangemax").val();
 
+        let sexSelect = [];
+            $.each($("input[name='sex']:checked"), function() {
+                sexSelect.push($(this).attr('id'));
+            });
+        //alert("Vous avez selectionne : " + sexSelect.join(", "));
+
+        let dietSelect = [];
+        $.each($("input[name='diet']:checked"), function() {
+            dietSelect.push($(this).attr('id'));
+        });
+        //alert("Vous avez selectionne : " + dietSelect.join(", "));
         $.post("/ajax.php?entity=user&action=filter",
             {
                 distanceMax : distanceMax,
                 ageRangemin : ageRangemin,
                 ageRangemax : ageRangemax,
-                //TODO OTHER PARAMETERS
+                sexSelect : sexSelect,
+                dietSelect : dietSelect,
             })
             .fail(function (e) {
-                console.log("fail", e)
+                console.log("fail", e);
+                $(this).html("Erreur d'enregistrement");
             })
             .done(function (e) {
                 let data = JSON.parse(e);
                 if (data.status === 'success') {
-                    console.log(data)
+                    console.log(data);
                 }
-            })
+            });
+        $(this).html("Réglages enregistrés !");
     });
 ////////////////////////////////////////////////////////////////////////////////////
     function selection() {
@@ -123,30 +150,7 @@ $(document).ready(function () {
 
     selection();
 
-    $(".buddy").on("swiperight", function () {
-        $(this).addClass('rotate-left').delay(700).fadeOut(1);
-        $('.buddy').find('.status').remove();
-
-        $(this).append('<div class="status miam">Miam!</div>');
-        if ($(this).is(':last-child')) {
-            $('.buddy:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-        } else {
-            $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
-        }
-    });
-
-    $(".buddy").on("swipeleft", function () {
-        $(this).addClass('rotate-right').delay(700).fadeOut(1);
-        $('.buddy').find('.status').remove();
-        $(this).append('<div class="status beurk">Beurk!</div>');
-
-        if ($(this).is(':last-child')) {
-        } else {
-            $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
-        }
-    });
-
-    $('#miamBtn').click(function () {
+    /*$('#miamBtn').click(function () {
         if ($('.buddy:last').is(':first-child')) {
         } else {
             $('.buddy:last').addClass('rotate-left').delay(700).fadeOut(1);
@@ -159,8 +163,7 @@ $(document).ready(function () {
             $('.buddy:last').addClass('rotate-right').delay(700).fadeOut(1);
             $('.buddy:last').append('<div class="status beurk">Beurk!</div>');
         }
-    });
-
+    });*/
 
 });
 

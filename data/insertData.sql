@@ -145,7 +145,10 @@ INSERT INTO interestedsex VALUES (2,'Pangender');
 INSERT INTO interestedsex VALUES (2,'Pinguoin');
 
 INSERT INTO rangeDistance VALUES (2,'66');
+INSERT INTO rangeDistance VALUES (1,'88');
 
 INSERT INTO rangeAge VALUES (2,'20','25');
+INSERT INTO rangeAge VALUES (1,'20','25');
+
 
 

@@ -18,6 +18,16 @@ class ParameterModel extends DBConnection{
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
+    public static function updateRangeDistance($idUser,$distance){
+        $req = self::$pdo->prepare("update rangeDistance set distance = ? where idUser = ?");
+        $req->execute(array($distance,$idUser));
+        return $req->fetchAll();
+    }
+    public static function updateRangeAge($idUser,$ageMin,$ageMax){
+        $req = self::$pdo->prepare("update rangeAge set ageMin = ?, ageMax = ? where idUser = ?");
+        $req->execute(array($ageMin,$ageMax,$idUser));
+        return $req->fetchAll();
+    }
 
 }
 
