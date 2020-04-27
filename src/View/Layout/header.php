@@ -29,7 +29,7 @@
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary"  style="margin-right: 30px" data-toggle="modal" data-target="#modalIdea">
-            <i class="fas fa-lightbulb"></i>
+            <i class="fas fa-lightbulb"></i> Suggestion
             </button>
 
             <!-- Modal -->
