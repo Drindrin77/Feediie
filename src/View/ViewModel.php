@@ -1,5 +1,7 @@
 <?php
 
+include_once('Pages/SuccessMessage.php');
+
 class ViewModel {
 
     private $page;
@@ -7,12 +9,14 @@ class ViewModel {
     private $data;
     private $headerInfo;
     private $showHeader = false;
+    private $successMessage;
 
     public function __construct($page, $data=null, $title='Feediie')
     {
         $this->page = $page;
         $this->title = $title;
         $this->data = $data;
+        $this->successMessage = new SuccessMessage();
         if(AuthService::isAuthenticated()){
           $this->showHeader = true;
           $this->setHeaderInfo();
@@ -48,6 +52,8 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<link rel="stylesheet" href="/Style/header.css">';
+                    //<link rel="stylesheet" href="/Style/SuccessMessage.css">
+                    include_once('Style/SuccessMessage.css');
                     include_once('Style/header.css');
                     include_once('Style/footer.css');
                   }
@@ -64,6 +70,7 @@ class ViewModel {
             }
             ?>
             <div id="pageContainer">
+              <?php $this->successMessage->render() ?>
               <?php include 'Pages/'.$this->page.'.php' ?>
             </div>
 
@@ -100,6 +107,7 @@ class ViewModel {
                 <?php 
 
                   if(file_exists('Script/'.$this->page.'.js')){
+
                     include_once('Script/'.$this->page.'.js');
                     
                     //echo '<script type="text/javascript"  src="/Script/'.$this->page.'.js"></script>';

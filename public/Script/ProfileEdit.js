@@ -289,8 +289,13 @@ $(document).ready(function () {
                 .done(function (e) {
                     let data = JSON.parse(e)
                     if (data.status == 'success') {
-                        console.log(data.success[0])
+                        $("#messageSuccess").html("Modification validée")
+                        $('#containerMessageSuccess').animate({ opacity: '1' })
+                        setTimeout(function () {
+                            $('#containerMessageSuccess').animate({ opacity: '0' })
+                        }, 2000);
                     }
+
                 })
         }
     })
