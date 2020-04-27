@@ -290,10 +290,7 @@ $(document).ready(function () {
                     let data = JSON.parse(e)
                     if (data.status == 'success') {
                         $("#messageSuccess").html("Modification validée")
-                        $('#containerMessageSuccess').animate({ opacity: '1' })
-                        setTimeout(function () {
-                            $('#containerMessageSuccess').animate({ opacity: '0' })
-                        }, 2000);
+                        $('#containerMessageSuccess').show(200).delay(2000).hide(200)
                     }
 
                 })
