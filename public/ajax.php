@@ -19,6 +19,7 @@ require_once("../src/Model/SexModel.php");
 require_once("../src/Model/DishModel.php");
 require_once("../src/Model/HobbyModel.php");
 require_once("../src/Model/PhotoModel.php");
+require_once("../src/Model/IdeaModel.php");
 
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
 $action = isset($_GET['action'])?strtolower($_GET['action']):null;

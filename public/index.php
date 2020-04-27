@@ -24,6 +24,7 @@ require_once("../src/Model/SexModel.php");
 require_once("../src/Model/DishModel.php");
 require_once("../src/Model/HobbyModel.php");
 require_once("../src/Model/PhotoModel.php");
+require_once("../src/Model/IdeaModel.php");
 
 require_once("../src/View/ViewModel.php");
 
@@ -35,7 +36,10 @@ $routes = explode('/',$urlWithoutParams[0]);
 $controllerName = ucfirst(strtolower($routes[1])). 'Controller';
 $controllerPath = "../src/Controller/$controllerName.php";
 
-if(empty($routes[1]) || file_exists($controllerPath)){
+if($controllerName[1]=='AdminController' && !AuthService::isAdmin()){
+    $viewModel = new ViewModel('Error404');
+}
+else if(empty($routes[1]) || file_exists($controllerPath)){
     //URL : "/" 
     if(empty($routes[1])){
         if(AuthService::isAuthenticated()){

@@ -40,3 +40,11 @@
     position: relative;
     font-size:20px;
 }
+
+#textIdea{
+    width:100% !important;
+}
+
+.invisible{
+    display: none;
+}
