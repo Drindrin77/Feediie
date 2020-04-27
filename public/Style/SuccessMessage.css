@@ -1,0 +1,36 @@
+#containerMessageSuccess{
+    position:absolute;
+    top:0; 
+    z-index: 10000;
+    padding:10px;
+    /*display:none;*/
+    opacity: 0;
+    width:100%;
+}
+
+#subContainerMessageSuccess{
+    background-color: white;
+    opacity: 0.9;
+    width:400px;
+    padding:15px;
+    margin:auto;
+    border-radius: 10px;
+    border:1px solid lightgrey;
+}    
+
+
+#image{
+    width: 100%;
+    height:100%;
+}
+
+#containerImgSuccess{
+    width: 20px;
+    height:30px;
+    margin-right: 10px;
+}
+
+#messageSuccess, #containerImgSuccess{
+    display: inline-block;
+    vertical-align: bottom;
+}

@@ -33,7 +33,7 @@
 
             <div class="row">
                 <div class="col">
-                    <div id="containerDescription">
+                    <div id="containerDescription" style="word-wrap:break-word">
                         <i class="fa fa-quote-left"></i> <?= $infoUser['description'] ?> <i class="fa fa-quote-right"></i>
                     </div>
                 </div>
