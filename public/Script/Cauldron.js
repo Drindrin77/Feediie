@@ -15,7 +15,7 @@ function setChatBoxSize() {
     $("#chatBox").height(height);
 }
 
-$(document).ready(function () {
+$(window).load(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
 });
@@ -88,14 +88,18 @@ function createMessageDiv(messageText, userPhoto, isCurrentUser) {
             "   <div class='userMessage col-9 offset-2'>",
             "       " + messageText,
             "   </div>",
-            "   <img class='col-1' src='" + userPhoto + "'>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + userPhoto + "'>",
+            "   </div>",
             "</div>"
         ].join("\n"));
     } else {
         const contactPhoto = $("#selectedContactPhoto").attr("src");
         messageDiv = $([
             "<div class='messageContainer row'>",
-            "   <img class='col-1' src='" + contactPhoto + "'>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + contactPhoto + "'>",
+            "   </div>",
             "   <div class='contactMessage col-9'>",
             "       " + messageText,
             "   </div>",
