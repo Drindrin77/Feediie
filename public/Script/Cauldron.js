@@ -1,32 +1,26 @@
 function spaceBelow2Div(divA, divB) {
-    const firstDiv=$(divA).offset();
-    const firstDivHeight = $(divA).height();
-    const secondDiv=$(divB).offset();
-    const spaceBelow = secondDiv.top-firstDiv.top;
-
-    return spaceBelow
+    const firstDiv = $(divA).offset();
+    const secondDiv = $(divB).offset();
+    return secondDiv.top - firstDiv.top;
 }
 
-function setMatchedUserContainerHeight(){
+function setMatchedUserContainerHeight() {
     const height = spaceBelow2Div("#pageContainer", "#footer");
-    $("#matchedUserContainer").height(height );
+    $("#matchedUserContainer").height(height);
 }
 
-function setChatBoxSize(){
+function setChatBoxSize() {
     let height = spaceBelow2Div("#pageContainer", "#footer");
-
-    height -= ($("#userMessageArea").height() + $("#chatSelectedContact").height());
-
+    height -= $("#userMessageArea").height() + $("#chatSelectedContact").height();
     $("#chatBox").height(height);
 }
 
-$(document).ready(function() {
+$(window).load(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
-    fetchMessages( $("#chatSelectedContact").attr("data-uniqid"));
 });
 
-$(window).resize(function(){
+$(window).resize(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
 });
@@ -38,13 +32,11 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     const photoDesciption = $("#photo-" + uniqId).attr("alt");
     const name = $("#name-" + uniqId).text();
 
-    console.log(event.currentTarget);
     $(".selectedMatchedUser").addClass("matchedUser");
     $(".selectedMatchedUser").removeClass("selectedMatchedUser");
 
     $("#user-" + uniqId).addClass("selectedMatchedUser")
     $("#user-" + uniqId).removeClass("matchedUser")
-    console.log(event.currentTarget);
 
     $("#chatSelectedContact").attr("data-uniqid", uniqId);
     $("#chatSelectedContact").attr("href", "/profile/" + uniqId);
@@ -53,19 +45,70 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     $("#selectedContactName").text(name);
 
     setChatBoxSize(); //TODO enlever dès que les images sont de taille fixe
+    changeChatBoxContent(uniqId);
 });
 
+function changeChatBoxContent(uniqId) {
+    $("#messageListContainer").empty();
+    fetchMessages(uniqId, 0);
 
-function fetchMessages(uniqId){
-    console.log(uniqId);
+}
+
+
+function fetchMessages(uniqId, offset) {
     $.post("/ajax.php?entity=chat&action=fetchMessages",
         {
-            "contactUniqId": uniqId
-        })
+            "contactUniqId": uniqId,
+            "offset": offset
+        }, "json")
         .fail(function (e) {
             console.log("fail", e)
         })
         .done(function (e) {
-            console.log(e);
+            const jsonResponse = JSON.parse(e);
+            console.log(jsonResponse);
+            fillChatBox(jsonResponse.data.messageList, jsonResponse.data.userPhoto, uniqId);//TODO faire en sorte d'attendre la réponse pour enlever la responsabiliter
         });
+}
+
+function fillChatBox(messageList, userPhoto, contactUniqId) {
+    for (let i = messageList.length - 1; i >= 0; i--) {
+        console.log(createMessageDiv(messageList[i].message, userPhoto, true));
+        let isCurrentUser = contactUniqId !== messageList[i].uniqid;
+        $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
+    }
+}
+
+function createMessageDiv(messageText, userPhoto, isCurrentUser) {
+    let messageDiv;
+
+    if (isCurrentUser) {
+        messageDiv = $([
+            "<div class='messageContainer row'>",
+            "   <div class='userMessage col-9 offset-2'>",
+            "       " + messageText,
+            "   </div>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + userPhoto + "'>",
+            "   </div>",
+            "</div>"
+        ].join("\n"));
+    } else {
+        const contactPhoto = $("#selectedContactPhoto").attr("src");
+        messageDiv = $([
+            "<div class='messageContainer row'>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + contactPhoto + "'>",
+            "   </div>",
+            "   <div class='contactMessage col-9'>",
+            "       " + messageText,
+            "   </div>",
+            "</div>"
+        ].join("\n"));
+    }
+    // console.log(messageDiv[0]);
+    //console.log($("#messageListContainer"));
+
+
+    return messageDiv;
 }

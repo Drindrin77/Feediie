@@ -11,7 +11,6 @@ class ChatRequest extends RequestService{
     }
 
     public function execute($action){
-        //$this->addData("messageList", "test stp");
         switch ($action){
             case "fetchmessages" :
                 $test = $this->fetchMessages();
@@ -21,10 +20,12 @@ class ChatRequest extends RequestService{
 
     private function fetchMessages(){
         $contactUniqId = isset($_POST["contactUniqId"]) && !empty($_POST['contactUniqId']) ? $_POST['contactUniqId'] : null;
+        $offset = isset($_POST["offset"]) && !empty($_POST['offset']) ? $_POST['offset'] : 0;
 
         if($contactUniqId !== null) {
-            $data = UserModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId);
-            $this->addData("messageList", $data);
+            $messageList = UserModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
+            $this->addData("messageList", $messageList);
+            $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);
         }
     }
 }

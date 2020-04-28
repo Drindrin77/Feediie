@@ -85,7 +85,7 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public static function fetchMessages($userUniqId, $contactUniqId){
+    public static function fetchMessages($userUniqId, $contactUniqId, $offset){
         $req = self::$pdo->prepare("SELECT
                                         message,
                                         author.uniqid,
@@ -99,9 +99,11 @@ class UserModel extends DBConnection{
                                     WHERE
                                     (author.uniqId = ? AND recipient.uniqId = ?) OR (author.uniqId = ? AND recipient.uniqId = ?)
                                     
-                                    ORDER BY idmessage");
+                                    ORDER BY idmessage DESC
+                                    LIMIT 50
+                                    OFFSET ?");
 
-        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId));
+        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId, $offset));
         return $req->fetchAll();
     }
 
