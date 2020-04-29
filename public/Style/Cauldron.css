@@ -16,7 +16,7 @@
     background-color: aqua;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding:5px;
+    padding:5px 0px;
 }
 
 .matchedUser:hover{
@@ -28,7 +28,7 @@
     background-color: #E86B51;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding:5px;
+    padding:5px 0px;
 }
 
 .selectedMatchedUser:hover{
