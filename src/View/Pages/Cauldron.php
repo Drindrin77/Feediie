@@ -55,7 +55,7 @@ $userPhoto = $this->data["userPhoto"];
                                 ?>
                                 <div class="messageContainer row">
                                     <div class="userMessage col-9 offset-2">
-                                        <?php echo $message["message"] ?>
+                                        <?php echo htmlspecialchars($message["message"]) ?>
                                     </div>
                                     <div class="col-1">
                                         <img class="chatImage" src="<?php echo $userPhoto["url"] ?>">
@@ -70,7 +70,7 @@ $userPhoto = $this->data["userPhoto"];
                                              src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                                     </div>
                                     <div class="contactMessage col-9">
-                                        <?php echo $message["message"] ?>
+                                        <?php echo htmlspecialchars($message["message"]) ?>
                                     </div>
                                 </div>
                                 <?php
@@ -80,8 +80,8 @@ $userPhoto = $this->data["userPhoto"];
                     </div>
                 </div>
                 <div id="userMessageArea" class="row ">
-                    <input class="col-10 form-control">
-                    <button class="col-2 btn btn-primary" type="button">Envoyer</button>
+                    <input id="inputMessage" class="col-10 form-control" maxlength="500">
+                    <button id="sendMessageButton" class="col-2 btn btn-primary" type="button">Envoyer</button>
                 </div>
             </div>
         </div>

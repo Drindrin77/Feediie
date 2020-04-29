@@ -136,9 +136,9 @@ CREATE TABLE contact(
     idMessage        SERIAL NOT NULL,
 	idAuthor         INT  NOT NULL ,
 	idRecipient      INT  NOT NULL ,
-	message          VARCHAR (500)  NOT NULL ,
+	message          VARCHAR (512)  NOT NULL ,
 	dateMessage      TIMESTAMP  NOT NULL ,
-	isRead           BOOL  NOT NULL  ,
+	isRead           BOOL  NOT NULL DEFAULT FALSE,
 	CONSTRAINT contact_PK PRIMARY KEY (idMessage)
 
 	,CONSTRAINT contact_User_FK FOREIGN KEY (idAuthor) REFERENCES FeediieUser(idUser)
