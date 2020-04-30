@@ -407,6 +407,7 @@ $(document).ready(function () {
                         let url = data.data.url
                         let priority = data.data.priority
                         addPhoto(url, priority)
+                        $("#alertEmptyPhoto").addClass("invisible")
                     }, 1000);
                 } else {
                     $("#alerteMsgErrorUpload").removeClass("invisible")

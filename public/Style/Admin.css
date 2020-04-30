@@ -19,7 +19,13 @@
     margin:10px
 }
 
+.btnAddElement{
+    float:right;
+}
 
+.AdminCard{
+    width:300px;
+}
 @media screen and (max-width: 1010px) {
     #containerAdmin{
         width: 86%;
