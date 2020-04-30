@@ -81,7 +81,7 @@ if (!empty($userSelectAge)) {
                                        id="ageRangemax">
                             </div>
                             <div class="titleParameter"><h5>Je suis intéressé par</h5></div>
-                            <div id="boxSelectModifiedSex" class="boxSelectModified">
+                            <div id="boxSelectModifiedCat" class="boxSelectModified">
                                 <?php foreach ($relations as $relation): ?>
                                     <div id="relationCheckbox" class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="relation"
