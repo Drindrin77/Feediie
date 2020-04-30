@@ -18,4 +18,3 @@ class RelationModel extends DBConnection{
 }
 
 ?>
- 
