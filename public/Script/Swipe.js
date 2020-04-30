@@ -126,7 +126,8 @@ $(document).ready(function () {
                     console.log(data);
                 }
             });
-        $(this).html("Réglages enregistrés !");
+        $("#messageSuccess").html("Réglages enregistrés !");
+        $('#containerMessageSuccess').show(200).delay(2000).hide(200);
     });
 ////////////////////////////////////////////////////////////////////////////////////
     function selection() {

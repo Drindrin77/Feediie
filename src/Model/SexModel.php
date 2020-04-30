@@ -33,4 +33,5 @@ class SexModel extends DBConnection{
         $req->execute(array($idUser,$sexSelect));
         return $req->fetchAll();
     }
+
 }

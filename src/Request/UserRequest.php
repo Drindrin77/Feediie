@@ -33,6 +33,7 @@ class UserRequest extends RequestService{
     }    
 
     private function filter(){
+	    //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES
         $distance = $_POST['distanceMax'];
         $ageMin = $_POST['ageRangemin'];
         $sexSelect = $_POST['sexSelect'];
@@ -73,8 +74,13 @@ class UserRequest extends RequestService{
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');
             }
         }
-        //UserModel::setFilterParameter($args); 
-        //$newUsersFiltered = UserModel::getUsersFiltered($args)
+        //ON RECUPÈRE LES DONNEES DE CURRENT USER
+        $infoUser = UserModel::getInfoUser($idUser);
+        foreach ($sexSelect as $sex) {
+            $idUserSelect = SexModel::getUserByGender($sex,$infoUser['sex']);
+
+        }
+        //$newUsersFiltered = UserModel::getUsersFiltered($idUser,)
         //TODO DOUBLE FILTRAGE
 
     }

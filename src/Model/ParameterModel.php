@@ -28,7 +28,12 @@ class ParameterModel extends DBConnection{
         $req->execute(array($ageMin,$ageMax,$idUser));
         return $req->fetchAll();
     }
-
+    public static function getUserByGender($idUser,$sex){
+        $req = self::$pdo->prepare("select distinct * from FeediieUser inner join interestedsex on FeediieUser.sex = interestedsex.sex and interestedsex.sex = FeediieUser.sex");
+        $req->execute(array($idUser,$sex));
+        return $req->fetchAll();
+    }
+//Si currentUser.sex appartient à otheruser.selectedsex et si currentUser.selectedsex appartient à otheruser.sex where currentuser = $iduser et otheruser = *
 }
 
 ?>
