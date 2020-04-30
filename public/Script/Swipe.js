@@ -12,7 +12,6 @@ $(document).ready(function () {
         } else {
             $("#parameters").css('transform', 'translate(-120px,0)');
             $(this).css('transform', 'translate(500px,0px)');
-
             statusBtnParameter = 'opened'
         }
     });
@@ -178,9 +177,9 @@ $(document).ready(function () {
         let actualUser = $('.buddy:last')
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status miam">Miam!</div>');
-            actualUser.addClass('rotate-left').delay(500).fadeOut(1)
+            actualUser.addClass('rotate-left').delay(500).fadeOut(1);
             setTimeout(function () {
-                $('.buddy:last').remove()
+                $('.buddy:last').remove();
                 //TODO FREEZE BUTTONS
             }, 500);
         }
@@ -190,9 +189,9 @@ $(document).ready(function () {
         let actualUser = $('.buddy:last')
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status beurk">Beurk!</div>');
-            actualUser.addClass('rotate-right').delay(500).fadeOut(1)
+            actualUser.addClass('rotate-right').delay(500).fadeOut(1);
             setTimeout(function () {
-                $('.buddy:last').remove()
+                $('.buddy:last').remove();
                 //TODO FREEZE BUTTONS
 
             }, 500);

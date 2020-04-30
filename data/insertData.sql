@@ -7,6 +7,7 @@ INSERT INTO sex VALUES('Trans');
 INSERT INTO sex VALUES('Pinguoin');
 INSERT INTO sex VALUES('Other');
 
+INSERT INTO diet VALUES(default, 'Aucun');
 INSERT INTO diet VALUES(default, 'Végétarien');
 INSERT INTO diet VALUES(default, 'Sans gluten');
 INSERT INTO diet VALUES(default, 'Halal');
@@ -168,23 +169,19 @@ INSERT INTO looklike VALUES (2,5);
 INSERT INTO looklike VALUES (2,6);
 
 INSERT INTO practice VALUES(1,1);
-INSERT INTO interesteddiet VALUES (1,1);
-INSERT INTO interesteddiet VALUES (1,2);
-INSERT INTO interesteddiet VALUES (1,3);
-INSERT INTO interesteddiet VALUES (1,4);
-INSERT INTO interesteddiet VALUES (2,1);
-INSERT INTO interesteddiet VALUES (2,2);
-INSERT INTO interesteddiet VALUES (2,3);
-INSERT INTO interesteddiet VALUES (2,4);
+/*INSERT INTO interesteddiet VALUES (1,1);*/
 
+INSERT INTO interestedsex VALUES (1,'Homme');
 INSERT INTO interestedsex VALUES (2,'Femme');
-INSERT INTO interestedsex VALUES (2,'Pangender');
-INSERT INTO interestedsex VALUES (2,'Pinguoin');
 
-INSERT INTO interestedRelationType VALUES (2,'1');
-INSERT INTO interestedRelationType VALUES (2,'2');
-INSERT INTO interestedRelationType VALUES (1,'1');
+INSERT INTO interesteddiet VALUES(1,1);
+INSERT INTO interesteddiet VALUES(2,1);
+
+INSERT INTO followDiet VALUES(1,1);
+INSERT INTO followDiet VALUES(2,1);
+
 INSERT INTO interestedRelationType VALUES (1,'2');
+INSERT INTO interestedRelationType VALUES (2,'2');
 
 
 

@@ -128,7 +128,7 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-lg-8 swipe">
                 <div id="card">
                     <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
-                    <?php foreach ($users as $user): ?>
+                    <?php if(!empty($users)) {foreach ($users as $user): ?>
                         <div class="buddy" style="display: block">
                             <div class="avatar" style="display: block;width:275px;height: 275px">
                             <?php
@@ -140,7 +140,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div class="description"><?= $user['description'] ?>
                             </div>
                         </div>
-                    <?php endforeach ?>
+                    <?php endforeach;} ?>
                     <div id="profilLink">Afficher le profil</div>
                 </div>
                 <div class="row">

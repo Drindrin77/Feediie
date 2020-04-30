@@ -38,7 +38,7 @@ class UserModel extends DBConnection{
     }
 
     public static function filterUsersSwipe($idUser){
-        $req = self::$pdo->prepare("SELECT u2.idUser, u2.firstname FROM FeediieUser u1, FeediieUser u2 WHERE 
+        $req = self::$pdo->prepare("SELECT u2.idUser, u2.firstname, u2.birthDay, u2.description FROM FeediieUser u1, FeediieUser u2 WHERE 
                                             u1.iduser <> u2.iduser and 
                                             u1.sex IN (SELECT sex from interestedsex WHERE iduser = u2.iduser) and 
                                             u2.sex IN (SELECT sex from interestedsex WHERE iduser = u1.iduser) and
@@ -50,7 +50,7 @@ class UserModel extends DBConnection{
                                             (SELECT idRelationType from interestedRelationType WHERE iduser=u2.iduser) IN (SELECT idRelationType FROM interestedRelationType where iduser=u1.iduser) and 
                                             u2.idUser not in (SELECT iduser_dislike from dislike WHERE iduser=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
-                                            u1.idUser <> ?");
+                                            u1.idUser = ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
