@@ -508,6 +508,9 @@ $(document).ready(function () {
                     .done(function (e) {
                         let data = JSON.parse(e)
                         if (data.status == "success") {
+                            $("#modalResetPassword").modal('hide')
+                            $("#messageSuccess").html("Mot de passe modifié")
+                            $('#containerMessageSuccess').show(200).delay(2000).hide(200)
 
                         } else {
                             $("#oldPassword").addClass('errorValue')
