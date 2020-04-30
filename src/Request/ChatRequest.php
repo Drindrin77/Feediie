@@ -32,8 +32,8 @@ class ChatRequest extends RequestService
 
         if ($contactUniqId !== null) {
             $messageList = ChatModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
-            foreach ($messageList as $message) {
-                $message["message"] = htmlspecialchars($message["message"]); //TODO corriger
+            for ($i = 0; $i < sizeof($messageList); $i++) {
+                $messageList[$i]["message"] = htmlspecialchars($messageList[$i]["message"]);
             }
             $this->addData("messageList", $messageList);
             $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);
@@ -47,11 +47,11 @@ class ChatRequest extends RequestService
 
         if($contactUniqId !== null && $inputMessage !== null){
             $userId = $this->currentUser['iduser'];
-            $contactId = ChatModel::getUserByUniqID($contactUniqId)["iduser"];
+            $contactId = UserModel::getUserByUniqID($contactUniqId)["iduser"];
 
-            $unreadMessages = ChatModel::fetchUnreadMessages($userId, $contactId);
-            foreach ($unreadMessages as $message) {
-                $message["message"] = htmlspecialchars($message["message"]);
+            $unreadMessages = ChatModel::readMessages($userId, $contactId);
+            for ($i = 0; $i < sizeof($unreadMessages); $i++) {
+                $unreadMessages[$i]["message"] = htmlspecialchars($unreadMessages[$i]["message"]);
             }
             $this->addData("messageList", $unreadMessages);
 
