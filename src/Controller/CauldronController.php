@@ -16,10 +16,10 @@ class CauldronController extends Controller
             switch ($action) {
                 default:
                     $currentUser = AuthService::getCurrentUser();
-                    $usersMatched = UserModel::fetchMatchedUsers($currentUser["uniqid"]);
+                    $usersMatched = ChatModel::fetchMatchedUsers($currentUser["uniqid"]);
                     $defaultDiscussion = null;
                     if (sizeof($usersMatched) >= 1) {
-                        $defaultDiscussion = UserModel::fetchMessages($currentUser["uniqid"], $usersMatched[0]['uniq_id'], 0);
+                        $defaultDiscussion = ChatModel::fetchMessages($currentUser["uniqid"], $usersMatched[0]['uniq_id'], 0);
                     }
                     $viewModel = $this->pageCauldron($usersMatched, $defaultDiscussion, $currentUser);
                     break;

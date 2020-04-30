@@ -31,7 +31,7 @@ class ChatRequest extends RequestService
         $offset = isset($_POST["offset"]) && !empty($_POST['offset']) ? $_POST['offset'] : 0;
 
         if ($contactUniqId !== null) {
-            $messageList = UserModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
+            $messageList = ChatModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
             foreach ($messageList as $message) {
                 $message["message"] = htmlspecialchars($message["message"]); //TODO corriger
             }
@@ -47,15 +47,15 @@ class ChatRequest extends RequestService
 
         if($contactUniqId !== null && $inputMessage !== null){
             $userId = $this->currentUser['iduser'];
-            $contactId = UserModel::getUserByUniqID($contactUniqId)["iduser"];
+            $contactId = ChatModel::getUserByUniqID($contactUniqId)["iduser"];
 
-            $unreadMessages = UserModel::fetchUnreadMessages($userId, $contactId);
+            $unreadMessages = ChatModel::fetchUnreadMessages($userId, $contactId);
             foreach ($unreadMessages as $message) {
                 $message["message"] = htmlspecialchars($message["message"]);
             }
             $this->addData("messageList", $unreadMessages);
 
-            $isInserted = UserModel::addMessage($userId, $contactId, $inputMessage);
+            $isInserted = ChatModel::addMessage($userId, $contactId, $inputMessage);
             if($isInserted){
                 $this->addData("isInserted", true);
                 $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);
