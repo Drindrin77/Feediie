@@ -30,8 +30,10 @@ class AdminController extends Controller{
         $allHobbies = HobbyModel::getAllHobbies();
         $allSexs = SexModel::getAllSex();
         $allCities = CityModel::getAllCity();
-        $allPersonalities = DishModel::getAllPersonalities();
-        $allDish = DishModel::getAllDish();
+        $allPersonalities = PersonalityModel::getAllPersonalities();
+        $allDishes = DishModel::getAllDishes();
+        $allRelationType = RelationModel::getAllRelationType();
+        $allDiets = DietModel::getAllDiet();
 
         $data = [
             'ideas' => $ideas,
@@ -40,7 +42,9 @@ class AdminController extends Controller{
             'allPersonalities'=>$allPersonalities,
             'allCities'=>$allCities,
             'allSexs'=>$allSexs,
-            'allDish'=>$allDish
+            'allDishes'=>$allDishes,
+            'allRelationType'=>$allRelationType,
+            'allDiets'=>$allDiets
         ];
         return new ViewModel("Admin",$data);
     }

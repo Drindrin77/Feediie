@@ -29,8 +29,21 @@ class UserRequest extends RequestService{
             case "filter":
                 $this->filter();
             break;
+            case "delete":
+                $this->delete();
+            break;
         }
     }    
+
+    private function delete(){
+        $idUser= htmlspecialchars($_POST['id']);
+
+        if(UserModel::deleteUser($idUser)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Erreur BD");
+        }
+    }
 
     private function filter(){
 	    //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES

@@ -37,7 +37,7 @@ class ProfileController extends Controller{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $idUser = $userInfo['iduser'];
             $photos = PhotoModel::getAllPhotos($idUser);
-            $personalities = DishModel::getUserPersonalities($idUser);
+            $personalities = PersonalityModel::getUserPersonalities($idUser);
             $hobbies = HobbyModel::getUserHobbies($idUser);
             $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
 
@@ -61,10 +61,10 @@ class ProfileController extends Controller{
         $allHobbies = HobbyModel::getUnpracticedHobbies($idUser);
         $allSexs = SexModel::getAllSex();
         $allCities = CityModel::getAllCity();
-        $allPersonalities = DishModel::getUnusedPersonalities($idUser);
+        $allPersonalities = PersonalityModel::getUnusedPersonalities($idUser);
         $allDish = DishModel::getUnusedDishes($idUser);
         $photos = PhotoModel::getAllPhotos($idUser);
-        $personalities = DishModel::getUserPersonalities($idUser);
+        $personalities = PersonalityModel::getUserPersonalities($idUser);
         $hobbies = HobbyModel::getUserHobbies($idUser);
         $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
 

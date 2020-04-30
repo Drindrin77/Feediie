@@ -219,7 +219,7 @@
                 <div id="containerPracticedHobby">
                     <?php foreach($hobbies as $hobby): ?>
                         <div class="containerHobby practicedHobby" id="<?= $hobby['idhobby']?>">
-                        <i class="fas fa-ban deleteHobbyIcon"></i><span> <?= $hobby['name'] ?></span>
+                        <i class="fas fa-ban deleteHobbyIcon"></i><span> <?=  $hobby['name'] ?></span>
                         </div>
                     <?php endforeach ?>
                 </div>
