@@ -39,6 +39,12 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function getInfoUser($idUser){
+        $req = self::$pdo->prepare("select * from FeediieUser where idUser = ?");
+        $req->execute(array($idUser));
+        return $req->fetchAll();
+    }
+
     public static function getUserByMail($mail){
         $req = self::$pdo->prepare("select * from feediieuser where email = ?");
         $req->execute(array($mail));
@@ -152,6 +158,12 @@ class UserModel extends DBConnection{
         $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
         return $res;
     }
+    public static function setFilterParameter($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
+        $req = self::$pdo->prepare("select idUser from");
+        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
+        return $res;
+    }
+
 /*
     insert into feediieuser VALUES (default,'0bf7cf11709ce61b1861ab55e688d71e7b0bcc1cea0d66e9b6faed536947f583'
     ,null ,'Léanna', 'Ji', '1999-11-04', 'ji.leanna@outlook.com', '$2y$10$7Eag0hekMyCYm8gGBobdKebFoDcQhxAFsjxqC/ieh79TkEMzxElj6', null,

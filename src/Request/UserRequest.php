@@ -33,22 +33,56 @@ class UserRequest extends RequestService{
     }    
 
     private function filter(){
-        $distance = $_POST['distance'];
+	    //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES
+        $distance = $_POST['distanceMax'];
+        $ageMin = $_POST['ageRangemin'];
+        $sexSelect = $_POST['sexSelect'];
+        $dietSelect = $_POST['dietSelect'];
+        $ageMax = $_POST['ageRangemax'];
         $idUser = $this->currentUser['iduser'];
+        if(ParameterModel::updateRangeDistance($idUser, $distance)){
+            $this->addMessageSuccess('La distance a ete mise a jour');
+        }
+        else{
+            $this->addMessageError('Erreur BD mise a jour distance');
+        }
+        if(ParameterModel::updateRangeAge($idUser, $ageMin, $ageMax)){
+            $this->addMessageSuccess('L age a ete mis a jour');
+        }
+        else{
+            $this->addMessageError('Erreur BD mise a jour age');
+        }
+        if(SexModel::removeUserSelectedSex($idUser))
+        {
+            $this->addMessageSuccess('Table selectsex vide');
+        }
+        foreach ($sexSelect as $sex) {
+            if (SexModel::updateUserSelectedSex($idUser, $sex)) {
+                $this->addMessageSuccess('Les sexs on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour sex selectionne');
+            }
+        }
+        if(DietModel::removeUserSelectedDiet($idUser))
+        {
+            $this->addMessageSuccess('Table selectdiet vide');
+        }
+        foreach ($dietSelect as $diet) {
+            if (DietModel::updateUserSelectedDiet($idUser, $diet)) {
+                $this->addMessageSuccess('Les diets on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour diet selectionne');
+            }
+        }
+        //ON RECUPÈRE LES DONNEES DE CURRENT USER
+        $infoUser = UserModel::getInfoUser($idUser);
+        foreach ($sexSelect as $sex) {
+            $idUserSelect = SexModel::getUserByGender($sex,$infoUser['sex']);
 
-        //UserModel::setFilterParameter($args); 
-        //$newUsersFiltered = UserModel::getUsersFiltered($args)
+        }
+        //$newUsersFiltered = UserModel::getUsersFiltered($idUser,)
         //TODO DOUBLE FILTRAGE
 
-        /*
-        if (REUSSITE BD){
-            $this->addMessageSuccess('Le hobby a été supprimé');
-            $this->addData($newUsersFiltered)
-        }else{
-            $this->addMessageError('Erreur BD');
-        }
-
-        */
     }
 
     //XSS HACK : HTMLSPECIALCHARS ?

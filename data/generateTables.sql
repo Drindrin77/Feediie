@@ -108,7 +108,7 @@ CREATE TABLE interestedRelationType(
 ------------------------------------------------------------
 CREATE TABLE interestedsex(
 	idUser   INT  NOT NULL ,
-	sex   VARCHAR(24)  NOT NULL  ,
+	sex   VARCHAR(128)  NOT NULL  ,
 	CONSTRAINT interestedsex_PK PRIMARY KEY (idUser,sex)
 
 	,CONSTRAINT interestedsex_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
@@ -229,5 +229,45 @@ CREATE TABLE practice(
 	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)
 )WITHOUT OIDS;
 
+------------------------------------------------------------
+-- Table: diet
+------------------------------------------------------------
+CREATE TABLE diet(
+    idDiet   SERIAL NOT NULL ,
+    name     VARCHAR (128) NOT NULL,
+    CONSTRAINT diet_PK PRIMARY KEY (idDiet)
+)WITHOUT OIDS;
+-----------------------------------------------------------
+-- Table : interesteddiet
+-----------------------------------------------------------
+CREATE TABLE interesteddiet(
+    idUser   INT  NOT NULL ,
+    idDiet   INT  NOT NULL ,
+    CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
 
+    ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+    ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)
+)WITHOUT OIDS;
 
+-----------------------------------------------------------
+-- Table : rangeDistance
+-----------------------------------------------------------
+CREATE TABLE rangeDistance(
+    idUser   INT  NOT NULL ,
+    distance   INT  NOT NULL DEFAULT 50,
+    CONSTRAINT rangedistance_PK PRIMARY KEY (idUser,distance)
+
+    ,CONSTRAINT rangedistance_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+)WITHOUT OIDS;
+
+-----------------------------------------------------------
+-- Table : rangeAge
+-----------------------------------------------------------
+CREATE TABLE rangeAge(
+    idUser   INT  NOT NULL ,
+    ageMin   INT  NOT NULL DEFAULT 18,
+    ageMax   INT  NOT NULL DEFAULT 30,
+    CONSTRAINT rangeage_PK PRIMARY KEY (idUser,ageMin,ageMax)
+
+    ,CONSTRAINT rangeage_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+)WITHOUT OIDS;
