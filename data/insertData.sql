@@ -63,6 +63,11 @@ INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Partager a
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Attentionné', '/Images/Dish/pommeAmour.jpg');
 
+INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Relation sérieuse');
+INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Plan cul');
+INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Amitié');
+INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Coup d''un soir');
+
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');
 INSERT INTO Hobby VALUES(default, 'Cinema');
