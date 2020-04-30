@@ -7,6 +7,11 @@ class UserModel extends DBConnection{
    public function __construct () {
    }
 
+    public static function deleteUser($idUser){
+        $req = self::$pdo->prepare("delete from feediieuser where iduser = ?");
+        return $req->execute(array($idUser));
+    }
+
     public static function findByToken($token){
         $req = self::$pdo->prepare("select idUser,password, isadmin, uniqid, birthday, firstName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
         from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
@@ -163,17 +168,6 @@ class UserModel extends DBConnection{
         $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
         return $res;
     }
-
-/*
-    insert into feediieuser VALUES (default,'0bf7cf11709ce61b1861ab55e688d71e7b0bcc1cea0d66e9b6faed536947f583'
-    ,null ,'Léanna', 'Ji', '1999-11-04', 'ji.leanna@outlook.com', '$2y$10$7Eag0hekMyCYm8gGBobdKebFoDcQhxAFsjxqC/ieh79TkEMzxElj6', null,
-    default, default, default, default, '0bf7cf11709ce61b1861ab55e688d71e7b0bcc1cea0d66e9b6faed536947f583', default, 1, default, 'Femme')
-  */
-
-   /*public function getAllUser($idUser,$firstName,$birthDay,$description){
-       $req = self::$pdo->prepare("select idUser,firstName,birthDay,description from FeediieUser");
-       $req->execute(array($idUser,$firstName,$birthDay,$description));
-    }*/
 }
 
 ?>
