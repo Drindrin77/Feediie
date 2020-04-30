@@ -26,18 +26,19 @@ class CauldronController extends Controller
             }
             return $viewModel;
         } else {
-            return new ViewModel('Error403');
+            $this->redirectUser();
         }
 
     }
 
     public function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
     {
+        var_dump((PhotoModel::getPriorityPhoto($currentUser['iduser'])));
         $data = [
             "usersMatched" => $usersMatched,
             "defaultDiscussion" => $defaultDiscussion,
             "uniqId" => $currentUser["uniqid"],
-            "userPhoto" => PhotoModel::getPriorityPhoto($currentUser['iduser'])
+            "userPhoto" => (PhotoModel::getPriorityPhoto($currentUser['iduser']))
         ];
         return new ViewModel("Cauldron", $data);
     }
