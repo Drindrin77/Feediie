@@ -7,11 +7,13 @@ $(document).ready(function () {
         if (statusBtnParameter === 'opened') {
             $("#parameters").css('transform', 'translate(-420px,0)');
             $(this).css('transform', 'translate(0px,0px)');
+            this.style['-webkit-transition-duration'] = '1s';
             statusBtnParameter = 'closed'
 
         } else {
             $("#parameters").css('transform', 'translate(-120px,0)');
-            $(this).css('transform', 'translate(500px,0px)');
+            $(this).css('transform', 'translate(250px,0)');
+            this.style['-webkit-transition-duration'] = '1s';
             statusBtnParameter = 'opened'
         }
     });

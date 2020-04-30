@@ -123,9 +123,8 @@ include_once('../src/View/Pages/UserPhoto.php');
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-8 swipe">
+            <div class="col-md-8 col-lg-12  " >
+                <div class="row" >
                 <div id="card">
                     <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
                     <?php if(!empty($users)) {foreach ($users as $user): ?>
@@ -135,7 +134,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                 $userPhoto = new UserPhoto($user['photos']);
                                 $userPhoto->render();?>
                             </div>
-                            <div style="color:black" class="name card-body"><?= $user['firstname'] ?>
+                            <div style="color:black" class=" card-body"><?= $user['firstname'] ?>
                                 , <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div>
                             <div class="description"><?= $user['description'] ?>
                             </div>
@@ -143,14 +142,11 @@ include_once('../src/View/Pages/UserPhoto.php');
                     <?php endforeach;} ?>
                     <div id="profilLink">Afficher le profil</div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
                         <div id="blockButtons">
                             <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
                             <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
                         </div>
                     </div>
-                </div>
             </div>
             <div class="col-lg-4"></div>
         </div>
