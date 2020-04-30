@@ -52,7 +52,7 @@ class ChatModel extends DBConnection{
         $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId, $offset));
         return $req->fetchAll();
     }
-
+/*
     public static function fetchUnreadMessages($userId, $contactId){
         $req = self::$pdo->prepare("SELECT
                                         message,
@@ -71,13 +71,40 @@ class ChatModel extends DBConnection{
         $req->execute(array($contactId, $contactId, $userId));
         return $req->fetchAll();
     }
-
+*/
     public static function addMessage($userId, $contactId, $message){
 
         $req = self::$pdo->prepare("INSERT INTO contact (idAuthor, idRecipient, message, dateMessage) 
                                     VALUES (?, ?, ?, CURRENT_TIMESTAMP)                   
                                    ");
         return $req->execute(array($userId, $contactId, $message));
+    }
+
+    /**
+     * @param $userId l'id de l'utilisateur courrant
+     * @param $contactId l'id du destinataire
+     * @return mixed un tableau contenant la liste des messages ayant étés lus
+     */
+    public static function readMessages($userId, $contactId){
+        $req = self::$pdo->prepare("
+                                    WITH updatedMessages as (UPDATE
+                                        contact 
+                                    SET
+                                        isread = TRUE
+                                    WHERE
+                                        idAuthor = ?
+                                        AND idRecipient = ?
+                                        AND isread = FALSE
+                                        
+                                    RETURNING *)
+                                    SELECT message, datemessage, author.uniqid
+                                    FROM 
+                                    updatedMessages
+                                    INNER JOIN feediieuser AS author ON author.iduser = updatedMessages.idAuthor
+                                    ORDER BY idMessage DESC ;
+                                    ");
+        $req->execute(array($contactId, $userId));
+        return $req->fetchAll();
     }
 
 }
