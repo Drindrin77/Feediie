@@ -10,7 +10,7 @@
 CREATE TABLE RelationType(
 	idRelationType   SERIAL NOT NULL ,
 	iconURL			VARCHAR (128),
-	nom          VARCHAR (128) NOT NULL  ,
+	name          VARCHAR (128) NOT NULL  ,
 	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;
 
@@ -56,8 +56,8 @@ CREATE TABLE FeediieUser(
 	sex                         VARCHAR  NOT NULL,
 	CONSTRAINT User_PK PRIMARY KEY (idUser)
 
-	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
-	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
+	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)  ON DELETE CASCADE
+	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -71,7 +71,7 @@ CREATE TABLE Photo(
 	idUser     INT  NOT NULL  ,
 	CONSTRAINT Photo_PK PRIMARY KEY (idPhoto)
 
-	,CONSTRAINT Photo_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT Photo_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -85,8 +85,8 @@ CREATE TABLE likedUser(
 	matched       BOOL  NOT NULL  ,
 	CONSTRAINT like_PK PRIMARY KEY (idUser,idUser_liked)
 
-	,CONSTRAINT like_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_liked) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT like_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT like_User0_FK FOREIGN KEY (idUser_liked) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -98,8 +98,8 @@ CREATE TABLE interestedRelationType(
 	idRelationType   INT  NOT NULL  ,
 	CONSTRAINT interestedRelationType_PK PRIMARY KEY (idUser,idRelationType)
 
-	,CONSTRAINT interestedCategory_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT interestedRelationType_FK FOREIGN KEY (idRelationType) REFERENCES RelationType(idRelationType)
+	,CONSTRAINT interestedCategory_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE 
+	,CONSTRAINT interestedRelationType_FK FOREIGN KEY (idRelationType) REFERENCES RelationType(idRelationType)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -111,8 +111,8 @@ CREATE TABLE interestedsex(
 	sex   VARCHAR(128)  NOT NULL  ,
 	CONSTRAINT interestedsex_PK PRIMARY KEY (idUser,sex)
 
-	,CONSTRAINT interestedsex_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT interestedsex_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
+	,CONSTRAINT interestedsex_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT interestedsex_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -125,8 +125,8 @@ CREATE TABLE dislike(
 	dateMatch        TIMESTAMP  NOT NULL  ,
 	CONSTRAINT dislike_PK PRIMARY KEY (idUser,idUser_dislike)
 
-	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT dislike_User0_FK FOREIGN KEY (idUser_dislike) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT dislike_User0_FK FOREIGN KEY (idUser_dislike) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -142,8 +142,8 @@ CREATE TABLE contact(
 	isRead           BOOL  NOT NULL DEFAULT FALSE,
 	CONSTRAINT contact_PK PRIMARY KEY (idMessage)
 
-	,CONSTRAINT contact_User_FK FOREIGN KEY (idAuthor) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT contact_User0_FK FOREIGN KEY (idRecipient) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT contact_User_FK FOREIGN KEY (idAuthor) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT contact_User0_FK FOREIGN KEY (idRecipient) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 ------------------------------------------------------------
@@ -155,7 +155,7 @@ CREATE TABLE idea(
 	message          VARCHAR (500)  NOT NULL ,
 	CONSTRAINT idea_PK PRIMARY KEY (idIdea)
 
-	,CONSTRAINT idea_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+	,CONSTRAINT idea_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -199,8 +199,8 @@ CREATE TABLE likeEat(
 	idDish   INT  NOT NULL  ,
 	CONSTRAINT likeEat_PK PRIMARY KEY (idUser,idDish)
 
-	,CONSTRAINT likeEat__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT likeEat_Dish0_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)
+	,CONSTRAINT likeEat__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT likeEat_Dish0_FK FOREIGN KEY (idDish) REFERENCES Dish(idDish)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -212,8 +212,8 @@ CREATE TABLE looklike(
 	idDish   INT  NOT NULL  ,
 	CONSTRAINT looklike_PK PRIMARY KEY (idUser,idDish)
 
-	,CONSTRAINT looklike__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT looklike_PersonalityDish0_FK FOREIGN KEY (idDish) REFERENCES PersonalityDish(idDish)
+	,CONSTRAINT looklike__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT looklike_PersonalityDish0_FK FOREIGN KEY (idDish) REFERENCES PersonalityDish(idDish)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 
@@ -225,8 +225,8 @@ CREATE TABLE practice(
 	idHobby   INT  NOT NULL  ,
 	CONSTRAINT practice_PK PRIMARY KEY (idUser,idHobby)
 
-	,CONSTRAINT practice__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)
+	,CONSTRAINT practice__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)   ON DELETE CASCADE
 )WITHOUT OIDS;
 
 ------------------------------------------------------------
@@ -245,8 +245,8 @@ CREATE TABLE interesteddiet(
     idDiet   INT  NOT NULL ,
     CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
 
-    ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-    ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)
+    ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+    ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 -----------------------------------------------------------
@@ -257,7 +257,7 @@ CREATE TABLE rangeDistance(
     distance   INT  NOT NULL DEFAULT 50,
     CONSTRAINT rangedistance_PK PRIMARY KEY (idUser,distance)
 
-    ,CONSTRAINT rangedistance_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+    ,CONSTRAINT rangedistance_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
 -----------------------------------------------------------
@@ -269,5 +269,5 @@ CREATE TABLE rangeAge(
     ageMax   INT  NOT NULL DEFAULT 30,
     CONSTRAINT rangeage_PK PRIMARY KEY (idUser,ageMin,ageMax)
 
-    ,CONSTRAINT rangeage_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+    ,CONSTRAINT rangeage_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
 )WITHOUT OIDS;
