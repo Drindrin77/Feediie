@@ -524,9 +524,6 @@ $(document).ready(function () {
                             $("#modalResetPassword").modal('hide')
                             $("#messageSuccess").html("Mot de passe modifié")
                             $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                            $("#errorNewPassword").addClass('successPassword')
-                            $("#errorNewPassword").removeClass('invisible')
-                            $("#errorNewPassword").html("Le mot de passe a été changé")
                         } else {
                             $("#oldPassword").addClass('errorValue')
                             $("#errorOldPassword").removeClass('invisible')

@@ -16,21 +16,34 @@
     background-color: rgb(241, 237, 237);
     border-radius:10px;
     padding-top:10px;
-    margin:10px
+    margin-top:10px;
+}
+
+#navContentContainer{
+    height:600px;
+}
+.nav-link{
+    cursor: pointer;
+}
+.activeNav{
+    color:white !important;
+    background-color:#007bff !important;
 }
 
 .btnAddElement{
     float:right;
 }
 
-.AdminCard{
-    width:300px;
+.invisible{
+    display: none;
 }
-@media screen and (max-width: 1010px) {
-    #containerAdmin{
-        width: 86%;
-        margin:auto;
-    }
+.AdminCard{
+    margin-bottom: 20px;
+}
+
+.bodyAdminCard{
+    height: 500px;
+    overflow-y: auto;
 }
 
 #searchIcon{
@@ -46,4 +59,100 @@
 
 .noCursor{
     cursor: auto;
+}
+
+
+
+
+
+/**
+    CARD
+
+*/
+
+.titleCard{
+    text-align: center;
+    height:60px;
+    font-size:13px;
+}
+
+.cardImage{
+    width:100px;
+    height:100px;
+    margin:auto;
+}
+
+.cardElement{
+    width:130px;
+    display:inline-block;
+    vertical-align: bottom;
+}
+
+.cardElement:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+}
+
+.cardElement:hover .containerBtnOverlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.containerAddBtn{
+    position: absolute;
+    top:40%;
+    left:15%;
+}
+
+.containerDeleteBtn{
+    position: absolute;
+    top:40%;
+    left:7%;
+}
+.containerBtnOverlay{
+    opacity: 0;
+    transition: opacity .35s ease;
+    font-size: 10px;
+}
+
+.btnDelete{
+    font-size:15px;
+    background-color: red;
+    color:white;
+}
+
+.btnAdd{
+    font-size:15px;
+    background-color: rgb(15, 223, 15);
+    color:white;  
+}
+
+.image{
+    width:100%;
+    height:100%;
+}
+
+.containerHobby{
+    background-color:#cce5ff;
+    color: #004085;
+    border-radius: 10px;
+    margin-top:10px;
+    margin-right: 10px;
+    display: inline-block;
+    cursor: pointer;
+    padding:20px;
+
+}
+
+.containerHobby:hover{
+    background-color:#cd1608;
+    color: white;
+    padding:15px;
+}
+.deleteHobbyIcon{
+    display: none;
+}
+
+.containerHobby:hover > .deleteHobbyIcon{
+    display: contents;
 }

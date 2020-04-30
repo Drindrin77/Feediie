@@ -9,7 +9,7 @@ class IdeaModel extends DBConnection{
         return $req->execute(array($idUser, $message)); 
     }
 
-    public static function removeIdea($idIdea) {
+    public static function deleteIdea($idIdea) {
         $req = self::$pdo->prepare("delete from idea where idIdea = ?");
         return $req->execute(array($idIdea)); 
     }
