@@ -7,13 +7,13 @@ $(document).ready(function () {
         if (statusBtnParameter === 'opened') {
             $("#parameters").css('transform', 'translate(-420px,0)');
             setTimeout(function () {
-                $("#closeBtn").css('transform', 'translate(300px, -30px)');
+                $("#closeBtn").css('transform', 'translate(580%,-35%)');
             }, 800);
             statusBtnParameter = 'closed'
 
         } else {
-            $("#parameters").css('transform', 'translate(-100px,0)');
-            $("#closeBtn").css('transform', 'translate(270px, -30px)');
+            $("#parameters").css('transform', 'translate(-120px,0)');
+            $("#closeBtn").css('transform', 'translate(510%,-35%)');
             statusBtnParameter = 'opened'
         }
     });

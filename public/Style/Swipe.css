@@ -1,7 +1,8 @@
 .background {
     background: #E86B51;
-    height: 100%;
     user-select: none;
+    min-height: 100%;
+    height:auto;
 }
 
 #card {
@@ -148,10 +149,9 @@
 
 #parameters {
     margin-top: 20px;
-    height: 850px;
     width: 400px;
     border-radius: 20px;
-    transform: translate(-100px,0);
+    transform: translate(-120px,0);
     transition-duration: 1s;
     background: #E1E1E1;
     float:left;
@@ -171,11 +171,6 @@
     font-size:14px;
     text-align: center;
 }
-#spaceBlock {
-    width: 100px;
-    height: 100%;
-}
-
 #blockParameters {
     padding-left: 10px;
     padding-right: 10px;
@@ -203,7 +198,8 @@
 
 #closeBtn {
     position: absolute;
-    transform: translate(270px,-30px);
+    /*transform: translate(255px,-20px);*/
+    transform: translate(510%,-35%);
 }
 #overlayProfil {
     display: flex;
@@ -234,4 +230,8 @@
     transform: translate(870px,10px);
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     z-index:1000;
+}
+#submitParameter {
+    width: 100%;
+    margin-bottom: 10px;
 }
