@@ -93,12 +93,20 @@ class UserRequest extends RequestService{
                 }
                 $_SESSION['token'] = $token;
                 AuthService::connectUser();
+                $user = AuthService::GetCurrentUser();
+                //var_dump($user);
+                if($user['description'] == null && empty(PhotoModel::getAllPhotos($user['iduser']))){
+                    $this->addData("page", "/profile/edit");
+                }else{
+                    $this->addData("page", "/");
+                }
                 $this->addMessageSuccess("connect");
             }else{
                 $this->addMessageSuccess("rate");
             }
-        } 
-        $this->addMessageSuccess("rate");
+        }else{
+            $this->addMessageSuccess("rate");
+        }
     }
 
     private function passwordForgotten(){

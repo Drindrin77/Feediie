@@ -1,10 +1,19 @@
 
 $(document).ready(function () {
-    console.log("go")
-
     $(function () {
         $('[data-toggle="popover"]').popover()
       })
+
+    $("#seePassword").mousedown(function() {
+        $("#password").get(0).type = 'text';
+    });
+
+    $("#seePassword").mouseup(function() {
+        $("#password").get(0).type = 'password'
+    });
+
+//Pas de Press Enter quand on s'inscrit pour éviter les mauvaises manip d'inscription
+
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
@@ -16,7 +25,7 @@ $(document).ready(function () {
 
         var dateFormat = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
         var textFormat = /([a-zA-Z]+)/;
-        var numberFormat = /([0-9])/;
+        var numberFormat = /([0-9])/;        
 
         document.getElementById("createError").hidden = true;
         document.getElementById("emailError").hidden = true;
