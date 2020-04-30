@@ -85,7 +85,7 @@ if (!empty($userSelectAge)) {
                                 <?php foreach ($relations as $relation): ?>
                                     <div id="relationCheckbox" class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="relation"
-                                               id="<?= $relation['nom'] ?>"
+                                               id="<?= $relation['name'] ?>"
                                             <?php if (!empty($userSelectedRelationType)) {
                                                 foreach ($userSelectedRelationType as $userrelation) {
                                                     if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
@@ -94,7 +94,7 @@ if (!empty($userSelectAge)) {
                                                 }
                                             } ?>>
                                         <label class="custom-control-label"
-                                               for="<?= $relation['nom'] ?>"><?= $relation['nom'] ?></label>
+                                               for="<?= $relation['name'] ?>"><?= $relation['name'] ?></label>
                                     </div>
                                 <? endforeach; ?>
                             </div>

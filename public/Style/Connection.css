@@ -1,9 +1,5 @@
-#logoImg{
-    background-color: orange;
-}
-
 #slogan{
-    color: white;
+    color: orange;
     font-style: italic;
 }
 
@@ -14,4 +10,8 @@
 
 #navbarHead{
 	background-color: orange;
+}
+
+#seePassword{
+	cursor: help;
 }

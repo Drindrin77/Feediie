@@ -15,8 +15,8 @@ class IdeaRequest extends RequestService{
             case "add":
                 $this->addIdea();
             break;
-            case "remove":
-                $this->removeIdea();
+            case "delete":
+                $this->deleteIdea();
             break;
         }
     }
@@ -25,6 +25,16 @@ class IdeaRequest extends RequestService{
         $idUser = $this->currentUser['iduser'];
         $message = htmlspecialchars($_POST['message']);
         if(IdeaModel::addIdea($idUser, $message)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Erreur BD");
+        }
+    }
+
+    private function deleteIdea(){
+        $idIdea = htmlspecialchars($_POST['id']);
+
+        if(IdeaModel::deleteIdea($idIdea)){
             $this->addMessageSuccess("Ajout réussi");
         }else{
             $this->addMessageError("Erreur BD");

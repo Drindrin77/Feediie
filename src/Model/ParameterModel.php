@@ -50,7 +50,7 @@ class ParameterModel extends DBConnection{
         return $req->fetchAll();
     }
     public static function updateUserSelectedRelation($idUser,$relationSelect){
-        $req = self::$pdo->prepare("insert into interestedRelationType (idUser,idRelationType) values (?,(select idRelationType from RelationType where nom = ?))");
+        $req = self::$pdo->prepare("insert into interestedRelationType (idUser,idRelationType) values (?,(select idRelationType from RelationType where name = ?))");
         $req->execute(array($idUser,$relationSelect));
         return $req->fetchAll();
     }

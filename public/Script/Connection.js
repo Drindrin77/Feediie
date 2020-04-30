@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    $("#seePassword").mousedown(function() {
+        $("#password").get(0).type = 'text';
+    });
+
+    $("#seePassword").mouseup(function() {
+        $("#password").get(0).type = 'password'
+    });
+
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
@@ -16,6 +24,12 @@ $(document).ready(function () {
             document.getElementById("emailError").hidden = true;
         }
 
+        if(!password.trim() ){
+            document.getElementById("passwordError").hidden = false;
+            isValid = false;
+        }else{
+            document.getElementById("passwordError").hidden = true;
+        }
         
         if (isValid) {
             $.post("/ajax.php?entity=user&action=connection",
@@ -27,12 +41,10 @@ $(document).ready(function () {
             .fail(function (e){
                 console.log("fail", e)
             })
-            .done(function (e){
-                console.log(e);               
+            .done(function (e){         
                 data = JSON.parse(e);
-                console.log(data);
                 if (data.status == 'success') {
-                    document.location.href = "/";
+                    document.location.href = data.data.page;
                 } else {
                     document.getElementById("matchError").hidden = false;
                 }
@@ -42,25 +54,22 @@ $(document).ready(function () {
         }
     
     })
-    
+
+    document.getElementById("email").addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("btnSubmit").click();
+        }
+    });
+    document.getElementById("password").addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("btnSubmit").click();
+        }
+    });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     $("#btnForgotten").click(function (e) {
         let emailForgotten = $("#email").val()
         
