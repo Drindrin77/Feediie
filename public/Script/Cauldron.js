@@ -1,35 +1,29 @@
+$(window).load(function () {
+    setMatchedUserContainerHeight();
+    setChatBoxSize();
+});
+
+$(window).resize(function () {
+    setMatchedUserContainerHeight();
+    setChatBoxSize();
+});
+
 function spaceBelow2Div(divA, divB) {
-    const firstDiv=$(divA).offset();
-    const firstDivHeight = $(divA).height();
-    const secondDiv=$(divB).offset();
-    const spaceBelow = secondDiv.top-firstDiv.top;
-
-    return spaceBelow
+    const firstDiv = $(divA).offset();
+    const secondDiv = $(divB).offset();
+    return secondDiv.top - firstDiv.top;
 }
 
-function setMatchedUserContainerHeight(){
+function setMatchedUserContainerHeight() {
     const height = spaceBelow2Div("#pageContainer", "#footer");
-    $("#matchedUserContainer").height(height );
+    $("#matchedUserContainer").height(height);
 }
 
-function setChatBoxSize(){
+function setChatBoxSize() {
     let height = spaceBelow2Div("#pageContainer", "#footer");
-
-    height -= ($("#userMessageArea").height() + $("#chatSelectedContact").height());
-
+    height -= $("#userMessageArea").height() + $("#chatSelectedContact").height();
     $("#chatBox").height(height);
 }
-
-$(document).ready(function() {
-    setMatchedUserContainerHeight();
-    setChatBoxSize();
-    fetchMessages( $("#chatSelectedContact").attr("data-uniqid"));
-});
-
-$(window).resize(function(){
-    setMatchedUserContainerHeight();
-    setChatBoxSize();
-});
 
 //selectionne un utilisateur dans la liste des matchs
 $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
@@ -38,13 +32,11 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     const photoDesciption = $("#photo-" + uniqId).attr("alt");
     const name = $("#name-" + uniqId).text();
 
-    console.log(event.currentTarget);
     $(".selectedMatchedUser").addClass("matchedUser");
     $(".selectedMatchedUser").removeClass("selectedMatchedUser");
 
     $("#user-" + uniqId).addClass("selectedMatchedUser")
     $("#user-" + uniqId).removeClass("matchedUser")
-    console.log(event.currentTarget);
 
     $("#chatSelectedContact").attr("data-uniqid", uniqId);
     $("#chatSelectedContact").attr("href", "/profile/" + uniqId);
@@ -52,20 +44,106 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     $("#selectedContactPhoto").attr("alt", photoDesciption);
     $("#selectedContactName").text(name);
 
-    setChatBoxSize(); //TODO enlever dès que les images sont de taille fixe
+    changeChatBoxContent(uniqId);
 });
 
+function changeChatBoxContent(uniqId) {
+    $("#messageListContainer").empty();
+    fetchMessages(uniqId, 0);
 
-function fetchMessages(uniqId){
-    console.log(uniqId);
-    $.post("/ajax.php?entity=chat&action=fetchMessages",
-        {
-            "contactUniqId": uniqId
-        })
-        .fail(function (e) {
-            console.log("fail", e)
-        })
-        .done(function (e) {
-            console.log(e);
-        });
 }
+
+
+function fetchMessages(contactUniqId, offset) {
+
+    $.ajax({
+        url: "/ajax.php?entity=chat&action=fetchMessages",
+        type: "POST",
+        dataType: 'json',
+        timeout: 500,
+        data: {
+            "contactUniqId": contactUniqId,
+            "offset": offset
+        },
+        success: function (data) {
+            data = data.data;
+            fillChatBox(data.messageList, data.userPhoto, contactUniqId);
+        },
+        error: function (e) {
+            console.log("fail", e);
+        }
+    });
+}
+
+function fillChatBox(messageList, userPhoto, contactUniqId) {
+    for (let i = messageList.length - 1; i >= 0; i--) {
+        //console.log(createMessageDiv(messageList[i].message, userPhoto, true));
+        let isCurrentUser = contactUniqId !== messageList[i].uniqid;
+        $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
+    }
+}
+
+function createMessageDiv(messageText, userPhoto, isCurrentUser) {
+    let messageDiv;
+
+    if (isCurrentUser) {
+        messageDiv = $([
+            "<div class='messageContainer row'>",
+            "   <div class='userMessage col-9 offset-2'>",
+            "       " + messageText,
+            "   </div>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + userPhoto + "'>",
+            "   </div>",
+            "</div>"
+        ].join("\n"));
+    } else {
+        const contactPhoto = $("#selectedContactPhoto").attr("src");
+        messageDiv = $([
+            "<div class='messageContainer row'>",
+            "   <div class='col-1'>",
+            "       <img class='chatImage' src='" + contactPhoto + "'>",
+            "   </div>",
+            "   <div class='contactMessage col-9'>",
+            "       " + messageText,
+            "   </div>",
+            "</div>"
+        ].join("\n"));
+    }
+    return messageDiv;
+}
+
+$("#sendMessageButton").on("click", function () {
+    const inputMessage = $("#inputMessage").val();
+    if (inputMessage !== "") {
+        const contactUniqId = $("#chatSelectedContact").attr("data-uniqid");
+
+        $.ajax({
+            url: "/ajax.php?entity=chat&action=sendMessage",
+            type: "POST",
+            dataType: 'json',
+            timeout: 500,
+            data: {
+                "contactUniqId": contactUniqId,
+                "inputMessage": inputMessage
+            },
+            success: function (data) {
+                data = data.data;
+                console.log(data);
+                if (data.isInserted === true) {
+                    const message = {
+                        "message": inputMessage,
+                        "uniqId": "-1",// il s'agit d'avoir un uniq id différent de celui du contact pour être considéré comme user
+                        "datemessage": "null" //TODO
+                    };
+                    data.messageList.unshift(message);
+                }
+                fillChatBox(data.messageList, data.userPhoto, contactUniqId);
+            },
+            error: function (e) {
+                console.log("fail", e);
+            }
+        });
+        $("#inputMessage").val("");
+    }
+});

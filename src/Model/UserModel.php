@@ -80,7 +80,7 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public static function fetchMessages($userUniqId, $contactUniqId){
+    public static function fetchMessages($userUniqId, $contactUniqId, $offset){
         $req = self::$pdo->prepare("SELECT
                                         message,
                                         author.uniqid,
@@ -94,11 +94,42 @@ class UserModel extends DBConnection{
                                     WHERE
                                     (author.uniqId = ? AND recipient.uniqId = ?) OR (author.uniqId = ? AND recipient.uniqId = ?)
                                     
-                                    ORDER BY idmessage");
+                                    ORDER BY idmessage DESC
+                                    LIMIT 50
+                                    OFFSET ?");
 
-        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId));
+        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId, $offset));
         return $req->fetchAll();
     }
+
+    public static function fetchUnreadMessages($userId, $contactId){
+        $req = self::$pdo->prepare("SELECT
+                                        message,
+                                        author.uniqid,
+                                        datemessage
+                                    FROM
+                                        contact
+                                        INNER JOIN feediieUser author ON author.iduser = ?
+                                    WHERE
+                                        idAuthor = ? 
+                                        AND idRecipient = ?
+                                        AND isread = FALSE
+                                    ORDER BY idmessage DESC
+                                   ");
+
+        $req->execute(array($contactId, $contactId, $userId));
+        return $req->fetchAll();
+    }
+
+    public static function addMessage($userId, $contactId, $message){
+
+        $req = self::$pdo->prepare("INSERT INTO contact (idAuthor, idRecipient, message, dateMessage) 
+                                    VALUES (?, ?, ?, CURRENT_TIMESTAMP)                   
+                                   ");
+        return $req->execute(array($userId, $contactId, $message));
+    }
+
+
 
 
     public static function editInfo($args, $idUser){

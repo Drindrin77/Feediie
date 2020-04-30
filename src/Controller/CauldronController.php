@@ -1,31 +1,43 @@
 <?php
 
-if(!defined('CONST_INCLUDE'))
+if (!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
-class CauldronController extends Controller{
+class CauldronController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function execute($action){
-        if(AuthService::isAuthenticated()){
-            switch($action){
+    public function execute($action)
+    {
+        if (AuthService::isAuthenticated()) {
+            switch ($action) {
                 default:
-                    $uniqID = AuthService::getCurrentUser()['uniqid'];
-                    $usersMatched = UserModel::fetchMatchedUsers($uniqID);
-                    $viewModel = $this->pageCauldron($usersMatched);
+                    $currentUser = AuthService::getCurrentUser();
+                    $usersMatched = UserModel::fetchMatchedUsers($currentUser["uniqid"]);
+                    $defaultDiscussion = null;
+                    if (sizeof($usersMatched) >= 1) {
+                        $defaultDiscussion = UserModel::fetchMessages($currentUser["uniqid"], $usersMatched[0]['uniq_id'], 0);
+                    }
+                    $viewModel = $this->pageCauldron($usersMatched, $defaultDiscussion, $currentUser);
                     break;
             }
             return $viewModel;
-        }else{
+        } else {
             return new ViewModel('Error403');
         }
 
     }
-    public function pageCauldron($usersMatched){
+
+    public function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
+    {
         $data = [
-            "usersMatched"=>$usersMatched
+            "usersMatched" => $usersMatched,
+            "defaultDiscussion" => $defaultDiscussion,
+            "uniqId" => $currentUser["uniqid"],
+            "userPhoto" => PhotoModel::getPriorityPhoto($currentUser['iduser'])
         ];
         return new ViewModel("Cauldron", $data);
     }
