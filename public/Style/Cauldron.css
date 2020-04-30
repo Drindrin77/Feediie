@@ -57,10 +57,12 @@
 
 .userMessage{
     background-color: #cce5ff;
+    word-wrap:break-word;
 }
 
 .contactMessage{
     background-color: gray;
+    word-wrap:break-word;
 }
 
 .messageContainer {
