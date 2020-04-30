@@ -45,10 +45,5 @@ class PhotoModel extends DBConnection{
         return $req->execute(array($url));
 
     }
-
-    
-
 }
-
-
 ?>

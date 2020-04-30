@@ -5,7 +5,7 @@
 
 <div id="containerAdmin">
     <div class="container-fluid" style="margin-top: 50px;">
-        <div class="row">
+        <div class="row justify-content-center">
                 <div class="col tableBackground">
                     <h3 class="titleTab">Liste des suggestions</h3>
                     <div class="table-responsive tableSize">
@@ -78,5 +78,70 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col">
+                <div class="card AdminCard">
+                    <div class="card-header">
+                        Catégorie de relation
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+                <div class="card AdminCard">
+                    <div class="card-header">
+                        Hobby
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>            
+            </div>
+
+            <div class="col">
+                <div class="card AdminCard">
+                    <div class="card-header">
+                        Personnalité
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>            
+            </div>
+
+            <div class="col">
+                <div class="card AdminCard">
+                    <div class="card-header">
+                        Plat
+                        <button id="btnAddDish" class="btn btn-primary btnAddElement">
+                            <i class="fas fa-plus"></i>
+                            <span class="addText">Ajouter</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>            
+            </div>
+
+
+            <div class="col">
+                <div class="card AdminCard">
+                    <div class="card-header">
+                        Régime alimentaire
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>            
+            </div>
+
         </div>
 </div>

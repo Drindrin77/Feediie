@@ -107,6 +107,13 @@
             <div class="navContent" id="contentPhoto">
 
                 <h3 class="titleSection">Mes photos</h3>
+                <?php
+                if(empty($this->data['photos'])){
+                    echo '<div id="alertEmptyPhoto" class="alert alert-warning" role="alert">
+                        N\'hésitez pas à rajouter une photo ! Certaines personnes n\'apprécient pas le goût du risque !
+                        </div>';
+                }
+            ?>
                 <div class="alert alert-danger invisible" role="alert" id="alerteMsgErrorUpload">
                     
                 </div>
