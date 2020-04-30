@@ -7,7 +7,7 @@ class ChatModel extends DBConnection{
     public function __construct () {
     }
 
-    public static function fetchMatchedUsers($uniqID){
+    public static function fetchMatchedUsers($userId){
         $req = self::$pdo->prepare("SELECT
                                         matchedUser.firstname AS name,
                                         EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
@@ -22,16 +22,16 @@ class ChatModel extends DBConnection{
                                     
                                     WHERE 
                                         matched = true
-                                    AND currentUser.uniqid = ?
+                                    AND currentUser.iduser = ?
                                     AND (photo.priority = true OR photo IS NULL)
                                     
                                     ORDER BY 
 	                                    likedU.datematch DESC");
-        $req->execute(array($uniqID));
+        $req->execute(array($userId));
         return $req->fetchAll();
     }
 
-    public static function fetchMessages($userUniqId, $contactUniqId, $offset){
+    public static function fetchMessages($userId, $contactId, $offset){
         $req = self::$pdo->prepare("SELECT
                                         message,
                                         author.uniqid,
@@ -40,16 +40,15 @@ class ChatModel extends DBConnection{
                                     FROM
                                         contact
                                     INNER JOIN feediieUser author ON idauthor = author.iduser
-                                    INNER JOIN feediieUser recipient ON idrecipient = recipient.iduser
                                     
                                     WHERE
-                                    (author.uniqId = ? AND recipient.uniqId = ?) OR (author.uniqId = ? AND recipient.uniqId = ?)
+                                    (idAuthor = ? AND idRecipient = ?) OR (idAuthor = ? AND idRecipient = ?)
                                     
                                     ORDER BY idmessage DESC
                                     LIMIT 50
                                     OFFSET ?");
 
-        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId, $offset));
+        $req->execute(array($userId, $contactId, $contactId, $userId, $offset));
         return $req->fetchAll();
     }
 /*
@@ -105,6 +104,19 @@ class ChatModel extends DBConnection{
                                     ");
         $req->execute(array($contactId, $userId));
         return $req->fetchAll();
+    }
+
+    public static function setReadToAllMessages($userId, $contactId){//TODO utiliser
+        $req = self::$pdo->prepare("UPDATE 
+                                        contact
+                                    SET 
+                                        isread = TRUE
+                                    WHERE
+                                        idauthor = ?
+                                        AND idrecipient = ?
+                                        AND isread = FALSE;
+                                    ");
+        $req->execute(array($contactId, $userId));
     }
 
 }

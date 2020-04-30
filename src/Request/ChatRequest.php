@@ -31,9 +31,14 @@ class ChatRequest extends RequestService
         $offset = isset($_POST["offset"]) && !empty($_POST['offset']) ? $_POST['offset'] : 0;
 
         if ($contactUniqId !== null) {
-            $messageList = ChatModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
+            $contactId = UserModel::getUserByUniqID($contactUniqId)['iduser'];
+
+            ChatModel::setReadToAllMessages($this->currentUser["iduser"], $contactId);
+            $messageList = ChatModel::fetchMessages($this->currentUser['iduser'], $contactId, $offset);
+
             for ($i = 0; $i < sizeof($messageList); $i++) {
                 $messageList[$i]["message"] = htmlspecialchars($messageList[$i]["message"]);
+
             }
             $this->addData("messageList", $messageList);
             $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);

@@ -16,10 +16,12 @@ class CauldronController extends Controller
             switch ($action) {
                 default:
                     $currentUser = AuthService::getCurrentUser();
-                    $usersMatched = ChatModel::fetchMatchedUsers($currentUser["uniqid"]);
+                    $usersMatched = ChatModel::fetchMatchedUsers($currentUser["iduser"]);
                     $defaultDiscussion = null;
                     if (sizeof($usersMatched) >= 1) {
-                        $defaultDiscussion = ChatModel::fetchMessages($currentUser["uniqid"], $usersMatched[0]['uniq_id'], 0);
+                        $contactId = UserModel::getUserByUniqID($usersMatched[0]['uniq_id'])['iduser'];
+                        ChatModel::setReadToAllMessages($currentUser["iduser"], $contactId);
+                        $defaultDiscussion = ChatModel::fetchMessages($currentUser["iduser"], $contactId, 0);
                     }
                     $viewModel = $this->pageCauldron($usersMatched, $defaultDiscussion, $currentUser);
                     break;
@@ -33,7 +35,7 @@ class CauldronController extends Controller
 
     public function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
     {
-        var_dump((PhotoModel::getPriorityPhoto($currentUser['iduser'])));
+      //  var_dump((PhotoModel::getPriorityPhoto($currentUser['iduser'])));
         $data = [
             "usersMatched" => $usersMatched,
             "defaultDiscussion" => $defaultDiscussion,
