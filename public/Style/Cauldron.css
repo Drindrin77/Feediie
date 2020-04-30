@@ -1,12 +1,22 @@
+#pageContainer img{
+    border-radius: 50%;
+}
+
 #matchedUserContainer{
-    border : 0px solid gray;
+    background-color : #ffc107;
     overflow-y : scroll;
+}
+
+#matchedUserContainer img{
+    height: 40px;
+    width: 40px;
 }
 
 .matchedUser{
     background-color: aqua;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding:5px 0px;
 }
 
 .matchedUser:hover{
@@ -18,19 +28,46 @@
     background-color: #E86B51;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding:5px 0px;
 }
 
 .selectedMatchedUser:hover{
     cursor:pointer;
 }
 
-
-
 #chatSelectedContact{
     color : inherit;
+    background-color: #007bff;
+}
+
+#chatSelectedContact img{
+    height: 70px;
+    width: 70px;
 }
 
 #chatSelectedContact:hover{
     color : inherit;
     text-decoration: none;
+}
+
+#chatBox{
+    background-color: #004085;
+    overflow-y: auto;
+}
+
+.userMessage{
+    background-color: #cce5ff;
+}
+
+.contactMessage{
+    background-color: gray;
+}
+
+.messageContainer {
+    margin: 5px;
+}
+
+.messageContainer img{
+    height: 40px;
+    width: 40px;
 }

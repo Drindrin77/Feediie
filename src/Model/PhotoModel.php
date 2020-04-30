@@ -11,9 +11,12 @@ class PhotoModel extends DBConnection{
     }
 
     public static function getPriorityPhoto($idUser){
-        $req = self::$pdo->prepare("select * from photo where iduser = ? and priority=true");
+        $req = self::$pdo->prepare("select url from photo where iduser = ? and priority=true");
         $req->execute(array($idUser));
-        return $req->fetch();
+        $result = $req->fetch();
+        if(empty($result))
+            $result = PATH_DEFAULT_USER_PHOTO;
+        return $result;
     }
 
     public static function addPhoto($idUser, $path, $priority=false){

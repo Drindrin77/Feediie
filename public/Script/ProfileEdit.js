@@ -11,8 +11,6 @@ $(document).ready(function () {
     let city = $("#cityControl").children("option:selected").val()
     let description = $("#description").val()
 
-    // $j is now an alias to the jQuery function; creating the new alias is optional.
-
     $('[data-toggle="popover"]').popover()
 
     $("#btnOpenModalResetPassword").click(function () {

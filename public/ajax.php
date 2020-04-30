@@ -23,6 +23,7 @@ require_once("../src/Model/PhotoModel.php");
 require_once("../src/Model/ParameterModel.php");
 require_once("../src/Model/IdeaModel.php");
 
+
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
 $action = isset($_GET['action'])?strtolower($_GET['action']):null;
 

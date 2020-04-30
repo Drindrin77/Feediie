@@ -1,0 +1,43 @@
+.triggerDropdown{
+    cursor:pointer;
+}
+
+.titleTab{
+    margin-bottom: 30px;
+}
+.tableSize{
+    max-height: 500px;
+    overflow-y: auto;
+    background-color:white;
+    margin-bottom:10px;
+}
+
+.tableBackground{
+    background-color: rgb(241, 237, 237);
+    border-radius:10px;
+    padding-top:10px;
+    margin:10px
+}
+
+
+@media screen and (max-width: 1010px) {
+    #containerAdmin{
+        width: 86%;
+        margin:auto;
+    }
+}
+
+#searchIcon{
+    margin-left:2px;
+}
+
+.stayOpenDropDownItem{
+    padding-right:10px;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.noCursor{
+    cursor: auto;
+}
