@@ -26,9 +26,21 @@ class AdminController extends Controller{
         $idUser = AuthService::getCurrentUser()['iduser'];
         $ideas = IdeaModel::getAllIdea();
         $users = UserModel::getAllUserOrderReport($idUser);
+        
+        $allHobbies = HobbyModel::getAllHobbies();
+        $allSexs = SexModel::getAllSex();
+        $allCities = CityModel::getAllCity();
+        $allPersonalities = DishModel::getAllPersonalities();
+        $allDish = DishModel::getAllDish();
+
         $data = [
             'ideas' => $ideas,
             'users' => $users,
+            'allHobbies'=>$allHobbies,
+            'allPersonalities'=>$allPersonalities,
+            'allCities'=>$allCities,
+            'allSexs'=>$allSexs,
+            'allDish'=>$allDish
         ];
         return new ViewModel("Admin",$data);
     }

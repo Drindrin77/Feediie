@@ -1,6 +1,8 @@
 <?php
     $ideas = $this->data['ideas'];
     $users = $this->data['users'];
+
+    var_dump($this->data);
 ?>
 
 <div id="containerAdmin">

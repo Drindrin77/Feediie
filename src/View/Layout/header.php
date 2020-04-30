@@ -3,6 +3,8 @@
     $uniqID = $this->headerInfo['uniqID'];
     $isAdmin = $this->headerInfo['isAdmin'];
     $photo = $this->headerInfo['photo'];
+    if(is_array($photo))
+        $photo = $photo['url'];
 ?>
 
 
