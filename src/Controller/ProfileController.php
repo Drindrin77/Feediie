@@ -67,6 +67,7 @@ class ProfileController extends Controller{
         $personalities = DishModel::getUserPersonalities($idUser);
         $hobbies = HobbyModel::getUserHobbies($idUser);
         $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
+        $policy = PasswordService::policyToString();
 
         $data = [
             'user'=>$user,
@@ -78,7 +79,8 @@ class ProfileController extends Controller{
             'allPersonalities'=>$allPersonalities,
             'allCities'=>$allCities,
             'allSexs'=>$allSexs,
-            'allDish'=>$allDish
+            'allDish'=>$allDish,
+            'policy' => $policy
         ];
         
         return new ViewModel('ProfileEdit', $data);

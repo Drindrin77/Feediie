@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
     let confirmModification = false;
     let changedFirstName = false;
     let changedBirthday = false;
@@ -489,6 +494,14 @@ $(document).ready(function () {
             isValid = false
         }
 
+        var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&@'*+-/=?^_`{|}~$£µ¨~§]))(?=.{6,})/;
+        if (!newPassword.match(passwordFormat)) {
+            $("#newPassword").addClass('errorValue')
+            $("#errorNewPassword").removeClass('invisible')
+            $("#errorNewPassword").html("Le mot de passe n'a pas le bon format")
+            isValid = false;
+        }
+
         if (isValid) {
             if (newPassword == oldPassword) {
                 $("#oldPassword").addClass('errorValue')
@@ -506,9 +519,14 @@ $(document).ready(function () {
                         console.log("fail", e)
                     })
                     .done(function (e) {
-                        let data = JSON.parse(e)
+                        data = JSON.parse(e)
                         if (data.status == "success") {
-
+                            $("#modalResetPassword").modal('hide')
+                            $("#messageSuccess").html("Mot de passe modifié")
+                            $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                            $("#errorNewPassword").addClass('successPassword')
+                            $("#errorNewPassword").removeClass('invisible')
+                            $("#errorNewPassword").html("Le mot de passe a été changé")
                         } else {
                             $("#oldPassword").addClass('errorValue')
                             $("#errorOldPassword").removeClass('invisible')
