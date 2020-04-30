@@ -14,10 +14,10 @@ INSERT INTO diet VALUES(default, 'Végan');
 INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
 
-INSERT INTO RelationType VALUES(default,'Plan cul régulier','Tu cherches un plan Q régulier car tu aimes croquer la vie à pleine dent');
-INSERT INTO RelationType VALUES(default,'Amitié', 'Tu cherches de l amitié rien que de l amitié pour un moment convivial');
-INSERT INTO RelationType VALUES(default,'Relation sérieuse', 'Tu recherches quelque chose de sérieux');
-INSERT INTO RelationType VALUES(default, 'Juste un soir','Tu cherches un coup d un soir pour ne nuit... caliente !');
+INSERT INTO RelationType VALUES(default,'Plan cul régulier');
+INSERT INTO RelationType VALUES(default,'Amitié');
+INSERT INTO RelationType VALUES(default,'Relation sérieuse');
+INSERT INTO RelationType VALUES(default, 'Juste un soir');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
