@@ -9,17 +9,16 @@ class IdeaModel extends DBConnection{
         return $req->execute(array($idUser, $message)); 
     }
 
-    public static function removeIdea($idUser) {
-        $req = self::$pdo->prepare("delete from idea where idUser = ?");
-        return $req->execute(array($idUser)); 
+    public static function removeIdea($idIdea) {
+        $req = self::$pdo->prepare("delete from idea where idIdea = ?");
+        return $req->execute(array($idIdea)); 
     }
 
     public static function getAllIdea(){
-        $req = self::$pdo->prepare("select * from idea");
-        return $req->execute(); 
+        $req = self::$pdo->prepare("select idIdea, firstname, message from idea inner join feediieuser on idea.iduser = feediieuser.iduser");
+        $req->execute();
+        return $req->fetchAll();
     }
-
-
 }
 
 ?>

@@ -23,7 +23,14 @@ class AdminController extends Controller{
     }
 
     private function pageAdmin(){
-        return new ViewModel("Admin");
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        $ideas = IdeaModel::getAllIdea();
+        $users = UserModel::getAllUserOrderReport($idUser);
+        $data = [
+            'ideas' => $ideas,
+            'users' => $users,
+        ];
+        return new ViewModel("Admin",$data);
     }
 }
 

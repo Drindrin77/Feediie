@@ -50,15 +50,10 @@ class UserModel extends DBConnection{
         $req->execute(array($token, $mail));
     }
 
-
-    public static function addHobby($idUser, $idHobby) {
-        $req = self::$pdo->prepare("insert into practice values(?,?)");
-        return $req->execute(array($idUser, $idHobby));
-    }
-
-    public static function removeHobby($idUser, $idHobby) {
-        $req = self::$pdo->prepare("delete from practice where idUser = ? and idHobby = ?");
-        return $req->execute(array($idUser, $idHobby));
+    public static function getAllUserOrderReport($idUser){
+        $req = self::$pdo->prepare("select iduser, isadmin, firstname, email, nbReport from FeediieUser where iduser<> ? order by nbreport desc");
+        $req->execute(array($idUser));
+        return $req->fetchAll();
     }
 
     public static function fetchMatchedUsers($uniqID){
