@@ -12,7 +12,7 @@ class RelationModel extends DBConnection{
 
     public static function deleteRelationType($idRelation){
         $req = self::$pdo->prepare("delete from RelationType where idRelationType=?");
-        return $req->execute($idRelation);
+        return $req->execute(array($idRelation));
     }
 
 }
