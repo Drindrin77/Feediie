@@ -4,10 +4,7 @@
 
 <div class="container col-xl-8">
     <div class="row h-100">
-        <div class="col my-auto pt-5 w-100 h-75" id="logoImg">
-            <img class="w-100" src="/Images/Icon/logo.png" alt="Feediie">
-            <p class="w-100 text-center h1 pt-4" id="slogan">Trouve ton plat</p>
-        </div>
+            <p class="w-100 text-center h1 pt-4" id="slogan">Trouve ton plat ! Miam !</p>
         <div class="col mt-4 mb-4">
             <div class="border rounded bg-light pl-4 pt-2">
             
@@ -20,11 +17,11 @@
                     <input type="email" id="email" name="email" required size="50" class="form-control w-75" placeholder="email@mail.com">
                 
                 </div>
-                <p class="error" id='passwordError' hidden>Le mot de passe n'est pas bien renseigné</p>
+                <p class="error" id='passwordError' hidden>Veuillez renseigner votre mot de passe</p>
                 <div class="form-group">
                     <label for="passwordInput">Mot de passe</label>
                     <br>
-                    <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
+                    <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe"><i id="seePassword" class="far fa-eye"></i>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">

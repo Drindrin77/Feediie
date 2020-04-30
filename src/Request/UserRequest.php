@@ -51,6 +51,7 @@ class UserRequest extends RequestService{
         $ageMin = $_POST['ageRangemin'];
         $sexSelect = $_POST['sexSelect'];
         $dietSelect = $_POST['dietSelect'];
+        $relationSelect = $_POST['relationSelect'];
         $ageMax = $_POST['ageRangemax'];
         $idUser = $this->currentUser['iduser'];
         if(ParameterModel::updateRangeDistance($idUser, $distance)){
@@ -87,6 +88,17 @@ class UserRequest extends RequestService{
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');
             }
         }
+        if(ParameterModel::removeUserSelectedRelation($idUser))
+        {
+            $this->addMessageSuccess('Table selectrelation vide');
+        }
+        foreach ($relationSelect as $relation) {
+            if (ParameterModel::updateUserSelectedRelation($idUser, $relation)) {
+                $this->addMessageSuccess('Les relations on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour relations selectionne');
+            }
+        }
         //ON RECUPÈRE LES DONNEES DE CURRENT USER
         $infoUser = UserModel::getInfoUser($idUser);
         foreach ($sexSelect as $sex) {
@@ -110,6 +122,7 @@ class UserRequest extends RequestService{
         else{
             UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
             $this->changeCookieToken(AuthService::getCurrentUser()['email']);
+            AuthService::connectUser();
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
@@ -129,7 +142,7 @@ class UserRequest extends RequestService{
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null;
-        if(isset(UserModel::getUserByMail($email)['password'])){
+        if(!empty(UserModel::getUserByMail($email)['password'])){
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
             if(PasswordService::samePassword($password, $passwordEncrypted)){
                 $token = UserModel::getUserByMail($email)['token'];
@@ -140,12 +153,19 @@ class UserRequest extends RequestService{
                 }
                 $_SESSION['token'] = $token;
                 AuthService::connectUser();
+                $user = AuthService::GetCurrentUser();
+                if($user['description'] == null && empty(PhotoModel::getAllPhotos($user['iduser']))){
+                    $this->addData("page", "/profile/edit");
+                }else{
+                    $this->addData("page", "/swipe");
+                }
                 $this->addMessageSuccess("connect");
             }else{
-                $this->addMessageSuccess("rate");
+                $this->addMessageError("rate");
             }
-        } 
-        $this->addMessageSuccess("rate");
+        }else{
+            $this->addMessageError("rate");
+        }
     }
 
     private function passwordForgotten(){
@@ -162,7 +182,11 @@ class UserRequest extends RequestService{
         while (!empty(UserModel::findByToken($token))) {
             $token = bin2hex(random_bytes($length));
         }
-        UserModel::setToken($mail);
+        UserModel::setToken($token ,$mail);
+        session_destroy();
+        session_set_cookie_params(3600*24,"/");
+        session_start();
+        $_SESSION['token'] = $token;
     }
 
     private function register(){

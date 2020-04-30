@@ -10,6 +10,7 @@
     $allDish = $this->data['allDish'];
     $photos = $this->data['photos'];
 
+    $passwordPolicy = isset($this->data['policy']) ? $this->data['policy'] : null;
 ?>
 
 <div id="background">
@@ -58,7 +59,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="passwordInput">Nouveau mot de passe</label>
+                                <label for="passwordInput">Nouveau mot de passe</label> 
+                                <span  id="passwordpopup" data-toggle="popover" data-placement="right" data-trigger="hover" data-html="true" data-content=<?php echo "\"".$passwordPolicy."\"" ?>>
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
                                 <br>
                                 <input class="w-75" required type="password" id="newPassword" name="password" placeholder="Mot de passe">
                                 <br>

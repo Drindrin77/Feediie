@@ -27,11 +27,13 @@ class SwipeController extends Controller{
         $idUser = AuthService::getCurrentUser()['iduser'];
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
+        $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
         $userSelectDistance = ParameterModel::getRangeDistance($idUser);
         $userSelectAge = ParameterModel::getRangeAge($idUser);
         $users = UserModel::getAllUser($idUser);
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
+        $relations = ParameterModel::getAllRelation();
         $filteredUser = array();
         //TODO GET DEFAULT PARAMETER USER
         foreach($users as $user) {
@@ -40,11 +42,13 @@ class SwipeController extends Controller{
             array_push($filteredUser,$user);
         }
         $data = [
+            'userSelectedRelationType' =>$userSelectedRelationType,
             'userSelectedDiet' => $userSelectedDiet,
             'userSelectedGender' => $userSelectedGender,
             'userSelectDistance' => $userSelectDistance,
             'userSelectAge' => $userSelectAge,
             'users' => $filteredUser,
+            'relations' => $relations,
             'sexs'=>$sexs,
             'diets'=>$diets,
         ];

@@ -13,7 +13,7 @@ class UserModel extends DBConnection{
     }
 
     public static function findByToken($token){
-        $req = self::$pdo->prepare("select idUser,password, isadmin, uniqid, birthday, firstName, description, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
+        $req = self::$pdo->prepare("select idUser,password, isadmin, uniqid, birthday, firstName, description, email, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
         from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
         $req->execute(array($token));
         return $req->fetch();
