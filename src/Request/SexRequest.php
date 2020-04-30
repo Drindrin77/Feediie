@@ -2,7 +2,7 @@
 if(!defined('CONST_INCLUDE'))
 	die('Acces direct interdit !'); 
 
-class RelationRequest extends RequestService{
+class SexRequest extends RequestService{
     
 	public function __construct() {
         parent::__construct();
@@ -20,9 +20,9 @@ class RelationRequest extends RequestService{
     }    
 
     private function delete(){
-        $idRelation = htmlspecialchars($_POST['id']);
+        $sex = htmlspecialchars($_POST['sex']);
 
-        if(RelationModel::deleteRelationType($idRelation)){
+        if(SexModel::deleteSex($sex)){
             $this->addMessageSuccess("Ajout réussi");
         }else{
             $this->addMessageError("Erreur BD");

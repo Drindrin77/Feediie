@@ -8,22 +8,12 @@ $userSelectedGender = isset($this->data['userSelectedGender']) ? $this->data['us
 $userSelectDistance = isset($this->data['userSelectDistance']) ? $this->data['userSelectDistance'] : null;
 $userSelectAge = isset($this->data['userSelectAge']) ? $this->data['userSelectAge'] : null;
 $userSelectedRelationType = isset($this->data['userSelectedRelationType']) ? $this->data['userSelectedRelationType'] : null;
-if (!empty($userSelectDistance)) {
-    foreach ($userSelectDistance as $userDistance) {
-        $distance = $userDistance['distance'];
-    }
-} else {
-    $distance = '50';
-}
-if (!empty($userSelectAge)) {
-    foreach ($userSelectAge as $userAges) {
-        $ageMin = $userAges['agemin'];
-        $ageMax = $userAges['agemax'];
-    }
-} else {
-    $ageMin = '20';
-    $ageMax = '25';
-}
+
+$distance = $userSelectDistance;
+$ageMin = $userSelectAge['agemin'];
+$ageMax = $userSelectAge['agemax'];
+
+include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
     <div class="backgroundOverlay">
@@ -35,12 +25,12 @@ if (!empty($userSelectAge)) {
         </div>
     </div>
     <div>
+    <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
         <div id="parameters" class="container">
             <div class="row">
                 <div class="col-3"></div>
-                <div class="col-9">
-                    <div id="blockParameters container" class="overflow-auto">
-                        <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+                <div class="col-9" id="containerParameter">
+                    <div class="blockParameters">
                         <div>
                             <div class="titleParameter"><h5>Je veux voir</h5></div>
                             <div id="boxSelectModifiedSex" class="boxSelectModified">
@@ -140,10 +130,12 @@ if (!empty($userSelectAge)) {
                     <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
                     <?php foreach ($users as $user): ?>
                         <div class="buddy" style="display: block">
-                            <div class="avatar"
-                                 style="display: block;width:275px;height: 275px"><?php $this->data['photos'] = $user['photos'];
-                                include_once('UserPhoto.php'); ?></div>
-                            <div class="name"><?= $user['firstname'] ?>
+                            <div class="avatar" style="display: block;width:275px;height: 275px">
+                            <?php
+                                $userPhoto = new UserPhoto($user['photos']);
+                                $userPhoto->render();?>
+                            </div>
+                            <div style="color:black" class="name card-body"><?= $user['firstname'] ?>
                                 , <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div>
                             <div class="description"><?= $user['description'] ?>
                             </div>

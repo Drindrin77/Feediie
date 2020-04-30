@@ -70,7 +70,7 @@ class ViewModel {
               <?php if ($this->showHeader) {
                 include_once('Pages/SuccessMessage.php');
               } 
-              include 'Pages/'.$this->page.'.php' ?>
+              include_once 'Pages/'.$this->page.'.php' ?>
             </div>
 
             <?php

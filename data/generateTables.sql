@@ -237,6 +237,23 @@ CREATE TABLE diet(
     name     VARCHAR (128) NOT NULL,
     CONSTRAINT diet_PK PRIMARY KEY (idDiet)
 )WITHOUT OIDS;
+
+
+------------------------------------------------------------
+-- Table: diet
+------------------------------------------------------------
+
+CREATE TABLE followDiet(
+    idUser   INT  NOT NULL ,
+    idDiet   INT  NOT NULL ,
+    CONSTRAINT userDiet_PK PRIMARY KEY (idUser,idDiet)
+
+    ,CONSTRAINT userDiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+    ,CONSTRAINT userDiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
+)WITHOUT OIDS;
+
+
+
 -----------------------------------------------------------
 -- Table : interesteddiet
 -----------------------------------------------------------

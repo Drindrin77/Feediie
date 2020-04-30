@@ -34,4 +34,12 @@ class SexModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function deleteSex($sex){
+        $req = self::$pdo->prepare("update feediieuser set sex = NULL where sex=?");
+        $req->execute(array($sex));
+        $req = self::$pdo->prepare("delete from sex where name=?");
+        return $req->execute(array($sex));
+    }
+    
+
 }

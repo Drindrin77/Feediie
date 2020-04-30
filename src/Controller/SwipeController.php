@@ -28,18 +28,23 @@ class SwipeController extends Controller{
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
         $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
-        $userSelectDistance = ParameterModel::getRangeDistance($idUser);
-        $userSelectAge = ParameterModel::getRangeAge($idUser);
-        $users = UserModel::getAllUser($idUser);
+
+        $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
+        $userSelectDistance = $userFilterAgeDistance[0]['distancemax'];
+        $userSelectAge = array("agemin"=>$userFilterAgeDistance[0]['filteragemin'],"agemax"=>$userFilterAgeDistance[0]['filteragemax']);
+        
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
         $relations = ParameterModel::getAllRelation();
-        $filteredUser = array();
-        //TODO GET DEFAULT PARAMETER USER
-        foreach($users as $user) {
-            $idUser = $user['iduser'];
-            $user['photos'] = PhotoModel::getAllPhotos($idUser);
-            array_push($filteredUser,$user);
+
+        //FILTER (WITHOUT DISTANCE FILTER)
+        //$users = UserModel::filterUsersSwipe($idUser);
+        $users = UserModel::getAllUsers($idUser);
+
+
+        for($i=0; $i<count($users);$i++){
+            $idUser = $users[$i]['iduser'];
+            $users[$i]['photos'] = PhotoModel::getAllPhotos($idUser);
         }
         $data = [
             'userSelectedRelationType' =>$userSelectedRelationType,
@@ -47,7 +52,7 @@ class SwipeController extends Controller{
             'userSelectedGender' => $userSelectedGender,
             'userSelectDistance' => $userSelectDistance,
             'userSelectAge' => $userSelectAge,
-            'users' => $filteredUser,
+            'users' => $users,
             'relations' => $relations,
             'sexs'=>$sexs,
             'diets'=>$diets,

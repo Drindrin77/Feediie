@@ -3,7 +3,24 @@ $(".dropdown-menu .stayOpenDropDownItem").click(function (e) {
 })
 
 
+$(".deleteSex").click(function (e) {
+    let parent = $(this).parent().parent();
+    let sex = parent.attr("data-id")
 
+    $.post("/ajax.php?entity=sex&action=delete",
+        {
+            'sex': sex,
+        })
+        .fail(function (e) {
+            console.log("fail", e)
+        })
+        .done(function (e) {
+            let data = JSON.parse(e)
+            if (data.status == "success") {
+                parent.remove();
+            }
+        })
+})
 
 $(".deleteRelation").click(function (e) {
     let parent = $(this).parent().parent();
