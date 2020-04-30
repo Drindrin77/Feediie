@@ -41,6 +41,11 @@ class DishModel extends DBConnection{
         return $req->fetchAll();
     }
 
+    public static function getAllRelationType(){
+        $req = self::$pdo->prepare("select * from RelationType");
+        $req->execute();
+        return $req->fetchAll();
+    }
 
     public static function addFavorite($idUser, $idDish){
         $req = self::$pdo->prepare("insert into likeeat values(?,?)");

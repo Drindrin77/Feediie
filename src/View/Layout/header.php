@@ -2,7 +2,9 @@
     $firstName = $this->headerInfo['firstName'];
     $uniqID = $this->headerInfo['uniqID'];
     $isAdmin = $this->headerInfo['isAdmin'];
-    $photo = empty($this->headerInfo['photo'])?PATH_DEFAULT_USER_PHOTO:$this->headerInfo['photo']['url'];
+    $photo = $this->headerInfo['photo'];
+    if(is_array($photo))
+        $photo = $photo['url'];
 ?>
 
 

@@ -113,7 +113,7 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<script type="text/javascript" src="/Script/header.js"></script>';
-                    include_once('Script/footer.js');
+                    //include_once('Script/footer.js');
                     include_once('Script/header.js');
                   }
                   ?>

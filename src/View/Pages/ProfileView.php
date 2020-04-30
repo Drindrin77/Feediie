@@ -29,9 +29,15 @@
                 </div>
             </div>
 
-            <hr class="solid">
+            <?php
+                if(empty($this->data['photos'])){
+                    echo '<div class="alert alert-warning" role="alert">
+                        N\'hésitez pas à rajouter une photo ! Certaines personnes n\'apprécient pas le goût du risque !
+                        </div>';
+                }
+            ?>
 
-            <div class="row">
+            <div class="row" style="margin-top: 15px;"> 
                 <div class="col">
                     <div id="containerDescription" style="word-wrap:break-word">
                         <i class="fa fa-quote-left"></i> <?= $infoUser['description'] ?> <i class="fa fa-quote-right"></i>

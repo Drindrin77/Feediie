@@ -11,8 +11,6 @@ $(document).ready(function () {
     let city = $("#cityControl").children("option:selected").val()
     let description = $("#description").val()
 
-    // $j is now an alias to the jQuery function; creating the new alias is optional.
-
     $('[data-toggle="popover"]').popover()
 
     $("#btnOpenModalResetPassword").click(function () {
@@ -409,6 +407,7 @@ $(document).ready(function () {
                         let url = data.data.url
                         let priority = data.data.priority
                         addPhoto(url, priority)
+                        $("#alertEmptyPhoto").addClass("invisible")
                     }, 1000);
                 } else {
                     $("#alerteMsgErrorUpload").removeClass("invisible")

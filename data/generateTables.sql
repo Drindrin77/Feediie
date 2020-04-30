@@ -7,10 +7,11 @@
 ------------------------------------------------------------
 -- Table: Category
 ------------------------------------------------------------
-CREATE TABLE Category(
-	idCategory   SERIAL NOT NULL ,
+CREATE TABLE RelationType(
+	idRelationType   SERIAL NOT NULL ,
+	iconURL			VARCHAR (128),
 	nom          VARCHAR (128) NOT NULL  ,
-	CONSTRAINT Category_PK PRIMARY KEY (idCategory)
+	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;
 
 
@@ -92,13 +93,13 @@ CREATE TABLE likedUser(
 ------------------------------------------------------------
 -- Table: interestedCategory
 ------------------------------------------------------------
-CREATE TABLE interestedCategory(
+CREATE TABLE interestedRelationType(
 	idUser       INT  NOT NULL ,
-	idCategory   INT  NOT NULL  ,
-	CONSTRAINT interestedCategory_PK PRIMARY KEY (idUser,idCategory)
+	idRelationType   INT  NOT NULL  ,
+	CONSTRAINT interestedRelationType_PK PRIMARY KEY (idUser,idRelationType)
 
 	,CONSTRAINT interestedCategory_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT interestedCategory_Category0_FK FOREIGN KEY (idCategory) REFERENCES Category(idCategory)
+	,CONSTRAINT interestedRelationType_FK FOREIGN KEY (idRelationType) REFERENCES RelationType(idRelationType)
 )WITHOUT OIDS;
 
 
@@ -107,7 +108,7 @@ CREATE TABLE interestedCategory(
 ------------------------------------------------------------
 CREATE TABLE interestedsex(
 	idUser   INT  NOT NULL ,
-	sex   VARCHAR(24)  NOT NULL  ,
+	sex   VARCHAR(128)  NOT NULL  ,
 	CONSTRAINT interestedsex_PK PRIMARY KEY (idUser,sex)
 
 	,CONSTRAINT interestedsex_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
@@ -157,15 +158,6 @@ CREATE TABLE idea(
 	,CONSTRAINT idea_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
 )WITHOUT OIDS;
 
-------------------------------------------------------------
--- Table: TypeRestaurant
-------------------------------------------------------------
-CREATE TABLE TypeRestaurant(
-	idRestaurant   SERIAL NOT NULL ,
-	name           VARCHAR (500) NOT NULL  ,
-	CONSTRAINT TypeRestaurant_PK PRIMARY KEY (idRestaurant)
-)WITHOUT OIDS;
-
 
 ------------------------------------------------------------
 -- Table: Dish
@@ -198,19 +190,6 @@ CREATE TABLE Hobby(
 	name      VARCHAR (128) NOT NULL  ,
 	CONSTRAINT Hobby_PK PRIMARY KEY (idHobby)
 )WITHOUT OIDS;
-
-------------------------------------------------------------
--- Table: firstDate
-------------------------------------------------------------
-CREATE TABLE firstDate(
-	idUser         INT  NOT NULL ,
-	idRestaurant   INT  NOT NULL  ,
-	CONSTRAINT firstDate_PK PRIMARY KEY (idUser,idRestaurant)
-
-	,CONSTRAINT firstDate__User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
-	,CONSTRAINT firstDate_TypeRestaurant0_FK FOREIGN KEY (idRestaurant) REFERENCES TypeRestaurant(idRestaurant)
-)WITHOUT OIDS;
-
 
 ------------------------------------------------------------
 -- Table: likeEat
@@ -250,5 +229,45 @@ CREATE TABLE practice(
 	,CONSTRAINT practice_Hobby0_FK FOREIGN KEY (idHobby) REFERENCES Hobby(idHobby)
 )WITHOUT OIDS;
 
+------------------------------------------------------------
+-- Table: diet
+------------------------------------------------------------
+CREATE TABLE diet(
+    idDiet   SERIAL NOT NULL ,
+    name     VARCHAR (128) NOT NULL,
+    CONSTRAINT diet_PK PRIMARY KEY (idDiet)
+)WITHOUT OIDS;
+-----------------------------------------------------------
+-- Table : interesteddiet
+-----------------------------------------------------------
+CREATE TABLE interesteddiet(
+    idUser   INT  NOT NULL ,
+    idDiet   INT  NOT NULL ,
+    CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
 
+    ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+    ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)
+)WITHOUT OIDS;
 
+-----------------------------------------------------------
+-- Table : rangeDistance
+-----------------------------------------------------------
+CREATE TABLE rangeDistance(
+    idUser   INT  NOT NULL ,
+    distance   INT  NOT NULL DEFAULT 50,
+    CONSTRAINT rangedistance_PK PRIMARY KEY (idUser,distance)
+
+    ,CONSTRAINT rangedistance_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+)WITHOUT OIDS;
+
+-----------------------------------------------------------
+-- Table : rangeAge
+-----------------------------------------------------------
+CREATE TABLE rangeAge(
+    idUser   INT  NOT NULL ,
+    ageMin   INT  NOT NULL DEFAULT 18,
+    ageMax   INT  NOT NULL DEFAULT 30,
+    CONSTRAINT rangeage_PK PRIMARY KEY (idUser,ageMin,ageMax)
+
+    ,CONSTRAINT rangeage_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)
+)WITHOUT OIDS;
