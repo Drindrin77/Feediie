@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    $(document).on("click", ".expand", function (evt) {
+        let url = $(this).parent().parent().find("img").attr('src');
+        $("#imgInfoPhoto").attr("src", url)
+        $("#modalInfoPhoto").modal()
+    })
+
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
@@ -442,7 +448,7 @@ $(document).ready(function () {
 
     function addPhoto(url, priority) {
         $(".containerEmptyPhoto").first().empty()
-        $(".containerEmptyPhoto").first().append('<img class="image" priority="' + priority + '" src="' + url + '"><div class="containerPriority" data-priority="' + priority + '"><i class= "fa fa-star"></i></div > <div class="overlay"></div> <div class="btnGroupPhoto"><div class="containerBtnPhoto"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div><div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div></div>');
+        $(".containerEmptyPhoto").first().append('<img class="image" priority="' + priority + '" src="' + url + '"><div class="containerPriority" data-priority="' + priority + '"><i class= "fa fa-star"></i></div > <div class="overlay"></div> <div class="btnGroupPhoto"><div class="containerBtnPhoto expand"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div><div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div></div>');
         $(".containerEmptyPhoto").first().addClass('containerNotEmptyPhoto');
         $(".containerEmptyPhoto").first().removeClass('containerEmptyPhoto');
     }
