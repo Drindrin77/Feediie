@@ -53,14 +53,17 @@ class UserRequest extends RequestService{
         $dietSelect = $_POST['dietSelect'];
         $relationSelect = $_POST['relationSelect'];
         $ageMax = $_POST['ageRangemax'];
-        $idUser = $this->currentUser['iduser'];
-        if(ParameterModel::updateRangeDistance($idUser, $distance)){
+        $idUser = $this->currentUser['iduser']; 
+
+
+
+        if(ParameterModel::updateDistance($idUser, $distance)){
             $this->addMessageSuccess('La distance a ete mise a jour');
         }
         else{
             $this->addMessageError('Erreur BD mise a jour distance');
         }
-        if(ParameterModel::updateRangeAge($idUser, $ageMin, $ageMax)){
+        if(ParameterModel::updateAge($idUser, $ageMin, $ageMax)){
             $this->addMessageSuccess('L age a ete mis a jour');
         }
         else{
@@ -129,8 +132,7 @@ class UserRequest extends RequestService{
 
     private function editInfo(){
         if(AuthService::isAuthenticated()){
-            $idUser = AuthService::getCurrentUser()['iduser'];
-            if(!UserModel::editInfo($_POST, $idUser)){
+            if(!UserModel::editInfo($_POST, $this->currentUser[$idUser])){
                 $this->addMessageSuccess('Erreur BD');
             }else{
                 $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');

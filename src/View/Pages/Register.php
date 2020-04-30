@@ -40,13 +40,13 @@
                 <p class="error" id='fNameError' hidden>Veuillez renseigner votre prénom/surnom </p>
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
-                    <input type="text" id="firstname" required size="50" class="form-control w-25" placeholder="Prénom ou surnom">
+                    <input type="text" id="firstname" required size="50" class="form-control w-50" placeholder="Prénom ou surnom">
 
                     <p class="error" id='birthdayError' hidden>La date n'a pas le bon format</p>
 
                     <div class='date' id='datetimepicker1'>
                         <label>Date de naissance:</label>
-                        <input type='date' id="birthday" class="form-control w-25"/>
+                        <input type='date' id="birthday" class="form-control w-50"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>

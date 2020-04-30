@@ -46,8 +46,9 @@ CREATE TABLE FeediieUser(
 	email						VARCHAR (128) NOT NULL UNIQUE,
 	password                    VARCHAR (128) NOT NULL ,
 	description                 VARCHAR (500) ,
-	needPhotoOther              BOOL  NOT NULL DEFAULT FALSE,
 	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
+	filterAgeMin				INT DEFAULT 18,
+	filterAgeMax				INT DEFAULT 60,
 	distanceMax                 INT  NOT NULL DEFAULT 15,
     token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
@@ -59,7 +60,6 @@ CREATE TABLE FeediieUser(
 	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
 	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
 )WITHOUT OIDS;
-
 
 ------------------------------------------------------------
 -- Table: Photo
@@ -237,6 +237,23 @@ CREATE TABLE diet(
     name     VARCHAR (128) NOT NULL,
     CONSTRAINT diet_PK PRIMARY KEY (idDiet)
 )WITHOUT OIDS;
+
+
+------------------------------------------------------------
+-- Table: diet
+------------------------------------------------------------
+
+CREATE TABLE followDiet(
+    idUser   INT  NOT NULL ,
+    idDiet   INT  NOT NULL ,
+    CONSTRAINT userDiet_PK PRIMARY KEY (idUser,idDiet)
+
+    ,CONSTRAINT userDiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
+    ,CONSTRAINT userDiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
+)WITHOUT OIDS;
+
+
+
 -----------------------------------------------------------
 -- Table : interesteddiet
 -----------------------------------------------------------
@@ -249,34 +266,4 @@ CREATE TABLE interesteddiet(
     ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
 )WITHOUT OIDS;
 
------------------------------------------------------------
--- Table : rangeDistance
------------------------------------------------------------
-CREATE TABLE rangeDistance(
-    idUser   INT  NOT NULL ,
-    distance   INT  NOT NULL DEFAULT 50,
-    CONSTRAINT rangedistance_PK PRIMARY KEY (idUser,distance)
 
-    ,CONSTRAINT rangedistance_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
-)WITHOUT OIDS;
-
------------------------------------------------------------
--- Table : rangeAge
------------------------------------------------------------
-CREATE TABLE rangeAge(
-    idUser   INT  NOT NULL ,
-    ageMin   INT  NOT NULL DEFAULT 18,
-    ageMax   INT  NOT NULL DEFAULT 30,
-    CONSTRAINT rangeage_PK PRIMARY KEY (idUser,ageMin,ageMax)
-
-    ,CONSTRAINT rangeage_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
-)WITHOUT OIDS;
-
-CREATE TABLE userDiet(
-    idUser   INT  NOT NULL ,
-    idDiet   INT  NOT NULL ,
-    CONSTRAINT userDiet_PK PRIMARY KEY (idUser,idDiet)
-
-    ,CONSTRAINT userDiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
-    ,CONSTRAINT userDiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
-)WITHOUT OIDS;

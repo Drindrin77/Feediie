@@ -7,24 +7,19 @@ class ParameterModel extends DBConnection{
     public function __construct () {
     }
 
-    public static function getRangeDistance($idUser){
-        $req = self::$pdo->prepare("select distance from rangeDistance where idUser = ?");
+    public static function getUserFilterAgeDistance($idUser){
+        $req = self::$pdo->prepare("select distanceMax, filterAgeMin, filterAgeMax from feediieuser where idUser = ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
 
-    public static function getRangeAge($idUser){
-        $req = self::$pdo->prepare("select ageMin,ageMax from rangeAge where idUser = ?");
-        $req->execute(array($idUser));
-        return $req->fetchAll();
-    }
-    public static function updateRangeDistance($idUser,$distance){
-        $req = self::$pdo->prepare("update rangeDistance set distance = ? where idUser = ?");
+    public static function updateDistance($idUser,$distance){
+        $req = self::$pdo->prepare("update feediieuser set distance = ? where idUser = ?");
         $req->execute(array($distance,$idUser));
         return $req->fetchAll();
     }
-    public static function updateRangeAge($idUser,$ageMin,$ageMax){
-        $req = self::$pdo->prepare("update rangeAge set ageMin = ?, ageMax = ? where idUser = ?");
+    public static function updateAge($idUser,$ageMin,$ageMax){
+        $req = self::$pdo->prepare("update feediieuser set ageMin = ?, ageMax = ? where idUser = ?");
         $req->execute(array($ageMin,$ageMax,$idUser));
         return $req->fetchAll();
     }

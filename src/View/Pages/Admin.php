@@ -173,9 +173,9 @@
                                         <tbody>
                                             <?php
                                                 foreach($sexs as $sex){
-                                                    echo '<tr>
+                                                    echo '<tr data-id='.$sex['name'].'>
                                                     <td>'.$sex['name'].'</td>
-                                                    <td><button class="btn btn-danger">Supprimer</button></td>
+                                                    <td><button class="btn btn-danger deleteSex">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
