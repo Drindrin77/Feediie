@@ -38,6 +38,7 @@ class UserRequest extends RequestService{
         $ageMin = $_POST['ageRangemin'];
         $sexSelect = $_POST['sexSelect'];
         $dietSelect = $_POST['dietSelect'];
+        $relationSelect = $_POST['relationSelect'];
         $ageMax = $_POST['ageRangemax'];
         $idUser = $this->currentUser['iduser'];
         if(ParameterModel::updateRangeDistance($idUser, $distance)){
@@ -72,6 +73,17 @@ class UserRequest extends RequestService{
                 $this->addMessageSuccess('Les diets on ete mis a jour');
             } else {
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');
+            }
+        }
+        if(ParameterModel::removeUserSelectedRelation($idUser))
+        {
+            $this->addMessageSuccess('Table selectrelation vide');
+        }
+        foreach ($relationSelect as $relation) {
+            if (ParameterModel::updateUserSelectedRelation($idUser, $relation)) {
+                $this->addMessageSuccess('Les relations on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour relations selectionne');
             }
         }
         //ON RECUPÈRE LES DONNEES DE CURRENT USER

@@ -18,36 +18,70 @@ $(document).ready(function () {
         }
     });
 
-    $("#showMore1").click(function () {
-        if (document.getElementById("boxSelectModified1").style.height === "auto") {
-            $("#boxSelectModified1").css('height', '75px');
-            $("#boxSelectModified2").show();
-            $(".boxSelect").show();
-            $("#showMore2").show();
+    $("#showMoreSex").click(function () {
+        if (document.getElementById("boxSelectModifiedSex").style.height === "auto") {
+            $("#boxSelectModifiedSex").css('height', '75px');
+            $("#boxSelectModifiedDiet").show();
+            $("#showMoreDiet").show();
+            $("#boxSelectModifiedCat").show();
+            $("#showMoreCat").show();
+            $("#boxSelectAge").css({ height : 'auto',opacity : '100'});
+            $("#boxSelectDistance").css({ height : 'auto',opacity : '100'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
         } else {
-            $("#boxSelectModified1").css('height', 'auto');
-            $("#boxSelectModified2").hide();
-            $(".boxSelect").hide();
-            $("#showMore2").hide();
+            $("#boxSelectModifiedSex").css('height', 'auto');
+            $("#boxSelectModifiedDiet").hide();
+            $("#showMoreDiet").hide();
+            $("#boxSelectModifiedCat").hide();
+            $("#showMoreCat").hide();
+            $("#boxSelectAge").css({ height : '0',opacity : '0'});
+            $("#boxSelectDistance").css({ height : '0',opacity : '0'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
-    $("#showMore2").click(function () {
-        if (document.getElementById("boxSelectModified2").style.height === "auto") {
-            $("#boxSelectModified2").css('height', '75px');
-            $("#boxSelectModified1").show();
-            $("#showMore1").show();
-            $(".boxSelect").show();
+    $("#showMoreDiet").click(function () {
+        if (document.getElementById("boxSelectModifiedDiet").style.height === "auto") {
+            $("#boxSelectModifiedDiet").css('height', '75px');
+            $("#boxSelectModifiedSex").show();
+            $("#showMoreSex").show();
+            $("#boxSelectModifiedCat").show();
+            $("#showMoreCat").show();
+            $("#boxSelectAge").css({ height : 'auto',opacity : '100'});
+            $("#boxSelectDistance").css({ height : 'auto',opacity : '100'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
         } else {
-            $("#boxSelectModified2").css('height', 'auto');
-            $("#boxSelectModified1").hide();
-            $("#showMore1").hide();
-            $(".boxSelect").hide();
+            $("#boxSelectModifiedDiet").css('height', 'auto');
+            $("#boxSelectModifiedSex").hide();
+            $("#showMoreSex").hide();
+            $("#boxSelectModifiedCat").hide();
+            $("#showMoreCat").hide();
+            $("#boxSelectAge").css({ height : '0',opacity : '0'});
+            $("#boxSelectDistance").css({ height : '0',opacity : '0'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
+    $("#showMoreCat").click(function () {
+        if (document.getElementById("boxSelectModifiedCat").style.height === "auto") {
+            $("#boxSelectModifiedCat").css('height', '75px');
+            $("#boxSelectModifiedSex").show();
+            $("#showMoreSex").show();
+            $("#boxSelectModifiedDiet").show();
+            $("#showMoreDiet").show();
+            $("#boxSelectAge").css({ height : 'auto',opacity : '100'});
+            $("#boxSelectDistance").css({ height : 'auto',opacity : '100'});
+            $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
+        } else {
+            $("#boxSelectModifiedCat").css('height', 'auto');
+            $("#boxSelectModifiedSex").hide();
+            $("#showMoreSex").hide();
+            $("#boxSelectModifiedDiet").hide();
+            $("#showMoreDiet").hide();
+            $("#boxSelectAge").css({ height : '0',opacity : '0'});
+            $("#boxSelectDistance").css({ height : '0',opacity : '0'});
+            $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
+        }
+    });
+
 
     ///////////////////////RECUPERATION DES DONNEES PARAMETRES////////////////////////
 
@@ -107,7 +141,14 @@ $(document).ready(function () {
         $.each($("input[name='diet']:checked"), function() {
             dietSelect.push($(this).attr('id'));
         });
-        //alert("Vous avez selectionne : " + dietSelect.join(", "));
+        alert("Vous avez selectionne : " + dietSelect.join(", "));
+
+        let relationSelect = [];
+        $.each($("input[name='relation']:checked"), function() {
+            relationSelect.push($(this).attr('id'));
+        });
+        alert("Vous avez selectionne : " + relationSelect.join(", "));
+
         $.post("/ajax.php?entity=user&action=filter",
             {
                 distanceMax : distanceMax,
@@ -115,6 +156,7 @@ $(document).ready(function () {
                 ageRangemax : ageRangemax,
                 sexSelect : sexSelect,
                 dietSelect : dietSelect,
+                relationSelect : relationSelect,
             })
             .fail(function (e) {
                 console.log("fail", e);

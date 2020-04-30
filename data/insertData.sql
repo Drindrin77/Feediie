@@ -6,12 +6,19 @@ INSERT INTO sex VALUES('Pangender');
 INSERT INTO sex VALUES('Trans');
 INSERT INTO sex VALUES('Pinguoin');
 INSERT INTO sex VALUES('Other');
+
 INSERT INTO diet VALUES(default, 'Végétarien');
 INSERT INTO diet VALUES(default, 'Sans gluten');
 INSERT INTO diet VALUES(default, 'Halal');
 INSERT INTO diet VALUES(default, 'Végan');
 INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
+
+INSERT INTO RelationType VALUES(default,'Plan cul régulier','Tu cherches un plan Q régulier car tu aimes croquer la vie à pleine dent');
+INSERT INTO RelationType VALUES(default,'Amitié', 'Tu cherches de l amitié rien que de l amitié pour un moment convivial');
+INSERT INTO RelationType VALUES(default,'Relation sérieuse', 'Tu recherches quelque chose de sérieux');
+INSERT INTO RelationType VALUES(default, 'Juste un soir','Tu cherches un coup d un soir pour ne nuit... caliente !');
+
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
 INSERT INTO FeediieUser VALUES
@@ -75,11 +82,6 @@ INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Pas de pri
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Partager avant tout', '/Images/Dish/pizza.png');
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
 INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Attentionné', '/Images/Dish/pommeAmour.jpg');
-
-INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Relation sérieuse');
-INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Plan cul');
-INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Amitié');
-INSERT INTO RelationType VALUES(default, '/Images/Dish/relation_default.png', 'Coup d''un soir');
 
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');
@@ -178,6 +180,10 @@ INSERT INTO interestedsex VALUES (2,'Femme');
 INSERT INTO interestedsex VALUES (2,'Pangender');
 INSERT INTO interestedsex VALUES (2,'Pinguoin');
 
+INSERT INTO interestedRelationType VALUES (2,'1');
+INSERT INTO interestedRelationType VALUES (2,'2');
+INSERT INTO interestedRelationType VALUES (1,'1');
+INSERT INTO interestedRelationType VALUES (1,'2');
 INSERT INTO rangeDistance VALUES (2,'66');
 INSERT INTO rangeDistance VALUES (1,'88');
 
