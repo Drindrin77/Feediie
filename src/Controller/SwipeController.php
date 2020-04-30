@@ -35,8 +35,6 @@ class SwipeController extends Controller{
         $diets = DietModel::getAllDiet();
         $relations = ParameterModel::getAllRelation();
         $filteredUser = array();
-        var_dump($userSelectedRelationType);
-        var_dump($relations);
         //TODO GET DEFAULT PARAMETER USER
         foreach($users as $user) {
             $idUser = $user['iduser'];

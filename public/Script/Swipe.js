@@ -141,13 +141,13 @@ $(document).ready(function () {
         $.each($("input[name='diet']:checked"), function() {
             dietSelect.push($(this).attr('id'));
         });
-        alert("Vous avez selectionne : " + dietSelect.join(", "));
+      //  alert("Vous avez selectionne : " + dietSelect.join(", "));
 
         let relationSelect = [];
         $.each($("input[name='relation']:checked"), function() {
             relationSelect.push($(this).attr('id'));
         });
-        alert("Vous avez selectionne : " + relationSelect.join(", "));
+      //  alert("Vous avez selectionne : " + relationSelect.join(", "));
 
         $.post("/ajax.php?entity=user&action=filter",
             {
