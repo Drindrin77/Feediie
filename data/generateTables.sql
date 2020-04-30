@@ -51,13 +51,13 @@ CREATE TABLE FeediieUser(
 	distanceMax                 INT  NOT NULL DEFAULT 15,
     token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
-	idCity                      INT   NOT NULL,
+	idCity                      INT,
     nbReport                    INT DEFAULT 0,
-	sex                         VARCHAR  NOT NULL,
+	sex                         VARCHAR,
 	CONSTRAINT User_PK PRIMARY KEY (idUser)
 
-	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)  ON DELETE CASCADE
-	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)  ON DELETE CASCADE
+	,CONSTRAINT User_City_FK FOREIGN KEY (idCity) REFERENCES City(idCity)
+	,CONSTRAINT User_sex0_FK FOREIGN KEY (sex) REFERENCES sex(name)
 )WITHOUT OIDS;
 
 
