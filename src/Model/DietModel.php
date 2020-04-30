@@ -22,7 +22,7 @@ class DietModel extends DBConnection{
         return $req->fetchAll();
     }
     public static function updateUserSelectedDiet($idUser,$dietSelect){
-        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet) values (?,?)");
+        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet) values (?,(select idDiet from diet where name = ?))");
         $req->execute(array($idUser,$dietSelect));
         return $req->fetchAll();
     }
