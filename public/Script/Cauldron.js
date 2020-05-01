@@ -1,6 +1,7 @@
 $(window).load(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
+    scrollDownChatBox();
     setInterval(updateMatchAndMessages, 1000)
 });
 
@@ -8,6 +9,8 @@ $(window).resize(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
 });
+
+
 
 
 function spaceBelow2Div(divA, divB) {
@@ -92,7 +95,6 @@ function fetchUnreadMessages(contactUniqId) {
         success: function (data) {
            // console.log(data);
             data = data.data;
-            console.log(contactUniqId);
             fillChatBox(data.messageList, null, contactUniqId);
         },
         error: function (e) {
@@ -102,13 +104,16 @@ function fetchUnreadMessages(contactUniqId) {
 }
 
 function fillChatBox(messageList, userPhoto, contactUniqId) {
-    console.log(contactUniqId);
+    let isScrollDown = $("#chatBox").scrollTop() == ($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
     for (let i = messageList.length - 1; i >= 0; i--) {
         //console.log(createMessageDiv(messageList[i].message, userPhoto, true));
         let isCurrentUser = contactUniqId !== messageList[i].uniqid;
-        console.log("contact uniq id = " + contactUniqId + "  message uniq id = " + messageList[i].uniqid)
         $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
     }
+    if(isScrollDown){
+        scrollDownChatBox();
+    }
+
 }
 
 function createMessageDiv(messageText, userPhoto, isCurrentUser) {
@@ -157,7 +162,6 @@ $("#sendMessageButton").on("click", function () {
             },
             success: function (data) {
                 data = data.data;
-                console.log(data);
                 if (data.isInserted === true) {
                     const message = {
                         "message": inputMessage,
@@ -173,5 +177,11 @@ $("#sendMessageButton").on("click", function () {
             }
         });
         $("#inputMessage").val("");
+
     }
 });
+
+function scrollDownChatBox(){
+    console.log($("#chatBox"));
+    $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
+}
