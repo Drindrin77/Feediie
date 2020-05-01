@@ -5,16 +5,12 @@ $(document).ready(function () {
 
     $("#closeBtn").click(function () {
         if (statusBtnParameter === 'opened') {
-            $("#parameters").css('transform', 'translate(-420px,0)');
-            $(this).css('transform', 'translate(0px,0px)');
-            this.style['-webkit-transition-duration'] = '1s';
-            statusBtnParameter = 'closed'
+            $(".animationParameters").css('transform', 'translate(-420px,0)');
+            statusBtnParameter = 'closed';
 
         } else {
-            $("#parameters").css('transform', 'translate(-120px,0)');
-            $(this).css('transform', 'translate(250px,0)');
-            this.style['-webkit-transition-duration'] = '1s';
-            statusBtnParameter = 'opened'
+            $(".animationParameters").css('transform', 'translate(-120px,0)');
+            statusBtnParameter = 'opened';
         }
     });
 
@@ -171,32 +167,46 @@ $(document).ready(function () {
         $("#messageSuccess").html("Réglages enregistrés !");
         $('#containerMessageSuccess').show(200).delay(2000).hide(200);
     });
-
+    //AFFICHER PROFILE
+    $('.seeProfil:last').click(function () {
+        $('.watchProfile').css({opacity: '100%','pointer-events':'all','transform': 'translate(0px,0)'});
+        $('#blockButtons').css({opacity: '0%','pointer-events':'none'});
+        $('.moveOpenProfil').css({'transform': 'translate(0px,0)'});
+    });
+    $('#closeProfileBtn').click(function () {
+        $('.watchProfile').css({opacity: '0%','pointer-events':'none','transform':' translate(-160px,0)'});
+        $('#blockButtons').css({opacity: '100%','pointer-events':'all'});
+        $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
+    });
     // SWIPE
 
     $('#miamBtn').click(function () {
-
-        let actualUser = $('.buddy:last')
+        $(this).css('pointer-events','none');
+        $("#beurkBtn").css('pointer-events','none');
+        let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status miam">Miam!</div>');
-            actualUser.addClass('rotate-left').delay(500).fadeOut(1);
+            actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                //TODO FREEZE BUTTONS
-            }, 500);
+                $(this).css('pointer-events','auto');
+                $("#beurkBtn").css('pointer-events','auto');
+            }, 1000);
         }
     });
     $('#beurkBtn').click(function () {
-
-        let actualUser = $('.buddy:last')
+        $(this).css('pointer-events','none');
+        $("#miamBtn").css('pointer-events','none');
+        let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status beurk">Beurk!</div>');
-            actualUser.addClass('rotate-right').delay(500).fadeOut(1);
+            actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                //TODO FREEZE BUTTONS
+                $(this).css('pointer-events','auto');
+                $("#miamBtn").css('pointer-events','auto');
 
-            }, 500);
+            }, 1000);
         }
     });
 

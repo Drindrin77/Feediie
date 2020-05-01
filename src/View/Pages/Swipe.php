@@ -16,16 +16,8 @@ $ageMax = $userSelectAge['agemax'];
 include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
-    <div class="backgroundOverlay">
-        <div class="container">
-            <div class="row">
-                <div id="profilCloseBtn" class="buttons"><img src="Images/Icon/croix.png" alt=""/></div>
-                <div id="overlayProfil"></div>
-            </div>
-        </div>
-    </div>
-    <div>
-    <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+    <div class="animationParameters">
+        <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
         <div id="parameters" class="container">
             <div class="row">
                 <div class="col-3"></div>
@@ -123,32 +115,57 @@ include_once('../src/View/Pages/UserPhoto.php');
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-lg-12  " >
-                <div class="row" >
-                <div id="card">
-                    <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
-                    <?php if(!empty($users)) {foreach ($users as $user): ?>
-                        <div class="buddy" style="display: block">
-                            <div class="avatar" style="display: block;width:275px;height: 275px">
-                            <?php
-                                $userPhoto = new UserPhoto($user['photos']);
-                                $userPhoto->render();?>
-                            </div>
-                            <div style="color:black" class=" card-body"><?= $user['firstname'] ?>
-                                , <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?></div>
-                            <div class="description"><?= $user['description'] ?>
-                            </div>
-                        </div>
-                    <?php endforeach;} ?>
-                    <div id="profilLink">Afficher le profil</div>
+            <div class="col-sm-2 col-md-2 col-lg-2 ">
+                <div class="relationPanel">
+                    <div class="relationCase"></div>
+                    <div class="relationCase"></div>
+                    <div class="relationCase"></div>
+                    <div class="relationCase"></div>
                 </div>
-                        <div id="blockButtons">
-                            <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
-                            <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
-                        </div>
-                    </div>
             </div>
-            <div class="col-lg-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
+                <div class="row">
+                    <div id="card">
+                        <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
+                        <?php if (!empty($users)) {
+                            foreach ($users as $user): ?>
+                                <div class="buddy" style="display: block">
+                                    <div class="avatar">
+                                        <?php
+                                        $userPhoto = new UserPhoto($user['photos']);
+                                        $userPhoto->render(); ?>
+                                    </div>
+                                    <div class="name"><?= $user['firstname'] ?> <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?>
+                                        ans
+                                        <div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt=""/></div>
+                                        <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
+                                        </div>
+                                    </div>
+                                    <div class="description"><?= $user['description'] ?>inconsiderate et leviter
+                                        proficiscere inquit ut praeceptum est, Caesar sciens quod si cessaveris, et tuas
+                                        et palatii tui auferri iubebo prope diem annonas. hocque solo contumaciter dicto
+                                        subiratus abscessit nec in conspectum eius postea venit saepius arcessitus.
+                                    </div>
+                                    <div class="meat">
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            <?php endforeach;
+                        } ?>
+                    </div>
+                    <div id="blockButtons">
+                        <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
+                        <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
+                <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+                <div class="moreinfoUser"></div>
+            </div>
         </div>
     </div>
 </div>

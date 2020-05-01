@@ -8,12 +8,11 @@
 #card {
     width: 500px;
     margin: auto !important;
-    display: block;
+    display: flex;
     height: 500px;
     position: relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    flex-direction: column;
+    align-items: center;
     list-style-type: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -24,15 +23,20 @@
 }
 .buddy {
     display: none;
-    background: #fff;
+    background: lightgray;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     color: black;
-    width: 275px;
-    height: 440px;
-    top: 40px;
+    width: 300px;
+    height: 480px;
+    top: 20px;
     position: absolute;
     cursor: hand;
+}
+.moveOpenProfil {
+    transform: translate(150px,0);
+    z-index: 20;
+    transition: 0.5s;
 }
 .buddyEnd {
     display: none;
@@ -40,9 +44,9 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     color: black;
-    width: 275px;
-    height: 440px;
-    top: 40px;
+    width: 300px;
+    height: 480px;
+    top: 20px;
     position: absolute;
     cursor: hand;
 }
@@ -62,30 +66,89 @@
     cursor: w-resize;
     z-index: 10;
 }
+.name {
+    display: flex;
+    align-items:center;
+    position: relative;
+    height: 10%;
+    font-size:24px;
+    color: white;
+    border-radius: 0px 0px 15px 15px;
+    background: #AD270D;
+    padding-left: 10px;
+    transform: translate(0,-42px);
+    z-index: 100;
+}
+.titledescription {
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+    position: relative;
+    height: 9%;
+    font-size:10px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: white;
+    border-radius: 0px 0px 15px 15px;
+    background: #721907;
+    transform: translate(0,-65px);
+    z-index: 80;
+}
 .avatar {
-    width: 275px;
-    height: 275px;
+    position: relative;
+    width: 300px;
+    height: 300px;
     display: block;
     border-radius: 15px;
     background-size: auto 160% !important;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: auto;
+    z-index: 50;
 }
-.name {
-    color: white;
-    font-size: 1.5vw;
-    padding-left: 10px;
-    transform: translate(0,-40px);
-    left : 10px;
-    z-index: auto;
-}
+
 .description {
-    font-size: 1vw;
-    padding-left: 10px;
-    transform: translate(0,-20px);
-    left : 10px;
-    z-index: auto;
+    display: block;
+    align-items:flex-start;
+    position: absolute;
+    height: 23%;
+    width: 100%;
+    font-size:15px;
+    line-height:18px;
+    color: black;
+    border-radius: 0 0 15px 15px;
+    background: white;
+    padding: 17px 10px 15px;
+    white-space: normal;
+    word-wrap:break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: translate(0,-55px);
+    z-index: 70;
+}
+.meat{
+    display: flex;
+    align-items:flex-end;
+    position: relative;
+    border-radius: 0px 0px 15px 15px;
+    height: 14%;
+    font-size:22px;
+    color: white;
+    background: #cd1608;
+    transform: translate(0,65px);
+    justify-content: space-evenly;
+}
+.circle{
+    height: 50px;
+    width: 50px;
+    background-color: lightgray;
+    border-radius: 50%;
+    margin: 5px 10px;
+}
+.iconcard img {
+    margin-left:20px;
+    width: 40px;
+    height: auto;
+
 }
 .miam {
     border-radius: 10px;
@@ -111,8 +174,8 @@
     align-content: center;
     width: 100%;
     display: flex;
-    margin-left:30%;
-    margin-right:30%;
+    margin-top: 10px;
+    transition:1s ;
     justify-content: space-evenly;
 }
 .buttons {
@@ -124,8 +187,6 @@
 }
 
 .buttons:hover {
-    width: 50px;
-    height: 50px;
     background: white;
     border-radius: 50px;
     border: solid 5px gray;
@@ -144,16 +205,62 @@
     margin-left: 3px;
     margin-top: 4px;
 }
-
+.animationParameters{
+    transform: translate(-120px,0);
+    transition: 0.5s;
+}
 #parameters {
     margin-top: 20px;
     width: 400px;
     border-radius: 20px;
-    transform: translate(-120px,0);
-    transition-duration: 1s;
     background: #E1E1E1;
     float:left;
     display: flex;
+}
+.relationPanel {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    height: 480px;
+    width: 80px;
+    background: #AD270D;
+    border-radius: 40px;
+    justify-content: space-between;
+    transform: translate(-100px,0);
+}
+.relationCase {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: lightgray;
+    margin: 10px;
+}
+.watchProfile{
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.5s;
+    transform: translate(-160px,0);
+    z-index: 1;
+}
+.moreinfoUser {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: black;
+    width: 400px;
+    height: 480px;
+    left:80px;
+    top: 20px;
+    position: absolute;
+    cursor: hand;
+    z-index:10;
+}
+#closeProfileBtn {
+    position: absolute;
+    /*transform: translate(255px,-20px);*/
+    transform: translate(440px,0);
+    z-index:11;
 }
 
 @media screen and ( max-height: 800px ) {
@@ -163,7 +270,28 @@
         overflow-y: auto;
     }
 }
+@media screen and ( min-height: 800px ) {
 
+    .buddy {
+        border-radius: 25px;
+        width: 365px;
+        height: 594px;
+        background: #ffc107;
+        top: 40px;
+    }
+    .avatar {
+        width: 365px;
+        height: 365px;
+        border-radius: 25px;
+    }
+    #blockButtons {
+        transform: translate(0,150px);
+    }
+    .buttons {
+        width: 60px;
+        height: 60px;
+    }
+}
 
 
 .showMoreBtn {
@@ -204,38 +332,10 @@
 #closeBtn {
     position: absolute;
     /*transform: translate(255px,-20px);*/
-    transform: translate(250px,0);
+    transform: translate(375px,5px);
     z-index:100;
 }
-#overlayProfil {
-    display: flex;
-    background: #fff;
-    margin-left:200px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    width: 700px;
-    height: 500px;
-    opacity: 100%;
-    top: 30px;
-    position: absolute;
-    cursor: hand;
-}
-.backgroundOverlay {
-    display: flex;
-    position: absolute;
-    background: rgba(38, 12, 12, 0.8);
-    width: 100%;
-    transform: translate(-15px,0);
-    z-index:100;
-    opacity: 0;
-    transition: 1s;
-    pointer-events: none;
-}
-#profilCloseBtn {
-    transform: translate(870px,10px);
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    z-index:1000;
-}
+
 #submitParameter {
     width: 100%;
     margin-bottom: 10px;
