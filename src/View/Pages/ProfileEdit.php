@@ -9,7 +9,10 @@
     $favoriteDish = $this->data['favoriteDish'];
     $allDish = $this->data['allDish'];
     $photos = $this->data['photos'];
+    $allDiets = $this->data['allDiets'];
+    $diets = $this->data['diets'];
 
+    $passwordPolicy = isset($this->data['policy']) ? $this->data['policy'] : null;
 ?>
 
 <div id="background">
@@ -36,6 +39,9 @@
                 <li class="nav-item">
                     <span class="nav-link" targetIDContent='contentDish'>Plats</span>
                 </li>
+                <li class="nav-item">
+                    <span class="nav-link" targetIDContent='contentDiet'>Régime</span>
+                </li>
             </ul>
 
             <div class="modal" id="modalResetPassword" tabindex="-1" role="dialog">
@@ -58,7 +64,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="passwordInput">Nouveau mot de passe</label>
+                                <label for="passwordInput">Nouveau mot de passe</label> 
+                                <span  id="passwordpopup" data-toggle="popover" data-placement="right" data-trigger="hover" data-html="true" data-content=<?php echo "\"".$passwordPolicy."\"" ?>>
+                                    <i class="fas fa-info-circle"></i>
+                                </span>
                                 <br>
                                 <input class="w-75" required type="password" id="newPassword" name="password" placeholder="Mot de passe">
                                 <br>
@@ -107,9 +116,26 @@
             <div class="navContent" id="contentPhoto">
 
                 <h3 class="titleSection">Mes photos</h3>
+                <?php
+                if(empty($this->data['photos'])){
+                    echo '<div id="alertEmptyPhoto" class="alert alert-warning" role="alert">
+                        N\'hésitez pas à rajouter une photo ! Certaines personnes n\'apprécient pas le goût du risque !
+                        </div>';
+                }
+            ?>
                 <div class="alert alert-danger invisible" role="alert" id="alerteMsgErrorUpload">
                     
                 </div>
+                
+                <div class="modal" id="modalInfoPhoto" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img id="imgInfoPhoto" class="w-100" src="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <div class="row justify-content-center" id="containerPhotos">
                     <?php foreach($photos as $photo): ?>
@@ -123,7 +149,7 @@
                         <div class="overlay"></div>
 
                         <div class="btnGroupPhoto">
-                            <div class="containerBtnPhoto"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div>
+                            <div class="containerBtnPhoto expand"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div>
                             <div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div>
                         </div>
                     </div>
@@ -212,7 +238,7 @@
                 <div id="containerPracticedHobby">
                     <?php foreach($hobbies as $hobby): ?>
                         <div class="containerHobby practicedHobby" id="<?= $hobby['idhobby']?>">
-                        <i class="fas fa-ban deleteHobbyIcon"></i><span> <?= $hobby['name'] ?></span>
+                        <i class="fas fa-ban deleteHobbyIcon"></i><span> <?=  $hobby['name'] ?></span>
                         </div>
                     <?php endforeach ?>
                 </div>
@@ -290,6 +316,38 @@
                         <?php endforeach ?>
                     </div>
                 </div>
+            </div>
+            <div class="navContent" id="contentDiet">
+
+                <h3 class="titleSection">Mes régimes alimentaires</h3>
+            
+                    <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        foreach($allDiets as $diet){
+                                            echo '<tr data-id='.$diet['iddiet'].'>
+                                            <td>'.$diet['name'].'</td>
+                                            <td>';
+                                                if(in_array($diet['name'],$diets))
+                                                    echo '<button class="btn btn-danger deleteDiet">Supprimer</button>';
+                                                else 
+                                                    echo '<button class="btn btn-success addDiet">Ajouter</button>';
+                                            echo '</td>
+                                            </tr>';
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>            
             </div>
         </div>
     </div>

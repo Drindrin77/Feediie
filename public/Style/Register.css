@@ -21,3 +21,15 @@ table {
 #navbarHead{
 	background-color: orange;
 }
+
+input[type='date']{
+	cursor: pointer;
+}
+
+#seePassword{
+	cursor: help;
+}
+
+select{
+	cursor: pointer;
+}

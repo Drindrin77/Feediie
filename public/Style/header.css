@@ -2,12 +2,12 @@
     background-color: orange;
 }
 
-#containerHeaderPhoto,#dropdown{
+#containerHeaderPhoto,#dropdownProfilContainer{
     display:inline-block;
     vertical-align: bottom;
 }
 
-#dropdown{
+#dropdownProfilContainer{
     z-index:10000;
 }
 

@@ -37,10 +37,11 @@ class ProfileController extends Controller{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $idUser = $userInfo['iduser'];
             $photos = PhotoModel::getAllPhotos($idUser);
-            $personalities = DishModel::getUserPersonalities($idUser);
+            $personalities = PersonalityModel::getUserPersonalities($idUser);
             $hobbies = HobbyModel::getUserHobbies($idUser);
             $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
-
+            $diets = DietModel::getUserDiet($idUser);
+            
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
                 'user'=>$userInfo,
@@ -48,6 +49,7 @@ class ProfileController extends Controller{
                 'personalities'=>$personalities,
                 'hobbies'=>$hobbies,
                 'favoriteDish'=>$favoriteDish,
+                'diets'=>$diets
             ];
             return new ViewModel('ProfileView',$data);
         }
@@ -61,12 +63,15 @@ class ProfileController extends Controller{
         $allHobbies = HobbyModel::getUnpracticedHobbies($idUser);
         $allSexs = SexModel::getAllSex();
         $allCities = CityModel::getAllCity();
-        $allPersonalities = DishModel::getUnusedPersonalities($idUser);
+        $allPersonalities = PersonalityModel::getUnusedPersonalities($idUser);
         $allDish = DishModel::getUnusedDishes($idUser);
         $photos = PhotoModel::getAllPhotos($idUser);
-        $personalities = DishModel::getUserPersonalities($idUser);
+        $personalities = PersonalityModel::getUserPersonalities($idUser);
         $hobbies = HobbyModel::getUserHobbies($idUser);
         $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
+        $policy = PasswordService::policyToString();
+        $allDiets = DietModel::getAllDiet();
+        $diets = DietModel::getUserDiet($idUser);
 
         $data = [
             'user'=>$user,
@@ -78,7 +83,10 @@ class ProfileController extends Controller{
             'allPersonalities'=>$allPersonalities,
             'allCities'=>$allCities,
             'allSexs'=>$allSexs,
-            'allDish'=>$allDish
+            'allDish'=>$allDish,
+            'policy' => $policy,
+            'allDiets'=>$allDiets,
+            'diets'=>$diets
         ];
         
         return new ViewModel('ProfileEdit', $data);

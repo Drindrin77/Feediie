@@ -2,7 +2,9 @@
     $firstName = $this->headerInfo['firstName'];
     $uniqID = $this->headerInfo['uniqID'];
     $isAdmin = $this->headerInfo['isAdmin'];
-    $photo = empty($this->headerInfo['photo'])?PATH_DEFAULT_USER_PHOTO:$this->headerInfo['photo']['url'];
+    $photo = $this->headerInfo['photo'];
+    if(is_array($photo))
+        $photo = $photo['url'];
 ?>
 
 
@@ -71,8 +73,8 @@
                 <?php echo '<img id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
             </div>
 
-            <div id="dropdown" class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div id="dropdownProfilContainer" class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="btnDropdownProfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo $firstName; ?>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

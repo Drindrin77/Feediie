@@ -1,4 +1,57 @@
 $(document).ready(function () {
+
+    $(document).on("click", ".expand", function (evt) {
+        let url = $(this).parent().parent().find("img").attr('src');
+        $("#imgInfoPhoto").attr("src", url)
+        $("#modalInfoPhoto").modal()
+    })
+
+    $(document).on("click", ".deleteDiet", function (evt) {
+        $(this).removeClass("btn-danger")
+        $(this).addClass("btn-success")
+        $(this).removeClass("deleteDiet")
+        $(this).addClass("addDiet")
+        $(this).html("Ajouter")
+
+        let idDiet = $(this).parent().parent().attr("data-id");
+        $.post("/ajax.php?entity=diet&action=deleteUserDiet",
+            {
+                idDiet: idDiet
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                }
+            })
+    })
+
+
+    $(document).on("click", ".addDiet", function (evt) {
+        $(this).addClass("btn-danger")
+        $(this).removeClass("btn-success")
+        $(this).addClass("deleteDiet")
+        $(this).removeClass("addDiet")
+        $(this).html("Supprimer")
+
+        let idDiet = $(this).parent().parent().attr("data-id");
+        $.post("/ajax.php?entity=diet&action=addUserDiet",
+            {
+                idDiet: idDiet
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                }
+            })
+
+    })
+
     let confirmModification = false;
     let changedFirstName = false;
     let changedBirthday = false;
@@ -11,10 +64,6 @@ $(document).ready(function () {
     let city = $("#cityControl").children("option:selected").val()
     let description = $("#description").val()
 
-    // $j is now an alias to the jQuery function; creating the new alias is optional.
-
-    $('[data-toggle="popover"]').popover()
-
     $("#btnOpenModalResetPassword").click(function () {
         $('#modalResetPassword').modal()
     })
@@ -23,10 +72,9 @@ $(document).ready(function () {
         let iddish = $(this).attr('data-iddish')
         let name = $(this).attr('data-name')
         let url = $(this).attr('data-url')
-        console.log(name)
         $(this).parent().parent().remove()
 
-        $.post("/ajax.php?entity=dish&action=deletePersonality",
+        $.post("/ajax.php?entity=dish&action=deleteUserPersonality",
             {
                 idDish: iddish
             })
@@ -48,7 +96,7 @@ $(document).ready(function () {
 
         $(this).parent().parent().remove()
 
-        $.post("/ajax.php?entity=dish&action=addPersonality",
+        $.post("/ajax.php?entity=dish&action=addUserPersonality",
             {
                 idDish: iddish
             })
@@ -86,7 +134,7 @@ $(document).ready(function () {
         let url = $(this).attr('data-url')
 
         $(this).parent().parent().remove()
-        $.post("/ajax.php?entity=dish&action=deleteFavorite",
+        $.post("/ajax.php?entity=dish&action=deleteUserFavorite",
             {
                 idDish: iddish
             })
@@ -109,7 +157,7 @@ $(document).ready(function () {
 
         $(this).parent().parent().remove()
 
-        $.post("/ajax.php?entity=dish&action=addFavorite",
+        $.post("/ajax.php?entity=dish&action=addUserFavorite",
             {
                 idDish: iddish
             })
@@ -134,7 +182,7 @@ $(document).ready(function () {
         $(this).remove()
         addPracticeHobby(name, id)
 
-        $.post("/ajax.php?entity=hobby&action=add",
+        $.post("/ajax.php?entity=hobby&action=addUserHobby",
             {
                 idHobby: id
             })
@@ -154,7 +202,7 @@ $(document).ready(function () {
         let name = $(this).children().last().text()
         $(this).remove()
         addUnpracticedHobby(name, id)
-        $.post("/ajax.php?entity=hobby&action=remove",
+        $.post("/ajax.php?entity=hobby&action=deleteUserHobby",
             {
                 idHobby: id
             })
@@ -241,6 +289,7 @@ $(document).ready(function () {
 
 
     $("#submitInfo").click(function () {
+        console.log("allo")
         confirmModification = true;
         let argsJson = {};
 
@@ -409,6 +458,7 @@ $(document).ready(function () {
                         let url = data.data.url
                         let priority = data.data.priority
                         addPhoto(url, priority)
+                        $("#alertEmptyPhoto").addClass("invisible")
                     }, 1000);
                 } else {
                     $("#alerteMsgErrorUpload").removeClass("invisible")
@@ -438,7 +488,7 @@ $(document).ready(function () {
 
     function addPhoto(url, priority) {
         $(".containerEmptyPhoto").first().empty()
-        $(".containerEmptyPhoto").first().append('<img class="image" priority="' + priority + '" src="' + url + '"><div class="containerPriority" data-priority="' + priority + '"><i class= "fa fa-star"></i></div > <div class="overlay"></div> <div class="btnGroupPhoto"><div class="containerBtnPhoto"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div><div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div></div>');
+        $(".containerEmptyPhoto").first().append('<img class="image" priority="' + priority + '" src="' + url + '"><div class="containerPriority" data-priority="' + priority + '"><i class= "fa fa-star"></i></div > <div class="overlay"></div> <div class="btnGroupPhoto"><div class="containerBtnPhoto expand"><button class="btn btn-primary"><i class="fas fa-expand"></i></button></div><div class="containerBtnPhoto delete"><button class="btn btnTrash"><i class="fa fa-trash"></i></button></div></div>');
         $(".containerEmptyPhoto").first().addClass('containerNotEmptyPhoto');
         $(".containerEmptyPhoto").first().removeClass('containerEmptyPhoto');
     }
@@ -455,8 +505,6 @@ $(document).ready(function () {
         $("#confirmPassword").removeClass('errorValue')
         $("#errorConfirmPassword").addClass('invisible')
     })
-
-    // TODO: CHECK PASSWORD POLICY
 
     $("#btnConfirmReset").click(function (e) {
         let oldPassword = $("#oldPassword").val()
@@ -490,6 +538,14 @@ $(document).ready(function () {
             isValid = false
         }
 
+        var passwordFormat = /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%&@'*+-/=?^_`{|}~$£µ¨~§]))(?=.{6,})/;
+        if (!newPassword.match(passwordFormat)) {
+            $("#newPassword").addClass('errorValue')
+            $("#errorNewPassword").removeClass('invisible')
+            $("#errorNewPassword").html("Le mot de passe n'a pas le bon format")
+            isValid = false;
+        }
+
         if (isValid) {
             if (newPassword == oldPassword) {
                 $("#oldPassword").addClass('errorValue')
@@ -507,9 +563,11 @@ $(document).ready(function () {
                         console.log("fail", e)
                     })
                     .done(function (e) {
-                        let data = JSON.parse(e)
+                        data = JSON.parse(e)
                         if (data.status == "success") {
-
+                            $("#modalResetPassword").modal('hide')
+                            $("#messageSuccess").html("Mot de passe modifié")
+                            $('#containerMessageSuccess').show(200).delay(2000).hide(200)
                         } else {
                             $("#oldPassword").addClass('errorValue')
                             $("#errorOldPassword").removeClass('invisible')

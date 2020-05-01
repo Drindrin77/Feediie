@@ -1,7 +1,8 @@
 .background {
     background: #E86B51;
-    height: 100%;
     user-select: none;
+    min-height: 100%;
+    height:auto;
 }
 
 #card {
@@ -147,21 +148,25 @@
 }
 
 #parameters {
-    margin-top: 50px;
-    height: 850px;
+    margin-top: 20px;
     width: 400px;
     border-radius: 20px;
-    transform: translate(-100px,0);
+    transform: translate(-120px,0);
     transition-duration: 1s;
     background: #E1E1E1;
     float:left;
     display: flex;
 }
-#parametersBtn {
-    z-index: 2000;
+
+@media screen and ( max-height: 700px ) {
+    #parameters{
+        max-height: 500px;
+        overflow-y: auto;
+    }
 }
-.titleParameter {
-}
+
+
+
 .showMoreBtn {
     width:100%;
     background: #E86B51;
@@ -172,17 +177,11 @@
     font-size:14px;
     text-align: center;
 }
-#spaceBlock {
-    width: 100px;
-    height: 100%;
-}
-
 #blockParameters {
     padding-left: 10px;
     padding-right: 10px;
     padding-top : 5px;
-    width: 100%;
-    height: 100%;
+    position: relative;
 }
 .boxSelect {
     padding: 5px;
@@ -196,6 +195,7 @@
     flex-direction: column;
     padding: 5px;
     background: white;
+    width: 100%;
     border-radius: 10px 10px 0 0;
     margin-bottom: 10px;
     overflow: hidden;
@@ -204,7 +204,10 @@
 
 #closeBtn {
     position: absolute;
-    transform: translate(270px,-30px);
+    /*transform: translate(255px,-20px);*/
+
+    transform: translate(510%,-35%);
+    z-index:10000
 }
 #overlayProfil {
     display: flex;
@@ -223,7 +226,7 @@
     display: flex;
     position: absolute;
     background: rgba(38, 12, 12, 0.8);
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
     transform: translate(-15px,0);
     z-index:100;
@@ -235,4 +238,8 @@
     transform: translate(870px,10px);
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     z-index:1000;
+}
+#submitParameter {
+    width: 100%;
+    margin-bottom: 10px;
 }

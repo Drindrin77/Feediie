@@ -12,19 +12,25 @@ class HobbyRequest extends RequestService{
 
     public function execute($action){
         switch($action){
-            case "add":
+            case "adduserhobby":
+                $this->addUserHobby();
+            break;
+            case "deleteuserhobby":
+                $this->deleteUserHobby();
+            break;
+            case "addhobby":
                 $this->addHobby();
             break;
-            case "remove":
-                $this->removeHobby();
+            case "deletehobby":
+                $this->deleteHobby();
             break;
+
         }
     }    
 
-    private function removeHobby(){
-        $idUser = $this->currentUser['iduser'];
+    private function deleteHobby(){
         $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
-        if(HobbyModel::removeHobby($idUser, $idHobby)){
+        if(HobbyModel::deleteHobby($idHobby)){
             $this->addMessageSuccess('Le hobby a été supprimé');
         }else{
             $this->addMessageError('Erreur BD');
@@ -32,9 +38,27 @@ class HobbyRequest extends RequestService{
     }
 
     private function addHobby(){
+        // if(HobbyModel::addHobby($idHobby)){
+        //     $this->addMessageSuccess('Le hobby a été ajouté');
+        // }else{
+        //     $this->addMessageError('Erreur BD');
+        // }
+    }
+
+    private function deleteUserHobby(){
         $idUser = $this->currentUser['iduser'];
         $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
-        if(HobbyModel::addHobby($idUser, $idHobby)){
+        if(HobbyModel::deleteUserHobby($idUser, $idHobby)){
+            $this->addMessageSuccess('Le hobby a été supprimé');
+        }else{
+            $this->addMessageError('Erreur BD');
+        }
+    }
+
+    private function addUserHobby(){
+        $idUser = $this->currentUser['iduser'];
+        $idHobby = isset($_POST['idHobby']) && !empty($_POST['idHobby']) ? $_POST['idHobby'] : null;
+        if(HobbyModel::addUserHobby($idUser, $idHobby)){
             $this->addMessageSuccess('Le hobby a été ajouté');
         }else{
             $this->addMessageError('Erreur BD');

@@ -29,26 +29,104 @@ class UserRequest extends RequestService{
             case "filter":
                 $this->filter();
             break;
+            case "delete":
+                $this->delete();
+            break;
+            case "setadmin":
+                $this->setAdmin(true);
+            break;
+            case "removeadmin":
+                $this->setAdmin(false);
+            break;
         }
     }    
 
-    private function filter(){
-        $distance = $_POST['distance'];
-        $idUser = $this->currentUser['iduser'];
+    private function setAdmin($admin){
+        $idUser= htmlspecialchars($_POST['idUser']);
+        if(UserModel::setAdmin($idUser, $admin)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Erreur BD");
+        }
+    }
 
-        //UserModel::setFilterParameter($args); 
-        //$newUsersFiltered = UserModel::getUsersFiltered($args)
+
+    private function delete(){
+        $idUser= htmlspecialchars($_POST['id']);
+
+        if(UserModel::deleteUser($idUser)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Erreur BD");
+        }
+    }
+
+    private function filter(){
+	    //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES
+        $distance = $_POST['distanceMax'];
+        $ageMin = $_POST['ageRangemin'];
+        $sexSelect = $_POST['sexSelect'];
+        $dietSelect = $_POST['dietSelect'];
+        $relationSelect = $_POST['relationSelect'];
+        $ageMax = $_POST['ageRangemax'];
+        $idUser = $this->currentUser['iduser']; 
+
+
+
+        if(ParameterModel::updateDistance($idUser, $distance)){
+            $this->addMessageSuccess('La distance a ete mise a jour');
+        }
+        else{
+            $this->addMessageError('Erreur BD mise a jour distance');
+        }
+        if(ParameterModel::updateAge($idUser, $ageMin, $ageMax)){
+            $this->addMessageSuccess('L age a ete mis a jour');
+        }
+        else{
+            $this->addMessageError('Erreur BD mise a jour age');
+        }
+        if(SexModel::removeUserSelectedSex($idUser))
+        {
+            $this->addMessageSuccess('Table selectsex vide');
+        }
+        foreach ($sexSelect as $sex) {
+            if (SexModel::updateUserSelectedSex($idUser, $sex)) {
+                $this->addMessageSuccess('Les sexs on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour sex selectionne');
+            }
+        }
+        if(DietModel::removeUserSelectedDiet($idUser))
+        {
+            $this->addMessageSuccess('Table selectdiet vide');
+        }
+        foreach ($dietSelect as $diet) {
+            if (DietModel::updateUserSelectedDiet($idUser, $diet)) {
+                $this->addMessageSuccess('Les diets on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour diet selectionne');
+            }
+        }
+        if(ParameterModel::removeUserSelectedRelation($idUser))
+        {
+            $this->addMessageSuccess('Table selectrelation vide');
+        }
+        foreach ($relationSelect as $relation) {
+            if (ParameterModel::updateUserSelectedRelation($idUser, $relation)) {
+                $this->addMessageSuccess('Les relations on ete mis a jour');
+            } else {
+                $this->addMessageError('Erreur BD mise a jour relations selectionne');
+            }
+        }
+        //ON RECUPÈRE LES DONNEES DE CURRENT USER
+        $infoUser = UserModel::getInfoUser($idUser);
+        foreach ($sexSelect as $sex) {
+            $idUserSelect = SexModel::getUserByGender($sex,$infoUser['sex']);
+
+        }
+        //$newUsersFiltered = UserModel::getUsersFiltered($idUser,)
         //TODO DOUBLE FILTRAGE
 
-        /*
-        if (REUSSITE BD){
-            $this->addMessageSuccess('Le hobby a été supprimé');
-            $this->addData($newUsersFiltered)
-        }else{
-            $this->addMessageError('Erreur BD');
-        }
-
-        */
     }
 
     //XSS HACK : HTMLSPECIALCHARS ?
@@ -63,14 +141,14 @@ class UserRequest extends RequestService{
         else{
             UserModel::resetPassword(PasswordService::hashPassword($newPassword, PASSWORD_DEFAULT));
             $this->changeCookieToken(AuthService::getCurrentUser()['email']);
+            AuthService::connectUser();
             $this->addMessageSuccess('Le mot de passe a été réinitialisé');
         }
     }
 
     private function editInfo(){
         if(AuthService::isAuthenticated()){
-            $idUser = AuthService::getCurrentUser()['iduser'];
-            if(!UserModel::editInfo($_POST, $idUser)){
+            if(!UserModel::editInfo($_POST, $this->currentUser['iduser'])){
                 $this->addMessageSuccess('Erreur BD');
             }else{
                 $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
@@ -82,7 +160,7 @@ class UserRequest extends RequestService{
     private function connection(){
         $email = isset($_POST['email'])? $_POST['email'] : null;
         $password = isset($_POST['password'])? $_POST['password'] : null;
-        if(isset(UserModel::getUserByMail($email)['password'])){
+        if(!empty(UserModel::getUserByMail($email)['password'])){
             $passwordEncrypted = UserModel::getUserByMail($email)['password'];
             if(PasswordService::samePassword($password, $passwordEncrypted)){
                 $token = UserModel::getUserByMail($email)['token'];
@@ -93,12 +171,19 @@ class UserRequest extends RequestService{
                 }
                 $_SESSION['token'] = $token;
                 AuthService::connectUser();
+                $user = AuthService::GetCurrentUser();
+                if($user['description'] == null && empty(PhotoModel::getAllPhotos($user['iduser']))){
+                    $this->addData("page", "/profile/edit");
+                }else{
+                    $this->addData("page", "/swipe");
+                }
                 $this->addMessageSuccess("connect");
             }else{
-                $this->addMessageSuccess("rate");
+                $this->addMessageError("rate");
             }
-        } 
-        $this->addMessageSuccess("rate");
+        }else{
+            $this->addMessageError("rate");
+        }
     }
 
     private function passwordForgotten(){
@@ -115,7 +200,11 @@ class UserRequest extends RequestService{
         while (!empty(UserModel::findByToken($token))) {
             $token = bin2hex(random_bytes($length));
         }
-        UserModel::setToken($mail);
+        UserModel::setToken($token ,$mail);
+        session_destroy();
+        session_set_cookie_params(3600*24,"/");
+        session_start();
+        $_SESSION['token'] = $token;
     }
 
     private function register(){

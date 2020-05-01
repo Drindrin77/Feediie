@@ -4,6 +4,7 @@
     $hobbies = $this->data['hobbies'];
     $personalities = $this->data['personalities'];
     $favoriteDish = $this->data['favoriteDish'];
+    $diets = $this->data['diets'];
     include_once('../src/View/Pages/UserPhoto.php');
     $userPhoto = new UserPhoto($this->data['photos']);
 ?>
@@ -18,6 +19,22 @@
                 </button>
             <?php } ?>
 
+
+
+
+            <div class="modal" id="modalphoto" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <?php $userPhoto->render() ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <div class="row">
                 <div class="col-md-auto">
                     <div id="userphoto">
@@ -29,9 +46,15 @@
                 </div>
             </div>
 
-            <hr class="solid">
+            <?php
+                if(empty($this->data['photos'])){
+                    echo '<div class="alert alert-warning" role="alert">
+                        N\'hésitez pas à rajouter une photo ! Certaines personnes n\'apprécient pas le goût du risque !
+                        </div>';
+                }
+            ?>
 
-            <div class="row">
+            <div class="row" style="margin-top: 15px;"> 
                 <div class="col">
                     <div id="containerDescription" style="word-wrap:break-word">
                         <i class="fa fa-quote-left"></i> <?= $infoUser['description'] ?> <i class="fa fa-quote-right"></i>
@@ -48,9 +71,9 @@
                         <p>Ville:</p>
                     </div>
                     <div id="responseGeneralInfo">
-                        <p><?= $infoUser['age']?> ans</p>
-                        <p><?= $infoUser['sex']?></p>
-                        <p><?= $infoUser['city'].' ('. $infoUser['zipcode']. ')' ?> </p>
+                        <p><?= $infoUser['age']==null? '-':$infoUser['age']. ' ans'?></p>
+                        <p><?= $infoUser['sex']==null? '-':$infoUser['sex'] ?></p>
+                        <p><?= $infoUser['city']==null? '-': $infoUser['city'].' ('. $infoUser['zipcode']. ')' ?> </p>
                     </div>
                 </div>
 
@@ -65,6 +88,21 @@
                         </div>
                     <?php endforeach ?>
                 </div>
+                <?php } ?>
+            </div>
+
+            <div class="row" style="margin-top:40px">
+                <?php if(!empty($diets)) {?>
+                    <div class="col">
+                        <div id="containerTitleHobby">
+                            <h5 class="titleSection">Mes régimes alimentaires: </h5>
+                        </div>      
+                        <?php foreach($diets as $diet): ?>
+                            <div class="containerDiet">
+                                <?= $diet ?>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
                 <?php } ?>
             </div>
 

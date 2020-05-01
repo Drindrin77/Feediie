@@ -10,6 +10,7 @@
 
 
 <div class="container col-xl-8 justify-content-center">
+    <a href="/" class="btn btn-primary mt-3" ><i class="fas fa-arrow-left"></i> Retour</a>
     <div class="col mt-4 mb-4">
         <div class="border rounded pl-4 pt-2" id="main" >
             
@@ -27,7 +28,7 @@
                         <i class="fas fa-info-circle"></i>
                     </span>
                     <br>
-                    <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe">
+                    <input class="w-75" required type="password" name="password" id="password" placeholder="Mot de passe"><i id="seePassword" class="far fa-eye"></i>
                 </div>
                 <p class="error" id='matchPwdError' hidden>Les mots de passe n'est pas identique</p>
                 <div class="form-group">
@@ -36,16 +37,16 @@
                     <input class="w-75" required type="password" name="confirmedPassword" id="confirmedPassword" placeholder="Confirmation du mot de passe">
                 </div>
                 
-                <p class="error" id='fNameError' hidden>Veuillez renseigner votre prénom </p>
+                <p class="error" id='fNameError' hidden>Veuillez renseigner votre prénom/surnom </p>
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
-                    <input type="text" id="firstname" required size="50" class="form-control w-25" placeholder="Votre prénom ou surnom">
+                    <input type="text" id="firstname" required size="50" class="form-control w-50" placeholder="Prénom ou surnom">
 
                     <p class="error" id='birthdayError' hidden>La date n'a pas le bon format</p>
 
                     <div class='date' id='datetimepicker1'>
                         <label>Date de naissance:</label>
-                        <input type='date' id="birthday" class="form-control w-25"/>
+                        <input type='date' id="birthday" class="form-control w-50"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -73,19 +74,6 @@
                         <?php endforeach?>
                     </select>
                 </div>
-
-                
-                <!--div class="form-group">
-                    <div class="col-auto my-1">
-                    <label class="mr-sm-2" for="city">Ville: </label>
-                    <select class="custom-select mr-sm-2 w-50" id="city">
-                        <?php foreach($cities as $city): ?>
-                            <option value=<?= $city['idcity']?>><?= $city['name'].' ('. $city['zipcode']. ')' ?></option>
-                        <?php endforeach?>
-                    </select>
-                    </div>
-                </div-->
-
                 <input type="button" id="btnSubmit" value="S'inscrire" required class="btn btn-primary m-3"/>
         </div>
     </div>

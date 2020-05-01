@@ -25,20 +25,38 @@ class SwipeController extends Controller{
     public function pageSwipe()
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
-        $users = UserModel::getAllUser($idUser);
-        $filteredUser = array();
+        $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
+        $userSelectedGender = SexModel::getUserSelectedGender($idUser);
+        $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
 
-        //TODO GET DEFAULT PARAMETER USER
-        foreach($users as $user) {
-            $idUser = $user['iduser'];
-            $user['photos'] = PhotoModel::getAllPhotos($idUser);
-            array_push($filteredUser,$user);
+        $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
+        $userSelectDistance = $userFilterAgeDistance[0]['distancemax'];
+        $userSelectAge = array("agemin"=>$userFilterAgeDistance[0]['filteragemin'],"agemax"=>$userFilterAgeDistance[0]['filteragemax']);
+        
+        $sexs = SexModel::getAllSex();
+        $diets = DietModel::getAllDiet();
+        $relations = ParameterModel::getAllRelation();
+
+        //FILTER (WITHOUT DISTANCE FILTER)
+        //$users = UserModel::filterUsersSwipe($idUser);
+        $users = UserModel::getAllUsers($idUser);
+
+
+        for($i=0; $i<count($users);$i++){
+            $idUser = $users[$i]['iduser'];
+            $users[$i]['photos'] = PhotoModel::getAllPhotos($idUser);
         }
         $data = [
-            'users' => $filteredUser,
+            'userSelectedRelationType' =>$userSelectedRelationType,
+            'userSelectedDiet' => $userSelectedDiet,
+            'userSelectedGender' => $userSelectedGender,
+            'userSelectDistance' => $userSelectDistance,
+            'userSelectAge' => $userSelectAge,
+            'users' => $users,
+            'relations' => $relations,
+            'sexs'=>$sexs,
+            'diets'=>$diets,
         ];
-
-
         return new ViewModel("Swipe", $data);
     }
 }

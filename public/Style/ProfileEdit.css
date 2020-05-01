@@ -148,7 +148,7 @@ span.clear { clear: right; display: block; }
 #info{
     margin-top: 25px;
 }
-#contentInfo, #contentHobby, #contentPersonality, #contentDish{
+#contentInfo, #contentHobby, #contentPersonality, #contentDish, #contentDiet{
     display: none;
 }
 
@@ -289,6 +289,10 @@ PHOTO
 }
 .errorPassword{
     color:red;
+}
+
+.successPassword{
+    color: green;
 }
 
 

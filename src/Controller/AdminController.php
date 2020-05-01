@@ -23,7 +23,30 @@ class AdminController extends Controller{
     }
 
     private function pageAdmin(){
-        return new ViewModel("Admin");
+        $idUser = AuthService::getCurrentUser()['iduser'];
+        $ideas = IdeaModel::getAllIdea();
+        $users = UserModel::getAllUserOrderReport($idUser);
+        
+        $allHobbies = HobbyModel::getAllHobbies();
+        $allSexs = SexModel::getAllSex();
+        $allCities = CityModel::getAllCity();
+        $allPersonalities = PersonalityModel::getAllPersonalities();
+        $allDishes = DishModel::getAllDishes();
+        $allRelationType = RelationModel::getAllRelationType();
+        $allDiets = DietModel::getAllDiet();
+
+        $data = [
+            'ideas' => $ideas,
+            'users' => $users,
+            'allHobbies'=>$allHobbies,
+            'allPersonalities'=>$allPersonalities,
+            'allCities'=>$allCities,
+            'allSexs'=>$allSexs,
+            'allDishes'=>$allDishes,
+            'allRelationType'=>$allRelationType,
+            'allDiets'=>$allDiets
+        ];
+        return new ViewModel("Admin",$data);
     }
 }
 
