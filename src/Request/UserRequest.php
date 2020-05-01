@@ -32,8 +32,24 @@ class UserRequest extends RequestService{
             case "delete":
                 $this->delete();
             break;
+            case "setadmin":
+                $this->setAdmin(true);
+            break;
+            case "removeadmin":
+                $this->setAdmin(false);
+            break;
         }
     }    
+
+    private function setAdmin($admin){
+        $idUser= htmlspecialchars($_POST['idUser']);
+        if(UserModel::setAdmin($idUser, $admin)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Erreur BD");
+        }
+    }
+
 
     private function delete(){
         $idUser= htmlspecialchars($_POST['id']);
@@ -132,7 +148,7 @@ class UserRequest extends RequestService{
 
     private function editInfo(){
         if(AuthService::isAuthenticated()){
-            if(!UserModel::editInfo($_POST, $this->currentUser[$idUser])){
+            if(!UserModel::editInfo($_POST, $this->currentUser['iduser'])){
                 $this->addMessageSuccess('Erreur BD');
             }else{
                 $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');

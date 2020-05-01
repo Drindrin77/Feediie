@@ -7,14 +7,20 @@ class UserModel extends DBConnection{
    public function __construct () {
    }
 
+    public static function setAdmin($idUser, $admin){
+        $req = self::$pdo->prepare("update feediieuser set isadmin = ? where iduser = ?");
+        return $req->execute(array($admin,$idUser));
+    }
+
+
     public static function deleteUser($idUser){
         $req = self::$pdo->prepare("delete from feediieuser where iduser = ?");
         return $req->execute(array($idUser));
     }
 
     public static function findByToken($token){
-        $req = self::$pdo->prepare("select idUser,password, isadmin, uniqid, birthday, firstName, description, email, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
-        from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
+        $req = self::$pdo->prepare("select idUser,password, sex, isadmin, uniqid, birthday, firstName, description, email, city.name as city, city.zipcode as zipcode, nbReport 
+        from feediieuser left join city on city.idCity = feediieuser.idCity where token=?");
         $req->execute(array($token));
         return $req->fetch();
     }
@@ -30,9 +36,9 @@ class UserModel extends DBConnection{
     }
 
     public static function getUserByUniqID($uniqID){
-        $req = self::$pdo->prepare("select idUser, firstName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
-                                                    , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
-                                    from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and uniqID=?");
+        $req = self::$pdo->prepare("select idUser, firstName, sex, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
+                                                    , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport
+                                                    from feediieuser left join city on city.idCity = feediieuser.idCity where uniqID=?");
         $req->execute(array($uniqID)); 
         return $req->fetch();
     }

@@ -100,7 +100,7 @@
                                             <td>'.$user['firstname'].'</td>
                                             <td>'.$user['email'].'</td>
                                             <td>'.$user['nbreport'].'</td>
-                                            <td><button class="btn btn-primary">
+                                            <td><button class="btn btn-primary modifyAdmin">
                                             ';
                                             if($user['isadmin']){
                                                 echo 'Destituer';
@@ -208,10 +208,10 @@
                                         <tbody>
                                             <?php
                                                 foreach($cities as $city){
-                                                    echo '<tr>
+                                                    echo '<tr data-id='.$city['idcity'].'>
                                                     <td>'.$city['name'].'</td>
                                                     <td>'.$city['zipcode'].'</td>
-                                                    <td><button class="btn btn-danger">Supprimer</button></td>
+                                                    <td><button class="btn btn-danger deleteCity">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -244,9 +244,9 @@
                                         <tbody>
                                             <?php
                                                 foreach($diets as $diet){
-                                                    echo '<tr>
+                                                    echo '<tr data-id='.$diet['iddiet'].'>
                                                     <td>'.$diet['name'].'</td>
-                                                    <td><button class="btn btn-danger">Supprimer</button></td>
+                                                    <td><button class="btn btn-danger deleteDiet">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -275,8 +275,8 @@
                                     </div>      
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                            <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>"  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
-                                        </div>
+                                        <button data-id=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
+                                    </div>
                                     <div class="card-header titleCard"><?= $personality['name']?></div>
                                 </div>
                                 <?php endforeach ?>
@@ -305,8 +305,8 @@
                                     </div> 
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                            <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>"  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
-                                        </div>
+                                        <button data-id=<?=$dish['iddish']?> class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button>
+                                    </div>
                                     <div class="card-header titleCard"><?= $dish['name']?></div>
                                 </div>  
                                 <?php endforeach?>
@@ -326,7 +326,7 @@
                             </div>
                             <div class="card-body bodyAdminCard">
                             <?php foreach($hobbies as $hobby): 
-                                echo '<div id='.$hobby['idhobby'].' class=\'containerHobby\'>
+                                echo '<div data-id='.$hobby['idhobby'].' class=\'containerHobby deletehobby\'>
                                 <i class="fas fa-ban deleteHobbyIcon"></i><span>'.$hobby['name'].'</span>
                                 </div>';
                                 endforeach ?>

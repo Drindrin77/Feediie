@@ -40,7 +40,8 @@ class ProfileController extends Controller{
             $personalities = PersonalityModel::getUserPersonalities($idUser);
             $hobbies = HobbyModel::getUserHobbies($idUser);
             $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
-
+            $diets = DietModel::getUserDiet($idUser);
+            
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
                 'user'=>$userInfo,
@@ -48,6 +49,7 @@ class ProfileController extends Controller{
                 'personalities'=>$personalities,
                 'hobbies'=>$hobbies,
                 'favoriteDish'=>$favoriteDish,
+                'diets'=>$diets
             ];
             return new ViewModel('ProfileView',$data);
         }
@@ -68,6 +70,8 @@ class ProfileController extends Controller{
         $hobbies = HobbyModel::getUserHobbies($idUser);
         $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
         $policy = PasswordService::policyToString();
+        $allDiets = DietModel::getAllDiet();
+        $diets = DietModel::getUserDiet($idUser);
 
         $data = [
             'user'=>$user,
@@ -80,7 +84,9 @@ class ProfileController extends Controller{
             'allCities'=>$allCities,
             'allSexs'=>$allSexs,
             'allDish'=>$allDish,
-            'policy' => $policy
+            'policy' => $policy,
+            'allDiets'=>$allDiets,
+            'diets'=>$diets
         ];
         
         return new ViewModel('ProfileEdit', $data);

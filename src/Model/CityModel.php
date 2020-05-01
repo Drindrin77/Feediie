@@ -18,6 +18,20 @@ class CityModel extends DBConnection{
         $req->execute(array($id));    
         return $req->fetch();
     }
+
+    public static function deleteCity($idCity){
+        $req = self::$pdo->prepare("update feediieuser set idCity = NULL where idCity = ?");
+        $req->execute(array($idCity)); 
+        $req = self::$pdo->prepare("delete from city where idCity = ?");
+        return $req->execute(array($idCity));    
+    }
+
+    public static function addCity($name, $zipcode){
+        $req = self::$pdo->prepare("insert into city values(default, ?, ?)");
+        return $req->execute(array($name,$zipcode));    
+    }
+
+
       
 }
 

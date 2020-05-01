@@ -4,6 +4,7 @@
     $hobbies = $this->data['hobbies'];
     $personalities = $this->data['personalities'];
     $favoriteDish = $this->data['favoriteDish'];
+    $diets = $this->data['diets'];
     include_once('../src/View/Pages/UserPhoto.php');
     $userPhoto = new UserPhoto($this->data['photos']);
 ?>
@@ -70,9 +71,9 @@
                         <p>Ville:</p>
                     </div>
                     <div id="responseGeneralInfo">
-                        <p><?= $infoUser['age']?> ans</p>
-                        <p><?= $infoUser['sex']?></p>
-                        <p><?= $infoUser['city'].' ('. $infoUser['zipcode']. ')' ?> </p>
+                        <p><?= $infoUser['age']==null? '-':$infoUser['age']. ' ans'?></p>
+                        <p><?= $infoUser['sex']==null? '-':$infoUser['sex'] ?></p>
+                        <p><?= $infoUser['city']==null? '-': $infoUser['city'].' ('. $infoUser['zipcode']. ')' ?> </p>
                     </div>
                 </div>
 
@@ -87,6 +88,21 @@
                         </div>
                     <?php endforeach ?>
                 </div>
+                <?php } ?>
+            </div>
+
+            <div class="row" style="margin-top:40px">
+                <?php if(!empty($diets)) {?>
+                    <div class="col">
+                        <div id="containerTitleHobby">
+                            <h5 class="titleSection">Mes régimes alimentaires: </h5>
+                        </div>      
+                        <?php foreach($diets as $diet): ?>
+                            <div class="containerDiet">
+                                <?= $diet ?>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
                 <?php } ?>
             </div>
 
