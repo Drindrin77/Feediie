@@ -175,7 +175,6 @@
     width: 100%;
     display: flex;
     margin-top: 10px;
-    transition:1s ;
     justify-content: space-evenly;
 }
 .buttons {
@@ -235,6 +234,11 @@
     background: lightgray;
     margin: 10px;
 }
+.relationCase img {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
 .watchProfile{
     pointer-events: none;
     opacity: 0;
@@ -259,7 +263,7 @@
 #closeProfileBtn {
     position: absolute;
     /*transform: translate(255px,-20px);*/
-    transform: translate(440px,0);
+    transform: translate(440px,5px);
     z-index:11;
 }
 

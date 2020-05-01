@@ -13,6 +13,8 @@ $(document).ready(function () {
             statusBtnParameter = 'opened';
         }
     });
+    //AFFICHER LES DIFFERENTES RELATIONS
+    $('[data-toggle="popover"]').popover({ trigger: 'hover'});
 
     $("#showMoreSex").click(function () {
         if (document.getElementById("boxSelectModifiedSex").style.height === "auto") {
@@ -170,12 +172,12 @@ $(document).ready(function () {
     //AFFICHER PROFILE
     $('.seeProfil:last').click(function () {
         $('.watchProfile').css({opacity: '100%','pointer-events':'all','transform': 'translate(0px,0)'});
-        $('#blockButtons').css({opacity: '0%','pointer-events':'none'});
+        $('#blockButtons').css({'pointer-events':'none'}).fadeOut('slow');
         $('.moveOpenProfil').css({'transform': 'translate(0px,0)'});
     });
     $('#closeProfileBtn').click(function () {
         $('.watchProfile').css({opacity: '0%','pointer-events':'none','transform':' translate(-160px,0)'});
-        $('#blockButtons').css({opacity: '100%','pointer-events':'all'});
+        $('#blockButtons').css({'pointer-events':'all'}).fadeIn('slow');
         $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
     });
     // SWIPE
@@ -189,8 +191,8 @@ $(document).ready(function () {
             actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events','auto');
-                $("#beurkBtn").css('pointer-events','auto');
+                $(this).css('pointer-events','all');
+                $("#beurkBtn").css('pointer-events','all');
             }, 1000);
         }
     });
@@ -203,8 +205,8 @@ $(document).ready(function () {
             actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events','auto');
-                $("#miamBtn").css('pointer-events','auto');
+                $(this).css('pointer-events','all');
+                $("#miamBtn").css('pointer-events','all');
 
             }, 1000);
         }

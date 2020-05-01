@@ -117,10 +117,17 @@ include_once('../src/View/Pages/UserPhoto.php');
         <div class="row">
             <div class="col-sm-2 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
-                    <div class="relationCase"></div>
-                    <div class="relationCase"></div>
-                    <div class="relationCase"></div>
-                    <div class="relationCase"></div>
+                    <?php foreach ($relations as $relation): ?>
+                    <div id="<?= $relation['name'] ?>"class="relationCase" style="
+                        <?php if (!empty($userSelectedRelationType)) {
+                            foreach ($userSelectedRelationType as $userrelation) {
+                                if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
+                                    echo 'background:dodgerblue;';
+                                }
+                            }
+                        } ?>
+                    " data-toggle="popover" title="<?= $relation['name'] ?>" data-content="<?= $relation['description'] ?>"><img src="<?= $relation['iconurl'] ?>" alt=""/></div>
+                    <? endforeach;?>
                 </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">

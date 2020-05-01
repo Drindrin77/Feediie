@@ -9,8 +9,9 @@
 ------------------------------------------------------------
 CREATE TABLE RelationType(
 	idRelationType   SERIAL NOT NULL ,
-	/*iconURL			VARCHAR (128),*/
+	iconURL			VARCHAR (128),
 	name          VARCHAR (128) NOT NULL  ,
+	description   VARCHAR (128) NOT NULL  ,
 	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;
 
