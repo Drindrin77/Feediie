@@ -80,6 +80,9 @@ $(document).ready(function () {
         }
     });
 
+    //ON RECUPERE LA RELATION SELECTIONNEE
+    $('.relationCase').onclick 
+
 
     ///////////////////////RECUPERATION DES DONNEES PARAMETRES////////////////////////
 

@@ -16,9 +16,9 @@ INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
 
 INSERT INTO RelationType VALUES(default,'/Images/Dish/hotdog.png','Plan HOT régulier','Tu cherches un plan HOT régulier car tu aimes croquer la vie à pleine dent !');
-INSERT INTO RelationType VALUES(default,'/Images/Dish/hotchocolate.png','Amitié','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/hotchocolate.png','Rencontre Amicale','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
 INSERT INTO RelationType VALUES(default,'/Images/Dish/croquemonsieur.png','Relation sérieuse','Tu souhaite trouver la bonne personne qui comblera tes appétits !');
-INSERT INTO RelationType VALUES(default,'/Images/Dish/guacamole.png', 'Juste un soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/guacamole.png', 'Juste pour se soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
