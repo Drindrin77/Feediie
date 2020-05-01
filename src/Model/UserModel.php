@@ -7,9 +7,14 @@ class UserModel extends DBConnection{
    public function __construct () {
    }
 
-    public static function setAdmin($idUser, $admin){
-        $req = self::$pdo->prepare("update feediieuser set isadmin = ? where iduser = ?");
-        return $req->execute(array($admin,$idUser));
+    public static function promuteAdmin($idUser){
+        $req = self::$pdo->prepare("update feediieuser set isadmin = true where iduser = ?");
+        return $req->execute(array($idUser));
+    }
+
+    public static function destituteAdmin($idUser){
+        $req = self::$pdo->prepare("update feediieuser set isadmin = false where iduser = ?");
+        return $req->execute(array($idUser));
     }
 
 

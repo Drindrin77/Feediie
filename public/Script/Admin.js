@@ -2,6 +2,95 @@ $(".dropdown-menu .stayOpenDropDownItem").click(function (e) {
     e.stopPropagation();
 })
 
+$("#submitAddSex").click(function (e) {
+    let name = $("#textAddSex")
+
+    $.post("/ajax.php?entity=sex&action=addSex",
+        {
+            'name': name,
+        })
+        .fail(function (e) {
+            console.log("fail", e)
+        })
+        .done(function (e) {
+            let data = JSON.parse(e)
+            console.log(data)
+            if (data.status == "success") {
+                parent.remove();
+            }
+
+        })
+})
+
+
+$("#submitAddDiet").click(function (e) {
+    let name = $("#textAddDiet")
+
+    $.post("/ajax.php?entity=diet&action=addDiet",
+        {
+            'name': name,
+        })
+        .fail(function (e) {
+            console.log("fail", e)
+        })
+        .done(function (e) {
+            let data = JSON.parse(e)
+            console.log(data)
+            if (data.status == "success") {
+                parent.remove();
+            }
+
+        })
+})
+
+
+$("#submitAddHobby").click(function (e) {
+    let name = $("#textAddHobby")
+
+    $.post("/ajax.php?entity=hobby&action=addHobby",
+        {
+            'name': name,
+        })
+        .fail(function (e) {
+            console.log("fail", e)
+        })
+        .done(function (e) {
+            let data = JSON.parse(e)
+            console.log(data)
+            if (data.status == "success") {
+                parent.remove();
+            }
+
+        })
+})
+
+
+$("#submitAddRelation").click(function (e) {
+    let name = $("#textAddRelation").val()
+    console.log(name)
+
+    if (!name.trim()) {
+        $.post("/ajax.php?entity=relation&action=addRelation",
+            {
+                'name': name,
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                console.log(data)
+                if (data.status == "success") {
+                    $("#tableBodyRealtion");
+                }
+
+            })
+    }
+
+
+})
+
+
 $(".deletehobby").click(function (e) {
     let parent = $(this);
     let idHobby = $(this).attr('data-id')
