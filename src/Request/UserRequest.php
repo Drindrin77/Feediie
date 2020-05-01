@@ -20,6 +20,7 @@ class UserRequest extends RequestService{
             break;
             case "register":
                 $this->register();
+            break;
             case "editinfo":
                 $this->editInfo();
             break;
@@ -43,11 +44,20 @@ class UserRequest extends RequestService{
 
     private function setAdmin($admin){
         $idUser= htmlspecialchars($_POST['idUser']);
-        if(UserModel::setAdmin($idUser, $admin)){
-            $this->addMessageSuccess("Ajout réussi");
+        if($admin){
+            if(UserModel::promuteAdmin($idUser)){
+                $this->addMessageSuccess("Promotion réussie");
+            }else{
+                $this->addMessageError("Erreur BD");
+            }
         }else{
-            $this->addMessageError("Erreur BD");
+            if(UserModel::destituteAdmin($idUser)){
+                $this->addMessageSuccess("Destitution réussie");
+            }else{
+                $this->addMessageError("Erreur BD");
+            }
         }
+        
     }
 
 
@@ -175,7 +185,7 @@ class UserRequest extends RequestService{
                 if($user['description'] == null && empty(PhotoModel::getAllPhotos($user['iduser']))){
                     $this->addData("page", "/profile/edit");
                 }else{
-                    $this->addData("page", "/swipe");
+                    $this->addData("page", "/");
                 }
                 $this->addMessageSuccess("connect");
             }else{
