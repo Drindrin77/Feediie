@@ -1,12 +1,17 @@
 $(window).load(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
+    scrollDownChatBox();
+    setInterval(updateMatchAndMessages, 1000)
 });
 
 $(window).resize(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
 });
+
+
+
 
 function spaceBelow2Div(divA, divB) {
     const firstDiv = $(divA).offset();
@@ -15,12 +20,12 @@ function spaceBelow2Div(divA, divB) {
 }
 
 function setMatchedUserContainerHeight() {
-    const height = spaceBelow2Div("#pageContainer", "#footer");
+    const height = $("#pageContainer").height();//spaceBelow2Div("#pageContainer", "#footer");
     $("#matchedUserContainer").height(height);
 }
 
 function setChatBoxSize() {
-    let height = spaceBelow2Div("#pageContainer", "#footer");
+    let height = $("#pageContainer").height()//spaceBelow2Div("#pageContainer", "#footer");
     height -= $("#userMessageArea").height() + $("#chatSelectedContact").height();
     $("#chatBox").height(height);
 }
@@ -75,12 +80,40 @@ function fetchMessages(contactUniqId, offset) {
     });
 }
 
+function updateMatchAndMessages(){
+    fetchUnreadMessages($("#chatSelectedContact").attr("data-uniqid"));
+}
+function fetchUnreadMessages(contactUniqId) {
+    $.ajax({
+        url: "/ajax.php?entity=chat&action=fetchUnreadMessages",
+        type: "POST",
+        dataType: 'json',
+        timeout: 500,
+        data: {
+            "contactUniqId": contactUniqId
+        },
+        success: function (data) {
+           // console.log(data);
+            data = data.data;
+            fillChatBox(data.messageList, null, contactUniqId);
+        },
+        error: function (e) {
+            console.log("fail", e);
+        }
+    });
+}
+
 function fillChatBox(messageList, userPhoto, contactUniqId) {
+    let isScrollDown = $("#chatBox").scrollTop() == ($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
     for (let i = messageList.length - 1; i >= 0; i--) {
         //console.log(createMessageDiv(messageList[i].message, userPhoto, true));
         let isCurrentUser = contactUniqId !== messageList[i].uniqid;
         $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
     }
+    if(isScrollDown){
+        scrollDownChatBox();
+    }
+
 }
 
 function createMessageDiv(messageText, userPhoto, isCurrentUser) {
@@ -129,7 +162,6 @@ $("#sendMessageButton").on("click", function () {
             },
             success: function (data) {
                 data = data.data;
-                console.log(data);
                 if (data.isInserted === true) {
                     const message = {
                         "message": inputMessage,
@@ -145,5 +177,11 @@ $("#sendMessageButton").on("click", function () {
             }
         });
         $("#inputMessage").val("");
+
     }
 });
+
+function scrollDownChatBox(){
+    console.log($("#chatBox"));
+    $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
+}
