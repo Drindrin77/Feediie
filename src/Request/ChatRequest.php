@@ -19,6 +19,9 @@ class ChatRequest extends RequestService
             case "fetchmessages" :
                 $this->fetchMessages();
                 break;
+            case "fetchunreadmessages" :
+                $this->fetchUnreadMessages();
+                break;
             case "sendmessage":
                 $this->sendMessage();
                 break;
@@ -31,12 +34,33 @@ class ChatRequest extends RequestService
         $offset = isset($_POST["offset"]) && !empty($_POST['offset']) ? $_POST['offset'] : 0;
 
         if ($contactUniqId !== null) {
-            $messageList = UserModel::fetchMessages($this->currentUser['uniqid'], $contactUniqId, $offset);
-            foreach ($messageList as $message) {
-                $message["message"] = htmlspecialchars($message["message"]); //TODO corriger
+            $contactId = UserModel::getUserByUniqID($contactUniqId)['iduser'];
+
+            ChatModel::setReadToAllMessages($this->currentUser["iduser"], $contactId);
+            $messageList = ChatModel::fetchMessages($this->currentUser['iduser'], $contactId, $offset);
+
+            for ($i = 0; $i < sizeof($messageList); $i++) {
+                $messageList[$i]["message"] = htmlspecialchars($messageList[$i]["message"]);
+
             }
             $this->addData("messageList", $messageList);
-            $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);
+            $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser']));
+        }
+    }
+
+    private function fetchUnreadMessages(){
+        $contactUniqId = isset($_POST["contactUniqId"]) && !empty($_POST['contactUniqId']) ? $_POST['contactUniqId'] : null;
+
+        if ($contactUniqId !== null) {
+            $userId = $this->currentUser['iduser'];
+            $contactId = UserModel::getUserByUniqID($contactUniqId)['iduser'];
+
+            $unreadMessages = ChatModel::readMessages($userId, $contactId);
+            for ($i = 0; $i < sizeof($unreadMessages); $i++) {
+                $unreadMessages[$i]["message"] = htmlspecialchars($unreadMessages[$i]["message"]);
+            }
+            $this->addData("messageList", $unreadMessages);
+
         }
     }
 
@@ -45,20 +69,20 @@ class ChatRequest extends RequestService
         $contactUniqId = isset($_POST["contactUniqId"]) && !empty($_POST['contactUniqId']) ? $_POST['contactUniqId'] : null;
         $inputMessage = isset($_POST["inputMessage"]) && !empty($_POST['inputMessage']) ? $_POST['inputMessage'] : null;
 
-        if($contactUniqId !== null && $inputMessage !== null){
+        if ($contactUniqId !== null && $inputMessage !== null) {
             $userId = $this->currentUser['iduser'];
             $contactId = UserModel::getUserByUniqID($contactUniqId)["iduser"];
 
-            $unreadMessages = UserModel::fetchUnreadMessages($userId, $contactId);
-            foreach ($unreadMessages as $message) {
-                $message["message"] = htmlspecialchars($message["message"]);
+            $unreadMessages = ChatModel::readMessages($userId, $contactId);
+            for ($i = 0; $i < sizeof($unreadMessages); $i++) {
+                $unreadMessages[$i]["message"] = htmlspecialchars($unreadMessages[$i]["message"]);
             }
             $this->addData("messageList", $unreadMessages);
 
-            $isInserted = UserModel::addMessage($userId, $contactId, $inputMessage);
-            if($isInserted){
+            $isInserted = ChatModel::addMessage($userId, $contactId, $inputMessage);
+            if ($isInserted) {
                 $this->addData("isInserted", true);
-                $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser'])['url']);
+                $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser']));
             }
         }
     }

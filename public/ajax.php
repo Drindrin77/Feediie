@@ -25,6 +25,7 @@ require_once("../src/Model/ParameterModel.php");
 require_once("../src/Model/IdeaModel.php");
 require_once("../src/Model/RelationModel.php");
 require_once("../src/Model/PersonalityModel.php");
+require_once("../src/Model/ChatModel.php");
 
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
 $action = isset($_GET['action'])?strtolower($_GET['action']):null;
