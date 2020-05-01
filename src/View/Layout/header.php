@@ -60,13 +60,12 @@
                 </div>
             </div>
 
-
-            <button id="btnChat" type="button" style="margin-right: 30px" class="btn btn-primary">
+            <a id="btnChat" class="btn btn-primary" href="/cauldron" style="margin-right: 30px" role="button">
                 <i class="far fa-comments"></i>
                 <div id="containerNotif">
                     <span id="nbNotif">8</span>
                 </div>
-            </button>
+            </a>
 
 
             <div id="containerHeaderPhoto">
