@@ -1,12 +1,14 @@
 $(window).load(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
+    setInterval(updateMatchAndMessages, 1000)
 });
 
 $(window).resize(function () {
     setMatchedUserContainerHeight();
     setChatBoxSize();
 });
+
 
 function spaceBelow2Div(divA, divB) {
     const firstDiv = $(divA).offset();
@@ -15,12 +17,12 @@ function spaceBelow2Div(divA, divB) {
 }
 
 function setMatchedUserContainerHeight() {
-    const height = spaceBelow2Div("#pageContainer", "#footer");
+    const height = $("#pageContainer").height();//spaceBelow2Div("#pageContainer", "#footer");
     $("#matchedUserContainer").height(height);
 }
 
 function setChatBoxSize() {
-    let height = spaceBelow2Div("#pageContainer", "#footer");
+    let height = $("#pageContainer").height()//spaceBelow2Div("#pageContainer", "#footer");
     height -= $("#userMessageArea").height() + $("#chatSelectedContact").height();
     $("#chatBox").height(height);
 }
@@ -75,10 +77,36 @@ function fetchMessages(contactUniqId, offset) {
     });
 }
 
+function updateMatchAndMessages(){
+    fetchUnreadMessages($("#chatSelectedContact").attr("data-uniqid"));
+}
+function fetchUnreadMessages(contactUniqId) {
+    $.ajax({
+        url: "/ajax.php?entity=chat&action=fetchUnreadMessages",
+        type: "POST",
+        dataType: 'json',
+        timeout: 500,
+        data: {
+            "contactUniqId": contactUniqId
+        },
+        success: function (data) {
+           // console.log(data);
+            data = data.data;
+            console.log(contactUniqId);
+            fillChatBox(data.messageList, null, contactUniqId);
+        },
+        error: function (e) {
+            console.log("fail", e);
+        }
+    });
+}
+
 function fillChatBox(messageList, userPhoto, contactUniqId) {
+    console.log(contactUniqId);
     for (let i = messageList.length - 1; i >= 0; i--) {
         //console.log(createMessageDiv(messageList[i].message, userPhoto, true));
         let isCurrentUser = contactUniqId !== messageList[i].uniqid;
+        console.log("contact uniq id = " + contactUniqId + "  message uniq id = " + messageList[i].uniqid)
         $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
     }
 }

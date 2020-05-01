@@ -96,7 +96,7 @@ class ChatModel extends DBConnection{
                                         AND isread = FALSE
                                         
                                     RETURNING *)
-                                    SELECT message, datemessage, author.uniqid
+                                    SELECT message, datemessage, author.uniqid as uniqid
                                     FROM 
                                     updatedMessages
                                     INNER JOIN feediieuser AS author ON author.iduser = updatedMessages.idAuthor
