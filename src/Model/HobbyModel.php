@@ -38,6 +38,16 @@ class HobbyModel extends DBConnection{
         return $req->execute(array($idHobby)); 
     }
 
+    public static function addHobby($name){
+        $req = self::$pdo->prepare("insert into hobby values (default, ?)");
+        return $req->execute(array($name)); 
+    }
+
+    public static function getIDByName($name){
+        $req = self::$pdo->prepare("select idhobby from hobby where name=?");
+        $req->execute(array($name));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
 
 }
 

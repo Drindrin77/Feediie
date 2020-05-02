@@ -74,7 +74,7 @@ $(document).ready(function () {
         let url = $(this).attr('data-url')
         $(this).parent().parent().remove()
 
-        $.post("/ajax.php?entity=dish&action=deleteUserPersonality",
+        $.post("/ajax.php?entity=personality&action=deleteUserPersonality",
             {
                 idDish: iddish
             })
@@ -96,7 +96,7 @@ $(document).ready(function () {
 
         $(this).parent().parent().remove()
 
-        $.post("/ajax.php?entity=dish&action=addUserPersonality",
+        $.post("/ajax.php?entity=personality&action=addUserPersonality",
             {
                 idDish: iddish
             })

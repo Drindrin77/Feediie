@@ -12,26 +12,14 @@ class DishRequest extends RequestService{
 
     public function execute($action){
         switch($action){
-            case "deleteuserpersonality":
-                $this->deleteUserPersonality();
-            break;
-            case "adduserpersonality":
-                $this->addUserPersonality();
-            break;
             case "deleteuserfavorite":
                 $this->deleteUserFavorite();
             break;
             case "adduserfavorite":
                 $this->addUserFavorite();
             break;
-            case "deletepersonality":
-                $this->deletePersonality();
-            break;
             case "deletedish":
                 $this->deleteDish();
-            break;
-            case "addpersonality":
-                $this->addPersonality();
             break;
             case "adddish":
                 $this->addDish();
@@ -60,26 +48,6 @@ class DishRequest extends RequestService{
         }
     }
 
-    private function addPersonality(){
-        // $name = htmlspecialchars($_POST['name']);
-        
-        // if(PersonalityModel::addPersonality($idUser, $idDish)){
-        //     $this->addMessageSuccess("Ajout reussi");
-        // }else{
-        //     $this->addMessageError("Erreur BD");
-        // }
-    }
-
-    private function deletePersonality(){
-        $idDish = htmlspecialchars($_POST['idDish']);
-        if(PersonalityModel::deletePersonality($idDish)){
-            $this->addMessageSuccess("Suppression reussi");
-        }else{
-            $this->addMessageError("Erreur BD");
-        }
-    }
-
-
     // USER DISHES
 
     private function addUserFavorite(){
@@ -101,27 +69,6 @@ class DishRequest extends RequestService{
             $this->addMessageError("Erreur BD");
         }
     }
-
-    private function addUserPersonality(){
-        $idDish = htmlspecialchars($_POST['idDish']);
-        $idUser = $this->currentUser['iduser'];
-        if(PersonalityModel::addUserPersonality($idUser, $idDish)){
-            $this->addMessageSuccess("Ajout reussi");
-        }else{
-            $this->addMessageError("Erreur BD");
-        }
-    }
-
-    private function deleteUserPersonality(){
-        $idDish = htmlspecialchars($_POST['idDish']);
-        $idUser = $this->currentUser['iduser'];
-        if(PersonalityModel::deleteUserPersonality($idUser, $idDish)){
-            $this->addMessageSuccess("Suppression reussi");
-        }else{
-            $this->addMessageError("Erreur BD");
-        }
-    }
-
 }
 
 ?>

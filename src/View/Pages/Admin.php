@@ -39,9 +39,6 @@
                 </div>
             </div>
 
-            <input type="file" id="addPhoto" class="invisible">
-
-
             <div class="col-lg-7">
                 <ul class="nav nav-tabs" style="margin-bottom:50px">
                     <li class="nav-item">
@@ -76,7 +73,7 @@
                 <div id="navContentContainer">
                     <div class="navContent" id="contentUser">
                         <h3 class="titleTab">Liste des utilisateurs</h3>
-                        <div class="table-responsive tableSize">
+                        <div class="table-responsive tableSize table-hover">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -99,7 +96,7 @@
                                 <tbody>
                                     <?php
                                         foreach($users as $user){
-                                            echo '<tr data-id='.$user['iduser'].'>
+                                            echo '<tr class="contentUserTable" onclick="document.location.href=\'/profile/'.$user['uniqid'].'\'" data-id='.$user['iduser'].'>
                                             <td>'.$user['firstname'].'</td>
                                             <td>'.$user['email'].'</td>
                                             <td>'.$user['nbreport'].'</td>
@@ -135,6 +132,7 @@
                                     </div>
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
+                                            <span id="errorAddRelation" class="errorMsg"></span><br>
                                             <input id="textAddRelation" type="text"/>
                                             <button id="submitAddRelation" class="btn btn-primary">
                                                 Confirmer
@@ -145,7 +143,7 @@
 
                             </div>
                             <div class="card-body bodyAdminCard">
-                                <div class="table-responsive tableSize">
+                                <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -183,6 +181,7 @@
                                     </div>
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
+                                            <span id="errorAddSex" class="errorMsg"></span><br>
                                             <input id="textAddSex" type="text"/>
                                             <button id="submitAddSex" class="btn btn-primary">
                                                 Confirmer
@@ -201,7 +200,7 @@
                                             <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBodySex">
                                             <?php
                                                 foreach($sexs as $sex){
                                                     echo '<tr data-id='.$sex['name'].'>
@@ -221,8 +220,6 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Ville
-
-
                                 <div class="containerDropdownElement" class="dropdown">
                                     <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <button class="btn btn-primary btnAddElement">
@@ -279,9 +276,6 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Régime alimentaire
-
-
-
                                 <div class="containerDropdownElement" class="dropdown">
                                     <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <button class="btn btn-primary btnAddElement">
@@ -291,6 +285,7 @@
                                     </div>
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
+                                            <span id="errorAddDiet" class="errorMsg"></span><br>
                                             <input id="textAddDiet" type="text"/>
                                             <button id="submitAddDiet" class="btn btn-primary">
                                                 Confirmer
@@ -309,7 +304,7 @@
                                             <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBodyDiet">
                                             <?php
                                                 foreach($diets as $diet){
                                                     echo '<tr data-id='.$diet['iddiet'].'>
@@ -330,7 +325,7 @@
                             <div class="card-header">
                                 Personnalité
                                 <div class="containerDropdownElement" class="dropdown">
-                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="triggerDropdown triggerDropdownElement" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <button class="btn btn-primary btnAddElement">
                                             <i class="fas fa-plus"></i>
                                             <span class="addText">Ajouter</span>
@@ -338,14 +333,24 @@
                                     </div>
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
-                                        <div class="card cardElement">
-                                            <div class="cardImage">
-                                                <button id="photoAddPersonality" style="margin-top:20px" class="btn btn-primary">Ajouter photo</button>
-                                            </div>      
-                                            
-                                            <div class="card-header titleCard"><textarea style="width:100px" id="textAddPersonality"></textarea></div>
-                                        </div>
+                                            <form action="" method="POST" enctype="multipart/form-data">
+                                                <input type="file" name="photo" id="uploadInput" style="display:none" />
+                                            </form>
+                                            <span id="errorAddPersonality" class="errorMsg"></span><br>
 
+                                            <div class="card cardElement">
+                                                <div id="containerImgUploadPersonality" class="cardImage cardImgUpload">
+
+                                                </div>
+                                                <div class="card-header titleCardDropdown">
+                                                    <textarea class="textAreaAdd" id="textAddPersonality"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <br>
+                                            <button id="resetAddPersonality"  style="margin-top:20px"  class="btn btn-primary">Réinitialiser</button>
+                                            <br>
+                                            <button id="photoAddPersonality"  style="margin-top:20px"  class="btn btn-primary">Ajouter photo</button>
                                             <br>
                                             <button id="submitAddPersonality" style="margin-left:18px; margin-top: 10px" class="btn btn-primary">
                                                 Confirmer
@@ -354,7 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body bodyAdminCard">
+                            <div class="card-body bodyAdminCard" id="containerCardPersonality">
 
                             <?php foreach($personalities as $personality): ?>
                                 <div class="card cardElement">
@@ -447,7 +452,7 @@
                                 </div>
 
                             </div>
-                            <div class="card-body bodyAdminCard">
+                            <div class="card-body bodyAdminCard" id="bodyHobby">
                             <?php foreach($hobbies as $hobby): 
                                 echo '<div data-id='.$hobby['idhobby'].' class=\'containerHobby deletehobby\'>
                                 <i class="fas fa-ban deleteHobbyIcon"></i><span>'.$hobby['name'].'</span>

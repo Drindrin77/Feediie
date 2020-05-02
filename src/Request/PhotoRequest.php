@@ -25,6 +25,24 @@ class PhotoRequest extends RequestService{
             case 'setpriority':
                 $this->setPriority();
             break;
+            case 'gettemporaryphoto':
+                $this->returnTemporaryPhoto();
+            break;
+        }
+    }
+
+    //RETURN EXTENSION AND BASE64IMG
+    private function returnTemporaryPhoto(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(isset($_FILES['file'])){
+                $path = $_FILES['file']['tmp_name'];
+                $ext = PhotoService::getExtension($_FILES['file']['name']);
+                $data = file_get_contents($path);
+                $base64 = 'data:image/' . $ext . ';base64,' . base64_encode($data);
+
+                $this->addData('imgSrc',sprintf('%s', $base64));
+                $this->addData('extension',$ext);
+            }
         }
     }
 
@@ -82,20 +100,20 @@ class PhotoRequest extends RequestService{
                 $uploadOk = true;
                 
                 //CHECK TYPE FILE
-                if(!array_key_exists($filetype, $this->valid_extensions)){
+                if(!PhotoService::validExtension($filetype)){
                     $this->addMessageError('Veuillez sélectionner un format de fichier valide (.jpg, .jpeg, .gif ou .png)');
                     $uploadOk = false;
                 }
 
                 //CHECK SIZE
-                if($filesize > $this->maxSize){
+                if(!PhotoService::validSize($filesize)){
                     $this->addMessageError('La taille du fichier doit etre inférieur à 5Mo');
                     $uploadOk = false;
                 }
 
                 if ($uploadOk){ 
 
-                    $ext = $this->valid_extensions[$filetype];
+                    $ext = PhotoService::getExtByFileType($filetype);
 
                     $firstPhoto = false;
                     //CHECK IF DIRECTORY EXISTS

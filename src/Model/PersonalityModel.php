@@ -37,6 +37,17 @@ class PersonalityModel extends DBConnection{
         return $req->execute(array($idDish)); 
     }
 
+    public static function addPersonality($name, $fileName){
+        $req = self::$pdo->prepare("insert into personalitydish values(default,?,?)");
+        return $req->execute(array($name, $fileName));
+    }
+
+    public static function getIDByName($name){
+        $req = self::$pdo->prepare("select iddish from personalitydish where name=?");
+        $req->execute(array($name));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
 
 }
 ?>

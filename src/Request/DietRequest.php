@@ -50,14 +50,14 @@ class DietRequest extends RequestService{
     }
 
     private function addDiet(){
-        // $name = htmlspecialchars($_POST['name']);
-        // $zipcode = htmlspecialchars($_POST['zipcode']);
+        $name = htmlspecialchars($_POST['name']);
 
-        // if(CityModel::addCity($name, $zipcode)){
-        //     $this->addMessageSuccess("Ajout reussi");
-        // }else{
-        //     $this->addMessageError("Erreur BD");
-        // }
+        if(DietModel::addDiet($name)){
+            $this->addMessageSuccess("Ajout réussi");
+            $this->addData("id",DietModel::getIDByName($name));
+        }else{
+            $this->addMessageError("Le nom existe déjà");
+        }
     }
 
     private function deleteDiet(){

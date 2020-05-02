@@ -47,7 +47,7 @@
             </div>
 
             <?php
-                if(empty($this->data['photos'])){
+                if(empty($this->data['photos']) && $isCurrentUser){
                     echo '<div class="alert alert-warning" role="alert">
                         N\'hésitez pas à rajouter une photo ! Certaines personnes n\'apprécient pas le goût du risque !
                         </div>';
