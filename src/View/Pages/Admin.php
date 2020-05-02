@@ -13,8 +13,19 @@
 <div id="containerAdmin">
     <div class="container-fluid" style="margin-top: 50px;">
         <div class="row">
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="file" name="photo" class="uploadInput" data-content="Personality" style="display:none" />
+                <input type="file" name="photo" class="uploadInput" data-content="Dish" style="display:none" />
+                <input type="file" name="photo" class="uploadInput" data-content="Relation" style="display:none" />
+            </form>
+
             <div class="col-lg-5 col-md-10 col-sm-10 tableBackground" style="padding-top:50px">
                 <h3 class="titleTab">Liste des suggestions</h3>
+               
+                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+               
+
                 <div class="table-responsive tableSize">
                     <table class="table table-striped">
                         <thead>
@@ -324,39 +335,40 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Personnalité
-                                <div class="containerDropdownElement" class="dropdown">
-                                    <div class="triggerDropdown triggerDropdownElement" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <button class="btn btn-primary btnAddElement">
-                                            <i class="fas fa-plus"></i>
-                                            <span class="addText">Ajouter</span>
-                                        </button>                     
-                                    </div>
-                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
-                                        <div class="stayOpenDropDownItem">
-                                            <form action="" method="POST" enctype="multipart/form-data">
-                                                <input type="file" name="photo" id="uploadInput" style="display:none" />
-                                            </form>
-                                            <span id="errorAddPersonality" class="errorMsg"></span><br>
 
-                                            <div class="card cardElement">
-                                                <div id="containerImgUploadPersonality" class="cardImage cardImgUpload">
+                                <div class="containerPopOver">
 
+                                    <div class="contentPopOver" id="containerPopOverPersonality" data-hidden='true'>
+
+                                        <span id="errorAddPersonality" class="errorMsg"></span>
+
+                                        <div>
+                                            <div class="card cardElement cardPhotoAdd">
+                                                    
+                                                    <div data-extension="" id="containerImgUploadPersonality" class="cardImage cardImgUpload">
+
+                                                    </div>
+                                                    <div class="card-header titleCardAdd">
+                                                        <textarea class="textAreaAdd" id="textAddPersonality"></textarea>
+                                                    </div>
                                                 </div>
-                                                <div class="card-header titleCardDropdown">
-                                                    <textarea class="textAreaAdd" id="textAddPersonality"></textarea>
-                                                </div>
-                                            </div>
 
-                                            <br>
-                                            <button id="resetAddPersonality"  style="margin-top:20px"  class="btn btn-primary">Réinitialiser</button>
-                                            <br>
-                                            <button id="photoAddPersonality"  style="margin-top:20px"  class="btn btn-primary">Ajouter photo</button>
-                                            <br>
-                                            <button id="submitAddPersonality" style="margin-left:18px; margin-top: 10px" class="btn btn-primary">
-                                                Confirmer
-                                            </button>
-                                        </div>
+
+                                            <div class="GroupbuttonsAdd">
+                                                <button data-content="Personality" class="btn btn-secondary buttonsAdd resetAddCard"><i class="fas fa-undo-alt"></i> Réinitialiser</button>
+                                                <br>
+                                                <button data-content="Personality" class="btn btn-info buttonsAdd photoAddCard"><i class="fas fa-plus"></i> Ajouter photo</button>
+                                                <br>
+                                                <button data-content="Personality" class="btn btn-primary buttonsAdd submitAddCard">Confirmer</button>
+                                            </div> 
+                                        </div>                                
                                     </div>
+
+                                    <button class="btn btn-primary btnAddElement" onclick="triggerPopOver('containerPopOverPersonality')">
+                                        <i class="fas fa-plus"></i>
+                                        <span class="addText">Ajouter</span>
+                                    </button>   
+
                                 </div>
                             </div>
                             <div class="card-body bodyAdminCard" id="containerCardPersonality">
@@ -383,32 +395,42 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Plat
-                                <div class="containerDropdownElement" class="dropdown">
-                                    <div class="triggerDropdown " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <button class="btn btn-primary btnAddElement">
-                                            <i class="fas fa-plus"></i>
-                                            <span class="addText">Ajouter</span>
-                                        </button>                     
-                                    </div>
-                                    <div class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
-                                        <div class="stayOpenDropDownItem">
-                                            <div class="card cardElement">
-                                                <div class="cardImage">
-                                                    <button id="photoAddDish" style="margin-top:20px" class="btn btn-primary">Ajouter photo</button>
-                                                </div>      
-                                                
-                                                <div class="card-header titleCard"><textarea style="width:100px" id="textAddDish"></textarea></div>
-                                            </div>
+                                <div class="containerPopOver">
 
-                                            <br>
-                                            <button id="submitAddDish" style="margin-left:18px; margin-top: 10px" class="btn btn-primary">
-                                                Confirmer
-                                            </button>
-                                        </div>
+                                    <div class="contentPopOver" id="containerPopOverDish" data-hidden='true'>
+
+                                        <span id="errorAddDish" class="errorMsg"></span>
+
+                                        <div>
+                                            <div class="card cardElement cardPhotoAdd">
+                                                    
+                                                    <div data-extension="" id="containerImgUploadDish" class="cardImage cardImgUpload">
+
+                                                    </div>
+                                                    <div class="card-header titleCardAdd">
+                                                        <textarea class="textAreaAdd" id="textAddDish"></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                            <div class="GroupbuttonsAdd">
+                                                <button data-content="Dish" class="btn btn-secondary buttonsAdd resetAddCard"><i class="fas fa-undo-alt"></i> Réinitialiser</button>
+                                                <br>
+                                                <button data-content="Dish" class="btn btn-info buttonsAdd photoAddCard"><i class="fas fa-plus"></i> Ajouter photo</button>
+                                                <br>
+                                                <button data-content="Dish" class="btn btn-primary buttonsAdd submitAddCard">Confirmer</button>
+                                            </div> 
+                                        </div>                                
                                     </div>
+
+                                    <button class="btn btn-primary btnAddElement" onclick="triggerPopOver('containerPopOverDish')">
+                                        <i class="fas fa-plus"></i>
+                                        <span class="addText">Ajouter</span>
+                                    </button>   
+
                                 </div>
                             </div>
-                            <div class="card-body bodyAdminCard">
+                            <div class="card-body bodyAdminCard" id="containerCardDish">
 
                             <?php foreach($dishes as $dish): ?>
 
@@ -432,8 +454,6 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Hobby
-
-
                                 <div class="containerDropdownElement" class="dropdown">
                                     <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <button class="btn btn-primary btnAddElement">

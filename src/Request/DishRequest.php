@@ -30,13 +30,20 @@ class DishRequest extends RequestService{
     // GENERAL DISHES
 
     private function addDish(){
-        // $idDish = htmlspecialchars($_POST['idDish']);
-        // $idUser = $this->currentUser['iduser'];
-        // if(DishModel::addUserFavorite($idUser, $idDish)){
-        //     $this->addMessageSuccess("Ajout reussi");
-        // }else{
-        //     $this->addMessageError("Erreur BD");
-        // }
+        $name = htmlspecialchars($_POST['name']);
+        $base64 = htmlspecialchars($_POST['base64Img']);
+        $ext = htmlspecialchars($_POST['ext']);
+        $fileName = PhotoService::createFilename(PATH_DISH_PHOTO,$ext);
+
+        if(DishModel::addDish($name, $fileName)){
+            $this->addMessageSuccess("Ajout reussi");
+            $id = DishModel::getIDByName($name);
+            PhotoService::base64ToFile($base64, $fileName);
+            $this->addData('id',$id);
+            $this->addData('url',$fileName);
+        }else{
+            $this->addMessageError("Le nom est déjà pris");
+        }   
     }
 
     private function deleteDish(){

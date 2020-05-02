@@ -51,7 +51,6 @@ class ViewModel {
                     //<link rel="stylesheet" href="/Style/SuccessMessage.css">
                     include_once('Style/SuccessMessage.css');
                     include_once('Style/header.css');
-                    include_once('Style/footer.css');
                   }
                 ?>
                 </style>
@@ -71,12 +70,6 @@ class ViewModel {
               } 
               include_once 'Pages/'.$this->page.'.php' ?>
             </div>
-
-            <?php
-              if ($this->showHeader) {
-                include_once 'Layout/footer.php';
-              }
-            ?>
 
           </body>
 
@@ -112,7 +105,6 @@ class ViewModel {
                   }
                   if($this->showHeader){
                     //echo '<script type="text/javascript" src="/Script/header.js"></script>';
-                    //include_once('Script/footer.js');
                     include_once('Script/header.js');
                   }
                   ?>
