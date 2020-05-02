@@ -15,7 +15,7 @@ class IdeaRequest extends RequestService{
             case "add":
                 $this->addIdea();
             break;
-            case "delete":
+            case "deleteidea":
                 $this->deleteIdea();
             break;
         }

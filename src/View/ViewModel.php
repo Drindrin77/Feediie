@@ -31,9 +31,9 @@ class ViewModel {
               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
               <!-- Bootstrap CSS -->
 
-              <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
                     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-                    crossorigin="anonymous">-->
+                    crossorigin="anonymous">
 
               <!-- ICON -->
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
@@ -53,10 +53,10 @@ class ViewModel {
                     include_once('Style/header.css');
 
 
-                    include_once('Style/bootstrap.css');
+                   // include_once('Style/bootstrap.css');
 
 
-                    
+
                   }
                 ?>
                 </style>

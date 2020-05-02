@@ -13,14 +13,14 @@ class SexRequest extends RequestService{
             case "addsex":
                 $this->addSex();
             break;
-            case "delete":
-                $this->delete();
+            case "deletesex":
+                $this->deleteSex();
             break;
         }
     }    
 
-    private function delete(){
-        $sex = htmlspecialchars($_POST['sex']);
+    private function deleteSex(){
+        $sex = htmlspecialchars($_POST['id']);
 
         if(SexModel::deleteSex($sex)){
             $this->addMessageSuccess("Ajout réussi");

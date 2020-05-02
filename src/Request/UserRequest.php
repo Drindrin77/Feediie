@@ -34,8 +34,8 @@ class UserRequest extends RequestService
             case "filter":
                 $this->filter();
                 break;
-            case "delete":
-                $this->delete();
+            case "deleteuser":
+                $this->deleteUser();
                 break;
             case "relation":
                 $this->relation();
@@ -69,7 +69,7 @@ class UserRequest extends RequestService
     }
 
 
-    private function delete()
+    private function deleteUser()
     {
         $idUser = htmlspecialchars($_POST['id']);
 
