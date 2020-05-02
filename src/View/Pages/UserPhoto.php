@@ -33,8 +33,7 @@ class UserPhoto{
               else{
                 echo '<div class="carousel-item">';
               }
-              echo '<img style="width:100%; height:100%;" src="'.$photo['url'].'">';
-
+              echo '<img class="w-100 h-100" src="'.$photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>
@@ -42,11 +41,10 @@ class UserPhoto{
 
         <a class="carousel-control-prev" href="#carouselPhoto" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselPhoto" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
+
         </a>
       </div>
 

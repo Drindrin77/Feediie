@@ -128,14 +128,14 @@
                 </div>
                 
                 <div class="modal" id="modalInfoPhoto" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img id="imgInfoPhoto" class="w-100" src="" />
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img id="imgInfoPhoto" class="w-100" src="" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
                 <div class="row justify-content-center" id="containerPhotos">
                     <?php foreach($photos as $photo): ?>
