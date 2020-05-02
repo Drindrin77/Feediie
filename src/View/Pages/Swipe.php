@@ -118,7 +118,7 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-2 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
-                    <div id="<?= $relation['name'] ?>"class="relationCase" style="
+                    <div id="<?= $relation['idrelationtype'] ?>"class="relationCase" style="
                         <?php if (!empty($userSelectedRelationType)) {
                             foreach ($userSelectedRelationType as $userrelation) {
                                 if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {

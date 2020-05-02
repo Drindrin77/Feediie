@@ -32,11 +32,10 @@ class SwipeController extends Controller{
         $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
         $userSelectDistance = $userFilterAgeDistance[0]['distancemax'];
         $userSelectAge = array("agemin"=>$userFilterAgeDistance[0]['filteragemin'],"agemax"=>$userFilterAgeDistance[0]['filteragemax']);
-        
+
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
         $relations = ParameterModel::getAllRelation();
-        var_dump($userSelectedRelationType);
         //FILTER (WITHOUT DISTANCE FILTER)
         $users = UserModel::filterUsersSwipe($idUser);
         //$users = UserModel::getAllUsers($idUser);
