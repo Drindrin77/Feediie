@@ -7,6 +7,7 @@ INSERT INTO sex VALUES('Trans');
 INSERT INTO sex VALUES('Pinguoin');
 INSERT INTO sex VALUES('Other');
 
+INSERT INTO diet VALUES(default, 'Aucun');
 INSERT INTO diet VALUES(default, 'Végétarien');
 INSERT INTO diet VALUES(default, 'Sans gluten');
 INSERT INTO diet VALUES(default, 'Halal');
@@ -14,10 +15,10 @@ INSERT INTO diet VALUES(default, 'Végan');
 INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
 
-INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Plan cul régulier');
-INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Amitié');
-INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Relation sérieuse');
-INSERT INTO RelationType VALUES(default, '/Images/Relation/relation_default.png','Coup d''un soir');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/hotdog.png','Plan HOT régulier','Tu cherches un plan HOT régulier car tu aimes croquer la vie à pleine dent !');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/hotchocolate.png','Rencontre Amicale','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/croquemonsieur.png','Relation sérieuse','Tu souhaite trouver la bonne personne qui comblera tes appétits !');
+INSERT INTO RelationType VALUES(default,'/Images/Dish/guacamole.png', 'Juste pour ce soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
@@ -168,23 +169,19 @@ INSERT INTO looklike VALUES (2,5);
 INSERT INTO looklike VALUES (2,6);
 
 INSERT INTO practice VALUES(1,1);
-INSERT INTO interesteddiet VALUES (1,1);
-INSERT INTO interesteddiet VALUES (1,2);
-INSERT INTO interesteddiet VALUES (1,3);
-INSERT INTO interesteddiet VALUES (1,4);
-INSERT INTO interesteddiet VALUES (2,1);
-INSERT INTO interesteddiet VALUES (2,2);
-INSERT INTO interesteddiet VALUES (2,3);
-INSERT INTO interesteddiet VALUES (2,4);
+/*INSERT INTO interesteddiet VALUES (1,1);*/
 
+INSERT INTO interestedsex VALUES (1,'Homme');
 INSERT INTO interestedsex VALUES (2,'Femme');
-INSERT INTO interestedsex VALUES (2,'Pangender');
-INSERT INTO interestedsex VALUES (2,'Pinguoin');
 
-INSERT INTO interestedRelationType VALUES (2,'1');
-INSERT INTO interestedRelationType VALUES (2,'2');
-INSERT INTO interestedRelationType VALUES (1,'1');
+INSERT INTO interesteddiet VALUES(1,1);
+INSERT INTO interesteddiet VALUES(2,1);
+
+INSERT INTO followDiet VALUES(1,1);
+INSERT INTO followDiet VALUES(2,1);
+
 INSERT INTO interestedRelationType VALUES (1,'2');
+INSERT INTO interestedRelationType VALUES (2,'2');
 
 
 

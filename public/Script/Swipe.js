@@ -5,17 +5,16 @@ $(document).ready(function () {
 
     $("#closeBtn").click(function () {
         if (statusBtnParameter === 'opened') {
-            $("#parameters").css('transform', 'translate(-420px,0)');
-            $(this).css('transform', 'translate(0px,0px)');
-            statusBtnParameter = 'closed'
+            $(".animationParameters").css('transform', 'translate(-420px,0)');
+            statusBtnParameter = 'closed';
 
         } else {
-            $("#parameters").css('transform', 'translate(-120px,0)');
-            $(this).css('transform', 'translate(500px,0px)');
-
-            statusBtnParameter = 'opened'
+            $(".animationParameters").css('transform', 'translate(-120px,0)');
+            statusBtnParameter = 'opened';
         }
     });
+    //AFFICHER LES DIFFERENTES RELATIONS
+    $('[data-toggle="popover"]').popover({ trigger: 'hover'});
 
     $("#showMoreSex").click(function () {
         if (document.getElementById("boxSelectModifiedSex").style.height === "auto") {
@@ -79,6 +78,31 @@ $(document).ready(function () {
             $("#boxSelectDistance").css({ height: '0', opacity: '0' });
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
+    });
+
+    //ON RECUPERE LA RELATION SELECTIONNEE
+    $('.relationCase').click(function () {
+        $(this).css('background','dodgerblue');
+        let relationSelect = $(this).attr('id');
+        $('.relationCase').not(this).each(function () {
+            $(this).css('background','lightgrey');
+        });
+        $.post("/ajax.php?entity=user&action=relation",
+            {
+                relationSelect: relationSelect,
+            })
+            .fail(function (e) {
+                console.log("fail", e);
+                $(this).html("Erreur d'enregistrement");
+            })
+            .done(function (e) {
+                let data = JSON.parse(e);
+                if (data.status === 'success') {
+                    console.log(data);
+                }
+            });
+        $("#messageSuccess").html("Relation bien enregistrés !");
+        $('#containerMessageSuccess').show(200).delay(2000).hide(200);
     });
 
 
@@ -170,32 +194,46 @@ $(document).ready(function () {
         $("#messageSuccess").html("Réglages enregistrés !");
         $('#containerMessageSuccess').show(200).delay(2000).hide(200);
     });
-
+    //AFFICHER PROFILE
+    $('.seeProfil:last').click(function () {
+        $('.watchProfile').css({opacity: '100%','pointer-events':'all','transform': 'translate(0px,0)'});
+        $('#blockButtons').css({'pointer-events':'none'}).fadeOut('slow');
+        $('.moveOpenProfil').css({'transform': 'translate(0px,0)'});
+    });
+    $('#closeProfileBtn').click(function () {
+        $('.watchProfile').css({opacity: '0%','pointer-events':'none','transform':' translate(-160px,0)'});
+        $('#blockButtons').css({'pointer-events':'all'}).fadeIn('slow');
+        $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
+    });
     // SWIPE
 
     $('#miamBtn').click(function () {
-
-        let actualUser = $('.buddy:last')
+        $(this).css('pointer-events','none');
+        $("#beurkBtn").css('pointer-events','none');
+        let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status miam">Miam!</div>');
-            actualUser.addClass('rotate-left').delay(500).fadeOut(1)
+            actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
-                $('.buddy:last').remove()
-                //TODO FREEZE BUTTONS
-            }, 500);
+                $('.buddy:last').remove();
+                $(this).css('pointer-events','all');
+                $("#beurkBtn").css('pointer-events','all');
+            }, 1000);
         }
     });
     $('#beurkBtn').click(function () {
-
-        let actualUser = $('.buddy:last')
+        $(this).css('pointer-events','none');
+        $("#miamBtn").css('pointer-events','none');
+        let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status beurk">Beurk!</div>');
-            actualUser.addClass('rotate-right').delay(500).fadeOut(1)
+            actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
-                $('.buddy:last').remove()
-                //TODO FREEZE BUTTONS
+                $('.buddy:last').remove();
+                $(this).css('pointer-events','all');
+                $("#miamBtn").css('pointer-events','all');
 
-            }, 500);
+            }, 1000);
         }
     });
 

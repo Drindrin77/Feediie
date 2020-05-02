@@ -10,7 +10,8 @@
 CREATE TABLE RelationType(
 	idRelationType   SERIAL NOT NULL ,
 	iconURL			VARCHAR (128),
-	name          VARCHAR (128) NOT NULL UNIQUE ,
+	name          VARCHAR (128) NOT NULL  ,
+	description   VARCHAR (128) NOT NULL  ,
 	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;
 
@@ -264,4 +265,5 @@ CREATE TABLE interesteddiet(
     ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE
     ,CONSTRAINT interesteddiet_diet0_FK FOREIGN KEY (idDiet) REFERENCES diet(idDiet)  ON DELETE CASCADE
 )WITHOUT OIDS;
+
 
