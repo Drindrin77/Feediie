@@ -5,28 +5,21 @@ session_start();
 
 define('CONST_INCLUDE', NULL);
 define('PATH_USER_PHOTO', '/Images/UserUpload/');
+define('PATH_DISH_PHOTO', '/Images/Dish/');
+define('PATH_RELATION_PHOTO', '/Images/Relation/');
+define('PATH_PERSONALITY_PHOTO', '/Images/Personality/');
+define('PATH_ICON_PHOTO', '/Images/Icon/');
 define('PATH_DEFAULT_USER_PHOTO', '/Images/UserUpload/default.png');
+define('MAX_USER_PHOTO',6);
 
-require_once("../src/Service/DBConnection.php");
-require_once("../src/Service/AuthService.php");
-require_once("../src/Service/RequestService.php");
-require_once("../src/Service/PasswordService.php");
-require_once("../src/Service/EmailService.php");
-require_once("../src/Service/DateService.php");
-
-require_once("../src/Model/UserModel.php");
-require_once("../src/Model/CityModel.php");
-require_once("../src/Model/SexModel.php");
-require_once("../src/Model/DishModel.php");
-require_once("../src/Model/DietModel.php");
-require_once("../src/Model/HobbyModel.php");
-require_once("../src/Model/PhotoModel.php");
-require_once("../src/Model/ParameterModel.php");
-require_once("../src/Model/IdeaModel.php");
-require_once("../src/Model/RelationModel.php");
-require_once("../src/Model/PersonalityModel.php");
-
-require_once("../src/Model/ChatModel.php");
+$services = glob('../src/Service/*.php', GLOB_BRACE);
+foreach($services as $file) {
+  require_once($file);
+}
+$models = glob('../src/Model/*.php', GLOB_BRACE);
+foreach($models as $file) {
+  require_once($file);
+}
 
 $entity = isset($_GET['entity'])?ucfirst(strtolower($_GET['entity'])).'Request':null;
 $action = isset($_GET['action'])?strtolower($_GET['action']):null;

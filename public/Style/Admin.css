@@ -19,11 +19,40 @@
     margin-top:10px;
 }
 
+/*PHOTO*/
+
+.cardImgUpload{
+    position: relative;
+}
+
+
+.btnGroupPhoto{
+    position: absolute;
+    top:5%;
+    left:2%;
+}
+  
+
+
+
+
+
+
+.errorMsg{
+    color:red;
+}
+
 #navContentContainer{
     height:600px;
 }
 .nav-link{
     cursor: pointer;
+}
+.contentUserTable{
+    cursor: pointer;
+}
+.contentUserTable:hover{
+    background-color: lightslategrey;
 }
 .activeNav{
     color:white !important;
@@ -89,10 +118,20 @@
     font-size:13px;
 }
 
+.textAreaAdd{
+    width:100%;
+    height:100%;
+}
+.titleCardDropdown{
+    text-align: center;
+    height:60px;
+    font-size:13px;
+    padding:0px !important;
+}
+
 .cardImage{
-    width:100px;
-    height:100px;
-    margin:auto;
+    width:128px;
+    height:120px;
 }
 
 .cardElement{

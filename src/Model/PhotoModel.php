@@ -26,7 +26,7 @@ class PhotoModel extends DBConnection{
         return $req->execute(array($path,$priority,$idUser));
     }
 
-    public static function deletePhoto($url){
+    public static function deleteUserPhoto($url){
         $req = self::$pdo->prepare("delete from photo where url=?");
         return $req->execute(array($url));
     }

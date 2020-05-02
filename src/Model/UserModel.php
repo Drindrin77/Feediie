@@ -90,7 +90,7 @@ class UserModel extends DBConnection{
     }
 
     public static function getAllUserOrderReport($idUser){
-        $req = self::$pdo->prepare("select iduser, isadmin, firstname, email, nbReport from FeediieUser where iduser<> ? order by nbreport desc");
+        $req = self::$pdo->prepare("select iduser, isadmin, firstname, email, nbReport, uniqid from FeediieUser where iduser<> ? order by nbreport desc, email asc");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }

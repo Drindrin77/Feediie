@@ -40,6 +40,10 @@ class SexModel extends DBConnection{
         $req = self::$pdo->prepare("delete from sex where name=?");
         return $req->execute(array($sex));
     }
-    
+
+    public static function addSex($name){
+        $req = self::$pdo->prepare("insert into sex values (?)");
+        return $req->execute(array($name));
+    }    
 
 }

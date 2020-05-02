@@ -10,8 +10,8 @@ class SexRequest extends RequestService{
 
     public function execute($action){
         switch($action){
-            case "add":
-                $this->add();
+            case "addsex":
+                $this->addSex();
             break;
             case "delete":
                 $this->delete();
@@ -26,6 +26,16 @@ class SexRequest extends RequestService{
             $this->addMessageSuccess("Ajout réussi");
         }else{
             $this->addMessageError("Erreur BD");
+        }
+    }
+
+    private function addSex(){
+        $name = htmlspecialchars($_POST['name']);
+
+        if(SexModel::addSex($name)){
+            $this->addMessageSuccess("Ajout réussi");
+        }else{
+            $this->addMessageError("Le nom existe déjà");
         }
     }
 

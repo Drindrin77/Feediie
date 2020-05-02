@@ -38,11 +38,14 @@ class HobbyRequest extends RequestService{
     }
 
     private function addHobby(){
-        // if(HobbyModel::addHobby($idHobby)){
-        //     $this->addMessageSuccess('Le hobby a été ajouté');
-        // }else{
-        //     $this->addMessageError('Erreur BD');
-        // }
+        $name = htmlspecialchars($_POST['name']);
+
+        if(HobbyModel::addHobby($name)){
+            $this->addMessageSuccess("Ajout réussi");
+            $this->addData("id",HobbyModel::getIDByName($name));
+        }else{
+            $this->addMessageError("Le nom existe déjà");
+        }
     }
 
     private function deleteUserHobby(){

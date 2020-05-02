@@ -15,6 +15,17 @@ class RelationModel extends DBConnection{
         return $req->execute(array($idRelation));
     }
 
+    public static function addRelationType($pathIcon, $name){
+        $req = self::$pdo->prepare("insert into RelationType values (default, ?, ?)");
+        return $req->execute(array($pathIcon,$name)); //FALSE => UNIQUE
+    }
+
+    public static function getIDByName($name){
+        $req = self::$pdo->prepare("select idrelationtype from RelationType where name=?");
+        $req->execute(array($name));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
 }
 
 ?>

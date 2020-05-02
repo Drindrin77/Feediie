@@ -14,10 +14,10 @@ INSERT INTO diet VALUES(default, 'Végan');
 INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
 
-INSERT INTO RelationType VALUES(default,'/Images/Dish/hotdog.png','Plan HOT régulier','Tu cherches un plan HOT régulier car tu aimes croquer la vie à pleine dent !');
-INSERT INTO RelationType VALUES(default,'/Images/Dish/hotchocolate.png','Rencontre Amicale','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
-INSERT INTO RelationType VALUES(default,'/Images/Dish/croquemonsieur.png','Relation sérieuse','Tu souhaites trouver la bonne personne qui comblera tes appétits !');
-INSERT INTO RelationType VALUES(default,'/Images/Dish/guacamole.png', 'Juste pour ce soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/hotdog.png','Plan HOT régulier','Tu cherches un plan HOT régulier car tu aimes croquer la vie à pleine dent !');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/hotchocolate.png','Rencontre Amicale','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/croquemonsieur.png','Relation sérieuse','Tu souhaite trouver la bonne personne qui comblera tes appétits !');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/guacamole.png', 'Juste pour ce soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
@@ -77,12 +77,12 @@ INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
 INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
 
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Gourmand', '/Images/Dish/chocolat.jpg');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Pas de prise de tête', '/Images/Dish/burger.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Partager avant tout', '/Images/Dish/pizza.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Attentionné', '/Images/Dish/pommeAmour.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Sportif', '/Images/Dish/salad.png');
+INSERT INTO PersonalityDish VALUES (default,  'Gourmand', '/Images/Dish/chocolat.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Pas de prise de tête', '/Images/Dish/burger.png');
+INSERT INTO PersonalityDish VALUES (default,  'Partager avant tout', '/Images/Dish/pizza.png');
+INSERT INTO PersonalityDish VALUES (default,  'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Attentionné', '/Images/Dish/pommeAmour.jpg');
 
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');

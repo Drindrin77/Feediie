@@ -10,16 +10,28 @@ class RelationRequest extends RequestService{
 
     public function execute($action){
         switch($action){
-            case "add":
-                $this->add();
+            case "addrelation":
+                $this->addRelation();
             break;
-            case "delete":
-                $this->delete();
+            case "deleterelation":
+                $this->deleteRelation();
             break;
         }
     }    
 
-    private function delete(){
+    private function addRelation(){
+        $name = htmlspecialchars($_POST['name']);
+        $path = '';
+        //TODO ADD PATH
+        if(RelationModel::addRelationType($path, $name)){
+            $this->addMessageSuccess("Ajout réussi");
+            $this->addData("id",RelationModel::getIDByName($name));
+        }else{
+            $this->addMessageError("Le nom existe déjà");
+        }
+    }
+
+    private function deleteRelation(){
         $idRelation = htmlspecialchars($_POST['id']);
 
         if(RelationModel::deleteRelationType($idRelation)){
