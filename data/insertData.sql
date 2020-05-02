@@ -14,10 +14,10 @@ INSERT INTO diet VALUES(default, 'Végan');
 INSERT INTO diet VALUES(default, 'Sans arachide');
 INSERT INTO diet VALUES(default, 'Casher');
 
-INSERT INTO RelationType VALUES(default,'Plan cul régulier');
-INSERT INTO RelationType VALUES(default,'Amitié');
-INSERT INTO RelationType VALUES(default,'Relation sérieuse');
-INSERT INTO RelationType VALUES(default, 'Juste un soir');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Plan cul régulier');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Amitié');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/relation_default.png','Relation sérieuse');
+INSERT INTO RelationType VALUES(default, '/Images/Relation/relation_default.png','Coup d''un soir');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000'),(default,'Choisy-le-Roi', '94600');
@@ -77,12 +77,12 @@ INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
 INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
 
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sportif', '/Images/Dish/salad.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Gourmand', '/Images/Dish/chocolat.jpg');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Pas de prise de tête', '/Images/Dish/burger.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Partager avant tout', '/Images/Dish/pizza.png');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
-INSERT INTO PersonalityDish VALUES (default, 'Sportif et en forme!', 'Attentionné', '/Images/Dish/pommeAmour.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Sportif', '/Images/Dish/salad.png');
+INSERT INTO PersonalityDish VALUES (default,  'Gourmand', '/Images/Dish/chocolat.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Pas de prise de tête', '/Images/Dish/burger.png');
+INSERT INTO PersonalityDish VALUES (default,  'Partager avant tout', '/Images/Dish/pizza.png');
+INSERT INTO PersonalityDish VALUES (default,  'Sans ami? Impossible', '/Images/Dish/raclette.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Attentionné', '/Images/Dish/pommeAmour.jpg');
 
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');

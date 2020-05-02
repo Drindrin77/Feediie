@@ -9,7 +9,7 @@
 ------------------------------------------------------------
 CREATE TABLE RelationType(
 	idRelationType   SERIAL NOT NULL ,
-	/*iconURL			VARCHAR (128),*/
+	iconURL			VARCHAR (128),
 	name          VARCHAR (128) NOT NULL UNIQUE ,
 	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;
@@ -175,8 +175,7 @@ CREATE TABLE Dish(
 ------------------------------------------------------------
 CREATE TABLE PersonalityDish(
 	idDish        SERIAL  NOT NULL ,
-	description   VARCHAR (128) ,
-	name          VARCHAR (64) NOT NULL ,
+	name          VARCHAR (64) NOT NULL UNIQUE ,
 	iconURL       VARCHAR (64) NOT NULL  ,
 	CONSTRAINT PersonalityDish_PK PRIMARY KEY (idDish)
 )WITHOUT OIDS;
@@ -187,7 +186,7 @@ CREATE TABLE PersonalityDish(
 ------------------------------------------------------------
 CREATE TABLE Hobby(
 	idHobby   SERIAL NOT NULL ,
-	name      VARCHAR (128) NOT NULL  ,
+	name      VARCHAR (128) NOT NULL  UNIQUE,
 	CONSTRAINT Hobby_PK PRIMARY KEY (idHobby)
 )WITHOUT OIDS;
 
@@ -234,7 +233,7 @@ CREATE TABLE practice(
 ------------------------------------------------------------
 CREATE TABLE diet(
     idDiet   SERIAL NOT NULL ,
-    name     VARCHAR (128) NOT NULL,
+    name     VARCHAR (128) NOT NULL UNIQUE,
     CONSTRAINT diet_PK PRIMARY KEY (idDiet)
 )WITHOUT OIDS;
 
