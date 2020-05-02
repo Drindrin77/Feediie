@@ -62,24 +62,6 @@ include_once('../src/View/Pages/UserPhoto.php');
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMax ?>"
                                        id="ageRangemax">
                             </div>
-                            <div class="titleParameter"><h5>Je suis intéressé par</h5></div>
-                            <div id="boxSelectModifiedCat" class="boxSelectModified">
-                                <?php foreach ($relations as $relation): ?>
-                                    <div id="relationCheckbox" class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="relation"
-                                               id="<?= $relation['name'] ?>"
-                                            <?php if (!empty($userSelectedRelationType)) {
-                                                foreach ($userSelectedRelationType as $userrelation) {
-                                                    if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                                        echo 'checked';
-                                                    }
-                                                }
-                                            } ?>>
-                                        <label class="custom-control-label"
-                                               for="<?= $relation['name'] ?>"><?= $relation['name'] ?></label>
-                                    </div>
-                                <? endforeach; ?>
-                            </div>
                             <div id="showMoreCat" class="showMoreBtn"><i class='fas'>&#xf103;</i>
                             </div>
                             <div class="titleParameter"><h5>Régime Alimentaire</h5></div>

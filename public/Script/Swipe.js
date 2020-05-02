@@ -84,7 +84,6 @@ $(document).ready(function () {
     $('.relationCase').click(function () {
         $(this).css('background','dodgerblue');
         let relationSelect = $(this).attr('id');
-        alert(relationSelect);
         $('.relationCase').not(this).each(function () {
             $(this).css('background','lightgrey');
         });
