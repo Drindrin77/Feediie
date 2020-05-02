@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <!-- BUTTON EDIT SHOW ONLY IF IT IS THE CURRENT USER-->
             <?php if($isCurrentUser){?>
-                <button id="edit" class="btn btn-primary" onclick="location.href='/profile/edit'">
+                <button id="edit" class="feediieBtn btn btn-primary" onclick="location.href='/profile/edit'">
                     <i class="fas fa-edit"></i> <span id="editProfileText">Modifier le profil</span>
                 </button>
             <?php } ?>
