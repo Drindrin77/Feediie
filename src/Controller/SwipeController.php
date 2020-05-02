@@ -36,7 +36,6 @@ class SwipeController extends Controller{
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
         $relations = ParameterModel::getAllRelation();
-        var_dump($userSelectedRelationType);
         //FILTER (WITHOUT DISTANCE FILTER)
         $users = UserModel::filterUsersSwipe($idUser);
         //$users = UserModel::getAllUsers($idUser);
