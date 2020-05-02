@@ -49,9 +49,6 @@ $("#submitAddPersonality").click(function (e) {
 function addPersonality(name, url, id) {
     $("#containerCardPersonality").append('<div class="card cardElement"><div class="cardImage"><img src="' + url + '" class= "card-img-top image" alt = "..." ></div ><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-id=' + id + ' class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button></div ><div class="card-header titleCard">' + name + '</div></div > ')
 }
-//TODO GESTION SAME FILE
-//TODO ALREADY TAKEN NAME
-
 
 $("#uploadInput").change(function (e) {
     var file_data = $('#uploadInput').prop('files')[0];

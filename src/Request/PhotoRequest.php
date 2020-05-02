@@ -17,10 +17,10 @@ class PhotoRequest extends RequestService{
     public function execute($action){
         switch($action){
             case 'add':
-                $this->uploadPhoto();
+                $this->uploadUserPhoto();
             break;
             case 'delete':
-                $this->deletePhoto();
+                $this->deleteUserPhoto();
             break;
             case 'setpriority':
                 $this->setPriority();
@@ -35,11 +35,8 @@ class PhotoRequest extends RequestService{
     private function returnTemporaryPhoto(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(isset($_FILES['file'])){
-                $path = $_FILES['file']['tmp_name'];
                 $ext = PhotoService::getExtension($_FILES['file']['name']);
-                $data = file_get_contents($path);
-                $base64 = 'data:image/' . $ext . ';base64,' . base64_encode($data);
-
+                $base64 = PhotoService::createBase64Photo($_FILES['file']['tmp_name'],$ext);
                 $this->addData('imgSrc',sprintf('%s', $base64));
                 $this->addData('extension',$ext);
             }
@@ -54,33 +51,21 @@ class PhotoRequest extends RequestService{
         $this->addMessageSuccess('La priorite a été changé');
     }
 
-    private function dir_is_empty($dir) {
-        $handle = opendir($dir);
-        while (false !== ($entry = readdir($handle))) {
-          if ($entry != "." && $entry != "..") {
-            closedir($handle);
-            return FALSE;
-          }
-        }
-        closedir($handle);
-        return TRUE;
-      }
-
-    private function deletePhoto(){
+    private function deleteUserPhoto(){
         $priority = isset($_POST['priority']) && !empty($_POST['priority']) ? $_POST['priority']:null;
         $priority = $priority == 'false' ? false:true;
-
         $url = isset($_POST['url']) && !empty($_POST['url']) ? $_POST['url']:null;
-        if(PhotoModel::deletePhoto($url)){
+
+        if(PhotoModel::deleteUserPhoto($url)){
             $this->addMessageSuccess('La suppression a été réussi');
-            unlink('./'.$url);
+            PhotoService::deletePhoto($url);
+
             //if there are no more file, delete the directory
             $directory = './'.dirname($url);
             if($this->dir_is_empty($directory)){
                 rmdir($directory);
             }
             //If photo was priority and there are another photos, delegate it to the first one
-
             else if($priority){
                 PhotoModel::setPriorityToFirst($this->user['iduser']);
                 $this->addData('newPriorityUrl',PhotoModel::getPriorityPhoto($this->user['iduser'])['url']);
@@ -91,29 +76,40 @@ class PhotoRequest extends RequestService{
        }
     }
 
-    private function uploadPhoto(){
+
+    private function dir_is_empty($dir) {
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) {
+          if ($entry != "." && $entry != "..") {
+            closedir($handle);
+            return FALSE;
+          }
+        }
+        closedir($handle);
+        return TRUE;
+    }
+
+
+    private function uploadUserPhoto(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(isset($_FILES['file'])){
-                $filename = $_FILES["file"]["name"];
-                $filetype = $_FILES["file"]["type"];
-                $filesize = $_FILES["file"]["size"];
                 $uploadOk = true;
                 
                 //CHECK TYPE FILE
-                if(!PhotoService::validExtension($filetype)){
+                if(!PhotoService::validExtension($_FILES["file"]["type"])){
                     $this->addMessageError('Veuillez sélectionner un format de fichier valide (.jpg, .jpeg, .gif ou .png)');
                     $uploadOk = false;
                 }
 
                 //CHECK SIZE
-                if(!PhotoService::validSize($filesize)){
+                if(!PhotoService::validSize($_FILES["file"]["size"])){
                     $this->addMessageError('La taille du fichier doit etre inférieur à 5Mo');
                     $uploadOk = false;
                 }
 
                 if ($uploadOk){ 
 
-                    $ext = PhotoService::getExtByFileType($filetype);
+                    $ext = PhotoService::getExtByFileType($_FILES["file"]["type"]);
 
                     $firstPhoto = false;
                     //CHECK IF DIRECTORY EXISTS
@@ -123,32 +119,24 @@ class PhotoRequest extends RequestService{
                         $firstPhoto = true;
                     }
 
-                    //CHECK IF NEW FILE EXISTS
-                    do{
-                        $target_file = $directory .'/'. uniqid(rand(), false) . '.' . $ext;
-                    } while(file_exists($target_file));
+                    $target_file = PhotoService::createUserFilename($this->user['uniqid'], $ext);
+                    $successBD = PhotoModel::addPhoto($this->user['iduser'],substr($target_file,1), $firstPhoto);
 
-                    if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
-
-                        $successBD = PhotoModel::addPhoto($this->user['iduser'],substr($target_file,1), $firstPhoto);
-                        if(!$successBD){
-                            $this->addMessageError('Erreur BD');
-                        }else{
-                            $this->addMessageSuccess('Le fichier a été téléchargé');
-                            $this->addData('url',substr($target_file,1));
-                            $this->addData('priority',$firstPhoto);
-                        }
-                    } else {
-                        $this->addMessageError('Erreur lors du téléchargement, veuillez réessayer');
+                    if($successBD){
+                        PhotoService::moveTmpFile($_FILES['file']['tmp_name'], $target_file);
+                        $this->addMessageSuccess('Le fichier a été téléchargé');
+                        $this->addData('url',substr($target_file,1));
+                        $this->addData('priority',$firstPhoto);
+                        
+                    }else{
+                        $this->addMessageError('Erreur BD');
                     }
                 }
-            }else{
-                $this->addMessageError('Pas de fichier reçu');  
             }
-        }else{
-            $this->addMessageError('Pas la bonne requete');   
-        }
+        }  
+
     }
+
 
    
 }

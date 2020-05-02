@@ -47,7 +47,9 @@ class PersonalityRequest extends RequestService{
 
     private function deletePersonality(){
         $idDish = htmlspecialchars($_POST['idDish']);
+        $url = PersonalityModel::getUrlbyId($idDish);
         if(PersonalityModel::deletePersonality($idDish)){
+            PhotoService::deletePhoto($url);
             $this->addMessageSuccess("Suppression reussi");
         }else{
             $this->addMessageError("Erreur BD");

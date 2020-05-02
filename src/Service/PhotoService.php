@@ -22,7 +22,8 @@ class PhotoService{
         return self::$valid_extensions[$fileType];
     }
 
-    public static function deletePhoto($fileName){
+    public static function deletePhoto($url){
+        unlink('./'.$url);
     }
 
     public static function getFilenameWithoutExt($fileName){
@@ -40,6 +41,18 @@ class PhotoService{
         return $file;
     }
 
+    public static function createUserFilename($uniqid,$ext){
+        do{
+            $file = '.'. PATH_USER_PHOTO . $uniqid. '/' . uniqid(rand(), false) . '.' . $ext;
+        } while(file_exists($file));
+        return $file;
+    }
+
+    public static function createBase64Photo($filename, $ext){
+        $data = file_get_contents($filename);
+        return $base64 = 'data:image/' . $ext . ';base64,' . base64_encode($data);
+    }
+
     public static function base64ToFile($base64Img, $filename){
         $img = str_replace('data:image/'.self::getExtension($filename).';base64,', '', $base64Img);
         $img = str_replace(' ', '+', $img);
@@ -47,9 +60,8 @@ class PhotoService{
         return file_put_contents($filename, $data);
     }
 
-    public static function createNewImgDish($tmpName,$fileName){
-        $target_file = '.'. PATH_DISH_PHOTO.$fileName;
-        return move_uploaded_file($tmpName, $target_file);
+    public static function moveTmpFile($tmpName, $fileName){
+        return move_uploaded_file($tmpName, $fileName);
     }
 
 }
