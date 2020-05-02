@@ -31,6 +31,11 @@ class DishModel extends DBConnection{
         $req = self::$pdo->prepare("delete from likeeat where idUser = ? and idDish = ?");
         return $req->execute(array($idUser, $idDish)); 
     }
+    public static function getUserFavoriteDish($idUser){
+        $req = self::$pdo->prepare("select * from likeeat where idUser = ?");
+        $req->execute(array($idUser));
+        return $req->fetchAll();
+    }
 
     public static function deleteDish($idDish){
         $req = self::$pdo->prepare("delete from dish where idDish = ?");
