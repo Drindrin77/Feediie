@@ -51,12 +51,6 @@ class ViewModel {
                     //<link rel="stylesheet" href="/Style/SuccessMessage.css">
                     include_once('Style/SuccessMessage.css');
                     include_once('Style/header.css');
-
-
-                   // include_once('Style/bootstrap.css');
-
-
-
                   }
                 ?>
                 </style>
