@@ -66,19 +66,17 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
                             <div id="boxToggleDiet" class="boxSelect">
                                 <div class="custom-control custom-switch">
-                                    <?php if (!empty($toggleDiet)) {?>
-                                    <input type="checkbox" class="custom-control-input" name="togglediet"
-                                        <?php if ($toggleDiet== 'true') {
+                                    <input type="checkbox" class="custom-control-input" name="togglediet" id="togglediet"
+                                        <?php if ($toggleDiet == 'true') {
                                             echo 'checked';
                                         }?>>
                                     <label class="custom-control-label" for="togglediet">
                                         <?php if ($toggleDiet == 'true') {
-                                            echo 'Désactiver recherche par régime alimentaire';
+                                            echo 'Désactiver la recherche';
                                         } else {
-                                            echo 'Activer recherche par régime alimentaire';
+                                            echo 'Activer la recherche';
                                         } ?>
                                     </label>
-                                    <?php }?>
                                 </div>
                             </div>
                                 <div id="boxSelectModifiedDiet" class="boxSelectModified">

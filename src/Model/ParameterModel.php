@@ -49,6 +49,11 @@ class ParameterModel extends DBConnection{
         $req->execute(array($idUser,$relationSelect));
         return $req->fetchAll();
     }
+    public static function updateDietActive($idUser,$dietactive){
+        $req = self::$pdo->prepare("update feediieuser set filterDiet = ? where idUser = ?");
+        $req->execute(array($dietactive,$idUser));
+        return $req->fetchAll();
+    }
 }
 
 ?>

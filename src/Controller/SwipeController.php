@@ -26,7 +26,6 @@ class SwipeController extends Controller{
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
         $toggleDiet = UserModel::getInfoUser($idUser)[0]['filterdiet'];
-        var_dump($toggleDiet);
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
         $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);

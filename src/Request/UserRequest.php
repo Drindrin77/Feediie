@@ -105,10 +105,17 @@ class UserRequest extends RequestService
         $sexSelect = $_POST['sexSelect'];
         $dietSelect = $_POST['dietSelect'];
         $ageMax = $_POST['ageRangemax'];
+        $dietactive = $_POST['dietactive'];
+
         $idUser = $this->currentUser['iduser'];
 
 
         if (ParameterModel::updateDistance($idUser, $distance)) {
+            $this->addMessageSuccess('La distance a ete mise a jour');
+        } else {
+            $this->addMessageError('Erreur BD mise a jour distance');
+        }
+        if (ParameterModel::updateDietActive($idUser, $dietactive)) {
             $this->addMessageSuccess('La distance a ete mise a jour');
         } else {
             $this->addMessageError('Erreur BD mise a jour distance');
