@@ -4,7 +4,7 @@ if(!defined('CONST_INCLUDE'))
     die('Acces direct interdit !');
 
 class SwipeController extends Controller{
-	
+
 	public function __construct() {
     }
 
@@ -20,11 +20,13 @@ class SwipeController extends Controller{
         }else{
             return new ViewModel('Error403');
         }
-        
+
     }
     public function pageSwipe()
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
+        $toggleDiet = UserModel::getInfoUser($idUser)[0]['filterdiet'];
+        var_dump($toggleDiet);
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
         $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
@@ -32,7 +34,6 @@ class SwipeController extends Controller{
         $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
         $userSelectDistance = $userFilterAgeDistance[0]['distancemax'];
         $userSelectAge = array("agemin"=>$userFilterAgeDistance[0]['filteragemin'],"agemax"=>$userFilterAgeDistance[0]['filteragemax']);
-
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
         $relations = ParameterModel::getAllRelation();
@@ -45,6 +46,7 @@ class SwipeController extends Controller{
             $users[$i]['photos'] = PhotoModel::getAllPhotos($idUser);
         }
         $data = [
+            'toggleDiet' => $toggleDiet,
             'userSelectedRelationType' =>$userSelectedRelationType,
             'userSelectedDiet' => $userSelectedDiet,
             'userSelectedGender' => $userSelectedGender,
