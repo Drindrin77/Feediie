@@ -36,5 +36,16 @@ class DishModel extends DBConnection{
         $req = self::$pdo->prepare("delete from dish where idDish = ?");
         return $req->execute(array($idDish)); 
     }
+
+    public static function addDish($name, $fileName){
+        $req = self::$pdo->prepare("insert into dish values(default,?,?)");
+        return $req->execute(array($name, $fileName));
+    }
+
+    public static function getIDByName($name){
+        $req = self::$pdo->prepare("select iddish from dish where name=?");
+        $req->execute(array($name));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
 }
 ?>

@@ -68,7 +68,7 @@ class PhotoRequest extends RequestService{
             //If photo was priority and there are another photos, delegate it to the first one
             else if($priority){
                 PhotoModel::setPriorityToFirst($this->user['iduser']);
-                $this->addData('newPriorityUrl',PhotoModel::getPriorityPhoto($this->user['iduser'])['url']);
+                $this->addData('newPriorityUrl',PhotoModel::getPriorityPhoto($this->user['iduser']));
             }
 
         }else{

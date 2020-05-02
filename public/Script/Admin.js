@@ -1,30 +1,40 @@
-$("#photoAddPersonality").click(function (e) {
-    $("#uploadInput").click();
+$(".photoAddCard").click(function (e) {
+    let content = $(this).data('content');
+    $('.uploadInput[data-content=' + content + ']').click();
 })
 
-let stockExtension = '';
-let stockBase64Img = '';
-
-$("#resetAddPersonality").click(function (e) {
-    resetPersonality()
+$(".contentUserTable").click(function (e) {
+    console.log($(this).parent().parent().is('.contentUserTable'))
 })
-function resetPersonality() {
-    stockBase64Img = '';
-    stockExtension = '';
-    $("#containerImgUploadPersonality").empty();
-    $("#textAddPersonality").val('');
-    $("#uploadInput").val('')
-    $("#errorAddPersonality").html("");
+function triggerPopOver(target) {
+    let hidden = $("#" + target).attr("data-hidden")
+    hidden = hidden == 'false' ? 'true' : 'false'
+    $("#" + target).attr("data-hidden", hidden)
 }
 
-$("#submitAddPersonality").click(function (e) {
-    let name = $("#textAddPersonality").val();
-    if (name.trim() && stockBase64Img != '' && stockExtension != '') {
-        $.post("/ajax.php?entity=personality&action=addPersonality",
+$(".resetAddCard").click(function (e) {
+    let content = $(this).data('content')
+    resetCard(content)
+})
+function resetCard(content) {
+    $("#containerImgUpload" + content).empty();
+    $("#textAdd" + content).val('');
+    $('.uploadInput[data-content=' + content + ']').val('')
+    $("#errorAdd" + content).html("");
+}
+
+$(".submitAddCard").click(function (e) {
+    let content = $(this).data("content")
+    let uploadInput = $('.uploadInput[data-content=' + content + ']');
+    let name = $("#textAdd" + content).val();
+    let container = $("#containerImgUpload" + content)
+
+    if (name.trim() != '' && uploadInput.val() != '') {
+        $.post('/ajax.php?entity=' + content + '&action=add' + content,
             {
                 'name': name,
-                'base64Img': stockBase64Img,
-                'ext': stockExtension
+                'base64Img': container.find("img").attr("src"),
+                'ext': container.data("extension")
             })
             .fail(function (e) {
                 console.log("fail", e)
@@ -32,29 +42,28 @@ $("#submitAddPersonality").click(function (e) {
             .done(function (e) {
                 let data = JSON.parse(e)
                 if (data.status == "success") {
-                    resetPersonality()
-                    addPersonality(name, data.data.url, data.data.id);
+                    resetCard(content)
+                    addCard(content, name, data.data.url, data.data.id);
                     $("#messageSuccess").html("Ajout de personnalité réussi")
                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
                 } else {
-                    $("#errorAddPersonality").html(data.error[0]);
+                    $("#errorAdd" + content).html(data.error[0]);
                 }
-
             })
     } else {
-        $("#errorAddPersonality").html("Le nom et le fichier ne doit pas être vide");
+        $("#errorAdd" + content).html("Le nom et le fichier ne doit pas être vide");
     }
 })
 
-function addPersonality(name, url, id) {
-    $("#containerCardPersonality").append('<div class="card cardElement"><div class="cardImage"><img src="' + url + '" class= "card-img-top image" alt = "..." ></div ><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-id=' + id + ' class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button></div ><div class="card-header titleCard">' + name + '</div></div > ')
+function addCard(content, name, url, id) {
+    $("#containerCard" + content).append('<div class="card cardElement"><div class="cardImage"><img src="' + url + '" class= "card-img-top image" alt = "..." ></div ><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-id=' + id + ' class="btn btnDelete delete' + content + '"><i class="fa fa-trash"></i> Supprimer</button></div ><div class="card-header titleCard">' + name + '</div></div > ')
 }
 
-$("#uploadInput").change(function (e) {
-    var file_data = $('#uploadInput').prop('files')[0];
+$(".uploadInput").change(function (e) {
+    var file_data = $(this).prop('files')[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
-
+    let content = $(this).data("content");
     $.ajax({
         url: "/ajax.php?entity=photo&action=getTemporaryPhoto",
         type: "POST",
@@ -65,13 +74,14 @@ $("#uploadInput").change(function (e) {
         success: function (e) {
             let data = JSON.parse(e)
             if (data.status == 'success') {
-                console.log(data.data)
                 var image = new Image();
                 image.src = data.data.imgSrc
                 image.className = "image"
-                $("#containerImgUploadPersonality").append(image)
-                stockExtension = data.data.extension
-                stockBase64Img = data.data.imgSrc
+
+                let container = $("#containerImgUpload" + content)
+
+                container.append(image)
+                container.data('extension', data.data.extension)
             }
         },
         error: function (e) {
@@ -164,7 +174,7 @@ $("#submitAddHobby").click(function (e) {
             .done(function (e) {
                 let data = JSON.parse(e)
                 if (data.status == "success") {
-                    $("#bodyHobby").append('<div data-id=' + data.data.id + ' class="containerHobby deletehobby"><i class="fas fa-ban deleteHobbyIcon" ></i > <span>' + name + '</span></div >')
+                    $("#bodyHobby").prepend('<div data-id=' + data.data.id + ' class="containerHobby deletehobby"><i class="fas fa-ban deleteHobbyIcon" ></i > <span>' + name + '</span></div >')
                     $("#textAddHobby").val("")
                     $("#messageSuccess").html("Ajout de relation réussi")
                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
@@ -317,6 +327,7 @@ $(document).on("click", ".deleteCity", function (event) {
 })
 
 $(".modifyAdmin").click(function (e) {
+    e.stopPropagation()
     let text = $(this).text().trim()
     let button = $(this)
     action = text == 'Promouvoir' ? 'setAdmin' : 'removeAdmin';
@@ -398,9 +409,9 @@ $(document).on("click", ".deleteIdea", function (event) {
 })
 
 $(".deleteUser").click(function (e) {
+    e.stopPropagation()
     let parent = $(this).parent().parent();
     let id = parent.attr("data-id")
-    console.log(id)
     $.post("/ajax.php?entity=user&action=delete",
         {
             'id': id,
