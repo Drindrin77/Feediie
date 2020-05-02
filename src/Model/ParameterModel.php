@@ -49,6 +49,6 @@ class ParameterModel extends DBConnection{
         $req->execute(array($idUser,$relationSelect));
         return $req->fetchAll();
     }
-}
+}insert into interestedRelationType (idUser,idRelationType) values (1,(select idRelationType from RelationType where name = "Rencontre Amicale" ?))
 
 ?>

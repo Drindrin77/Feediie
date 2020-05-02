@@ -99,7 +99,6 @@
     width: 300px;
     height: 300px;
     display: block;
-    border-radius: 15px;
     background-size: auto 160% !important;
     background-position: center;
     background-repeat: no-repeat;
@@ -229,12 +228,16 @@
 }
 .relationCase {
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background: lightgray;
-    margin: 10px;
+    width: 62px;
+    height: 62px;
+    background: white;
+    margin-left: 9px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .relationCase img {
+    margin-top: 1px;
+    margin-left: 1.2px;
     position: relative;
     width: 60px;
     height: 60px;

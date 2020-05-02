@@ -81,7 +81,29 @@ $(document).ready(function () {
     });
 
     //ON RECUPERE LA RELATION SELECTIONNEE
-    $('.relationCase').onclick 
+    $('.relationCase').click(function () {
+        $(this).css('background','dodgerblue');
+        let relationSelect = $(this).attr('id');
+        $('.relationCase').not(this).each(function () {
+            $(this).css('background','lightgrey');
+        });
+        $.post("/ajax.php?entity=user&action=relation",
+            {
+                relationSelect: relationSelect,
+            })
+            .fail(function (e) {
+                console.log("fail", e);
+                $(this).html("Erreur d'enregistrement");
+            })
+            .done(function (e) {
+                let data = JSON.parse(e);
+                if (data.status === 'success') {
+                    console.log(data);
+                }
+            });
+        $("#messageSuccess").html("Relation bien enregistrés !");
+        $('#containerMessageSuccess').show(200).delay(2000).hide(200);
+    });
 
 
     ///////////////////////RECUPERATION DES DONNEES PARAMETRES////////////////////////

@@ -33,6 +33,9 @@ class UserRequest extends RequestService{
             case "delete":
                 $this->delete();
             break;
+            case "relation":
+                $this->relation();
+                break;
             case "setadmin":
                 $this->setAdmin(true);
             break;
@@ -70,14 +73,29 @@ class UserRequest extends RequestService{
             $this->addMessageError("Erreur BD");
         }
     }
+    private function relation()
+    {
+        //ON RECUPERE LA RELATION DE CURRENTUSER
+        $idUser = $this->currentUser['iduser'];
+        $relationSelect = $_POST['relationSelect'];
 
+        if(ParameterModel::removeUserSelectedRelation($idUser))
+        {
+            $this->addMessageSuccess('Table selectrelation vide');
+        }
+        if (ParameterModel::updateUserSelectedRelation($idUser, $relationSelect)) {
+
+            $this->addMessageSuccess('Les relations on ete mis a jour');
+            } else {
+            $this->addMessageError('Erreur BD mise a jour relations selectionne');
+        }
+    }
     private function filter(){
 	    //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES
         $distance = $_POST['distanceMax'];
         $ageMin = $_POST['ageRangemin'];
         $sexSelect = $_POST['sexSelect'];
         $dietSelect = $_POST['dietSelect'];
-        $relationSelect = $_POST['relationSelect'];
         $ageMax = $_POST['ageRangemax'];
         $idUser = $this->currentUser['iduser']; 
 
@@ -115,17 +133,6 @@ class UserRequest extends RequestService{
                 $this->addMessageSuccess('Les diets on ete mis a jour');
             } else {
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');
-            }
-        }
-        if(ParameterModel::removeUserSelectedRelation($idUser))
-        {
-            $this->addMessageSuccess('Table selectrelation vide');
-        }
-        foreach ($relationSelect as $relation) {
-            if (ParameterModel::updateUserSelectedRelation($idUser, $relation)) {
-                $this->addMessageSuccess('Les relations on ete mis a jour');
-            } else {
-                $this->addMessageError('Erreur BD mise a jour relations selectionne');
             }
         }
         //ON RECUPÈRE LES DONNEES DE CURRENT USER
