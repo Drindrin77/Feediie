@@ -227,6 +227,7 @@ class UserRequest extends RequestService{
         $birthday = isset($_POST['birthday'])? $_POST['birthday'] : null;
         $sex = isset($_POST['sex'])? $_POST['sex'] : null;
         $city = isset($_POST['city'])? $_POST['city'] : null;
+        $age = isset($_POST['age'])? $_POST['age'] : null;
 
         if( !EmailService::checkEmailFormat($email)){
             $this->addMessageError("Le format de l'email n'est pas valide");
@@ -258,13 +259,15 @@ class UserRequest extends RequestService{
             $passwordEncrypted = PasswordService::hashPassword($password);
             $uniqID = bin2hex(random_bytes(32));
             $token = bin2hex(random_bytes(32));
+            $ageMin = $age-5< 18? 18:$age-5;
+            $ageMax = $age+5 >60?60:$age+5;
             while( !empty( UserModel::getUserByUniqID($uniqID) ) ){
                 $uniqID = bin2hex(random_bytes(32));
             }
             while (!empty(UserModel::findByToken($token))) {
                 $token = bin2hex(random_bytes(32));
             }
-            $res = UserModel::signUp($firstName, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token);
+            $res = UserModel::signUp($firstName, $email, $passwordEncrypted, $birthday, $sex, intval($city), $uniqID, $token, $ageMin, $ageMax);
             if ( $res ){
                 $this->addMessageSuccess("validate");
             }else{

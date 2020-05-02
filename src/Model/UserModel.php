@@ -110,11 +110,10 @@ class UserModel extends DBConnection{
         $req = self::$pdo->prepare($sql);
         return $req->execute($values); 
     }
-
-    public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
-        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ? ,?, ?, ?, ?, null, 
-        default, default, default, ?, default, ?, default, ?)");
-        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
+    
+    public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token, $ageMin, $ageMax){
+        $req = self::$pdo->prepare("insert into feediieuser (uniqID, firstName, birthday, email, password, filterAgeMin, filterAgeMax, token, idCity, sex) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $ageMin, $ageMax, $token, $city, $sex));
         return $res;
     }
     public static function setFilterParameter($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){

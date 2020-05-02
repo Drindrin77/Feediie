@@ -14,6 +14,12 @@ $(document).ready(function () {
 
 //Pas de Press Enter quand on s'inscrit pour éviter les mauvaises manip d'inscription
 
+function getAge(date) {
+    var diff = Date. now() - date. getTime();
+    var age = new Date(diff);
+    return Math. abs(age. getUTCFullYear() - 1970);
+}
+
     $("#btnSubmit").click(function (e) {
         let email = $("#email").val()
         let password = $("#password").val()
@@ -87,6 +93,9 @@ $(document).ready(function () {
         }
 
         if (isValid) {
+            age = getAge(new Date(birthday))
+            console.log(age);
+            
             $.post("/ajax.php?entity=user&action=register",
             {
                 'firstname': firstName,
@@ -94,12 +103,14 @@ $(document).ready(function () {
                 'password': password,
                 'birthday': birthday,
                 'sex': sex,
-                'city': city
+                'city': city,
+                'age': age
             })
             .fail(function (e) {
                 console.log("fail", e)
             })
             .done(function (e) {
+                console.log(e);
                 data = JSON.parse(e);
                 if (data.status == 'success') {
                     document.location.href = "/";
