@@ -8,8 +8,9 @@ $userSelectedGender = isset($this->data['userSelectedGender']) ? $this->data['us
 $userSelectDistance = isset($this->data['userSelectDistance']) ? $this->data['userSelectDistance'] : null;
 $userSelectAge = isset($this->data['userSelectAge']) ? $this->data['userSelectAge'] : null;
 $userSelectedRelationType = isset($this->data['userSelectedRelationType']) ? $this->data['userSelectedRelationType'] : null;
-
+$toggleDiet = isset($this->data['toggleDiet']) ? $this->data['toggleDiet'] : null;
 $distance = $userSelectDistance;
+
 $ageMin = $userSelectAge['agemin'];
 $ageMax = $userSelectAge['agemax'];
 
@@ -62,119 +63,119 @@ include_once('../src/View/Pages/UserPhoto.php');
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMax ?>"
                                        id="ageRangemax">
                             </div>
-                            <div class="titleParameter"><h5>Je suis intéressé par</h5></div>
-                            <div id="boxSelectModifiedCat" class="boxSelectModified">
-                                <?php foreach ($relations as $relation): ?>
-                                    <div id="relationCheckbox" class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="relation"
-                                               id="<?= $relation['name'] ?>"
-                                            <?php if (!empty($userSelectedRelationType)) {
-                                                foreach ($userSelectedRelationType as $userrelation) {
-                                                    if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                                        echo 'checked';
-                                                    }
-                                                }
-                                            } ?>>
-                                        <label class="custom-control-label"
-                                               for="<?= $relation['name'] ?>"><?= $relation['name'] ?></label>
-                                    </div>
-                                <? endforeach; ?>
-                            </div>
-                            <div id="showMoreCat" class="showMoreBtn"><i class='fas'>&#xf103;</i>
-                            </div>
                             <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
-                            <div id="boxSelectModifiedDiet" class="boxSelectModified">
-                                <?php foreach ($diets as $diet): ?>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="diet"
-                                               id="<?= $diet['name'] ?>"
-                                            <?php if (!empty($userSelectedDiet)) {
-                                                foreach ($userSelectedDiet as $userdiet) {
-                                                    if ($userdiet['iddiet'] == $diet['iddiet']) {
-                                                        echo 'checked';
-                                                    }
-                                                }
-                                            } ?>
-                                        >
-                                        <label class="custom-control-label"
-                                               for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
-                                    </div>
-                                <? endforeach; ?>
+                            <div id="boxToggleDiet" class="boxSelect">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" name="togglediet" id="togglediet"
+                                        <?php if ($toggleDiet == 'true') {
+                                            echo 'checked';
+                                        }?>>
+                                    <label id="lblToggleDiet"class="custom-control-label" for="togglediet">
+                                        <?php if ($toggleDiet == 'true') {
+                                            echo 'Désactiver la recherche';
+                                        } else {
+                                            echo 'Activer la recherche';
+                                        } ?>
+                                    </label>
+                                </div>
                             </div>
-                            <div id="showMoreDiet" class="showMoreBtn"><i class='fas'>&#xf103;</i>
+                                <div id="boxSelectModifiedDiet" class="boxSelectModified">
+                                    <?php foreach ($diets as $diet): ?>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" name="diet"
+                                                   id="<?= $diet['name'] ?>"
+                                                <?php if (!empty($userSelectedDiet)) {
+                                                    foreach ($userSelectedDiet as $userdiet) {
+                                                        if ($userdiet['iddiet'] == $diet['iddiet']) {
+                                                            echo 'checked';
+                                                        }
+                                                    }
+                                                } ?>
+                                            >
+                                            <label class="custom-control-label"
+                                                   for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
+                                        </div>
+                                    <? endforeach; ?>
+                                </div>
+                                <div id="showMoreDiet" class="showMoreBtn"><i class='fas'>&#xf103;</i>
+                                </div>
                             </div>
                         </div>
+                        <button id="submitParameter" type="button" class="btn btn-primary">Valider
+                            les
+                            réglages
+                        </button>
                     </div>
-                    <button id="submitParameter" type="button" class="btn btn-primary">Valider
-                        les
-                        réglages
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2 ">
-                <div class="relationPanel">
-                    <?php foreach ($relations as $relation): ?>
-                    <div id="<?= $relation['name'] ?>"class="relationCase" style="
-                        <?php if (!empty($userSelectedRelationType)) {
-                            foreach ($userSelectedRelationType as $userrelation) {
-                                if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                    echo 'background:dodgerblue;';
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 col-md-2 col-lg-2 ">
+                    <div class="relationPanel">
+                        <?php foreach ($relations as $relation): ?>
+                            <div id="<?= $relation['idrelationtype'] ?>" class="relationCase" style="
+                            <?php if (!empty($userSelectedRelationType)) {
+                                foreach ($userSelectedRelationType as $userrelation) {
+                                    if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
+                                        echo 'background:dodgerblue;';
+                                    }
                                 }
-                            }
-                        } ?>
-                    " data-toggle="popover" title="<?= $relation['name'] ?>" data-content="<?= $relation['description'] ?>"><img src="<?= $relation['iconurl'] ?>" alt=""/></div>
-                    <? endforeach;?>
+                            } ?>
+                                    " data-toggle="popover" title="<?= $relation['name'] ?>"
+                                 data-content="<?= $relation['description'] ?>"><img src="<?= $relation['iconurl'] ?>"
+                                                                                     alt=""/></div>
+                        <? endforeach; ?>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
-                <div class="row">
-                    <div id="card">
-                        <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
-                        <?php if (!empty($users)) {
-                            foreach ($users as $user): ?>
-                                <div class="buddy" style="display: block">
-                                    <div class="avatar">
-                                        <?php
-                                        $userPhoto = new UserPhoto($user['photos']);
-                                        $userPhoto->render(); ?>
-                                    </div>
-                                    <div class="name"><?= $user['firstname'] ?> <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?>
-                                        ans
-                                        <div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt=""/></div>
-                                        <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
+                <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
+                    <div class="row">
+                        <div id="card">
+                            <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
+                            <?php if (!empty($users)) {
+                                foreach ($users as $user): ?>
+                                    <div class="buddy" style="display: block">
+                                        <div class="avatar">
+                                            <?php
+                                            $userPhoto = new UserPhoto($user['photos']);
+                                            $userPhoto->render(); ?>
+                                        </div>
+                                        <div class="name"><?= $user['firstname'] ?> <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?>
+                                            ans
+                                            <div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
+                                            </div>
+                                            <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
+                                            </div>
+                                        </div>
+                                        <div class="description"><?= $user['description'] ?>inconsiderate et leviter
+                                            proficiscere inquit ut praeceptum est, Caesar sciens quod si cessaveris, et
+                                            tuas
+                                            et palatii tui auferri iubebo prope diem annonas. hocque solo contumaciter
+                                            dicto
+                                            subiratus abscessit nec in conspectum eius postea venit saepius arcessitus.
+                                        </div>
+                                        <div class="meat">
+                                            <div class="circle"></div>
+                                            <div class="circle"></div>
+                                            <div class="circle"></div>
+                                            <div class="circle"></div>
                                         </div>
                                     </div>
-                                    <div class="description"><?= $user['description'] ?>inconsiderate et leviter
-                                        proficiscere inquit ut praeceptum est, Caesar sciens quod si cessaveris, et tuas
-                                        et palatii tui auferri iubebo prope diem annonas. hocque solo contumaciter dicto
-                                        subiratus abscessit nec in conspectum eius postea venit saepius arcessitus.
-                                    </div>
-                                    <div class="meat">
-                                        <div class="circle"></div>
-                                        <div class="circle"></div>
-                                        <div class="circle"></div>
-                                        <div class="circle"></div>
-                                    </div>
-                                </div>
-                            <?php endforeach;
-                        } ?>
-                    </div>
-                    <div id="blockButtons">
-                        <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
-                        <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
+                                <?php endforeach;
+                            } ?>
+                        </div>
+                        <div id="blockButtons">
+                            <div id="beurkBtn" class="buttons"><img src="/Images/Icon/beurk.png" alt=""/></div>
+                            <div id="miamBtn" class="buttons"><img src="/Images/Icon/miam.png" alt=""/></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
-                <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
-                <div class="moreinfoUser"></div>
+                <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
+                    <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+                    <div class="moreinfoUser"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 

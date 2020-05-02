@@ -7,7 +7,6 @@ INSERT INTO sex VALUES('Trans');
 INSERT INTO sex VALUES('Pinguoin');
 INSERT INTO sex VALUES('Other');
 
-INSERT INTO diet VALUES(default, 'Aucun');
 INSERT INTO diet VALUES(default, 'Végétarien');
 INSERT INTO diet VALUES(default, 'Sans gluten');
 INSERT INTO diet VALUES(default, 'Halal');
