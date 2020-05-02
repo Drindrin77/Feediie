@@ -29,6 +29,7 @@ require_once("../src/Model/ParameterModel.php");
 require_once("../src/Model/IdeaModel.php");
 require_once("../src/Model/RelationModel.php");
 require_once("../src/Model/PersonalityModel.php");
+require_once("../src/Model/ChatModel.php");
 
 require_once("../src/View/ViewModel.php");
 

@@ -39,6 +39,9 @@
                 </div>
             </div>
 
+            <input type="file" id="addPhoto" class="invisible">
+
+
             <div class="col-lg-7">
                 <ul class="nav nav-tabs" style="margin-bottom:50px">
                     <li class="nav-item">
@@ -82,7 +85,7 @@
                                         <div class="dropdown">
                                             <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Email <i class="fas fa-angle-down"></i>
-                                            </button>
+                                            </div>
                                             <div class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
                                                 <div class="stayOpenDropDownItem"><input type="text"/> <i id="searchIcon" class="fas fa-search"></i></div>
                                             </div>
@@ -100,7 +103,7 @@
                                             <td>'.$user['firstname'].'</td>
                                             <td>'.$user['email'].'</td>
                                             <td>'.$user['nbreport'].'</td>
-                                            <td><button class="btn btn-primary">
+                                            <td><button class="btn btn-primary modifyAdmin">
                                             ';
                                             if($user['isadmin']){
                                                 echo 'Destituer';
@@ -122,10 +125,24 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Type de relation
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            <input id="textAddRelation" type="text"/>
+                                            <button id="submitAddRelation" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-body bodyAdminCard">
                                 <div class="table-responsive tableSize">
@@ -136,7 +153,7 @@
                                             <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBodyRelation">
                                             <?php
                                                 foreach($relationTypes as $relation){
                                                     echo '<tr data-id='.$relation['idrelationtype'].'>
@@ -156,10 +173,24 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Sexe
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            <input id="textAddSex" type="text"/>
+                                            <button id="submitAddSex" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-body bodyAdminCard">
                                 <div class="table-responsive">
@@ -190,10 +221,31 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Ville
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+
+
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            Ville:
+                                            <input id="textAddCity" type="text" class="marginBottom"/>
+                                            <br >
+                                            Code postal:
+                                            <input id="textAddZipCode" type="text" class="marginBottom"/>
+                                            <br>
+                                            <button id="submitAddCity" style="float:right"class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                             <div class="card-body bodyAdminCard">
                                 <div class="table-responsive">
@@ -208,10 +260,10 @@
                                         <tbody>
                                             <?php
                                                 foreach($cities as $city){
-                                                    echo '<tr>
+                                                    echo '<tr data-id='.$city['idcity'].'>
                                                     <td>'.$city['name'].'</td>
                                                     <td>'.$city['zipcode'].'</td>
-                                                    <td><button class="btn btn-danger">Supprimer</button></td>
+                                                    <td><button class="btn btn-danger deleteCity">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -227,10 +279,26 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Régime alimentaire
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+
+
+
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            <input id="textAddDiet" type="text"/>
+                                            <button id="submitAddDiet" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-body bodyAdminCard">
                             <div class="table-responsive">
@@ -244,9 +312,9 @@
                                         <tbody>
                                             <?php
                                                 foreach($diets as $diet){
-                                                    echo '<tr>
+                                                    echo '<tr data-id='.$diet['iddiet'].'>
                                                     <td>'.$diet['name'].'</td>
-                                                    <td><button class="btn btn-danger">Supprimer</button></td>
+                                                    <td><button class="btn btn-danger deleteDiet">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -257,14 +325,34 @@
                         </div>            
                     </div>
  
-                    <div  class="navContent invisible" id="contentPersonality">
+                    <div class="navContent invisible" id="contentPersonality">
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Personnalité
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                        <div class="card cardElement">
+                                            <div class="cardImage">
+                                                <button id="photoAddPersonality" style="margin-top:20px" class="btn btn-primary">Ajouter photo</button>
+                                            </div>      
+                                            
+                                            <div class="card-header titleCard"><textarea style="width:100px" id="textAddPersonality"></textarea></div>
+                                        </div>
+
+                                            <br>
+                                            <button id="submitAddPersonality" style="margin-left:18px; margin-top: 10px" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body bodyAdminCard">
 
@@ -275,8 +363,8 @@
                                     </div>      
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                            <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>"  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
-                                        </div>
+                                        <button data-id=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
+                                    </div>
                                     <div class="card-header titleCard"><?= $personality['name']?></div>
                                 </div>
                                 <?php endforeach ?>
@@ -290,10 +378,30 @@
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Plat
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            <div class="card cardElement">
+                                                <div class="cardImage">
+                                                    <button id="photoAddDish" style="margin-top:20px" class="btn btn-primary">Ajouter photo</button>
+                                                </div>      
+                                                
+                                                <div class="card-header titleCard"><textarea style="width:100px" id="textAddDish"></textarea></div>
+                                            </div>
+
+                                            <br>
+                                            <button id="submitAddDish" style="margin-left:18px; margin-top: 10px" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body bodyAdminCard">
 
@@ -305,28 +413,43 @@
                                     </div> 
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                            <button data-url=<?=$personality['iconurl']?> data-name="<?= $personality['name']?>"  data-iddish=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
-                                        </div>
+                                        <button data-id=<?=$dish['iddish']?> class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button>
+                                    </div>
                                     <div class="card-header titleCard"><?= $dish['name']?></div>
                                 </div>  
                                 <?php endforeach?>
                                 
                             </div>
-                        </div>            
+                        </div>          
                     </div>
 
                     <div class="navContent invisible" id="contentHobby">
                         <div class="card AdminCard">
                             <div class="card-header">
                                 Hobby
-                                <button id="btnAddDish" class="btn btn-primary btnAddElement">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="addText">Ajouter</span>
-                                </button>
+
+
+                                <div class="containerDropdownElement" class="dropdown">
+                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-primary btnAddElement">
+                                            <i class="fas fa-plus"></i>
+                                            <span class="addText">Ajouter</span>
+                                        </button>                     
+                                    </div>
+                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
+                                        <div class="stayOpenDropDownItem">
+                                            <input id="textAddHobby" type="text"/>
+                                            <button id="submitAddHobby" class="btn btn-primary">
+                                                Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-body bodyAdminCard">
                             <?php foreach($hobbies as $hobby): 
-                                echo '<div id='.$hobby['idhobby'].' class=\'containerHobby\'>
+                                echo '<div data-id='.$hobby['idhobby'].' class=\'containerHobby deletehobby\'>
                                 <i class="fas fa-ban deleteHobbyIcon"></i><span>'.$hobby['name'].'</span>
                                 </div>';
                                 endforeach ?>

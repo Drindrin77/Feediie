@@ -135,7 +135,7 @@ CREATE TABLE dislike(
 -- Table: contact
 ------------------------------------------------------------
 CREATE TABLE contact(
-    idMessage        SERIAL NOT NULL,
+    idMessage        BIGSERIAL NOT NULL,
 	idAuthor         INT  NOT NULL ,
 	idRecipient      INT  NOT NULL ,
 	message          VARCHAR (512)  NOT NULL ,

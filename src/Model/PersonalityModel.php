@@ -22,14 +22,19 @@ class PersonalityModel extends DBConnection{
         return $req->fetchAll(); 
     }
 
-    public static function addPersonality($idUser, $idDish){
+    public static function addUserPersonality($idUser, $idDish){
         $req = self::$pdo->prepare("insert into looklike values(?,?)");
         return $req->execute(array($idUser, $idDish));
     }
 
-    public static function deletePersonality($idUser, $idDish){
+    public static function deleteUserPersonality($idUser, $idDish){
         $req = self::$pdo->prepare("delete from looklike where idUser = ? and idDish = ?");
         return $req->execute(array($idUser, $idDish)); 
+    }
+
+    public static function deletePersonality($idDish){
+        $req = self::$pdo->prepare("delete from personalitydish where idDish = ?");
+        return $req->execute(array($idDish)); 
     }
 
 

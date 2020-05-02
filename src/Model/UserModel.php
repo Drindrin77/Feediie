@@ -7,14 +7,25 @@ class UserModel extends DBConnection{
    public function __construct () {
    }
 
+    public static function promuteAdmin($idUser){
+        $req = self::$pdo->prepare("update feediieuser set isadmin = true where iduser = ?");
+        return $req->execute(array($idUser));
+    }
+
+    public static function destituteAdmin($idUser){
+        $req = self::$pdo->prepare("update feediieuser set isadmin = false where iduser = ?");
+        return $req->execute(array($idUser));
+    }
+
+
     public static function deleteUser($idUser){
         $req = self::$pdo->prepare("delete from feediieuser where iduser = ?");
         return $req->execute(array($idUser));
     }
 
     public static function findByToken($token){
-        $req = self::$pdo->prepare("select idUser,password, isadmin, uniqid, birthday, firstName, description, email, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
-        from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and token=?");
+        $req = self::$pdo->prepare("select idUser,password, sex, isadmin, uniqid, birthday, firstName, description, email, city.name as city, city.zipcode as zipcode, nbReport 
+        from feediieuser left join city on city.idCity = feediieuser.idCity where token=?");
         $req->execute(array($token));
         return $req->fetch();
     }
@@ -30,9 +41,9 @@ class UserModel extends DBConnection{
     }
 
     public static function getUserByUniqID($uniqID){
-        $req = self::$pdo->prepare("select idUser, firstName, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
-                                                    , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport, sex.name as sex
-                                    from feediieuser, city, sex where city.idCity = feediieuser.idCity and sex.name = feediieuser.sex and uniqID=?");
+        $req = self::$pdo->prepare("select idUser, firstName, sex, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age
+                                                    , description, isAdmin, city.name as city, city.zipcode as zipcode, nbReport
+                                                    from feediieuser left join city on city.idCity = feediieuser.idCity where uniqID=?");
         $req->execute(array($uniqID)); 
         return $req->fetch();
     }
@@ -84,80 +95,6 @@ class UserModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public static function fetchMatchedUsers($uniqID){
-        $req = self::$pdo->prepare("SELECT
-                                        matchedUser.firstname AS name,
-                                        EXTRACT(YEAR FROM(age(matchedUser.birthday))) AS age,
-                                        to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
-                                        CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
-                                        matchedUser.uniqId AS uniq_id
-                                    FROM
-                                        feediieuser matchedUser 
-                                    INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
-                                    INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
-                                    LEFT OUTER JOIN photo ON photo.idUser = matchedUser.idUser
-                                    
-                                    WHERE 
-                                        matched = true
-                                    AND currentUser.uniqid = ?
-                                    AND (photo.priority = true OR photo IS NULL)
-                                    
-                                    ORDER BY 
-	                                    likedU.datematch DESC");
-        $req->execute(array($uniqID));
-        return $req->fetchAll();
-    }
-
-    public static function fetchMessages($userUniqId, $contactUniqId, $offset){
-        $req = self::$pdo->prepare("SELECT
-                                        message,
-                                        author.uniqid,
-                                        datemessage
-                                    
-                                    FROM
-                                        contact
-                                    INNER JOIN feediieUser author ON idauthor = author.iduser
-                                    INNER JOIN feediieUser recipient ON idrecipient = recipient.iduser
-                                    
-                                    WHERE
-                                    (author.uniqId = ? AND recipient.uniqId = ?) OR (author.uniqId = ? AND recipient.uniqId = ?)
-                                    
-                                    ORDER BY idmessage DESC
-                                    LIMIT 50
-                                    OFFSET ?");
-
-        $req->execute(array($userUniqId, $contactUniqId, $contactUniqId, $userUniqId, $offset));
-        return $req->fetchAll();
-    }
-
-    public static function fetchUnreadMessages($userId, $contactId){
-        $req = self::$pdo->prepare("SELECT
-                                        message,
-                                        author.uniqid,
-                                        datemessage
-                                    FROM
-                                        contact
-                                        INNER JOIN feediieUser author ON author.iduser = ?
-                                    WHERE
-                                        idAuthor = ? 
-                                        AND idRecipient = ?
-                                        AND isread = FALSE
-                                    ORDER BY idmessage DESC
-                                   ");
-
-        $req->execute(array($contactId, $contactId, $userId));
-        return $req->fetchAll();
-    }
-
-    public static function addMessage($userId, $contactId, $message){
-
-        $req = self::$pdo->prepare("INSERT INTO contact (idAuthor, idRecipient, message, dateMessage) 
-                                    VALUES (?, ?, ?, CURRENT_TIMESTAMP)                   
-                                   ");
-        return $req->execute(array($userId, $contactId, $message));
-    }
-
-
 
 
     public static function editInfo($args, $idUser){
@@ -173,11 +110,10 @@ class UserModel extends DBConnection{
         $req = self::$pdo->prepare($sql);
         return $req->execute($values); 
     }
-
-    public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
-        $req = self::$pdo->prepare("insert into feediieuser VALUES (default, ? ,?, ?, ?, ?, null, 
-        default, default, default, ?, default, ?, default, ?)");
-        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $token, $city, $sex));
+    
+    public static function signUp($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token, $ageMin, $ageMax){
+        $req = self::$pdo->prepare("insert into feediieuser (uniqID, firstName, birthday, email, password, filterAgeMin, filterAgeMax, token, idCity, sex) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $res = $req->execute(array($uniqID, $firstName, $birthday, $email, $password, $ageMin, $ageMax, $token, $city, $sex));
         return $res;
     }
     public static function setFilterParameter($firstName, $email, $password, $birthday, $sex, $city, $uniqID, $token){
