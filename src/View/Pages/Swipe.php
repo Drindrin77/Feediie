@@ -29,7 +29,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div id="boxSelectModifiedSex" class="boxSelectModified">
                                 <?php foreach ($sexs as $sex): ?>
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="sex"
+                                        <input type="checkbox" class="custom-control-input Feediie-custom-input" name="sex"
                                                id="<?= $sex['name'] ?>"
                                             <?php if (!empty($userSelectedGender)) {
                                                 foreach ($userSelectedGender as $usergender) {
@@ -147,13 +147,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                             <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
                                             </div>
                                         </div>
-                                        <div class="description"><?= $user['description'] ?>inconsiderate et leviter
-                                            proficiscere inquit ut praeceptum est, Caesar sciens quod si cessaveris, et
-                                            tuas
-                                            et palatii tui auferri iubebo prope diem annonas. hocque solo contumaciter
-                                            dicto
-                                            subiratus abscessit nec in conspectum eius postea venit saepius arcessitus.
-                                        </div>
+                                        <div class="description"><?= $user['description'] ?> ...</div>
                                         <div class="meat">
                                             <div class="circle"></div>
                                             <div class="circle"></div>

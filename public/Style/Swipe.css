@@ -283,8 +283,11 @@
         border-radius: 25px;
         width: 365px;
         height: 594px;
-        background: #ffc107;
+        background: lightgray;
         top: 40px;
+    }
+    .name {
+        font-size:32px;
     }
     .avatar {
         width: 365px;
@@ -297,6 +300,36 @@
     .buttons {
         width: 60px;
         height: 60px;
+    }
+    .relationPanel {
+        margin-top: 40px;
+        height: 600px;
+        transform: translate(-50px,0);
+    }
+    .description {
+        padding-top: 15px;
+        line-height: 20px;
+        height: 23%;
+        width: 100%;
+        font-size:20px;
+        transform: translate(0,-55px);
+    }
+    .meat{
+        transform: translate(0,85px);
+    }
+    .circle{
+        height: 70px;
+        width: 70px;
+        margin: 8px 10px;
+    }
+    .moreinfoUser {
+        width: 500px;
+        height: 594px;
+        left:80px;
+        top: 40px;
+    }
+    #closeProfileBtn {
+        transform: translate(530px,5px);
     }
 }
 
