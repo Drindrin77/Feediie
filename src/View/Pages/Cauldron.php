@@ -58,7 +58,7 @@ $userPhoto = $this->data["userPhoto"];
                                         <?php echo htmlspecialchars($message["message"]) ?>
                                     </div>
                                     <div class="col-1">
-                                        <img class="chatImage" src="<?php echo $userPhoto["url"] ?>">
+                                        <img class="chatImage" src="<?php echo $userPhoto ?>">
                                     </div>
                                 </div>
                                 <?php

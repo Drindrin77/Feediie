@@ -20,6 +20,7 @@ class UserRequest extends RequestService{
             break;
             case "register":
                 $this->register();
+            break;
             case "editinfo":
                 $this->editInfo();
             break;
@@ -32,8 +33,33 @@ class UserRequest extends RequestService{
             case "delete":
                 $this->delete();
             break;
+            case "setadmin":
+                $this->setAdmin(true);
+            break;
+            case "removeadmin":
+                $this->setAdmin(false);
+            break;
         }
     }    
+
+    private function setAdmin($admin){
+        $idUser= htmlspecialchars($_POST['idUser']);
+        if($admin){
+            if(UserModel::promuteAdmin($idUser)){
+                $this->addMessageSuccess("Promotion réussie");
+            }else{
+                $this->addMessageError("Erreur BD");
+            }
+        }else{
+            if(UserModel::destituteAdmin($idUser)){
+                $this->addMessageSuccess("Destitution réussie");
+            }else{
+                $this->addMessageError("Erreur BD");
+            }
+        }
+        
+    }
+
 
     private function delete(){
         $idUser= htmlspecialchars($_POST['id']);
@@ -132,7 +158,7 @@ class UserRequest extends RequestService{
 
     private function editInfo(){
         if(AuthService::isAuthenticated()){
-            if(!UserModel::editInfo($_POST, $this->currentUser[$idUser])){
+            if(!UserModel::editInfo($_POST, $this->currentUser['iduser'])){
                 $this->addMessageSuccess('Erreur BD');
             }else{
                 $this->addMessageSuccess('Les nouvelles informations ont été pris en compte');
@@ -159,7 +185,7 @@ class UserRequest extends RequestService{
                 if($user['description'] == null && empty(PhotoModel::getAllPhotos($user['iduser']))){
                     $this->addData("page", "/profile/edit");
                 }else{
-                    $this->addData("page", "/swipe");
+                    $this->addData("page", "/");
                 }
                 $this->addMessageSuccess("connect");
             }else{

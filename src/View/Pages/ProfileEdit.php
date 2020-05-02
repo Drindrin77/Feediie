@@ -9,6 +9,8 @@
     $favoriteDish = $this->data['favoriteDish'];
     $allDish = $this->data['allDish'];
     $photos = $this->data['photos'];
+    $allDiets = $this->data['allDiets'];
+    $diets = $this->data['diets'];
 
     $passwordPolicy = isset($this->data['policy']) ? $this->data['policy'] : null;
 ?>
@@ -36,6 +38,9 @@
                 </li>
                 <li class="nav-item">
                     <span class="nav-link" targetIDContent='contentDish'>Plats</span>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link" targetIDContent='contentDiet'>Régime</span>
                 </li>
             </ul>
 
@@ -311,6 +316,38 @@
                         <?php endforeach ?>
                     </div>
                 </div>
+            </div>
+            <div class="navContent" id="contentDiet">
+
+                <h3 class="titleSection">Mes régimes alimentaires</h3>
+            
+                    <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        foreach($allDiets as $diet){
+                                            echo '<tr data-id='.$diet['iddiet'].'>
+                                            <td>'.$diet['name'].'</td>
+                                            <td>';
+                                                if(in_array($diet['name'],$diets))
+                                                    echo '<button class="btn btn-danger deleteDiet">Supprimer</button>';
+                                                else 
+                                                    echo '<button class="btn btn-success addDiet">Ajouter</button>';
+                                            echo '</td>
+                                            </tr>';
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>            
             </div>
         </div>
     </div>

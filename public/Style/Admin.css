@@ -29,9 +29,22 @@
     color:white !important;
     background-color:#007bff !important;
 }
+#textAddCity{
+    margin-left:54px
+}
 
-.btnAddElement{
+.marginBottom{
+    margin-bottom:20px;
+}
+
+.inlineBlock{
+    display: inline-block;
+}
+.containerDropdownElement{
     float:right;
+}
+.contentDropdownElement{
+    float:left;
 }
 
 .invisible{

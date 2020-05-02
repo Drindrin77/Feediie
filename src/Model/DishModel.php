@@ -22,14 +22,19 @@ class DishModel extends DBConnection{
         return $req->fetchAll();
     }
 
-    public static function addFavorite($idUser, $idDish){
+    public static function addUserFavorite($idUser, $idDish){
         $req = self::$pdo->prepare("insert into likeeat values(?,?)");
         return $req->execute(array($idUser, $idDish));         
     }
 
-    public static function deleteFavorite($idUser, $idDish){
+    public static function deleteUserFavorite($idUser, $idDish){
         $req = self::$pdo->prepare("delete from likeeat where idUser = ? and idDish = ?");
         return $req->execute(array($idUser, $idDish)); 
+    }
+
+    public static function deleteDish($idDish){
+        $req = self::$pdo->prepare("delete from dish where idDish = ?");
+        return $req->execute(array($idDish)); 
     }
 }
 ?>
