@@ -9,10 +9,9 @@
 }
 
 .tableBackground{
-    background-color: rgb(241, 237, 237);
-    border-radius:10px;
     padding-top:10px;
-    margin-top:10px;
+    margin-top:42px;
+    border-right: 2px solid  rgb(241, 237, 237)
 }
 
 /*PHOTO*/
@@ -48,9 +47,10 @@ CARD ADD PHOTO
     float:right;
 }
 
-.contentPopOver[data-hidden='true']{
+[data-hidden='true']{
     display: none;
 }
+
 .contentPopOver{
     position:absolute;
     z-index:100;
@@ -72,8 +72,18 @@ CARD ADD PHOTO
     margin-left:5px;
 }
 
+[data-containImg='false']{
+    background-color: lightgrey;
+}
 
+.relationTr td{
+    vertical-align: middle !important;
+}
 
+.containerImgRelation{
+    width:80px;
+    height:80px;
+}
 /*
 
 NORMAL POPOVER ADD ONLY TEXT
