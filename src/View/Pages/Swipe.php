@@ -70,7 +70,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                         <?php if ($toggleDiet == 'true') {
                                             echo 'checked';
                                         }?>>
-                                    <label class="custom-control-label" for="togglediet">
+                                    <label id="lblToggleDiet"class="custom-control-label" for="togglediet">
                                         <?php if ($toggleDiet == 'true') {
                                             echo 'Désactiver la recherche';
                                         } else {

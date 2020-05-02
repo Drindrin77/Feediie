@@ -71,9 +71,11 @@ $(document).ready(function () {
         if ($(this).is(':checked')) {
             $("#boxSelectModifiedDiet").show();
             $("#showMoreDiet").show();
+            $('#lblToggleDiet').html('Désactiver la recherche');
         } else {
             $("#boxSelectModifiedDiet").hide();
             $("#showMoreDiet").hide();
+            $('#lblToggleDiet').html('Activer la recherche');
             if (document.getElementById("boxSelectModifiedDiet").style.height === "auto") {
                 $("#boxSelectModifiedDiet").css('height', '75px');
                 $("#boxSelectModifiedSex").show();
