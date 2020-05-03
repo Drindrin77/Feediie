@@ -20,9 +20,7 @@ class ChatModel extends DBConnection
                                       to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
                                       CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
                                       matchedUser.uniqId AS uniq_id,
-                                      count(
-                                        CASE WHEN messageContact.isread = FALSE THEN 1 END
-                                      ) as unreadMessages
+                                      count(DISTINCT CASE WHEN messageContact.isRead = FALSE THEN messageContact.idMessage END) as unreadMessages
                                     FROM
                                       feediieuser matchedUser
                                       INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
@@ -138,7 +136,7 @@ class ChatModel extends DBConnection
     }
 
     public static function setReadToAllMessages($userId, $contactId)
-    {//TODO utiliser
+    {
         $req = self::$pdo->prepare("UPDATE 
                                         contact
                                     SET 
@@ -151,4 +149,16 @@ class ChatModel extends DBConnection
         $req->execute(array($contactId, $userId));
     }
 
+    public static function getUnreadMessagesCount($userId){
+        $req = self::$pdo->prepare("SELECT
+                                        count(*) as unreadmessages
+                                    FROM
+                                        contact
+                                    WHERE 
+                                        idrecipient = ?
+                                        AND NOT isread;
+                                    ");
+        $req->execute(array($userId));
+        return $req->fetch();
+    }
 }
