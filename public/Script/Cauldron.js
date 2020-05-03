@@ -86,6 +86,7 @@ function fetchMessages(contactUniqId, offset) {
 function updateMatchAndMessages() {
     fetchUnreadMessages($("#chatSelectedContact").attr("data-uniqid"));
     fetchMatchList();
+    fetchUnreadMessagesCount();
 }
 
 function fetchUnreadMessages(contactUniqId) {
@@ -169,8 +170,6 @@ function fillMatchList(matchList) {
     const actualMatchedUserList = getActualMatchedUserList();
     let i = 0;
 
-    console.log(matchList);
-
     matchList.forEach(function (matchedUser) {
         if (matchedUserList.includes((matchedUser.uniq_id))) {
             nodeToInsert = $("#user-" + matchedUser.uniq_id);
@@ -188,7 +187,6 @@ function fillMatchList(matchList) {
             nodeToInsert = createMatchedUserDiv(matchedUser);
             matchedUserList.add(matchedUser.uniqId);
         }
-//TODO ajouter verif de différence
         if(actualMatchedUserList[i] !== matchedUser.uniq_id) {
 
             if (isFirst) {

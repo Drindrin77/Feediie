@@ -28,6 +28,9 @@ class ChatRequest extends RequestService
             case "fetchmatchlist":
                 $this->fetchMatchedUsers();
                 break;
+            case "getunreadmessagescount":
+                $this->getUnreadMessagesCount();
+                break;
         }
     }
 
@@ -91,7 +94,13 @@ class ChatRequest extends RequestService
         }
     }
 
-    private function fetchMatchedUsers(){
+    private function fetchMatchedUsers()
+    {
         $this->addData("matchList", ChatModel::fetchMatchedUsers($this->currentUser['iduser']));
+    }
+
+    private function getUnreadMessagesCount()
+    {
+        $this->addData("unreadmessages", ChatModel::getUnreadMessagesCount($this->currentUser['iduser'])['unreadmessages']);
     }
 }

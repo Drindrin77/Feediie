@@ -136,7 +136,7 @@ class ChatModel extends DBConnection
     }
 
     public static function setReadToAllMessages($userId, $contactId)
-    {//TODO utiliser
+    {
         $req = self::$pdo->prepare("UPDATE 
                                         contact
                                     SET 
@@ -149,4 +149,16 @@ class ChatModel extends DBConnection
         $req->execute(array($contactId, $userId));
     }
 
+    public static function getUnreadMessagesCount($userId){
+        $req = self::$pdo->prepare("SELECT
+                                        count(*) as unreadmessages
+                                    FROM
+                                        contact
+                                    WHERE 
+                                        idrecipient = ?
+                                        AND NOT isread;
+                                    ");
+        $req->execute(array($userId));
+        return $req->fetch();
+    }
 }

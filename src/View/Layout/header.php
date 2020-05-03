@@ -3,6 +3,7 @@
     $uniqID = $this->headerInfo['uniqID'];
     $isAdmin = $this->headerInfo['isAdmin'];
     $photo = $this->headerInfo['photo'];
+    $notifCount = $this->headerInfo['notifCount']['unreadmessages'];
     if(is_array($photo))
         $photo = $photo['url'];
 ?>
@@ -62,8 +63,8 @@
 
             <a id="btnChat" class="btn btn-primary" href="/cauldron" style="margin-right: 30px" role="button">
                 <i class="far fa-comments"></i>
-                <div id="containerNotif">
-                    <span id="nbNotif">8</span>
+                <div id="containerNotif" class="<?php echo $notifCount === 0 ? 'invisible' : 'visible'?>">
+                    <span id="nbNotif"><?php echo $notifCount ?></span>
                 </div>
             </a>
 
