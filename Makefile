@@ -31,6 +31,9 @@ reinstall: install
 db.connect:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER'
 
+db.reset:
+	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -f data/resetDB.sql'; rm -rf public/Images/UserUpload/*
+
 db.install:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/db.sql'
 
