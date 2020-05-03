@@ -20,7 +20,11 @@ $(document).ready(function () {
 
 
 
-
+    $(document).on('click', '.seeProfil', function () {
+        let id = $(this).data("targetid")
+        console.log($(".moreinfoUser").find(".containerUserDetails[data-userID=" + id + "]"))
+        $(".moreinfoUser").find("div[data-userID=" + id + "]").attr("data-hidden", "false")
+    })
 
 
 
@@ -112,29 +116,31 @@ $(document).ready(function () {
         }
     });
 
+
     //ON RECUPERE LA RELATION SELECTIONNEE
     $('.relationCase').click(function () {
-        $(this).css('background', 'dodgerblue');
-        let relationSelect = $(this).attr('id');
-        $('.relationCase').not(this).each(function () {
-            $(this).css('background', 'lightgrey');
-        });
-        $.post("/ajax.php?entity=user&action=relation",
+        let selected = $(this).attr("data-selected")
+        selected = selected == "true" ? "false" : "true"
+        $(this).attr("data-selected", selected)
+        let id = $(this).attr("id")
+
+        $.post("/ajax.php?entity=user&action=updateInterestedRelation",
             {
-                relationSelect: relationSelect,
+                value: selected,
+                id: id
             })
             .fail(function (e) {
                 console.log("fail", e);
-                $(this).html("Erreur d'enregistrement");
             })
             .done(function (e) {
                 let data = JSON.parse(e);
                 if (data.status === 'success') {
                     console.log(data);
+                    $("#messageSuccess").html("Relation bien enregistrés !");
+                    $('#containerMessageSuccess').show(200).delay(2000).hide(200);
                 }
             });
-        $("#messageSuccess").html("Relation bien enregistrés !");
-        $('#containerMessageSuccess').show(200).delay(2000).hide(200);
+
     });
 
 
@@ -235,7 +241,7 @@ $(document).ready(function () {
         $('#containerMessageSuccess').show(200).delay(2000).hide(200);
     });
     //AFFICHER PROFILE
-    $('.seeProfil:last').click(function () {
+    $('.seeProfil').click(function () {
         $('.watchProfile').css({ opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)' });
         $('#blockButtons').css({ 'pointer-events': 'none' }).fadeOut('slow');
         $('.moveOpenProfil').css({ 'transform': 'translate(0px,0)' });
@@ -244,6 +250,7 @@ $(document).ready(function () {
         $('.watchProfile').css({ opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)' });
         $('#blockButtons').css({ 'pointer-events': 'all' }).fadeIn('slow');
         $('.moveOpenProfil').css({ 'transform': 'translate(150px,0)' });
+        $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
     });
     // SWIPE
 
@@ -256,12 +263,13 @@ $(document).ready(function () {
             actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events', 'all');
+                $("#miamBtn").css('pointer-events', 'all');
                 $("#beurkBtn").css('pointer-events', 'all');
             }, 1000);
         }
     });
     $('#beurkBtn').click(function () {
+
         $(this).css('pointer-events', 'none');
         $("#miamBtn").css('pointer-events', 'none');
         let actualUser = $('.buddy:last');
@@ -270,7 +278,7 @@ $(document).ready(function () {
             actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events', 'all');
+                $("#beurkBtn").css('pointer-events', 'all');
                 $("#miamBtn").css('pointer-events', 'all');
 
             }, 1000);

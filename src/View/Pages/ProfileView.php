@@ -48,8 +48,9 @@
                 }
             ?>
 
-            <?php $userDetails->render() ?>
-
+            <div>
+                <?php $userDetails->render() ?>
+            </div>
 
 
         </div>

@@ -12,7 +12,10 @@ class UserDetails{
   }
   
   public function render(){
+
       ?>
+
+        <link rel="stylesheet" href="/Style/UserDetails.css">
 
         <div class="row" style="margin-top: 15px;"> 
             <div class="col">
@@ -23,7 +26,7 @@ class UserDetails{
         </div>
 
         <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-auto">
                     <h5 class="titleSection">Information: </h5>
                     <div id="titleGeneralInfo">
                         <p>Age: </p>

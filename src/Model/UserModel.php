@@ -55,19 +55,23 @@ class UserModel extends DBConnection{
                                             u2.sex IN (SELECT sex from interestedsex WHERE iduser = u1.iduser) and
                                             (SELECT DATE_PART('year', now()::date) - DATE_PART('year', u1.birthday::date)) between u2.filteragemin and u2.filteragemax and 
                                             (SELECT DATE_PART('year', now()::date) - DATE_PART('year', u2.birthday::date)) between u1.filteragemin and u1.filteragemax and
-                                            (SELECT iddiet from interesteddiet WHERE iduser=u1.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u2.iduser) and
-                                            (SELECT iddiet from interesteddiet WHERE iduser=u2.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u1.iduser) and
                                             (SELECT idRelationType from interestedRelationType WHERE iduser=u1.iduser) IN (SELECT idRelationType FROM interestedRelationType where iduser=u2.iduser) and
-                                            (SELECT idRelationType from interestedRelationType WHERE iduser=u2.iduser) IN (SELECT idRelationType FROM interestedRelationType where iduser=u1.iduser) and 
                                             u2.idUser not in (SELECT iduser_dislike from dislike WHERE iduser=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
                                             u1.idUser = ?");
-        $req->execute(array($idUser));
+        //TODO FILTER DIET
+        /*
+                (SELECT iddiet from interesteddiet WHERE iduser=u1.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u2.iduser) and
+                (SELECT iddiet from interesteddiet WHERE iduser=u2.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u1.iduser) and
+                                            
+        */
+     $req->execute(array($idUser));
         return $req->fetchAll();
     }
 
     public static function getAllUsers($idUser){
-        $req = self::$pdo->prepare("select * from FeediieUser where idUser <> ?");
+        $req = self::$pdo->prepare("select iduser,description,sex, firstname, DATE_PART('year', now()::date) - DATE_PART('year', birthday::date) as age,
+        city.name as city, city.zipcode as zipcode from feediieuser left join city on city.idCity = feediieuser.idCity where idUser <> ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }

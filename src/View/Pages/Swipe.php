@@ -12,6 +12,7 @@ $toggleDiet = isset($this->data['toggleDiet']) ? $this->data['toggleDiet'] : nul
 $dishs = isset($this->data['dishs']) ? $this->data['dishs'] : null;
 $distance = $userSelectDistance;
 
+include_once('../src/View/Pages/UserDetails.php');
 $ageMin = $userSelectAge['agemin'];
 $ageMax = $userSelectAge['agemax'];
 
@@ -117,15 +118,16 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-2 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
-                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase" style="
-                        <?php if (!empty($userSelectedRelationType)) {
-                            foreach ($userSelectedRelationType as $userrelation) {
-                                if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                    echo 'background:dodgerblue;';
-                                }
-                            }
-                        } ?>
-                                " data-toggle="popover" title="<?= $relation['name'] ?>"
+                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase cursorPointer" 
+                        <?php 
+                        
+                        if (!empty($userSelectedRelationType) && in_array($relation['idrelationtype'], $userSelectedRelationType)) {
+                                echo 'data-selected="true"';
+                        }else{
+                                echo 'data-selected="false"';
+                        }
+                        ?>
+                            data-toggle="popover" title="<?= $relation['name'] ?>"
                              data-content="<?= $relation['description'] ?>"><img src="<?= $relation['iconurl'] ?>"
                                                                                  alt=""/></div>
                     <? endforeach; ?>
@@ -144,11 +146,11 @@ include_once('../src/View/Pages/UserPhoto.php');
                                         $userPhoto = new UserPhoto($user['photos']);
                                         $userPhoto->render(); ?>
                                     </div>
-                                    <div class="name"><?= $user['firstname'] ?> <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?>
+                                    <div class="name"><?= $user['firstname'] . ' ' . $user['age']?> 
                                         ans
-                                        <div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
+                                        <div data-targetID=<?= $user['iduser']?> class="iconcard cursorPointer seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
                                         </div>
-                                        <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
+                                        <div class="iconcard cursorPointer reportUser"><img src="/Images/Icon/alert.png" alt=""/>
                                         </div>
                                     </div>
                                     <div class="description"><?= $user['description'] ?> ...</div>
@@ -182,6 +184,17 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
                 <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
                 <div class="moreinfoUser">
+                    <div class="container-fluid">
+                        <?php
+                            foreach($users as $user){
+                                echo '<div class="containerUserDetails" data-hidden="true" data-userID="'.$user['iduser'].'">';
+                                    $userDetails = new UserDetails($user);
+                                    $userDetails->render();
+                                echo '</div>';
+                            }
+                        ?>
+                
+                    </div>
                 </div>
             </div>
         </div>

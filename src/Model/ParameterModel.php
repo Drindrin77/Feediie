@@ -30,23 +30,23 @@ class ParameterModel extends DBConnection{
     }
 //Si currentUser.sex appartient à otheruser.selectedsex et si currentUser.selectedsex appartient à otheruser.sex where currentuser = $iduser et otheruser = *
     public static function getUserSelectedRelation($idUser){
-        $req = self::$pdo->prepare("select * from RelationType inner join interestedRelationType on RelationType.idRelationType = interestedRelationType.idRelationType where idUser = ?");
+        $req = self::$pdo->prepare("select idrelationType from interestedRelationType where idUser = ?");
         $req->execute(array($idUser));
-        return $req->fetchAll();
+        return $req->fetchAll(PDO::FETCH_COLUMN);
     }
     public static function getAllRelation(){
         $req = self::$pdo->prepare("select * from RelationType");
         $req->execute();
         return $req->fetchAll();
     }
-    public static function removeUserSelectedRelation($idUser){
-        $req = self::$pdo->prepare("delete from interestedRelationType where idUser = ?");
-        $req->execute(array($idUser));
+    public static function removeUserSelectedRelation($idUser, $idRelation){
+        $req = self::$pdo->prepare("delete from interestedRelationType where idUser = ? and idRelationType = ?");
+        $req->execute(array($idUser, $idRelation));
         return $req->fetchAll();
     }
-    public static function updateUserSelectedRelation($idUser,$relationSelect){
+    public static function addUserSelectedRelation($idUser,$idRelation){
         $req = self::$pdo->prepare("insert into interestedRelationType (idUser,idRelationType) values (?,?)");
-        $req->execute(array($idUser,$relationSelect));
+        $req->execute(array($idUser,$idRelation));
         return $req->fetchAll();
     }
     public static function updateDietActive($idUser,$dietactive){

@@ -25,26 +25,35 @@ class SwipeController extends Controller{
     public function pageSwipe()
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
+        
         $toggleDiet = UserModel::getInfoUser($idUser)[0]['filterdiet'];
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
         $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
         $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
+
         $userSelectDistance = $userFilterAgeDistance[0]['distancemax'];
         $userSelectAge = array("agemin"=>$userFilterAgeDistance[0]['filteragemin'],"agemax"=>$userFilterAgeDistance[0]['filteragemax']);
+        
         $sexs = SexModel::getAllSex();
         $diets = DietModel::getAllDiet();
         $dishs = DishModel::getAllDishes();
         $relations = ParameterModel::getAllRelation();
-        //FILTER (WITHOUT DISTANCE FILTER)
-        $users = UserModel::filterUsersSwipe($idUser);
-        //$users = UserModel::getAllUsers($idUser);
-        
+
+
+        //$users = UserModel::filterUsersSwipe($idUser);
+        $users = UserModel::getAllUsers($idUser);
+
         for($i=0; $i<count($users);$i++){
             $idUser = $users[$i]['iduser'];
             $users[$i]['photos'] = PhotoModel::getAllPhotos($idUser);
             $users[$i]['favoritedish'] = DishModel::getUserFavoriteDish($idUser);
-        }
+            $users[$i]['personalities']=PersonalityModel::getUserPersonalities($idUser);
+            $users[$i]['hobbies']= HobbyModel::getUserHobbies($idUser);
+            $users[$i]['diets'] = DietModel::getUserDiet($idUser);
+        }      
+
+
         $data = [
             'toggleDiet' => $toggleDiet,
             'userSelectedRelationType' =>$userSelectedRelationType,

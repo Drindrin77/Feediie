@@ -37,8 +37,8 @@ class UserRequest extends RequestService
             case "deleteuser":
                 $this->deleteUser();
                 break;
-            case "relation":
-                $this->relation();
+            case "updateinterestedrelation":
+                $this->updateInterestedRelation();
                 break;
             case "setadmin":
                 $this->setAdmin(true);
@@ -80,21 +80,20 @@ class UserRequest extends RequestService
         }
     }
 
-    private function relation()
+    private function updateInterestedRelation()
     {
         //ON RECUPERE LA RELATION DE CURRENTUSER
         $idUser = $this->currentUser['iduser'];
-        $relationSelect = $_POST['relationSelect'];
-
-        if (ParameterModel::removeUserSelectedRelation($idUser)) {
-            $this->addMessageSuccess('Table selectrelation vide');
+        $idRelation = htmlspecialchars($_POST['id']);
+        $value = htmlspecialchars($_POST["value"]);
+        $value = $value=='true'?true:false;
+        if ($value){ 
+            ParameterModel::addUserSelectedRelation($idUser, $idRelation);
         }
-        if (ParameterModel::updateUserSelectedRelation($idUser, $relationSelect)) {
-
+        else{
+            ParameterModel::removeUserSelectedRelation($idUser, $idRelation); 
             $this->addMessageSuccess('Les relations ont ete mises a jour');
-        } else {
-            $this->addMessageError('Erreur BD mise a jour relations selectionne');
-        }
+        } 
     }
 
     private function filter()
