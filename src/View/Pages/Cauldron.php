@@ -24,16 +24,31 @@ if (sizeof($usersMatchedArray) === 0) {
                         ?>
                         <div id="user-<?php echo $matchedUser['uniq_id'] ?>"
                              class="row <?php echo $isFirst ? "selectedMatchedUser" : "matchedUser" ?> align-items-center"
-                             data-uniqId="<?php echo $matchedUser['uniq_id'] ?>">
+                             data-uniqId="<?php echo $matchedUser['uniq_id'] ?>"
+                             data-matchDate="<?php echo $matchedUser["date_match"] ?>"
+                             data-age="<?php echo $matchedUser["age"] ?>">
                             <div class="col-3">
                                 <img id="photo-<?php echo $matchedUser['uniq_id'] ?>"
                                      src="<?php echo $matchedUser['photo_url'] ?>"
                                      alt="Photo de profil de <?php echo $matchedUser["name"] ?>">
                             </div>
                             <span id="name-<?php echo $matchedUser['uniq_id'] ?>"
-                                  class="col-md-5"><?php echo $matchedUser["name"] ?></span>
-                            <span class="col-md-4"><?php echo $matchedUser["age"] ?> ans</span>
-                            <span class="col-md-12">Match le <?php echo $matchedUser["date_match"] ?> </span>
+                                  class="col-7"><?php echo $matchedUser["name"] ?></span>
+
+
+                            <?php
+                            if (!$isFirst) {
+                                $messageNumber = $matchedUser["unreadmessages"];
+                                if ($messageNumber > 0) {
+                                    ?>
+                                    <div class="col-2">
+                                        <span class="matchNotification"><?php echo $messageNumber ?></span>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+
                         </div>
 
                         <?php
@@ -52,7 +67,11 @@ if (sizeof($usersMatchedArray) === 0) {
                                  src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                         </div>
                         <span id="selectedContactName"
-                              class="col-8 offset-1"><?php echo $usersMatchedArray[0]["name"] ?></span>
+                              class="col-3"><?php echo $usersMatchedArray[0]["name"] ?>
+                        </span> <span id="selectedContactAge"
+                                      class="col-2"><?php echo $usersMatchedArray[0]["age"] ?> ans</span>
+                        <span id="selectedContactMatchDate"
+                              class="col-4">Match le <?php echo $usersMatchedArray[0]["date_match"] ?></span>
                     </a>
                     <div id="chatBox" class="row">
                         <div id="messageListContainer" class="container-fluid">

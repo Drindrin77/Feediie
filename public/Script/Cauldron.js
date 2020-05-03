@@ -36,6 +36,8 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     const photo = $("#photo-" + uniqId).attr("src");
     const photoDesciption = $("#photo-" + uniqId).attr("alt");
     const name = $("#name-" + uniqId).text();
+    const matchDate = $(event.currentTarget).attr("data-matchDate");
+    const age = $(event.currentTarget).attr("data-age");
 
     $(".selectedMatchedUser").addClass("matchedUser");
     $(".selectedMatchedUser").removeClass("selectedMatchedUser");
@@ -48,6 +50,8 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     $("#selectedContactPhoto").attr("src", photo);
     $("#selectedContactPhoto").attr("alt", photoDesciption);
     $("#selectedContactName").text(name);
+    $("#selectedContactMatchDate").text("Match le : " + matchDate);
+    $("#selectedContactAge").text(age + " ans");
 
     changeChatBoxContent(uniqId);
 });
@@ -182,6 +186,6 @@ $("#sendMessageButton").on("click", function () {
 });
 
 function scrollDownChatBox(){
-    console.log($("#chatBox"));
+    //console.log($("#chatBox"));
     $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
 }

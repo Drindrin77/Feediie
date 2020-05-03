@@ -51,13 +51,14 @@ INSERT INTO FeediieUser VALUES
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (3, 2, '2020-04-18 15:35:36', true);
 
-INSERT INTO LikedUser VALUES (2, 4, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (4, 2, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (2, 4, '2020-04-17 13:54:36', true);
+INSERT INTO LikedUser VALUES (4, 2, '2020-04-17 13:54:36', true);
 
-INSERT INTO LikedUser VALUES (2, 5, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (5, 2, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (2, 5, '2020-04-16 13:54:36', true);
+INSERT INTO LikedUser VALUES (5, 2, '2020-04-16 13:54:36', true);
 
-INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
+INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (2, 6, '2020-04-18 13:54:36', true);
 
 
 INSERT INTO Contact VALUES (default, 2, 3, 'Salut beau renard', '2020-04-18 17:35:36', true);
