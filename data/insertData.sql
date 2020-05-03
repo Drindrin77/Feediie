@@ -126,15 +126,6 @@ INSERT INTO Contact VALUES (default, 1, 9, 'Aimes-tu le gras ?', '2020-04-18 17:
 INSERT INTO Contact VALUES (default, 9, 1, 'T aimes quand la raclette dégoulinne ?', '2020-04-18 17:35:36', true);
 
 
-INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/jzpeerz58aze/1.jpg', true, 1);
-
-INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/arjaze98e58a5ab/1.jpg', true, 2);
-
-INSERT INTO Photo VALUES
-    (default, '/Images/UserUpload/crjaze98e58a5ab/1.jpeg', true, 4);
-
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
 INSERT INTO Dish VALUES (default, 'Pates', '/Images/Dish/pates.png');
 INSERT INTO Dish VALUES (default, 'Pavé de boeuf', '/Images/Dish/paveboeuf.png');
