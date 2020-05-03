@@ -1,5 +1,6 @@
 #navbar{
     background-color: orange;
+    height: 66px;
 }
 
 #containerHeaderPhoto,#dropdownProfilContainer{
@@ -44,6 +45,10 @@
 
 #textIdea{
     width:100% !important;
+}
+
+#pageContainer{
+    height: calc(100vh - 66px);
 }
 
 .invisible{
