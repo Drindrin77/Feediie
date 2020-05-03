@@ -25,6 +25,12 @@ class ChatRequest extends RequestService
             case "sendmessage":
                 $this->sendMessage();
                 break;
+            case "fetchmatchlist":
+                $this->fetchMatchedUsers();
+                break;
+            case "getunreadmessagescount":
+                $this->getUnreadMessagesCount();
+                break;
         }
     }
 
@@ -48,7 +54,8 @@ class ChatRequest extends RequestService
         }
     }
 
-    private function fetchUnreadMessages(){
+    private function fetchUnreadMessages()
+    {
         $contactUniqId = isset($_POST["contactUniqId"]) && !empty($_POST['contactUniqId']) ? $_POST['contactUniqId'] : null;
 
         if ($contactUniqId !== null) {
@@ -85,5 +92,15 @@ class ChatRequest extends RequestService
                 $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser']));
             }
         }
+    }
+
+    private function fetchMatchedUsers()
+    {
+        $this->addData("matchList", ChatModel::fetchMatchedUsers($this->currentUser['iduser']));
+    }
+
+    private function getUnreadMessagesCount()
+    {
+        $this->addData("unreadmessages", ChatModel::getUnreadMessagesCount($this->currentUser['iduser'])['unreadmessages']);
     }
 }

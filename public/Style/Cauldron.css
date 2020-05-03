@@ -37,12 +37,13 @@
 
 #chatSelectedContact{
     color : inherit;
+    height: 70px;
     background-color: #007bff;
 }
 
 #chatSelectedContact img{
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
 }
 
 #chatSelectedContact:hover{

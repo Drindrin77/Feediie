@@ -17,7 +17,7 @@ if (sizeof($usersMatchedArray) === 0) {
     <div class="container-fluid col-md-10">
         <div class="row">
             <div id="matchedUserContainer" class="col-md-3">
-                <div class="container-fluid">
+                <div id="matchedUserList" class="container-fluid">
                     <?php
                     $isFirst = true;
                     foreach ($usersMatchedArray as $matchedUser) {
@@ -37,17 +37,14 @@ if (sizeof($usersMatchedArray) === 0) {
 
 
                             <?php
-                            if (!$isFirst) {
-                                $messageNumber = $matchedUser["unreadmessages"];
-                                if ($messageNumber > 0) {
-                                    ?>
-                                    <div class="col-2">
-                                        <span class="matchNotification"><?php echo $messageNumber ?></span>
-                                    </div>
-                                    <?php
-                                }
-                            }
+
+                            $messageNumber = $matchedUser["unreadmessages"];
                             ?>
+                            <div id="notif-<?php echo $matchedUser['uniq_id'] ?>"
+                                 class="col-2 <?php echo $messageNumber === 0 || $isFirst ? 'invisible' : 'visible' ?>">
+                                <span class="matchNotification"><?php echo $messageNumber ?></span>
+                            </div>
+
 
                         </div>
 

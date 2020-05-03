@@ -119,7 +119,8 @@ class ViewModel {
       $this->headerInfo = array('firstName'=>$user['firstname'], 
                                 'photo'=>PhotoModel::getPriorityPhoto($user['iduser']),
                                 'isAdmin'=>$user['isadmin'],
-                                'uniqID'=> $user['uniqid']);
+                                'uniqID'=> $user['uniqid'],
+                                'notifCount'=>ChatModel::getUnreadMessagesCount($user['iduser']));
     }
 }
 ?>
