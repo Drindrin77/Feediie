@@ -12,9 +12,9 @@ $toggleDiet = isset($this->data['toggleDiet']) ? $this->data['toggleDiet'] : nul
 $dishs = isset($this->data['dishs']) ? $this->data['dishs'] : null;
 $distance = $userSelectDistance;
 
+include_once('../src/View/Pages/UserDetails.php');
 $ageMin = $userSelectAge['agemin'];
 $ageMax = $userSelectAge['agemax'];
-
 include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
@@ -49,7 +49,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                             </div>
                             <div class="titleParameter"><h5>Distance</h5></div>
                             <div id="boxSelectDistance" class="boxSelect">
-                                <label id="distanceLabel" for="distanceMax"><span id="valueDistance">NC</span>
+                                <label id="distanceLabel" for="distanceMax"><span id="valueDistance"><?= $distance ?></span>
                                     km</label>
                                 <input type="range" class="custom-range" min="0" max="200" value="<?= $distance ?>"
                                        id="distanceMax">
@@ -58,46 +58,36 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div id="boxSelectAge" class="boxSelect">
                                 <div id="slider-range"></div>
 
-                                <label id="ageRangeLabel" for="ageRangemin"><span id="valueAgeMin">NC</span> ans - <span
-                                            id="valueAgeMax">NC</span> ans</label>
+                                <label id="ageRangeLabel" for="ageRangemin"><span id="valueAgeMin"><?= $ageMin ?></span> ans - <span
+                                            id="valueAgeMax"><?= $ageMax ?></span> ans</label>
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMin ?>"
                                        id="ageRangemin">
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMax ?>"
                                        id="ageRangemax">
                             </div>
                             <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
-                            <div id="boxToggleDiet" class="boxSelect">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" name="togglediet"
-                                           id="togglediet"
-                                        <?php if ($toggleDiet == 'true') {
-                                            echo 'checked';
-                                        } ?>>
-                                    <label id="lblToggleDiet" class="custom-control-label" for="togglediet">
-                                        <?php if ($toggleDiet == 'true') {
-                                            echo 'Désactiver la recherche';
-                                        } else {
-                                            echo 'Activer la recherche';
-                                        } ?>
-                                    </label>
-                                </div>
-                            </div>
+                        
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="diet"
-                                               id="<?= $diet['name'] ?>"
-                                            <?php if (!empty($userSelectedDiet)) {
+                                <div >
+                                        <input type="range" class="custom-range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
+                                               id="<?= $diet['iddiet'] ?>" 
+                                            <?php 
+                                                $value = '1';
                                                 foreach ($userSelectedDiet as $userdiet) {
                                                     if ($userdiet['iddiet'] == $diet['iddiet']) {
-                                                        echo 'checked';
+                                                        if ($userdiet['status']=== false){
+                                                            $value = '0';
+                                                        }
+                                                        else{
+                                                            $value = '2';
+                                                        }
                                                     }
                                                 }
-                                            } ?>
-                                        >
-                                        <label class="custom-control-label"
-                                               for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
-                                    </div>
+                                                echo 'value='.$value;
+                                            ?>>
+                                    <label for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
+                                </div>
                                 <? endforeach; ?>
                             </div>
                             <div id="showMoreDiet" class="showMoreBtn"><i class='fas'>&#xf103;</i>
@@ -117,15 +107,16 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-2 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
-                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase" style="
-                        <?php if (!empty($userSelectedRelationType)) {
-                            foreach ($userSelectedRelationType as $userrelation) {
-                                if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                    echo 'background:dodgerblue;';
-                                }
-                            }
-                        } ?>
-                                " data-toggle="popover" title="<?= $relation['name'] ?>"
+                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase selectRelationCase cursorPointer" 
+                        <?php 
+                        
+                        if (!empty($userSelectedRelationType) && in_array($relation['idrelationtype'], $userSelectedRelationType)) {
+                                echo 'data-selected="true"';
+                        }else{
+                                echo 'data-selected="false"';
+                        }
+                        ?>
+                            data-toggle="popover" title="<?= $relation['name'] ?>"
                              data-content="<?= $relation['description'] ?>"><img src="<?= $relation['iconurl'] ?>"
                                                                                  alt=""/></div>
                     <? endforeach; ?>
@@ -134,39 +125,44 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
                 <div class="row">
                     <div id="card">
-                        <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
+                        <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png"
+                                                                                alt=""/></div>
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
-
-                                <div class="buddy" style="display: block">
+                                <div id=<?= $user['iduser'] ?> class="buddy" style="display: block">
                                     <div class="avatar">
                                         <?php
                                         $userPhoto = new UserPhoto($user['photos']);
                                         $userPhoto->render(); ?>
                                     </div>
-                                    <div class="name"><?= $user['firstname'] ?> <?= date_diff(date_create(($user['birthday'])), date_create('today'))->y ?>
+                                    <div class="name"><?= $user['firstname'] . ' ' . $user['age']?> 
                                         ans
-                                        <div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
+                                        <div data-targetID=<?= $user['iduser']?> class="iconcard cursorPointer seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
                                         </div>
-                                        <div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt=""/>
+                                        <div class="iconcard cursorPointer reportUser"><img src="/Images/Icon/alert.png" alt=""/>
                                         </div>
                                     </div>
                                     <div class="description"><?= $user['description'] ?> ...</div>
                                     <div class="meat">
-                                        <?php for ($i = 0; $i < 4; $i++) {
-                                        $favorite = $user['favoritedish'];
-                                        if (!empty($favorite)) {
-                                        foreach ($dishs as $dish) {
-                                                if ($favorite[$i]['iddish'] == $dish['iddish']) {
-                                                    ?>
-                                                    <div id="<?= $dish['iddish'] ?>" class="circle"
-                                                         data-toggle="popover"
-                                                         title="<?= $dish['name'] ?>"
-                                                         data-content=""><img src="<?= $dish['iconurl'] ?>" alt=""/>
-                                                    </div>
-                                                <?php }
-                                            }}}
+
+
+                                    <?php foreach ($relations as $relation): 
+                                        
                                         ?>
+
+                                        <div class="relationCase" 
+                                        <?php 
+                                        
+                                        if (in_array($relation['idrelationtype'], $user['relations'])) {
+                                                echo 'data-selected="true"';
+                                        }else{
+                                                echo 'data-selected="false"';
+                                        }
+                                        ?>
+                                            ><img src="<?= $relation['iconurl'] ?>"
+                                                           alt=""/></div>
+                                    <? endforeach; ?>
+
                                     </div>
                                 </div>
 
@@ -182,6 +178,17 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
                 <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
                 <div class="moreinfoUser">
+                    <div class="container-fluid">
+                        <?php
+                            foreach($users as $user){
+                                echo '<div class="containerUserDetails" data-hidden="true" data-userID="'.$user['iduser'].'">';
+                                    $userDetails = new UserDetails($user);
+                                    $userDetails->render();
+                                echo '</div>';
+                            }
+                        ?>
+                
+                    </div>
                 </div>
             </div>
         </div>

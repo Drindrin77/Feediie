@@ -1,0 +1,129 @@
+#userphoto{
+    width: 200px;
+    height: 200px;
+}
+#edit{
+    position:absolute;
+    z-index: 1000;
+    top:10;
+    right:10;
+}
+
+#name{
+    font-size: 30px;
+    font-weight: bold;
+}
+#containerProfile{
+    max-width:800px;
+    margin:auto;
+    position:relative;
+    background-color: white;
+    padding: 20px;
+    min-height:100%;
+}
+
+#background{
+    background-color: rgb(248, 245, 245);
+    height: 100%;
+    overflow: auto;
+}
+
+
+@media screen and (min-width: 769px) {
+    #name {
+        position:absolute;
+        bottom:0;
+    }
+}
+@media screen and (max-width: 768px) {
+    #containerProfile {
+        max-width:540px !important;
+    }
+    #containerName{
+        padding-top:10px;
+        text-align:center;
+    }
+    #userPhoto{
+        display:block;
+        margin:auto; 
+    }
+    #editProfileText{
+        display:none;
+    }
+    #containerTitleHobby{
+        text-align: left !important;
+    }
+}
+
+hr.solid {
+    border-top: 3px solid #007bff;
+    opacity: 0.5;
+}
+
+#containerDescription{
+    background-color: rgb(248, 245, 245);
+    border-radius: 5px;
+    padding:10px;
+    text-align: center;
+    margin-bottom:15px;
+}
+
+.titleSection{
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+#titleGeneralInfo, #responseGeneralInfo{
+    display:inline-block;
+}
+
+.containerHobby{
+    background-color:#cce5ff;
+    color: #004085;
+    border-radius: 10px;
+    margin-top:5px;
+    display: inline-block;
+    padding:15px;
+}
+
+.containerDiet{
+    background-color:#d4edda;
+    color: #155724;
+    border-radius: 10px;
+    margin-top:5px;
+    display: inline-block;
+    padding:15px;
+}
+
+#containerTitleHobby{
+    text-align:center;
+}
+
+.titleCard{
+    text-align: center;
+    height:60px;
+    font-size:13px;
+}
+
+.card{
+    display: inline-block;
+}
+
+.cardImage{
+    width:100px;
+    height:100px;
+    margin:auto;
+}
+
+.card{
+    width:130px;
+    display:inline-block;
+    vertical-align: bottom;
+}
+
+.image{
+    width:100%;
+    height:100%;
+}

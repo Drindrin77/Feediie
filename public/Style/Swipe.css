@@ -6,6 +6,9 @@
     position: fixed;
 }
 
+[data-hidden="true"]{
+    display: none;
+}
 #card {
     width: 500px;
     margin: auto !important;
@@ -22,17 +25,23 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.cursorPointer{
+    cursor: pointer;
+}
 .buddy {
     display: none;
     background: lightgray;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    /* border-radius: 30px; */
     color: black;
     width: 300px;
     height: 480px;
     top: 20px;
     position: absolute;
-    cursor: hand;
+}
+.buddy img{
+    width: 100%;
+    height: 100%;
 }
 .moveOpenProfil {
     transform: translate(150px,0);
@@ -42,14 +51,13 @@
 .buddyEnd {
     display: none;
     background: orangered;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 30px;
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.2); */
     color: black;
     width: 300px;
     height: 480px;
     top: 20px;
     position: absolute;
-    cursor: hand;
 }
 .rotate-left {
     transform: rotate(30deg) scale(0.8);
@@ -125,11 +133,20 @@
     transform: translate(0,-55px);
     z-index: 70;
 }
+
+.relationCase[data-selected="false"]{
+    opacity: 0.4;
+}
+
+.relationCase[data-selected="true"]{
+    background-color: rgba(255, 255, 255, 0.651);
+}
+
 .meat{
     display: flex;
     align-items:flex-end;
     position: relative;
-    border-radius: 0px 0px 15px 15px;
+    /* border-radius: 0px 0px 15px 15px; */
     height: 14%;
     font-size:22px;
     color: white;
@@ -140,7 +157,6 @@
 .circle{
     height: 60px;
     width: 60px;
-    background-color: lightgray;
     border-radius: 50%;
     margin: 5px 5px;
 }
@@ -233,19 +249,14 @@
 }
 .relationCase {
     border-radius: 50%;
-    width: 62px;
-    height: 62px;
-    background: white;
-    margin-left: 9px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 70px;
+    height: 70px;
+    margin: 5px;
 }
 .relationCase img {
-    margin-top: 1px;
-    margin-left: 1.2px;
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
 }
 .watchProfile{
     pointer-events: none;
@@ -262,6 +273,7 @@
     color: black;
     width: 400px;
     height: 480px;
+    overflow-y:auto;
     left:80px;
     top: 20px;
     position: absolute;
@@ -274,7 +286,9 @@
     transform: translate(440px,5px);
     z-index:11;
 }
-
+.dietblock{
+    display: flex;
+}
 @media screen and ( max-height: 800px ) {
     #parameters{
         border: 10px solid #E1E1E1;
@@ -285,7 +299,7 @@
 @media screen and ( min-height: 800px ) {
 
     .buddy {
-        border-radius: 25px;
+        border-radius: 30px;
         width: 365px;
         height: 594px;
         background: lightgray;
@@ -309,7 +323,7 @@
     .relationPanel {
         margin-top: 40px;
         height: 600px;
-        transform: translate(-50px,0);
+        transform: translate(-70px,0);
     }
     .description {
         padding-top: 15px;

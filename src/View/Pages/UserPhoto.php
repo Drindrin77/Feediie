@@ -33,7 +33,7 @@ class UserPhoto{
               else{
                 echo '<div class="carousel-item">';
               }
-              echo '<img class="w-100 h-100" src="'.$photo['url'].'">';
+              echo '<img style="width:100%;height:100%" src="'.$photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>
@@ -50,7 +50,7 @@ class UserPhoto{
 
     <?php }else{
       $url = count($this->photos)==0? PATH_DEFAULT_USER_PHOTO: $this->photos[0]['url'];
-      echo '<img style="height:100%; width:100%;border-radius:30px" src="'.$url.'">';
+      echo '<img style="height:100%; width:100%" src="'.$url.'">';
     }
   }
 

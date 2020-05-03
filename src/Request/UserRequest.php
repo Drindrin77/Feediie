@@ -37,8 +37,8 @@ class UserRequest extends RequestService
             case "deleteuser":
                 $this->deleteUser();
                 break;
-            case "relation":
-                $this->relation();
+            case "updateinterestedrelation":
+                $this->updateInterestedRelation();
                 break;
             case "setadmin":
                 $this->setAdmin(true);
@@ -46,6 +46,46 @@ class UserRequest extends RequestService
             case "removeadmin":
                 $this->setAdmin(false);
                 break;
+            case "editfilter":
+                $this->editFilter();
+            break;
+        }
+    }
+
+    private function editFilter(){
+
+        $args = array();
+        $idUser = $this->currentUser['iduser'];
+
+        if(isset($_POST['distance'])){
+            $args['distanceMax']=htmlspecialchars($_POST['distance']);
+        }
+        if(isset($_POST['ageMin'])){
+            $args['filterAgeMin']=htmlspecialchars($_POST['ageMin']);
+        }
+        if(isset($_POST['ageMax'])){
+            $args['filterAgeMax']=htmlspecialchars($_POST['ageMax']);
+        }
+
+        if(!empty($args)){
+            UserModel::editInfo($args,$idUser);
+        }
+
+        if(isset($_POST['changesSex'])){
+            $changesSex = $_POST['changesSex'];
+            foreach($changesSex as $sex){
+                if($sex['status']=='true'){
+                    SexModel::addUserSelectedSex($idUser, $sex['id']);
+                }else{
+                    SexModel::removeUserSelectedSex($idUser, $sex['id']);
+                }
+            }            
+        }
+
+        $valuesDiet = $_POST['valuesDiet'];
+        DietModel::removeUserSelectedDiet($idUser);
+        foreach($valuesDiet as $diet){
+            DietModel::updateUserSelectedDiet($idUser, $diet['id'], $diet['value']);
         }
     }
 
@@ -80,21 +120,20 @@ class UserRequest extends RequestService
         }
     }
 
-    private function relation()
+    private function updateInterestedRelation()
     {
         //ON RECUPERE LA RELATION DE CURRENTUSER
         $idUser = $this->currentUser['iduser'];
-        $relationSelect = $_POST['relationSelect'];
-
-        if (ParameterModel::removeUserSelectedRelation($idUser)) {
-            $this->addMessageSuccess('Table selectrelation vide');
+        $idRelation = htmlspecialchars($_POST['id']);
+        $value = htmlspecialchars($_POST["value"]);
+        $value = $value=='true'?true:false;
+        if ($value){ 
+            ParameterModel::addUserSelectedRelation($idUser, $idRelation);
         }
-        if (ParameterModel::updateUserSelectedRelation($idUser, $relationSelect)) {
-
+        else{
+            ParameterModel::removeUserSelectedRelation($idUser, $idRelation); 
             $this->addMessageSuccess('Les relations ont ete mises a jour');
-        } else {
-            $this->addMessageError('Erreur BD mise a jour relations selectionne');
-        }
+        } 
     }
 
     private function filter()
@@ -138,8 +177,10 @@ class UserRequest extends RequestService
         if (DietModel::removeUserSelectedDiet($idUser)) {
             $this->addMessageSuccess('Table selectdiet vide');
         }
+        var_dump($dietSelect);
         foreach ($dietSelect as $diet) {
-            if (DietModel::updateUserSelectedDiet($idUser, $diet)) {
+
+            if (DietModel::updateUserSelectedDiet($idUser, $diet['id'],$diet['value'])) {
                 $this->addMessageSuccess('Les diets on ete mis a jour');
             } else {
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');

@@ -50,7 +50,6 @@ CREATE TABLE FeediieUser(
 	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
 	filterAgeMin				INT DEFAULT 18,
 	filterAgeMax				INT DEFAULT 60,
-	filterDiet					BOOL DEFAULT FALSE,
 	distanceMax                 INT  NOT NULL DEFAULT 15,
     token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,
@@ -261,6 +260,7 @@ CREATE TABLE followDiet(
 CREATE TABLE interesteddiet(
     idUser   INT  NOT NULL ,
     idDiet   INT  NOT NULL ,
+    status   BOOLEAN,
     CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
 
     ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE

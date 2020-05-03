@@ -53,56 +53,56 @@ INSERT INTO city VALUES(default, 'Perpignan', '66000');
 
 INSERT INTO FeediieUser VALUES
     (default, 'jzpeerz58aze', 'Leanna', '1999-04-11','leiina77410@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 
-    'balbalbal', default, default, default, default, default, 'token', true, 1, default, 'Femme');
+    'balbalbal', default, default, default, default, 'token', true, 1, default, 'Femme');
 
 
 INSERT INTO FeediieUser VALUES
     (default, 'arjaze98e58a5ab','Valentin', '1998-02-14','valentinbgdu54@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je suis valentin je viens de Nancy',
-        default, default, default , default, default,'token2', true, 1, 5, 'Homme');
+        default, default, default , default,'token2', true, 1, 5, 'Homme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'brjaze98e58a5ab','Naruto', '1992-01-30','naruto@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default,'token3', default, 1, default, 'Homme');
+        default, default, default, default,'token3', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'crjaze98e58a5ab','Sakura', '1999-04-11','Sakura@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default,'token4', default, 1, default, 'Femme');
+        default, default, default, default,'token4', default, 1, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'drjaze98e58a5ab','Sasuke', '1999-04-11','sasuke@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default,'token5', default, 1, default, 'Homme');
+        default, default, default, default,'token5', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'erjaze98e58conta5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token6', default, 1, default, 'Homme');
+        default, default, default, default, 'token6', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'frjaze98e58conta5ab','Pierre', '1985-04-11','pierre@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token7', default, 1, default, 'Homme');
+        default, default, default, default, 'token7', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'grjaze98e58conta5ab','Jeanne', '1985-04-11','jeanne@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token8', default, 1, default, 'Femme');
+        default, default, default, default, 'token8', default, 1, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'hrjaze98e58conta5ab','Fred', '1985-04-11','fred@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token9', default, 8, default, 'Transgender');
+        default, default, default, default, 'token9', default, 8, default, 'Transgender');
 
 INSERT INTO FeediieUser VALUES
     (default, 'irjaze98e58conta5ab','Rookie', '1985-04-11','rookie@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token10', default, 8, default, 'Animal');
+        default, default, default, default, 'token10', default, 8, default, 'Animal');
 
 INSERT INTO FeediieUser VALUES
     (default, 'jrjaze98e58conta5ab','Monique', '1985-04-11','monique@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token11', default, 8, default, 'Femme');
+        default, default, default, default, 'token11', default, 8, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
     (default, 'krjaze98e58conta5ab','Sacha', '1985-04-11','sacha@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token12', default, 7, default, 'Transgender');
+        default, default, default, default, 'token12', default, 7, default, 'Transgender');
 
 INSERT INTO FeediieUser VALUES
     (default, 'lrjaze98e58conta5ab','Pikachu', '1985-04-11','pikachu@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
-        default, default, default, default, default, 'token13', default, 8, default, 'Animal');
+        default, default, default, default, 'token13', default, 8, default, 'Animal');
 
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (3, 2, '2020-04-18 15:35:36', true);
@@ -252,8 +252,8 @@ INSERT INTO interestedsex VALUES (9,'Femme');
 INSERT INTO interestedsex VALUES (9,'Animal');
 INSERT INTO interestedsex VALUES (13,'Animal');
 
-INSERT INTO interesteddiet VALUES(1,1);
-INSERT INTO interesteddiet VALUES(2,1);
+INSERT INTO interesteddiet VALUES(1,1,default );
+INSERT INTO interesteddiet VALUES(2,1,default);
 
 INSERT INTO followDiet VALUES(1,1);
 INSERT INTO followDiet VALUES(2,1);

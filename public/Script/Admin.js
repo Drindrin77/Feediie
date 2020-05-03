@@ -233,36 +233,6 @@ function addRelation(id, url, name, description) {
     $("#tableBodyRelation").prepend('<tr data-id=' + id + '><td class="containerImgRelation"><img class="image" src="' + url + '" /></td><td><b>' + name + '</b></td><td>' + description + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr >')
 }
 
-// $("#submitAddRelation").click(function (e) {
-//     let name = $("#textAddRelation").val()
-//     let description = $("#descriptionRelation").val()
-
-//     if (name.trim()) {
-//         $.post("/ajax.php?entity=relation&action=addRelation",
-//             {
-//                 'name': name,
-//             })
-//             .fail(function (e) {
-//                 console.log("fail", e)
-//             })
-//             .done(function (e) {
-//                 let data = JSON.parse(e)
-//                 if (data.status == "success") {
-//                     $("#tableBodyRelation").prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr>');
-//                     $("#textAddRelation").val("")
-//                     $("#messageSuccess").html("Ajout de relation réussi")
-//                     $("#errorAddRelation").html("");
-//                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-//                 } else {
-//                     $("#errorAddRelation").html(data.error[0]);
-//                 }
-
-//             })
-//     } else {
-//         $("#errorAddRelation").html("Le nom ne doit pas être vide");
-//     }
-// })
-
 $(document).on("click", ".deletehobby", function (event) {
     let parent = $(this);
     let idHobby = $(this).data('id')

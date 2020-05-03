@@ -12,7 +12,7 @@ class DietModel extends DBConnection{
         return $req->fetchAll();
     }
     public static function getUserSelectedDiet($idUser){
-        $req = self::$pdo->prepare("select * from diet inner join interesteddiet on diet.idDiet = interesteddiet.idDiet where idUser = ?");
+        $req = self::$pdo->prepare("select name,status, interesteddiet.iddiet from diet inner join interesteddiet on diet.idDiet = interesteddiet.idDiet where idUser = ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }
@@ -27,9 +27,13 @@ class DietModel extends DBConnection{
         $req = self::$pdo->prepare("delete from interesteddiet where idUser = ?");
         return $req->execute(array($idUser));
     }
-    public static function updateUserSelectedDiet($idUser,$dietSelect){
-        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet) values (?,(select idDiet from diet where name = ?))");
-        return $req->execute(array($idUser,$dietSelect));
+    public static function updateUserSelectedDiet($idUser,$dietSelect,$dietstatus){
+        if($dietstatus=='true'){
+            $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet,status) values (?,?,true)");
+        }else{
+            $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet,status) values (?,?,false)");
+        }
+        return $req->execute(array($idUser,intval($dietSelect)));
     }
 
     public static function deleteDiet($idDiet){
