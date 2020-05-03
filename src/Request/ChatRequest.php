@@ -55,7 +55,7 @@ class ChatRequest extends RequestService
             $userId = $this->currentUser['iduser'];
             $contactId = UserModel::getUserByUniqID($contactUniqId)['iduser'];
 
-            $unreadMessages = ChatModel::readMessages($userId, $contactId);
+            $unreadMessages = ChatModel::readNewMessages($userId, $contactId);
             for ($i = 0; $i < sizeof($unreadMessages); $i++) {
                 $unreadMessages[$i]["message"] = htmlspecialchars($unreadMessages[$i]["message"]);
             }
@@ -73,7 +73,7 @@ class ChatRequest extends RequestService
             $userId = $this->currentUser['iduser'];
             $contactId = UserModel::getUserByUniqID($contactUniqId)["iduser"];
 
-            $unreadMessages = ChatModel::readMessages($userId, $contactId);
+            $unreadMessages = ChatModel::readNewMessages($userId, $contactId);
             for ($i = 0; $i < sizeof($unreadMessages); $i++) {
                 $unreadMessages[$i]["message"] = htmlspecialchars($unreadMessages[$i]["message"]);
             }

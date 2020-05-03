@@ -260,3 +260,7 @@ INSERT INTO followDiet VALUES(2,1);
 
 INSERT INTO interestedRelationType VALUES (1,'2');
 INSERT INTO interestedRelationType VALUES (2,'2');
+
+
+
+
