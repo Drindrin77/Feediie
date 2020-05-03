@@ -261,6 +261,7 @@ CREATE TABLE followDiet(
 CREATE TABLE interesteddiet(
     idUser   INT  NOT NULL ,
     idDiet   INT  NOT NULL ,
+    status   BOOLEAN,
     CONSTRAINT interesteddiet_PK PRIMARY KEY (idUser,idDiet)
 
     ,CONSTRAINT interesteddiet_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE

@@ -252,8 +252,8 @@ INSERT INTO interestedsex VALUES (9,'Femme');
 INSERT INTO interestedsex VALUES (9,'Animal');
 INSERT INTO interestedsex VALUES (13,'Animal');
 
-INSERT INTO interesteddiet VALUES(1,1);
-INSERT INTO interesteddiet VALUES(2,1);
+INSERT INTO interesteddiet VALUES(1,1,default );
+INSERT INTO interesteddiet VALUES(2,1,default);
 
 INSERT INTO followDiet VALUES(1,1);
 INSERT INTO followDiet VALUES(2,1);

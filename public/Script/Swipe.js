@@ -90,10 +90,10 @@ $(document).ready(function () {
 
     //ON RECUPERE LA RELATION SELECTIONNEE
     $('.relationCase').click(function () {
-        $(this).css('background','dodgerblue');
+        $(this).css('filter','grayscale(0)');
         let relationSelect = $(this).attr('id');
         $('.relationCase').not(this).each(function () {
-            $(this).css('background','lightgrey');
+            $(this).css('filter','grayscale(1)');
         });
         $.post("/ajax.php?entity=user&action=relation",
             {
@@ -169,9 +169,21 @@ $(document).ready(function () {
         //alert("Vous avez selectionne : " + sexSelect.join(", "));
 
         let dietSelect = [];
-        $.each($("input[name='diet']:checked"), function () {
-            dietSelect.push($(this).attr('id'));
-        });
+        $.each($("input[name='diet']"), function () {
+            if($(this).attr('value')==='0'||'2'){
+            let id = $(this).attr('id');
+            let value;
+            if($(this).val() === '0')
+            {
+                value = false;
+            }
+            else
+            {
+                value = true;
+            }
+            dietSelect[id] = value;
+        }});
+
         //  alert("Vous avez selectionne : " + dietSelect.join(", "));
 
         let relationSelect = [];
