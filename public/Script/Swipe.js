@@ -257,6 +257,7 @@ $(document).ready(function () {
         if (!actualUser.is(':first-child')) {
 
             //TODO AJAX
+            //CHECK MATCH 
             let idLiked = actualUser.attr("id")
 
             actualUser.append('<div class="status miam">Miam!</div>');
@@ -276,7 +277,7 @@ $(document).ready(function () {
         if (!actualUser.is(':first-child')) {
 
             //TODO AJAX
-            let idLiked = actualUser.attr("id")
+            let idDislike = actualUser.attr("id")
 
 
             actualUser.append('<div class="status beurk">Beurk!</div>');

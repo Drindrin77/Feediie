@@ -49,20 +49,22 @@ class UserModel extends DBConnection{
     }
 
     public static function filterUsersSwipe($idUser){
-        $req = self::$pdo->prepare("SELECT u2.idUser, u2.firstname, u2.birthDay, u2.description FROM FeediieUser u1, FeediieUser u2 WHERE 
-                                            u1.iduser <> u2.iduser and 
+        $req = self::$pdo->prepare("SELECT u2.idUser, u2.firstname, u2.sex, city.zipcode as zipcode, city.name as city, u2.description, DATE_PART('year', now()::date) - DATE_PART('year', u2.birthday::date) as age FROM FeediieUser u1, FeediieUser u2 inner join city on u2.idcity = city.idcity 
+                                            WHERE u1.iduser <> u2.iduser and 
                                             u1.sex IN (SELECT sex from interestedsex WHERE iduser = u2.iduser) and 
                                             u2.sex IN (SELECT sex from interestedsex WHERE iduser = u1.iduser) and
                                             (SELECT DATE_PART('year', now()::date) - DATE_PART('year', u1.birthday::date)) between u2.filteragemin and u2.filteragemax and 
                                             (SELECT DATE_PART('year', now()::date) - DATE_PART('year', u2.birthday::date)) between u1.filteragemin and u1.filteragemax and
-                                            (SELECT idRelationType from interestedRelationType WHERE iduser=u1.iduser) IN (SELECT idRelationType FROM interestedRelationType where iduser=u2.iduser) and
+                                            EXISTS((SELECT idRelationType from interestedRelationType WHERE interestedRelationType.iduser=u1.iduser) INTERSECT (SELECT idRelationType FROM interestedRelationType where interestedRelationType.iduser=u2.iduser)) AND
+                                            ((SELECT COUNT(iddiet) from interesteddiet where interesteddiet.iduser=u1.iduser and status=true)=0 OR EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u1.iduser AND status=true) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u2.iduser))) AND
+                                            NOT EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u1.iduser AND status=false) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u2.iduser)) AND
+                                            ((SELECT COUNT(iddiet) from interesteddiet where interesteddiet.iduser=u2.iduser and status=true)=0 OR EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u2.iduser AND status=true) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u1.iduser))) AND
+                                            NOT EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u2.iduser AND status=false) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u1.iduser)) AND                                            
                                             u2.idUser not in (SELECT iduser_dislike from dislike WHERE iduser=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
                                             u1.idUser = ?");
         //TODO FILTER DIET
         /*
-                (SELECT iddiet from interesteddiet WHERE iduser=u1.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u2.iduser) and
-                (SELECT iddiet from interesteddiet WHERE iduser=u2.iduser) IN (SELECT iddiet FROM followDiet WHERE iduser=u1.iduser) and
                                             
         */
      $req->execute(array($idUser));

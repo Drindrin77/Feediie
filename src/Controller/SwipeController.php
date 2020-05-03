@@ -40,8 +40,8 @@ class SwipeController extends Controller{
         $relations = ParameterModel::getAllRelation();
 
 
-        //$users = UserModel::filterUsersSwipe($idUser);
-        $users = UserModel::getAllUsers($idUser);
+        $users = UserModel::filterUsersSwipe($idUser);
+        //$users = UserModel::getAllUsers($idUser);
 
         for($i=0; $i<count($users);$i++){
             $idUser = $users[$i]['iduser'];

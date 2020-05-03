@@ -82,10 +82,13 @@ class UserRequest extends RequestService
             }            
         }
 
-        $valuesDiet = $_POST['valuesDiet'];
-        DietModel::removeUserSelectedDiet($idUser);
-        foreach($valuesDiet as $diet){
-            DietModel::updateUserSelectedDiet($idUser, $diet['id'], $diet['value']);
+        if(isset($_POST['valuesDiet'])){
+            
+            $valuesDiet = $_POST['valuesDiet'];
+            DietModel::removeUserSelectedDiet($idUser);
+            foreach($valuesDiet as $diet){
+                DietModel::updateUserSelectedDiet($idUser, $diet['id'], $diet['value']);
+            }
         }
     }
 
