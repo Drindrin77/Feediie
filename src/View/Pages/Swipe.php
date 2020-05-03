@@ -134,7 +134,7 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
                 <div class="row">
                     <div id="card">
-                        <div class="buddy buddyEnd" style="display: block">Plus de plats en stock !</div>
+                        <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png" alt=""/></div>
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
 
