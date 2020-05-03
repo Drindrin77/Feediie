@@ -21,10 +21,7 @@
             </form>
 
             <div class="col-lg-5 col-md-10 col-sm-10 tableBackground" style="padding-top:50px">
-                <h3 class="titleTab">Liste des suggestions</h3>
-               
-                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-               
+                <h3 class="titleTab">Liste des suggestions</h3>               
 
                 <div class="table-responsive tableSize">
                     <table class="table table-striped">
@@ -41,7 +38,7 @@
                                     echo '<tr data-id='.$idea['ididea'].'>
                                     <td>'.$idea['firstname'].'</td>
                                     <td>'.$idea['message'].'</td>
-                                    <td class="deleteIdea"><button class="btn btn-danger">Supprimer</button></td>
+                                    <td><button data-content="Idea" class="btn btn-danger deleteTabOneElement">Supprimer</button></td>
                                 </tr>';
                                 }
                             ?>
@@ -119,8 +116,8 @@
                                                 echo 'Promouvoir';
                                             }
                                             echo'</button>
-                                            <button class="btn btn-danger deleteUser">Bannir</button></td>
-                                        </tr>';
+                                            <button data-content="User" class="btn btn-danger deleteUser">Supprimer</button></td>
+                                            </tr>';
                                         }
                                     ?>
                                 </tbody>
@@ -194,7 +191,7 @@
                                         <div class="stayOpenDropDownItem">
                                             <span id="errorAddSex" class="errorMsg"></span><br>
                                             <input id="textAddSex" type="text"/>
-                                            <button id="submitAddSex" class="btn btn-primary">
+                                            <button data-content="Sex" class="btn btn-primary submitAddTabOneElement">
                                                 Confirmer
                                             </button>
                                         </div>
@@ -216,7 +213,7 @@
                                                 foreach($sexs as $sex){
                                                     echo '<tr data-id='.$sex['name'].'>
                                                     <td>'.$sex['name'].'</td>
-                                                    <td><button class="btn btn-danger deleteSex">Supprimer</button></td>
+                                                    <td><button data-content="Sex" class="btn btn-danger deleteTabOneElement">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -298,7 +295,7 @@
                                         <div class="stayOpenDropDownItem">
                                             <span id="errorAddDiet" class="errorMsg"></span><br>
                                             <input id="textAddDiet" type="text"/>
-                                            <button id="submitAddDiet" class="btn btn-primary">
+                                            <button data-content="Diet" class="btn btn-primary submitAddTabOneElement">
                                                 Confirmer
                                             </button>
                                         </div>
@@ -320,7 +317,7 @@
                                                 foreach($diets as $diet){
                                                     echo '<tr data-id='.$diet['iddiet'].'>
                                                     <td>'.$diet['name'].'</td>
-                                                    <td><button class="btn btn-danger deleteDiet">Supprimer</button></td>
+                                                    <td><button data-content="Diet" class="btn btn-danger deleteTabOneElement">Supprimer</button></td>
                                                     </tr>';
                                                 }
                                             ?>
@@ -380,7 +377,7 @@
                                     </div>      
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                        <button data-id=<?=$personality['iddish']?> class="btn btnDelete deletePersonality"><i class="fa fa-trash"></i> Supprimer</button>
+                                        <button data-content='Personality' data-id=<?=$personality['iddish']?> class="btn btnDelete deleteCard"><i class="fa fa-trash"></i> Supprimer</button>
                                     </div>
                                     <div class="card-header titleCard"><?= $personality['name']?></div>
                                 </div>
@@ -440,7 +437,7 @@
                                     </div> 
                                     <div class="overlay"></div>
                                     <div class="containerBtnOverlay containerDeleteBtn">
-                                        <button data-id=<?=$dish['iddish']?> class="btn btnDelete deleteDish"><i class="fa fa-trash"></i> Supprimer</button>
+                                        <button data-content='Dish' data-id=<?=$dish['iddish']?> class="btn btnDelete deleteCard"><i class="fa fa-trash"></i> Supprimer</button>
                                     </div>
                                     <div class="card-header titleCard"><?= $dish['name']?></div>
                                 </div>  
@@ -464,7 +461,7 @@
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
                                             <input id="textAddHobby" type="text"/>
-                                            <button id="submitAddHobby" class="btn btn-primary">
+                                            <button data-content="Hobby" class="btn btn-primary submitAddTabOneElement">
                                                 Confirmer
                                             </button>
                                         </div>

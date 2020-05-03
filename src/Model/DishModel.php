@@ -37,6 +37,12 @@ class DishModel extends DBConnection{
         return $req->execute(array($idDish)); 
     }
 
+    public static function getUrlbyId($idDish){
+        $req = self::$pdo->prepare("select iconURL from dish where iddish=?");
+        $req->execute(array($idDish));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
     public static function addDish($name, $fileName){
         $req = self::$pdo->prepare("insert into dish values(default,?,?)");
         return $req->execute(array($name, $fileName));

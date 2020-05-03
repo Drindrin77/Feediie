@@ -39,7 +39,7 @@ class PersonalityModel extends DBConnection{
 
     public static function getUrlbyId($idDish){
         $req = self::$pdo->prepare("select iconURL from personalitydish where iddish=?");
-        $req->execute(array($iddish));
+        $req->execute(array($idDish));
         return $req->fetch(PDO::FETCH_COLUMN);
     }
 

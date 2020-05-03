@@ -3,9 +3,6 @@ $(".photoAddCard").click(function (e) {
     $('.uploadInput[data-content=' + content + ']').click();
 })
 
-$(".contentUserTable").click(function (e) {
-    console.log($(this).parent().parent().is('.contentUserTable'))
-})
 function triggerPopOver(target) {
     let hidden = $("#" + target).attr("data-hidden")
     hidden = hidden == 'false' ? 'true' : 'false'
@@ -56,7 +53,7 @@ $(".submitAddCard").click(function (e) {
 })
 
 function addCard(content, name, url, id) {
-    $("#containerCard" + content).append('<div class="card cardElement"><div class="cardImage"><img src="' + url + '" class= "card-img-top image" alt = "..." ></div ><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-id=' + id + ' class="btn btnDelete delete' + content + '"><i class="fa fa-trash"></i> Supprimer</button></div ><div class="card-header titleCard">' + name + '</div></div > ')
+    $("#containerCard" + content).prepend('<div class="card cardElement"><div class="cardImage"><img src="' + url + '" class= "card-img-top image" alt = "..." ></div ><div class="overlay"></div><div class="containerBtnOverlay containerDeleteBtn"><button data-content=' + content + ' data-id=' + id + ' class="btn btnDelete deleteCard"><i class="fa fa-trash"></i> Supprimer</button></div ><div class="card-header titleCard">' + name + '</div></div > ')
 }
 
 $(".uploadInput").change(function (e) {
@@ -89,22 +86,16 @@ $(".uploadInput").change(function (e) {
     });
 })
 
-
-
-
-
-
-
-
-
 $(".dropdown-menu .stayOpenDropDownItem").click(function (e) {
     e.stopPropagation();
 })
 
-$("#submitAddSex").click(function (e) {
-    let name = $("#textAddSex").val()
+$(".submitAddTabOneElement").click(function () {
+    let content = $(this).data("content")
+    let name = $("#textAdd" + content).val()
+
     if (name.trim()) {
-        $.post("/ajax.php?entity=sex&action=addSex",
+        $.post('/ajax.php?entity=' + content + '&action=add' + content,
             {
                 'name': name,
             })
@@ -114,78 +105,29 @@ $("#submitAddSex").click(function (e) {
             .done(function (e) {
                 let data = JSON.parse(e)
                 if (data.status == "success") {
-                    $("#tableBodySex").append('<tr data-id=' + name + '><td>' + name + '</td><td><button class="btn btn-danger deleteSex">Supprimer</button></td></tr>');
-                    $("#textAddSex").val("")
-                    $("#messageSuccess").html("Ajout de relation réussi")
+                    switch (content) {
+                        case 'Hobby':
+                            $("#bodyHobby").prepend('<div data-id=' + data.data.id + ' class="containerHobby deletehobby"><i class="fas fa-ban deleteHobbyIcon" ></i > <span>' + name + '</span></div >')
+                            break;
+                        case 'Sex':
+                            $("#tableBody" + content).prepend('<tr data-id=' + name + '><td>' + name + '</td><td><button data-content=' + content + ' class="btn btn-danger deleteTabOneElement">Supprimer</button></td></tr>');
+                            break;
+                        default:
+                            $("#tableBody" + content).prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button data-content=' + content + ' class="btn btn-danger deleteTabOneElement">Supprimer</button></td></tr>');
+                            break;
+                    }
+
+                    $("#textAdd" + content).val("")
+                    $("#messageSuccess").html("Ajout de " + content + " réussi")
                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                    $("#errorAddSex").html("");
+                    $("#errorAdd" + content).html("");
                 } else {
-                    $("#errorAddSex").html(data.error[0]);
+                    $("#errorAdd" + content).html(data.error[0]);
                 }
 
             })
     } else {
-        $("#errorAddSex").html("Le nom ne doit pas être vide");
-    }
-})
-
-
-$("#submitAddDiet").click(function (e) {
-    let name = $("#textAddDiet").val()
-    if (name.trim()) {
-        $.post("/ajax.php?entity=diet&action=addDiet",
-            {
-                'name': name,
-            })
-            .fail(function (e) {
-                console.log("fail", e)
-            })
-            .done(function (e) {
-                let data = JSON.parse(e)
-                if (data.status == "success") {
-                    $("#tableBodyDiet").append('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteSex">Supprimer</button></td></tr>');
-                    $("#textAddDiet").val("")
-                    $("#messageSuccess").html("Ajout de relation réussi")
-                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                    $("#errorAddDiet").html("");
-                } else {
-                    $("#errorAddDiet").html(data.error[0]);
-                }
-
-            })
-    } else {
-        $("#errorAddDiet").html("Le nom ne doit pas être vide");
-    }
-})
-
-
-$("#submitAddHobby").click(function (e) {
-
-    let name = $("#textAddHobby").val()
-    console.log(name)
-    if (name.trim()) {
-        $.post("/ajax.php?entity=hobby&action=addHobby",
-            {
-                'name': name,
-            })
-            .fail(function (e) {
-                console.log("fail", e)
-            })
-            .done(function (e) {
-                let data = JSON.parse(e)
-                if (data.status == "success") {
-                    $("#bodyHobby").prepend('<div data-id=' + data.data.id + ' class="containerHobby deletehobby"><i class="fas fa-ban deleteHobbyIcon" ></i > <span>' + name + '</span></div >')
-                    $("#textAddHobby").val("")
-                    $("#messageSuccess").html("Ajout de relation réussi")
-                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                    $("#errorAddHobby").html("");
-                } else {
-                    $("#errorAddHobby").html(data.error[0]);
-                }
-
-            })
-    } else {
-        $("#errorAddHobby").html("Le nom ne doit pas être vide");
+        $("#errorAdd" + content).html("Le nom ne doit pas être vide");
     }
 })
 
@@ -203,7 +145,7 @@ $("#submitAddRelation").click(function (e) {
             .done(function (e) {
                 let data = JSON.parse(e)
                 if (data.status == "success") {
-                    $("#tableBodyRelation").append('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr>');
+                    $("#tableBodyRelation").prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr>');
                     $("#textAddRelation").val("")
                     $("#messageSuccess").html("Ajout de relation réussi")
                     $("#errorAddRelation").html("");
@@ -220,7 +162,7 @@ $("#submitAddRelation").click(function (e) {
 
 $(document).on("click", ".deletehobby", function (event) {
     let parent = $(this);
-    let idHobby = $(this).attr('data-id')
+    let idHobby = $(this).data('id')
 
     $.post("/ajax.php?entity=hobby&action=deleteHobby",
         {
@@ -240,13 +182,14 @@ $(document).on("click", ".deletehobby", function (event) {
 })
 
 
-$(document).on("click", ".deleteDish", function (event) {
+$(document).on("click", ".deleteCard", function (event) {
     let parent = $(this).parent().parent();
-    let idDish = $(this).attr('data-id')
+    let content = $(this).data('content')
+    let id = $(this).data('id')
 
-    $.post("/ajax.php?entity=dish&action=deleteDish",
+    $.post('/ajax.php?entity=' + content + '&action=delete' + content,
         {
-            'idDish': idDish,
+            'id': id,
         })
         .fail(function (e) {
             console.log("fail", e)
@@ -261,15 +204,14 @@ $(document).on("click", ".deleteDish", function (event) {
         })
 })
 
-$(document).on("click", ".deletePersonality", function (event) {
+$(document).on("click", ".deleteTabOneElement", function (event) {
     let parent = $(this).parent().parent();
-    let idDish = $(this).attr('data-id')
+    let id = parent.attr('data-id')
+    let content = $(this).data('content')
 
-    console.log(idDish)
-
-    $.post("/ajax.php?entity=personality&action=deletePersonality",
+    $.post('/ajax.php?entity=' + content + '&action=delete' + content,
         {
-            'idDish': idDish,
+            'id': id,
         })
         .fail(function (e) {
             console.log("fail", e)
@@ -284,13 +226,14 @@ $(document).on("click", ".deletePersonality", function (event) {
         })
 })
 
-$(document).on("click", ".deleteDiet", function (event) {
+$(".deleteUser").click(function (e) {
+    e.stopPropagation()
     let parent = $(this).parent().parent();
-    let idDiet = parent.attr('data-id')
+    let id = parent.data('id')
 
-    $.post("/ajax.php?entity=diet&action=deleteDiet",
+    $.post("/ajax.php?entity=user&action=deleteUser",
         {
-            'idDiet': idDiet,
+            'id': id,
         })
         .fail(function (e) {
             console.log("fail", e)
@@ -350,69 +293,11 @@ $(".modifyAdmin").click(function (e) {
         })
 })
 
-
-$(document).on("click", ".deleteSex", function (event) {
-    let parent = $(this).parent().parent();
-    let sex = parent.attr("data-id")
-
-    $.post("/ajax.php?entity=sex&action=delete",
-        {
-            'sex': sex,
-        })
-        .fail(function (e) {
-            console.log("fail", e)
-        })
-        .done(function (e) {
-            let data = JSON.parse(e)
-            if (data.status == "success") {
-                parent.remove();
-            }
-        })
-})
-
 $(document).on("click", ".deleteRelation", function (event) {
     let parent = $(this).parent().parent();
     let id = parent.attr("data-id")
 
     $.post("/ajax.php?entity=relation&action=deleteRelation",
-        {
-            'id': id,
-        })
-        .fail(function (e) {
-            console.log("fail", e)
-        })
-        .done(function (e) {
-            let data = JSON.parse(e)
-            if (data.status == "success") {
-                parent.remove();
-            }
-        })
-})
-
-$(document).on("click", ".deleteIdea", function (event) {
-    let parent = $(this).parent();
-    let id = parent.attr("data-id")
-
-    $.post("/ajax.php?entity=idea&action=delete",
-        {
-            'id': id,
-        })
-        .fail(function (e) {
-            console.log("fail", e)
-        })
-        .done(function (e) {
-            let data = JSON.parse(e)
-            if (data.status == "success") {
-                parent.remove();
-            }
-        })
-})
-
-$(".deleteUser").click(function (e) {
-    e.stopPropagation()
-    let parent = $(this).parent().parent();
-    let id = parent.attr("data-id")
-    $.post("/ajax.php?entity=user&action=delete",
         {
             'id': id,
         })

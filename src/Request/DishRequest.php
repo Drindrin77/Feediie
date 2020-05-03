@@ -35,7 +35,7 @@ class DishRequest extends RequestService{
         $ext = htmlspecialchars($_POST['ext']);
         $fileName = PhotoService::createFilename(PATH_DISH_PHOTO,$ext);
 
-        if(DishModel::addDish($name, $fileName)){
+        if(DishModel::addDish($name, substr($fileName,1))){
             $this->addMessageSuccess("Ajout reussi");
             $id = DishModel::getIDByName($name);
             PhotoService::base64ToFile($base64, $fileName);
@@ -47,8 +47,11 @@ class DishRequest extends RequestService{
     }
 
     private function deleteDish(){
-        $idDish = htmlspecialchars($_POST['idDish']);
+
+        $idDish = htmlspecialchars($_POST['id']);
+        $url = DishModel::getUrlbyId($idDish);
         if(DishModel::deleteDish($idDish)){
+            PhotoService::deletePhoto($url);
             $this->addMessageSuccess("Suppression reussi");
         }else{
             $this->addMessageError("Erreur BD");

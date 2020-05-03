@@ -23,7 +23,7 @@ class PhotoService{
     }
 
     public static function deletePhoto($url){
-        unlink('./'.$url);
+        unlink('.'.$url);
     }
 
     public static function getFilenameWithoutExt($fileName){
