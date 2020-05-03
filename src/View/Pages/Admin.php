@@ -116,7 +116,7 @@
                                                 echo 'Promouvoir';
                                             }
                                             echo'</button>
-                                            <button data-content="User" class="btn btn-danger deleteUser">Supprimer</button></td>
+                                            <button data-content="User" class="btn btn-danger deleteUser">Bannir</button></td>
                                             </tr>';
                                         }
                                     ?>
