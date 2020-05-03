@@ -1,7 +1,3 @@
-.triggerDropdown{
-    cursor:pointer;
-}
-
 .titleTab{
     margin-bottom: 30px;
 }
@@ -13,10 +9,9 @@
 }
 
 .tableBackground{
-    background-color: rgb(241, 237, 237);
-    border-radius:10px;
     padding-top:10px;
-    margin-top:10px;
+    margin-top:42px;
+    border-right: 2px solid  rgb(241, 237, 237)
 }
 
 /*PHOTO*/
@@ -33,10 +28,75 @@
 }
   
 
+/*
 
 
+CARD ADD PHOTO 
 
 
+*/
+
+.titleCardAdd{
+    padding:1px !important;
+    font-size: 16px;
+}
+
+
+.containerPopOver{
+    position:relative;
+    float:right;
+}
+
+[data-hidden='true']{
+    display: none;
+}
+
+.contentPopOver{
+    position:absolute;
+    z-index:100;
+    left:-219px;
+    top: 40px;
+    background-color:white;
+    padding:10px;
+    border:2px solid rgb(170, 170, 170);
+    border-radius: 5px;
+}
+
+.GroupbuttonsAdd, .cardPhotoAdd{
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.buttonsAdd{
+    margin-top:30px;
+    margin-left:5px;
+}
+
+[data-containImg='false']{
+    background-color: lightgrey;
+}
+
+.relationTr td{
+    vertical-align: middle !important;
+}
+
+.containerImgRelation{
+    width:80px;
+    height:80px;
+}
+/*
+
+NORMAL POPOVER ADD ONLY TEXT
+
+*/
+
+.containerDropdownElement{
+    float:right;
+}
+
+.contentDropdownElement{
+    padding:10px;
+}
 
 .errorMsg{
     color:red;
@@ -69,13 +129,6 @@
 .inlineBlock{
     display: inline-block;
 }
-.containerDropdownElement{
-    float:right;
-}
-.contentDropdownElement{
-    float:left;
-}
-
 .invisible{
     display: none;
 }
@@ -90,13 +143,6 @@
 
 #searchIcon{
     margin-left:2px;
-}
-
-.stayOpenDropDownItem{
-    padding-right:10px;
-    padding-left:10px;
-    padding-top:5px;
-    padding-bottom:5px;
 }
 
 .noCursor{
@@ -121,12 +167,6 @@
 .textAreaAdd{
     width:100%;
     height:100%;
-}
-.titleCardDropdown{
-    text-align: center;
-    height:60px;
-    font-size:13px;
-    padding:0px !important;
 }
 
 .cardImage{

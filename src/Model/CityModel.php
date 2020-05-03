@@ -19,6 +19,12 @@ class CityModel extends DBConnection{
         return $req->fetch();
     }
 
+    public static function getID($name, $zipcode){
+        $req = self::$pdo->prepare("select idcity from city where name = ? and zipcode = ?");
+        $req->execute(array($name,$zipcode));
+        return $req->fetch(PDO::FETCH_COLUMN);
+    }
+
     public static function deleteCity($idCity){
         $req = self::$pdo->prepare("update feediieuser set idCity = NULL where idCity = ?");
         $req->execute(array($idCity)); 

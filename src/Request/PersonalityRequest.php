@@ -34,7 +34,7 @@ class PersonalityRequest extends RequestService{
         $ext = htmlspecialchars($_POST['ext']);
         $fileName = PhotoService::createFilename(PATH_PERSONALITY_PHOTO,$ext);
 
-        if(PersonalityModel::addPersonality($name, $fileName)){
+        if(PersonalityModel::addPersonality($name,  substr($fileName,1))){
             $this->addMessageSuccess("Ajout reussi");
             $id = PersonalityModel::getIDByName($name);
             PhotoService::base64ToFile($base64, $fileName);
@@ -46,7 +46,7 @@ class PersonalityRequest extends RequestService{
     }
 
     private function deletePersonality(){
-        $idDish = htmlspecialchars($_POST['idDish']);
+        $idDish = htmlspecialchars($_POST['id']);
         $url = PersonalityModel::getUrlbyId($idDish);
         if(PersonalityModel::deletePersonality($idDish)){
             PhotoService::deletePhoto($url);

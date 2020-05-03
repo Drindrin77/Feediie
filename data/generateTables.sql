@@ -10,7 +10,7 @@
 CREATE TABLE RelationType(
 	idRelationType   SERIAL NOT NULL ,
 	iconURL			VARCHAR (128),
-	name          VARCHAR (128) NOT NULL  ,
+	name          VARCHAR (128) NOT NULL UNIQUE ,
 	description   VARCHAR (128)  ,
 	CONSTRAINT RelationType_PK PRIMARY KEY (idRelationType)
 )WITHOUT OIDS;

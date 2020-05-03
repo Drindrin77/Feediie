@@ -25,9 +25,11 @@ class CityRequest extends RequestService{
         $zipcode = htmlspecialchars($_POST['zipcode']);
 
         if(CityModel::addCity($name, $zipcode)){
+            $id = CityModel::getID($name, $zipcode);
             $this->addMessageSuccess("Ajout reussi");
+            $this->addData('id',$id);
         }else{
-            $this->addMessageError("Erreur BD");
+            $this->addMessageError("Existe deja");
         }
     }
 

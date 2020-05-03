@@ -61,7 +61,7 @@ class DietRequest extends RequestService{
     }
 
     private function deleteDiet(){
-        $idDiet = htmlspecialchars($_POST['idDiet']);
+        $idDiet = htmlspecialchars($_POST['id']);
         if(DietModel::deleteDiet($idDiet)){
             $this->addMessageSuccess("Supression reussi");
         }else{

@@ -1,8 +1,9 @@
 .background {
     background: #E86B51;
     user-select: none;
-    min-height: 100%;
-    height:auto;
+    height:100%;
+    overflow-y: hidden;
+    position: fixed;
 }
 
 #card {
@@ -137,11 +138,15 @@
     justify-content: space-evenly;
 }
 .circle{
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     background-color: lightgray;
     border-radius: 50%;
-    margin: 5px 10px;
+    margin: 5px 5px;
+}
+.circle img{
+    height: 60px;
+    width: 60px;
 }
 .iconcard img {
     margin-left:20px;
@@ -283,8 +288,11 @@
         border-radius: 25px;
         width: 365px;
         height: 594px;
-        background: #ffc107;
+        background: lightgray;
         top: 40px;
+    }
+    .name {
+        font-size:32px;
     }
     .avatar {
         width: 365px;
@@ -297,6 +305,47 @@
     .buttons {
         width: 60px;
         height: 60px;
+    }
+    .relationPanel {
+        margin-top: 40px;
+        height: 600px;
+        transform: translate(-50px,0);
+    }
+    .description {
+        padding-top: 15px;
+        line-height: 20px;
+        height: 23%;
+        width: 100%;
+        font-size:20px;
+        transform: translate(0,-55px);
+    }
+    .meat{
+        transform: translate(0,85px);
+    }
+    .circle{
+        height: 70px;
+        width: 70px;
+        margin: 8px 10px;
+    }
+    .circle img{
+        height: 70px;
+        width: 70px;
+    }
+    .moreinfoUser {
+        width: 500px;
+        height: 594px;
+        left:80px;
+        top: 40px;
+    }
+    #closeProfileBtn {
+        transform: translate(530px,5px);
+    }
+    .moveOpenProfil {
+        transform: translate(200px,0);
+    }
+    #parameters {
+        margin-top: 40px;
+        width: 400px;
     }
 }
 

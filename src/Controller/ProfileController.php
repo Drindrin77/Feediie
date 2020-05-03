@@ -29,27 +29,22 @@ class ProfileController extends Controller{
     }
 
     private function viewProfile($uniqID){
-        $userInfo = UserModel::getUserByUniqID($uniqID);
-        
-        if(empty($userInfo)){
+        $user = UserModel::getUserByUniqID($uniqID);
+        if(empty($user)){
             return new ViewModel('UnknownUser');
         }else{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
-            $idUser = $userInfo['iduser'];
-            $photos = PhotoModel::getAllPhotos($idUser);
-            $personalities = PersonalityModel::getUserPersonalities($idUser);
-            $hobbies = HobbyModel::getUserHobbies($idUser);
-            $favoriteDish = DishModel::getUserFavoritesDishes($idUser);
-            $diets = DietModel::getUserDiet($idUser);
+            $idUser = $user['iduser'];
+            
+            $user['photos']=PhotoModel::getAllPhotos($idUser);
+            $user['personalities']=PersonalityModel::getUserPersonalities($idUser);
+            $user['hobbies']= HobbyModel::getUserHobbies($idUser);
+            $user['favoriteDish'] = DishModel::getUserFavoritesDishes($idUser);
+            $user['diets'] = DietModel::getUserDiet($idUser);
             
             $data = [
                 'isCurrentUser'=> $isCurrentUser,
-                'user'=>$userInfo,
-                'photos'=>$photos,
-                'personalities'=>$personalities,
-                'hobbies'=>$hobbies,
-                'favoriteDish'=>$favoriteDish,
-                'diets'=>$diets
+                'user'=>$user,
             ];
             return new ViewModel('ProfileView',$data);
         }
