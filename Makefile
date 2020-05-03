@@ -32,7 +32,7 @@ db.connect:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER'
 
 db.reset:
-	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -f data/resetDB.sql'; rm -rf public/Images/UserUpload/*
+	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -f data/resetDB.sql'; find "public/Images/UserUpload/" -maxdepth 1 -mindepth 1 -not -name "default.png" -exec rm -rf {} \;
 
 db.install:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/db.sql'
