@@ -39,6 +39,7 @@ class SwipeController extends Controller{
         //FILTER (WITHOUT DISTANCE FILTER)
         $users = UserModel::filterUsersSwipe($idUser);
         //$users = UserModel::getAllUsers($idUser);
+        
         for($i=0; $i<count($users);$i++){
             $idUser = $users[$i]['iduser'];
             $users[$i]['photos'] = PhotoModel::getAllPhotos($idUser);

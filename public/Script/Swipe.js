@@ -3,6 +3,29 @@ $(document).ready(function () {
 
     let statusBtnParameter = 'opened';
 
+    function replaceFilteredUser(user) {
+
+        //INSERT AFTER BUDDY END
+        let content = '<div class="buddy" style="display: block"><div class="avatar">'
+
+        let photos = ''
+
+        let card = '<div class="name">' + user.firstname + ' ' + user.age + ' ans<div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt="" /></div><div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt="" /></div></div><div class="description"> ' + user.description + ' ...</div><div class="meat">'
+        //FAVORITE DISH ? 
+
+        //INSERT AFTER MOREINFOUSER
+        //USER DETAILS
+
+    }
+
+
+
+
+
+
+
+
+
     $("#closeBtn").click(function () {
         if (statusBtnParameter === 'opened') {
             $(".animationParameters").css('transform', 'translate(-420px,0)');
@@ -14,7 +37,7 @@ $(document).ready(function () {
         }
     });
     //AFFICHER LES DIFFERENTES RELATIONS
-    $('[data-toggle="popover"]').popover({ trigger: 'hover'});
+    $('[data-toggle="popover"]').popover({ trigger: 'hover' });
 
     $("#showMoreSex").click(function () {
         if (document.getElementById("boxSelectModifiedSex").style.height === "auto") {
@@ -53,8 +76,8 @@ $(document).ready(function () {
             $("#showMoreSex").hide();
             $("#boxSelectModifiedCat").hide();
             $("#showMoreCat").hide();
-            $("#boxSelectAge").css({ height: '0', opacity: '0',margin:0 });
-            $("#boxSelectDistance").css({ height: '0', opacity: '0',margin:0 });
+            $("#boxSelectAge").css({ height: '0', opacity: '0', margin: 0 });
+            $("#boxSelectDistance").css({ height: '0', opacity: '0', margin: 0 });
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
@@ -67,7 +90,7 @@ $(document).ready(function () {
         $("#boxSelectModifiedDiet").hide();
         $("#showMoreDiet").hide();
     }
-    $('#togglediet').change(function() {
+    $('#togglediet').change(function () {
         if ($(this).is(':checked')) {
             $("#boxSelectModifiedDiet").show();
             $("#showMoreDiet").show();
@@ -84,16 +107,17 @@ $(document).ready(function () {
                 $("#showMoreCat").show();
                 $("#boxSelectAge").css({ height: 'auto', opacity: '100' });
                 $("#boxSelectDistance").css({ height: 'auto', opacity: '100' });
-                $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');}
+                $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
+            }
         }
     });
 
     //ON RECUPERE LA RELATION SELECTIONNEE
     $('.relationCase').click(function () {
-        $(this).css('background','dodgerblue');
+        $(this).css('background', 'dodgerblue');
         let relationSelect = $(this).attr('id');
         $('.relationCase').not(this).each(function () {
-            $(this).css('background','lightgrey');
+            $(this).css('background', 'lightgrey');
         });
         $.post("/ajax.php?entity=user&action=relation",
             {
@@ -184,13 +208,12 @@ $(document).ready(function () {
         if ($('#togglediet').is(':checked')) {
             dietactive = true;
         }
-        else
-        {
+        else {
             dietactive = false;
         }
         $.post("/ajax.php?entity=user&action=filter",
             {
-                dietactive : dietactive,
+                dietactive: dietactive,
                 distanceMax: distanceMax,
                 ageRangemin: ageRangemin,
                 ageRangemax: ageRangemax,
@@ -213,42 +236,42 @@ $(document).ready(function () {
     });
     //AFFICHER PROFILE
     $('.seeProfil:last').click(function () {
-        $('.watchProfile').css({opacity: '100%','pointer-events':'all','transform': 'translate(0px,0)'});
-        $('#blockButtons').css({'pointer-events':'none'}).fadeOut('slow');
-        $('.moveOpenProfil').css({'transform': 'translate(0px,0)'});
+        $('.watchProfile').css({ opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)' });
+        $('#blockButtons').css({ 'pointer-events': 'none' }).fadeOut('slow');
+        $('.moveOpenProfil').css({ 'transform': 'translate(0px,0)' });
     });
     $('#closeProfileBtn').click(function () {
-        $('.watchProfile').css({opacity: '0%','pointer-events':'none','transform':' translate(-160px,0)'});
-        $('#blockButtons').css({'pointer-events':'all'}).fadeIn('slow');
-        $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
+        $('.watchProfile').css({ opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)' });
+        $('#blockButtons').css({ 'pointer-events': 'all' }).fadeIn('slow');
+        $('.moveOpenProfil').css({ 'transform': 'translate(150px,0)' });
     });
     // SWIPE
 
     $('#miamBtn').click(function () {
-        $(this).css('pointer-events','none');
-        $("#beurkBtn").css('pointer-events','none');
+        $(this).css('pointer-events', 'none');
+        $("#beurkBtn").css('pointer-events', 'none');
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status miam">Miam!</div>');
             actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events','all');
-                $("#beurkBtn").css('pointer-events','all');
+                $(this).css('pointer-events', 'all');
+                $("#beurkBtn").css('pointer-events', 'all');
             }, 1000);
         }
     });
     $('#beurkBtn').click(function () {
-        $(this).css('pointer-events','none');
-        $("#miamBtn").css('pointer-events','none');
+        $(this).css('pointer-events', 'none');
+        $("#miamBtn").css('pointer-events', 'none');
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
             actualUser.append('<div class="status beurk">Beurk!</div>');
             actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
                 $('.buddy:last').remove();
-                $(this).css('pointer-events','all');
-                $("#miamBtn").css('pointer-events','all');
+                $(this).css('pointer-events', 'all');
+                $("#miamBtn").css('pointer-events', 'all');
 
             }, 1000);
         }
