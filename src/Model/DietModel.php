@@ -27,9 +27,9 @@ class DietModel extends DBConnection{
         $req = self::$pdo->prepare("delete from interesteddiet where idUser = ?");
         return $req->execute(array($idUser));
     }
-    public static function updateUserSelectedDiet($idUser,$dietSelect){
-        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet) values (?,(select idDiet from diet where name = ?))");
-        return $req->execute(array($idUser,$dietSelect));
+    public static function updateUserSelectedDiet($idUser,$dietSelect,$dietstatus){
+        $req = self::$pdo->prepare("insert into interesteddiet (idUser,idDiet,status) values (?,?,?)");
+        return $req->execute(array($idUser,$dietSelect,$dietstatus));
     }
 
     public static function deleteDiet($idDiet){

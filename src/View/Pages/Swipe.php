@@ -85,20 +85,29 @@ include_once('../src/View/Pages/UserPhoto.php');
                             </div>
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" name="diet"
-                                               id="<?= $diet['name'] ?>"
+                                <div class="dietblock">
+                                        <input type="range" class="custom-range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
+                                               id="<?= $diet['iddiet'] ?>" value="
                                             <?php if (!empty($userSelectedDiet)) {
                                                 foreach ($userSelectedDiet as $userdiet) {
                                                     if ($userdiet['iddiet'] == $diet['iddiet']) {
-                                                        echo 'checked';
+                                                        if ($userdiet['status']=== false)
+                                                        {
+                                                            echo '0';
+                                                        }
+                                                        else
+                                                        {
+                                                            echo '2';
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '1';
                                                     }
                                                 }
-                                            } ?>
-                                        >
-                                        <label class="custom-control-label"
-                                               for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
-                                    </div>
+                                            } ?>">
+                                    <label for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
+                                </div>
                                 <? endforeach; ?>
                             </div>
                             <div id="showMoreDiet" class="showMoreBtn"><i class='fas'>&#xf103;</i>
@@ -136,10 +145,10 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
                 <div class="row">
                     <div id="card">
-                        <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png" alt=""/></div>
+                        <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png"
+                                                                                alt=""/></div>
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
-
                                 <div class="buddy" style="display: block">
                                     <div class="avatar">
                                         <?php
@@ -155,20 +164,20 @@ include_once('../src/View/Pages/UserPhoto.php');
                                     </div>
                                     <div class="description"><?= $user['description'] ?> ...</div>
                                     <div class="meat">
-                                        <?php for ($i = 0; $i < 4; $i++) {
-                                        $favorite = $user['favoritedish'];
-                                        if (!empty($favorite)) {
-                                        foreach ($dishs as $dish) {
-                                                if ($favorite[$i]['iddish'] == $dish['iddish']) {
-                                                    ?>
-                                                    <div id="<?= $dish['iddish'] ?>" class="circle"
-                                                         data-toggle="popover"
-                                                         title="<?= $dish['name'] ?>"
-                                                         data-content=""><img src="<?= $dish['iconurl'] ?>" alt=""/>
-                                                    </div>
-                                                <?php }
-                                            }}}
-                                        ?>
+                                        <?php foreach ($relations as $relation): ?>
+                                            <div id="<?= $relation['idrelationtype'] ?>user" class="circle" style="
+                                            <?php if (!empty($userSelectedRelationType)) {
+                                                foreach ($userSelectedRelationType as $userrelation) {
+                                                    if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
+                                                        echo 'filter: grayscale(0)';
+                                                    } else {
+                                                        echo 'filter: grayscale(1)';
+                                                    }
+                                                }
+                                            } ?>
+                                                    "><img src="<?= $relation['iconurl'] ?>"
+                                                           alt=""/></div>
+                                        <? endforeach; ?>
                                     </div>
                                 </div>
 

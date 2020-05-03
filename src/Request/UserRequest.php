@@ -137,8 +137,10 @@ class UserRequest extends RequestService
         if (DietModel::removeUserSelectedDiet($idUser)) {
             $this->addMessageSuccess('Table selectdiet vide');
         }
+        var_dump($dietSelect);
         foreach ($dietSelect as $diet) {
-            if (DietModel::updateUserSelectedDiet($idUser, $diet)) {
+
+            if (DietModel::updateUserSelectedDiet($idUser, $diet['id'],$diet['value'])) {
                 $this->addMessageSuccess('Les diets on ete mis a jour');
             } else {
                 $this->addMessageError('Erreur BD mise a jour diet selectionne');
