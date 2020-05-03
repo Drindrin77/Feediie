@@ -112,6 +112,7 @@ INSERT INTO LikedUser VALUES (2, 7, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (1, 9, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (7, 5, '2020-04-18 13:54:36', true);
 INSERT INTO LikedUser VALUES (6, 1, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (5, 1, '2020-04-18 13:54:36', true);
 INSERT INTO LikedUser VALUES (2, 5, '2020-04-18 13:54:36', false);
 INSERT INTO LikedUser VALUES (5, 3, '2020-04-18 13:54:36', false);
 INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
@@ -121,7 +122,7 @@ INSERT INTO Contact VALUES (default, 2, 3, 'Salut beau renard', '2020-04-18 17:3
 INSERT INTO Contact VALUES (default, 3, 2, 'Salut dattebayo!', '2020-04-18 17:38:36', false);
 INSERT INTO Contact VALUES (default, 2, 4, 'Salut la planche!', '2020-04-18 17:35:36', true);
 INSERT INTO Contact VALUES (default, 1, 5, 'J adore ça !!', '2020-04-18 17:38:36', true);
-INSERT INTO Contact VALUES (default, 1, 9, 'Aimes-tu le gras ?', '2020-04-18 17:38:36', false);
+INSERT INTO Contact VALUES (default, 1, 9, 'Aimes-tu le gras ?', '2020-04-18 17:38:36', true);
 INSERT INTO Contact VALUES (default, 9, 1, 'T aimes quand la raclette dégoulinne ?', '2020-04-18 17:35:36', true);
 
 
