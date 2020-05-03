@@ -20,9 +20,7 @@ class ChatModel extends DBConnection
                                       to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
                                       CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
                                       matchedUser.uniqId AS uniq_id,
-                                      count(
-                                        CASE WHEN messageContact.isread = FALSE THEN 1 END
-                                      ) as unreadMessages
+                                      count(DISTINCT CASE WHEN messageContact.isRead = FALSE THEN messageContact.idMessage END) as unreadMessages
                                     FROM
                                       feediieuser matchedUser
                                       INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
