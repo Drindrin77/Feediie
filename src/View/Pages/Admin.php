@@ -87,12 +87,12 @@
                                     <tr>
                                     <th scope="col">Nom</th>
                                     <th scope="col">
-                                        <div class="dropdown">
+                                        <div class="dropdown" style="cursor:pointer">
                                             <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Email <i class="fas fa-angle-down"></i>
                                             </div>
-                                            <div class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
-                                                <div class="stayOpenDropDownItem"><input type="text"/> <i id="searchIcon" class="fas fa-search"></i></div>
+                                            <div style="padding-right:15px; padding-left:15px; width:235px" class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
+                                                <div class="stayOpenDropDownItem"><input type="text" id="searchUser"/> <i id="searchIcon" class="fas fa-search"></i></div>
                                             </div>
                                         </div>
                                 
@@ -101,10 +101,10 @@
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="bodyTableUser">
                                     <?php
                                         foreach($users as $user){
-                                            echo '<tr class="contentUserTable" onclick="document.location.href=\'/profile/'.$user['uniqid'].'\'" data-id='.$user['iduser'].'>
+                                            echo '<tr class="contentUserTable" data-hidden="false" data-email='.$user['email'].' onclick="document.location.href=\'/profile/'.$user['uniqid'].'\'" data-id='.$user['iduser'].'>
                                             <td>'.$user['firstname'].'</td>
                                             <td>'.$user['email'].'</td>
                                             <td>'.$user['nbreport'].'</td>

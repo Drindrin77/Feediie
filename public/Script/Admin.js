@@ -3,6 +3,30 @@ $(".photoAddCard").click(function (e) {
     $('.uploadInput[data-content=' + content + ']').click();
 })
 
+$("#searchUser").on('input', function (e) {
+    let name = $(this).val();
+    filterUser(name)
+})
+
+jQuery.expr[':'].regex = function (elem, index, match) {
+    var matchParams = match[3].split(','),
+        validLabels = /^(data|css):/,
+        attr = {
+            method: matchParams[0].match(validLabels) ?
+                matchParams[0].split(':')[0] : 'attr',
+            property: matchParams.shift().replace(validLabels, '')
+        },
+        regexFlags = 'ig',
+        regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
+    return regex.test(jQuery(elem)[attr.method](attr.property));
+}
+
+function filterUser(name) {
+    $('.contentUserTable').attr('data-hidden', 'true')
+    $('.contentUserTable:regex(data-email, .*' + name + '.*)').attr('data-hidden', 'false')
+}
+
+
 function triggerPopOver(target) {
     let hidden = $("#" + target).attr("data-hidden")
     hidden = hidden == 'false' ? 'true' : 'false'
