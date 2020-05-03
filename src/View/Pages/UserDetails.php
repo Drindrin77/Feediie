@@ -11,7 +11,17 @@ class UserDetails{
     $this->user = $user;
   }
   
-  public function render(){?>
+  public function render(){
+      ?>
+
+        <div class="row" style="margin-top: 15px;"> 
+            <div class="col">
+                <div id="containerDescription" style="word-wrap:break-word">
+                    <i class="fa fa-quote-left"></i> <?= $this->user['description'] ?> <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
                 <div class="col-md-4">
                     <h5 class="titleSection">Information: </h5>
@@ -47,7 +57,7 @@ class UserDetails{
                         <div id="containerTitleHobby">
                             <h5 class="titleSection">Mes régimes alimentaires: </h5>
                         </div>      
-                        <?php foreach($diets as $diet): ?>
+                        <?php foreach($this->user['diets'] as $diet): ?>
                             <div class="containerDiet">
                                 <?= $diet ?>
                             </div>
@@ -67,9 +77,6 @@ class UserDetails{
                                         <img class="image" src=<?=$personality['iconurl']?> class="card-img-top" alt="...">
                                     </div>      
                                     <div class="card-header titleCard"><?= $personality['name']?></div>
-                                    <!-- <div class="card-body">
-                                        <p class="card-text"><?= $personality['description']?></p>
-                                    </div> -->
                                 </div>
                             <?php endforeach ?>
                         </div>

@@ -87,12 +87,12 @@
                                     <tr>
                                     <th scope="col">Nom</th>
                                     <th scope="col">
-                                        <div class="dropdown">
+                                        <div class="dropdown" style="cursor:pointer">
                                             <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Email <i class="fas fa-angle-down"></i>
                                             </div>
-                                            <div class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
-                                                <div class="stayOpenDropDownItem"><input type="text"/> <i id="searchIcon" class="fas fa-search"></i></div>
+                                            <div style="padding-right:15px; padding-left:15px; width:235px" class="dropdown-menu noCursor" aria-labelledby="navbarDropdown">
+                                                <div class="stayOpenDropDownItem"><input type="text" id="searchUser"/> <i id="searchIcon" class="fas fa-search"></i></div>
                                             </div>
                                         </div>
                                 
@@ -101,10 +101,10 @@
                                     <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="bodyTableUser">
                                     <?php
                                         foreach($users as $user){
-                                            echo '<tr class="contentUserTable" onclick="document.location.href=\'/profile/'.$user['uniqid'].'\'" data-id='.$user['iduser'].'>
+                                            echo '<tr class="contentUserTable" data-hidden="false" data-email='.$user['email'].' onclick="document.location.href=\'/profile/'.$user['uniqid'].'\'" data-id='.$user['iduser'].'>
                                             <td>'.$user['firstname'].'</td>
                                             <td>'.$user['email'].'</td>
                                             <td>'.$user['nbreport'].'</td>
@@ -116,7 +116,7 @@
                                                 echo 'Promouvoir';
                                             }
                                             echo'</button>
-                                            <button data-content="User" class="btn btn-danger deleteUser">Supprimer</button></td>
+                                            <button data-content="User" class="btn btn-danger deleteUser">Bannir</button></td>
                                             </tr>';
                                         }
                                     ?>
@@ -127,43 +127,53 @@
 
 
                     <div class="navContent invisible" id="contentRelation">
+                    <span id="errorAddRelation" class="errorMsg"></span>
                         <div class="card AdminCard">
+
                             <div class="card-header">
                                 Type de relation
-
-                                <div class="containerDropdownElement" class="dropdown">
-                                    <div class="triggerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <button class="btn btn-primary btnAddElement">
+                                <button style="float:right" onclick="triggerPopOver('tdAddRelation')" class="btn btn-primary btnAddElement">
                                             <i class="fas fa-plus"></i>
                                             <span class="addText">Ajouter</span>
-                                        </button>                     
-                                    </div>
-                                    <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
-                                        <div class="stayOpenDropDownItem">
-                                            <span id="errorAddRelation" class="errorMsg"></span><br>
-                                            <input id="textAddRelation" type="text"/>
-                                            <button id="submitAddRelation" class="btn btn-primary">
-                                                Confirmer
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                        </button>  
+                                
                             </div>
                             <div class="card-body bodyAdminCard">
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                            <th scope="col">Image</th>
                                             <th scope="col">Nom</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBodyRelation">
+
+                                            <tr class="relationTr" data-hidden='true' id="tdAddRelation">
+
+                                                <td>
+                                                    <div data-containImg='false' class="containerImgRelation" id="containerImgUploadRelation">
+
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" id="nameAddRelation"></td>
+                                                <td><textarea rows='3' style="width:100%" id="descriptionAddRelation"></textarea></td>
+                                                <td>                                                    
+                                                    <button style="margin-bottom:10px" data-content="Relation" class="btn btn-info photoAddCard">
+                                                    <i class="fas fa-plus"></i> Photo
+                                                    </button>
+                                                    <button id="submitAddRelation" class="btn btn-primary">Confirmer</button></td>
+                                            </tr>
+
+
                                             <?php
                                                 foreach($relationTypes as $relation){
-                                                    echo '<tr data-id='.$relation['idrelationtype'].'>
-                                                    <td>'.$relation['name'].'</td>
+                                                    echo '<tr class="relationTr" data-id='.$relation['idrelationtype'].'>
+                                                    <td><div class="containerImgRelation"><img class="image" src="'.$relation['iconurl'].'"/></div></td>
+                                                    <td><b>'.$relation['name'].'</b></td>
+                                                    <td>'.$relation['description'].'</td>
                                                     <td><button class="btn btn-danger deleteRelation">Supprimer</button></td>
                                                     </tr>';
                                                 }
@@ -237,6 +247,8 @@
                                     </div>
                                     <div class="dropdown-menu noCursor contentDropdownElement" aria-labelledby="navbarDropdown">
                                         <div class="stayOpenDropDownItem">
+                                            <span id="errorAddCity" class="errorMsg"></span><br>
+
                                             Ville:
                                             <input id="textAddCity" type="text" class="marginBottom"/>
                                             <br >
@@ -262,7 +274,7 @@
                                             <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBodyCity">
                                             <?php
                                                 foreach($cities as $city){
                                                     echo '<tr data-id='.$city['idcity'].'>

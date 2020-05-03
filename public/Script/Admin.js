@@ -3,6 +3,30 @@ $(".photoAddCard").click(function (e) {
     $('.uploadInput[data-content=' + content + ']').click();
 })
 
+$("#searchUser").on('input', function (e) {
+    let name = $(this).val();
+    filterUser(name)
+})
+
+jQuery.expr[':'].regex = function (elem, index, match) {
+    var matchParams = match[3].split(','),
+        validLabels = /^(data|css):/,
+        attr = {
+            method: matchParams[0].match(validLabels) ?
+                matchParams[0].split(':')[0] : 'attr',
+            property: matchParams.shift().replace(validLabels, '')
+        },
+        regexFlags = 'ig',
+        regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
+    return regex.test(jQuery(elem)[attr.method](attr.property));
+}
+
+function filterUser(name) {
+    $('.contentUserTable').attr('data-hidden', 'true')
+    $('.contentUserTable:regex(data-email, .*' + name + '.*)').attr('data-hidden', 'false')
+}
+
+
 function triggerPopOver(target) {
     let hidden = $("#" + target).attr("data-hidden")
     hidden = hidden == 'false' ? 'true' : 'false'
@@ -19,6 +43,80 @@ function resetCard(content) {
     $('.uploadInput[data-content=' + content + ']').val('')
     $("#errorAdd" + content).html("");
 }
+
+$("#submitAddRelation").click(function (e) {
+    let uploadInput = $('.uploadInput[data-content="Relation"]');
+    let name = $("#nameAddRelation").val();
+    let description = $("#descriptionAddRelation").val()
+    let container = $("#containerImgUploadRelation")
+
+    if (name.trim() != '' && description != '' && uploadInput.val() != '') {
+        $.post('/ajax.php?entity=relation&action=addRelation',
+            {
+                'name': name,
+                'description': description,
+                'base64Img': container.find("img").attr("src"),
+                'ext': container.data("extension")
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == "success") {
+                    let id = data.data.id
+                    let url = data.data.url
+
+                    $("#containerImgUploadRelation").empty();
+                    $("#nameAddRelation").val('');
+                    $("#descriptionAddRelation").val('');
+                    $('.uploadInput[data-content="Relation"]').val('')
+                    $("#errorAddRelation").html("");
+                    $("#tdAddRelation").after('<tr class="relationTr" data-id=' + id + '><td><div class="containerImgRelation"><img class="image" src="' + url + '" /></div></td ><td><b>' + name + '</b></td><td>' + description + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr > ')
+
+                    $("#messageSuccess").html("Ajout de relation réussi")
+                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                } else {
+                    $("#errorAddRelation").html(data.error[0]);
+                }
+            })
+    } else {
+        $("#errorAddRelation").html("Le nom, la description et le fichier ne doivent pas être vide");
+    }
+
+
+})
+
+$("#submitAddCity").click(function (e) {
+    let name = $("#textAddCity").val()
+    let zipcode = $("#textAddZipCode").val()
+
+    if (name.trim() && zipcode.trim()) {
+        $.post("/ajax.php?entity=city&action=addCity",
+            {
+                'name': name,
+                'zipcode': zipcode
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == "success") {
+                    $("#tableBodyCity").prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td>' + zipcode + '</td><td><button class="btn btn-danger deleteCity">Supprimer</button></td></tr > ');
+                    $("#textAddCity").val("")
+                    $("#textAddZipCode").val("")
+                    $("#messageSuccess").html("Ajout de ville réussi")
+                    $("#errorAddCity").html("");
+                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                } else {
+                    $("#errorAddCity").html(data.error[0]);
+                }
+            })
+    } else {
+        $("#errorAddCity").html("Le nom et le code postal ne doivent pas être vide");
+    }
+})
 
 $(".submitAddCard").click(function (e) {
     let content = $(this).data("content")
@@ -76,7 +174,7 @@ $(".uploadInput").change(function (e) {
                 image.className = "image"
 
                 let container = $("#containerImgUpload" + content)
-
+                container.empty()
                 container.append(image)
                 container.data('extension', data.data.extension)
             }
@@ -131,34 +229,39 @@ $(".submitAddTabOneElement").click(function () {
     }
 })
 
+function addRelation(id, url, name, description) {
+    $("#tableBodyRelation").prepend('<tr data-id=' + id + '><td class="containerImgRelation"><img class="image" src="' + url + '" /></td><td><b>' + name + '</b></td><td>' + description + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr >')
+}
 
-$("#submitAddRelation").click(function (e) {
-    let name = $("#textAddRelation").val()
-    if (name.trim()) {
-        $.post("/ajax.php?entity=relation&action=addRelation",
-            {
-                'name': name,
-            })
-            .fail(function (e) {
-                console.log("fail", e)
-            })
-            .done(function (e) {
-                let data = JSON.parse(e)
-                if (data.status == "success") {
-                    $("#tableBodyRelation").prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr>');
-                    $("#textAddRelation").val("")
-                    $("#messageSuccess").html("Ajout de relation réussi")
-                    $("#errorAddRelation").html("");
-                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                } else {
-                    $("#errorAddRelation").html(data.error[0]);
-                }
+// $("#submitAddRelation").click(function (e) {
+//     let name = $("#textAddRelation").val()
+//     let description = $("#descriptionRelation").val()
 
-            })
-    } else {
-        $("#errorAddRelation").html("Le nom ne doit pas être vide");
-    }
-})
+//     if (name.trim()) {
+//         $.post("/ajax.php?entity=relation&action=addRelation",
+//             {
+//                 'name': name,
+//             })
+//             .fail(function (e) {
+//                 console.log("fail", e)
+//             })
+//             .done(function (e) {
+//                 let data = JSON.parse(e)
+//                 if (data.status == "success") {
+//                     $("#tableBodyRelation").prepend('<tr data-id=' + data.data.id + '><td>' + name + '</td><td><button class="btn btn-danger deleteRelation">Supprimer</button></td></tr>');
+//                     $("#textAddRelation").val("")
+//                     $("#messageSuccess").html("Ajout de relation réussi")
+//                     $("#errorAddRelation").html("");
+//                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+//                 } else {
+//                     $("#errorAddRelation").html(data.error[0]);
+//                 }
+
+//             })
+//     } else {
+//         $("#errorAddRelation").html("Le nom ne doit pas être vide");
+//     }
+// })
 
 $(document).on("click", ".deletehobby", function (event) {
     let parent = $(this);

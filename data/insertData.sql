@@ -135,6 +135,12 @@ INSERT INTO Photo VALUES
     (default, '/Images/UserUpload/crjaze98e58a5ab/1.jpeg', true, 4);
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
+INSERT INTO Dish VALUES (default, 'Pates', '/Images/Dish/pates.png');
+INSERT INTO Dish VALUES (default, 'Pavé de boeuf', '/Images/Dish/paveboeuf.png');
+INSERT INTO Dish VALUES (default, 'Tarte', '/Images/Dish/pie.png');
+INSERT INTO Dish VALUES (default, 'Salade', '/Images/Dish/salade.png');
+INSERT INTO Dish VALUES (default, 'Sushis', '/Images/Dish/sushis.png');
+INSERT INTO Dish VALUES (default, 'Tacos Mexicains', '/Images/Dish/tacos.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
 INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
 INSERT INTO Dish VALUES (default, 'Pomme d amour', '/Images/Dish/pommeAmour.jpg');
@@ -224,6 +230,14 @@ INSERT INTO Hobby VALUES(default, 'Roller');
 INSERT INTO Hobby VALUES(default, 'Voyage');
 
 INSERT INTO likeEat VALUES (1,1);
+INSERT INTO likeEat VALUES (1,2);
+INSERT INTO likeEat VALUES (1,3);
+INSERT INTO likeEat VALUES (1,4);
+INSERT INTO likeEat VALUES (2,1);
+INSERT INTO likeEat VALUES (2,2);
+INSERT INTO likeEat VALUES (2,3);
+INSERT INTO likeEat VALUES (2,4);
+
 INSERT INTO looklike VALUES (1,1);
 INSERT INTO looklike VALUES (2,1);
 INSERT INTO looklike VALUES (2,2);
