@@ -134,8 +134,12 @@
     z-index: 70;
 }
 
+.relationCase[data-selected="false"]{
+    opacity: 0.4;
+}
+
 .relationCase[data-selected="true"]{
-    background-color: dodgerblue;
+    background-color: rgba(255, 255, 255, 0.651);
 }
 
 .meat{

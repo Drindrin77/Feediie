@@ -46,6 +46,46 @@ class UserRequest extends RequestService
             case "removeadmin":
                 $this->setAdmin(false);
                 break;
+            case "editfilter":
+                $this->editFilter();
+            break;
+        }
+    }
+
+    private function editFilter(){
+
+        $args = array();
+        $idUser = $this->currentUser['iduser'];
+
+        if(isset($_POST['distance'])){
+            $args['distanceMax']=htmlspecialchars($_POST['distance']);
+        }
+        if(isset($_POST['ageMin'])){
+            $args['filterAgeMin']=htmlspecialchars($_POST['ageMin']);
+        }
+        if(isset($_POST['ageMax'])){
+            $args['filterAgeMax']=htmlspecialchars($_POST['ageMax']);
+        }
+
+        if(!empty($args)){
+            UserModel::editInfo($args,$idUser);
+        }
+
+        if(isset($_POST['changesSex'])){
+            $changesSex = $_POST['changesSex'];
+            foreach($changesSex as $sex){
+                if($sex['status']=='true'){
+                    SexModel::addUserSelectedSex($idUser, $sex['id']);
+                }else{
+                    SexModel::removeUserSelectedSex($idUser, $sex['id']);
+                }
+            }            
+        }
+
+        $valuesDiet = $_POST['valuesDiet'];
+        DietModel::removeUserSelectedDiet($idUser);
+        foreach($valuesDiet as $diet){
+            DietModel::updateUserSelectedDiet($idUser, $diet['id'], $diet['value']);
         }
     }
 

@@ -15,7 +15,6 @@ $distance = $userSelectDistance;
 include_once('../src/View/Pages/UserDetails.php');
 $ageMin = $userSelectAge['agemin'];
 $ageMax = $userSelectAge['agemax'];
-
 include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
@@ -50,7 +49,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                             </div>
                             <div class="titleParameter"><h5>Distance</h5></div>
                             <div id="boxSelectDistance" class="boxSelect">
-                                <label id="distanceLabel" for="distanceMax"><span id="valueDistance">NC</span>
+                                <label id="distanceLabel" for="distanceMax"><span id="valueDistance"><?= $distance ?></span>
                                     km</label>
                                 <input type="range" class="custom-range" min="0" max="200" value="<?= $distance ?>"
                                        id="distanceMax">
@@ -59,53 +58,34 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div id="boxSelectAge" class="boxSelect">
                                 <div id="slider-range"></div>
 
-                                <label id="ageRangeLabel" for="ageRangemin"><span id="valueAgeMin">NC</span> ans - <span
-                                            id="valueAgeMax">NC</span> ans</label>
+                                <label id="ageRangeLabel" for="ageRangemin"><span id="valueAgeMin"><?= $ageMin ?></span> ans - <span
+                                            id="valueAgeMax"><?= $ageMax ?></span> ans</label>
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMin ?>"
                                        id="ageRangemin">
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMax ?>"
                                        id="ageRangemax">
                             </div>
                             <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
-                            <div id="boxToggleDiet" class="boxSelect">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" name="togglediet"
-                                           id="togglediet"
-                                        <?php if ($toggleDiet == 'true') {
-                                            echo 'checked';
-                                        } ?>>
-                                    <label id="lblToggleDiet" class="custom-control-label" for="togglediet">
-                                        <?php if ($toggleDiet == 'true') {
-                                            echo 'Désactiver la recherche';
-                                        } else {
-                                            echo 'Activer la recherche';
-                                        } ?>
-                                    </label>
-                                </div>
-                            </div>
+                        
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
-                                <div class="dietblock">
+                                <div >
                                         <input type="range" class="custom-range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
-                                               id="<?= $diet['iddiet'] ?>" value="
-                                            <?php if (!empty($userSelectedDiet)) {
+                                               id="<?= $diet['iddiet'] ?>" 
+                                            <?php 
+                                                $value = '1';
                                                 foreach ($userSelectedDiet as $userdiet) {
                                                     if ($userdiet['iddiet'] == $diet['iddiet']) {
-                                                        if ($userdiet['status']=== false)
-                                                        {
-                                                            echo '0';
+                                                        if ($userdiet['status']=== false){
+                                                            $value = '0';
                                                         }
-                                                        else
-                                                        {
-                                                            echo '2';
+                                                        else{
+                                                            $value = '2';
                                                         }
-                                                    }
-                                                    else
-                                                    {
-                                                        echo '1';
                                                     }
                                                 }
-                                            } ?>">
+                                                echo 'value='.$value;
+                                            ?>>
                                     <label for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
                                 </div>
                                 <? endforeach; ?>
@@ -127,7 +107,7 @@ include_once('../src/View/Pages/UserPhoto.php');
             <div class="col-sm-2 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
-                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase cursorPointer" 
+                        <div id="<?= $relation['idrelationtype'] ?>" class="relationCase selectRelationCase cursorPointer" 
                         <?php 
                         
                         if (!empty($userSelectedRelationType) && in_array($relation['idrelationtype'], $userSelectedRelationType)) {
@@ -149,7 +129,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                                                                 alt=""/></div>
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
-                                <div class="buddy" style="display: block">
+                                <div id=<?= $user['iduser'] ?> class="buddy" style="display: block">
                                     <div class="avatar">
                                         <?php
                                         $userPhoto = new UserPhoto($user['photos']);
@@ -164,20 +144,25 @@ include_once('../src/View/Pages/UserPhoto.php');
                                     </div>
                                     <div class="description"><?= $user['description'] ?> ...</div>
                                     <div class="meat">
-                                        <?php foreach ($relations as $relation): ?>
-                                            <div id="<?= $relation['idrelationtype'] ?>user" class="circle" style="
-                                            <?php if (!empty($userSelectedRelationType)) {
-                                                foreach ($userSelectedRelationType as $userrelation) {
-                                                    if ($userrelation['idrelationtype'] == $relation['idrelationtype']) {
-                                                        echo 'filter: grayscale(0)';
-                                                    } else {
-                                                        echo 'filter: grayscale(1)';
-                                                    }
-                                                }
-                                            } ?>
-                                                    "><img src="<?= $relation['iconurl'] ?>"
+
+
+                                    <?php foreach ($relations as $relation): 
+                                        
+                                        ?>
+
+                                        <div class="relationCase" 
+                                        <?php 
+                                        
+                                        if (in_array($relation['idrelationtype'], $user['relations'])) {
+                                                echo 'data-selected="true"';
+                                        }else{
+                                                echo 'data-selected="false"';
+                                        }
+                                        ?>
+                                            ><img src="<?= $relation['iconurl'] ?>"
                                                            alt=""/></div>
-                                        <? endforeach; ?>
+                                    <? endforeach; ?>
+
                                     </div>
                                 </div>
 

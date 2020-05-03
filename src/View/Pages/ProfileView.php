@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div id="containerName" class="col">
-                    <span id="name"><?= $user['firstname']?></span>      
+                    <span id="name"><?= $user['firstname']?></span>
                 </div>
             </div>
 

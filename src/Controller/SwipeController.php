@@ -26,9 +26,7 @@ class SwipeController extends Controller{
     {
         $idUser = AuthService::getCurrentUser()['iduser'];
         
-        $toggleDiet = UserModel::getInfoUser($idUser)[0]['filterdiet'];
         $userSelectedDiet = DietModel::getUserSelectedDiet($idUser);
-        var_dump($userSelectedDiet);
         $userSelectedGender = SexModel::getUserSelectedGender($idUser);
         $userSelectedRelationType = ParameterModel::getUserSelectedRelation($idUser);
         $userFilterAgeDistance = ParameterModel::getUserFilterAgeDistance($idUser);
@@ -52,10 +50,10 @@ class SwipeController extends Controller{
             $users[$i]['personalities']=PersonalityModel::getUserPersonalities($idUser);
             $users[$i]['hobbies']= HobbyModel::getUserHobbies($idUser);
             $users[$i]['diets'] = DietModel::getUserDiet($idUser);
+            $users[$i]['relations'] = ParameterModel::getUserSelectedRelation($idUser);
         }      
 
         $data = [
-            'toggleDiet' => $toggleDiet,
             'userSelectedRelationType' =>$userSelectedRelationType,
             'userSelectedDiet' => $userSelectedDiet,
             'userSelectedGender' => $userSelectedGender,

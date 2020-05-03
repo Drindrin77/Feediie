@@ -50,7 +50,6 @@ CREATE TABLE FeediieUser(
 	notificationMailActivated   BOOL  NOT NULL DEFAULT FALSE,
 	filterAgeMin				INT DEFAULT 18,
 	filterAgeMax				INT DEFAULT 60,
-	filterDiet					BOOL DEFAULT FALSE,
 	distanceMax                 INT  NOT NULL DEFAULT 15,
     token                       VARCHAR (128) UNIQUE,
 	isAdmin                     BOOL  NOT NULL DEFAULT FALSE,

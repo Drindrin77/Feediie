@@ -33,7 +33,7 @@ class UserPhoto{
               else{
                 echo '<div class="carousel-item">';
               }
-              echo '<img class="width:100%;height:100%" src="'.$photo['url'].'">';
+              echo '<img style="width:100%;height:100%" src="'.$photo['url'].'">';
             ?>
             </div>
           <?php endforeach ?>

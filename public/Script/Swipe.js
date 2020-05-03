@@ -86,39 +86,9 @@ $(document).ready(function () {
         }
     });
 
-    //ON AFFICHE OU NON DIET S'IL EST ACTIVE
-    if ($('#togglediet').is(':checked')) {
-        $("#boxSelectModifiedDiet").show();
-        $("#showMoreDiet").show();
-    } else {
-        $("#boxSelectModifiedDiet").hide();
-        $("#showMoreDiet").hide();
-    }
-    $('#togglediet').change(function () {
-        if ($(this).is(':checked')) {
-            $("#boxSelectModifiedDiet").show();
-            $("#showMoreDiet").show();
-            $('#lblToggleDiet').html('Désactiver la recherche');
-        } else {
-            $("#boxSelectModifiedDiet").hide();
-            $("#showMoreDiet").hide();
-            $('#lblToggleDiet').html('Activer la recherche');
-            if (document.getElementById("boxSelectModifiedDiet").style.height === "auto") {
-                $("#boxSelectModifiedDiet").css('height', '75px');
-                $("#boxSelectModifiedSex").show();
-                $("#showMoreSex").show();
-                $("#boxSelectModifiedCat").show();
-                $("#showMoreCat").show();
-                $("#boxSelectAge").css({ height: 'auto', opacity: '100' });
-                $("#boxSelectDistance").css({ height: 'auto', opacity: '100' });
-                $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
-            }
-        }
-    });
-
 
     //ON RECUPERE LA RELATION SELECTIONNEE
-    $('.relationCase').click(function () {
+    $('.selectRelationCase').click(function () {
         let selected = $(this).attr("data-selected")
         selected = selected == "true" ? "false" : "true"
         $(this).attr("data-selected", selected)
@@ -146,19 +116,6 @@ $(document).ready(function () {
 
     ///////////////////////RECUPERATION DES DONNEES PARAMETRES////////////////////////
 
-    //ON LOADING PAGE
-    $('#distanceMax').load('input', function () {
-        let value = $(this).val();
-        $("#valueDistance").html(value)
-    });
-    $("#ageRangemin").load('input', function () {
-        let value = $(this).val();
-        $("#valueAgeMin").html(value)
-    });
-    $("#ageRangemax").load('input', function () {
-        let value = $(this).val();
-        $("#valueAgeMax").html(value)
-    });
     //ON MOVE EVENT
     $('#distanceMax').on('input', function () {
         let value = $(this).val();
@@ -187,71 +144,98 @@ $(document).ready(function () {
         let value = $(this).val();
         $("#valueAgeMax").html(value)
     });
-    $("#submitParameter").click(function () {
-        let distanceMax = $("#distanceMax").val();
-        let ageRangemin = $("#ageRangemin").val();
-        let ageRangemax = $("#ageRangemax").val();
 
-        let sexSelect = [];
-        $.each($("input[name='sex']:checked"), function () {
-            sexSelect.push($(this).attr('id'));
-        });
-        //alert("Vous avez selectionne : " + sexSelect.join(", "));
 
-        let dietSelect = [];
-        $.each($("input[name='diet']"), function () {
-            if($(this).attr('value')==='0'||'2'){
-            let id = $(this).attr('id');
-            let value;
-            if($(this).val() === '0')
-            {
-                value = false;
+    let initialSelectedSex = Array()
+
+    $('input[name="sex"]:checked').each(function () {
+        initialSelectedSex.push($(this).attr('id'));
+    });
+
+    let changesSex = Array()
+
+    $('input[name="sex"]').change(function () {
+        let id = this.id
+        let status = this.checked
+
+        //FOUND
+        if (jQuery.inArray(id, initialSelectedSex) !== -1) {
+            if (!status) {
+                changesSex.push({ id: id, status: false })
+            } else {
+                changesSex = $.grep(changesSex, function (e) {
+                    return e.id != id;
+                });
             }
-            else
-            {
-                value = true;
-            }
-            dietSelect[id] = value;
-        }});
-
-        //  alert("Vous avez selectionne : " + dietSelect.join(", "));
-
-        let relationSelect = [];
-        $.each($("input[name='relation']:checked"), function () {
-            relationSelect.push($(this).attr('id'));
-        });
-        //  alert("Vous avez selectionne : " + relationSelect.join(", "));
-
-        let dietactive;
-        if ($('#togglediet').is(':checked')) {
-            dietactive = true;
         }
+        //NOT FOUND
         else {
-            dietactive = false;
+            if (status) {
+                changesSex.push({ id: id, status: true })
+            } else {
+                changesSex = $.grep(changesSex, function (e) {
+                    return e.id != id;
+                });
+            }
         }
-        $.post("/ajax.php?entity=user&action=filter",
-            {
-                dietactive: dietactive,
-                distanceMax: distanceMax,
-                ageRangemin: ageRangemin,
-                ageRangemax: ageRangemax,
-                sexSelect: sexSelect,
-                dietSelect: dietSelect,
-                relationSelect: relationSelect,
-            })
+    })
+
+    let initialDistance = $("#distanceMax").val();
+    let initialAgeMin = $("#ageRangemin").val();
+    let initialAgeMax = $("#ageRangemax").val();
+
+    $("#submitParameter").click(function () {
+
+        let argsJSON = {
+            valuesDiet: []
+        };
+
+        let newDistance = $("#distanceMax").val();
+        let newAgeMin = $("#ageRangemin").val();
+        let newAgeMax = $("#ageRangemax").val();
+
+        if (newDistance != initialDistance) {
+            argsJSON.distance = newDistance
+        }
+        if (newAgeMax != initialAgeMax) {
+            argsJSON.ageMax = newAgeMax
+        }
+        if (newAgeMin != initialAgeMin) {
+            argsJSON.ageMin = newAgeMin
+        }
+
+        $('input[name="diet"]').each(function () {
+            let id = $(this).attr('id')
+            let value = $(this).val()
+            if (value != 1) {
+                value = value == 0 ? false : true
+                argsJSON.valuesDiet.push({ id: id, value: value })
+            }
+        })
+
+        if (changesSex.length != 0) {
+
+            argsJSON.changesSex = []
+            for (var i = 0; i < changesSex.length; i++) {
+                argsJSON.changesSex.push(changesSex[i]);
+            }
+        }
+
+        $.post("/ajax.php?entity=user&action=editFilter", argsJSON)
             .fail(function (e) {
-                console.log("fail", e);
-                $(this).html("Erreur d'enregistrement");
+                console.log("fail", e)
             })
             .done(function (e) {
-                let data = JSON.parse(e);
-                if (data.status === 'success') {
-                    console.log(data);
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                    $("#messageSuccess").html("Modification validée")
+                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                    location.reload();
                 }
-            });
-        $("#messageSuccess").html("Réglages enregistrés !");
-        $('#containerMessageSuccess').show(200).delay(2000).hide(200);
-    });
+
+            })
+    })
+
     //AFFICHER PROFILE
     $('.seeProfil').click(function () {
         $('.watchProfile').css({ opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)' });
@@ -271,6 +255,10 @@ $(document).ready(function () {
         $("#beurkBtn").css('pointer-events', 'none');
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
+
+            //TODO AJAX
+            let idLiked = actualUser.attr("id")
+
             actualUser.append('<div class="status miam">Miam!</div>');
             actualUser.addClass('rotate-left').delay(500);
             setTimeout(function () {
@@ -286,6 +274,11 @@ $(document).ready(function () {
         $("#miamBtn").css('pointer-events', 'none');
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
+
+            //TODO AJAX
+            let idLiked = actualUser.attr("id")
+
+
             actualUser.append('<div class="status beurk">Beurk!</div>');
             actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {
