@@ -31,9 +31,6 @@ class UserRequest extends RequestService
             case "passwordforgotten":
                 $this->passwordForgotten();
                 break;
-            case "filter":
-                $this->filter();
-                break;
             case "deleteuser":
                 $this->deleteUser();
                 break;
@@ -49,6 +46,45 @@ class UserRequest extends RequestService
             case "editfilter":
                 $this->editFilter();
             break;
+            case "like":
+                $this->likeUser();
+            break;
+            case "dislike":
+                $this->dislikeUser();
+            break;
+            case "report":
+                $this->reportUser();
+            break;
+        }
+    }
+
+    private function likeUser(){
+        $idLikedUser = htmlspecialchars($_POST['idLikedUser']);
+        $idCurrentUser = $this->currentUser['iduser'];
+        if (UserModel::likeUser($idCurrentUser, $idLikedUser)) {
+            $this->addMessageSuccess("Like réussie");
+        } else {
+            $this->addMessageError("Erreur BD");
+        }
+
+    }
+
+    private function dislikeUser(){
+        $idDislikedUser = htmlspecialchars($_POST['idDislikedUser']);
+        $idCurrentUser = $this->currentUser['iduser'];
+        if (UserModel::dislikeUser($idCurrentUser, $idDislikedUser)) {
+            $this->addMessageSuccess("Dislike réussie");
+        } else {
+            $this->addMessageError("Erreur BD");
+        }
+    }
+
+    private function reportUser(){
+        $idReportedUser = htmlspecialchars($_POST['idReportedUser']);
+        if (UserModel::reportUser($idReportedUser)) {
+            $this->addMessageSuccess("Report réussie");
+        } else {
+            $this->addMessageError("Erreur BD");
         }
     }
 
@@ -82,10 +118,10 @@ class UserRequest extends RequestService
             }            
         }
 
-        if(isset($_POST['valuesDiet'])){
-            
+        DietModel::removeUserSelectedDiet($idUser);
+
+        if(isset($_POST['valuesDiet'])){            
             $valuesDiet = $_POST['valuesDiet'];
-            DietModel::removeUserSelectedDiet($idUser);
             foreach($valuesDiet as $diet){
                 DietModel::updateUserSelectedDiet($idUser, $diet['id'], $diet['value']);
             }
@@ -137,67 +173,6 @@ class UserRequest extends RequestService
             ParameterModel::removeUserSelectedRelation($idUser, $idRelation); 
             $this->addMessageSuccess('Les relations ont ete mises a jour');
         } 
-    }
-
-    private function filter()
-    {
-        //ON RECUPERE LES INFORMATIONS PROVENANT DES PARAMETRES
-        $distance = $_POST['distanceMax'];
-        $ageMin = $_POST['ageRangemin'];
-        $sexSelect = $_POST['sexSelect'];
-        $dietSelect = $_POST['dietSelect'];
-        $ageMax = $_POST['ageRangemax'];
-        $dietactive = $_POST['dietactive'];
-
-        $idUser = $this->currentUser['iduser'];
-
-
-        if (ParameterModel::updateDistance($idUser, $distance)) {
-            $this->addMessageSuccess('La distance a ete mise a jour');
-        } else {
-            $this->addMessageError('Erreur BD mise a jour distance');
-        }
-        if (ParameterModel::updateDietActive($idUser, $dietactive)) {
-            $this->addMessageSuccess('La distance a ete mise a jour');
-        } else {
-            $this->addMessageError('Erreur BD mise a jour distance');
-        }
-        if (ParameterModel::updateAge($idUser, $ageMin, $ageMax)) {
-            $this->addMessageSuccess('L age a ete mis a jour');
-        } else {
-            $this->addMessageError('Erreur BD mise a jour age');
-        }
-        if (SexModel::removeUserSelectedSex($idUser)) {
-            $this->addMessageSuccess('Table selectsex vide');
-        }
-        foreach ($sexSelect as $sex) {
-            if (SexModel::updateUserSelectedSex($idUser, $sex)) {
-                $this->addMessageSuccess('Les sexs on ete mis a jour');
-            } else {
-                $this->addMessageError('Erreur BD mise a jour sex selectionne');
-            }
-        }
-        if (DietModel::removeUserSelectedDiet($idUser)) {
-            $this->addMessageSuccess('Table selectdiet vide');
-        }
-        var_dump($dietSelect);
-        foreach ($dietSelect as $diet) {
-
-            if (DietModel::updateUserSelectedDiet($idUser, $diet['id'],$diet['value'])) {
-                $this->addMessageSuccess('Les diets on ete mis a jour');
-            } else {
-                $this->addMessageError('Erreur BD mise a jour diet selectionne');
-            }
-        }
-        //ON RECUPÈRE LES DONNEES DE CURRENT USER
-        $infoUser = UserModel::getInfoUser($idUser);
-        foreach ($sexSelect as $sex) {
-            $idUserSelect = SexModel::getUserByGender($sex, $infoUser['sex']);
-
-        }
-        //$newUsersFiltered = UserModel::getUsersFiltered($idUser,)
-        //TODO DOUBLE FILTRAGE
-
     }
 
     //XSS HACK : HTMLSPECIALCHARS ?

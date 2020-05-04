@@ -123,7 +123,6 @@ CREATE TABLE interestedsex(
 CREATE TABLE dislike(
 	idUser           INT  NOT NULL ,
 	idUser_dislike   INT  NOT NULL ,
-	dateMatch        TIMESTAMP  NOT NULL  ,
 	CONSTRAINT dislike_PK PRIMARY KEY (idUser,idUser_dislike)
 
 	,CONSTRAINT dislike_User_FK FOREIGN KEY (idUser) REFERENCES FeediieUser(idUser)  ON DELETE CASCADE

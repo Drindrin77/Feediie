@@ -26,30 +26,30 @@ $(document).ready(function () {
         }
     })
 
-    if(!$("#chatBox").length){
+    if (!$("#chatBox").length) {
         setInterval(fetchUnreadMessagesCount, 1000);
     }
 })
 
-function fetchUnreadMessagesCount() {
-    $.ajax({
-        url: "/ajax.php?entity=chat&action=getunreadmessagescount",
-        type: "POST",
-        dataType: 'json',
-        timeout: 500
-    }).done(function (response) {
-        console.log(response.data.unreadmessages);
-        updateNotification(response.data.unreadmessages);
-    }).fail(function (e) {
-        console.log("fail", e);
-    });
-}
+// function fetchUnreadMessagesCount() {
+//     $.ajax({
+//         url: "/ajax.php?entity=chat&action=getunreadmessagescount",
+//         type: "POST",
+//         dataType: 'json',
+//         timeout: 500
+//     }).done(function (response) {
+//         console.log(response.data.unreadmessages);
+//         updateNotification(response.data.unreadmessages);
+//     }).fail(function (e) {
+//         console.log("fail", e);
+//     });
+// }
 
-function updateNotification(count){
-    if(count != $("#nbNotif").text()){
+function updateNotification(count) {
+    if (count != $("#nbNotif").text()) {
         $("#nbNotif").text(count);
-        if((count === 0 && $("#containerNotif").hasClass("visible"))
-            ||(count !== 0 && $("#containerNotif").hasClass("invisible"))){
+        if ((count === 0 && $("#containerNotif").hasClass("visible"))
+            || (count !== 0 && $("#containerNotif").hasClass("invisible"))) {
             $("#containerNotif").toggleClass("invisible");
             $("#containerNotif").toggleClass("visible");
         }

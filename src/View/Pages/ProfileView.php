@@ -19,7 +19,7 @@
                 </button>
             <?php } ?>
 
-            <div class="modal" id="modalphoto" tabindex="-1" role="dialog">
+            <!-- <div class="modal" id="modalphoto" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row">
                 <div class="col-md-auto">

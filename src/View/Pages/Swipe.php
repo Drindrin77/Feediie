@@ -137,9 +137,11 @@ include_once('../src/View/Pages/UserPhoto.php');
                                     </div>
                                     <div class="name"><?= $user['firstname'] . ' ' . $user['age']?> 
                                         ans
-                                        <div data-targetID=<?= $user['iduser']?> class="iconcard cursorPointer seeProfil"><img src="/Images/Icon/eye.png" alt=""/>
+                                        <div class="iconcard cursorPointer seeProfil">
+                                            <img src="/Images/Icon/eye.png" alt=""/>
                                         </div>
-                                        <div class="iconcard cursorPointer reportUser"><img src="/Images/Icon/alert.png" alt=""/>
+                                        <div class="iconcard cursorPointer reportUser">
+                                            <img src="/Images/Icon/alert.png" alt=""/>
                                         </div>
                                     </div>
                                     <div class="description"><?= $user['description'] ?> ...</div>

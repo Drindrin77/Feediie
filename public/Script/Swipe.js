@@ -1,34 +1,32 @@
 $(document).ready(function () {
-    console.log("ready");
 
     let statusBtnParameter = 'opened';
 
-    function replaceFilteredUser(user) {
-
-        //INSERT AFTER BUDDY END
-        let content = '<div class="buddy" style="display: block"><div class="avatar">'
-
-        let photos = ''
-
-        let card = '<div class="name">' + user.firstname + ' ' + user.age + ' ans<div class="iconcard seeProfil"><img src="/Images/Icon/eye.png" alt="" /></div><div id="report" class="iconcard"><img src="/Images/Icon/alert.png" alt="" /></div></div><div class="description"> ' + user.description + ' ...</div><div class="meat">'
-        //FAVORITE DISH ? 
-
-        //INSERT AFTER MOREINFOUSER
-        //USER DETAILS
-
-    }
-
-
-
-    $(document).on('click', '.seeProfil', function () {
-        let id = $(this).data("targetid")
-        console.log($(".moreinfoUser").find(".containerUserDetails[data-userID=" + id + "]"))
+    $(".seeProfil").click(function () {
+        let id = $(this).parent().parent().attr("id")
         $(".moreinfoUser").find("div[data-userID=" + id + "]").attr("data-hidden", "false")
     })
 
+    $(".reportUser").click(function () {
+        let idReportedUser = $(this).parent().parent().attr("id")
 
+        $.post("/ajax.php?entity=user&action=report",
+            {
+                idReportedUser: idReportedUser
+            })
+            .fail(function (e) {
+                console.log("fail", e)
+            })
+            .done(function (e) {
+                let data = JSON.parse(e)
+                if (data.status == 'success') {
+                    $("#messageSuccess").html("Cet utilisateur a bien été signalé")
+                    $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                }
 
+            })
 
+    })
 
     $("#closeBtn").click(function () {
         if (statusBtnParameter === 'opened') {
@@ -256,9 +254,24 @@ $(document).ready(function () {
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
 
-            //TODO AJAX
-            //CHECK MATCH 
-            let idLiked = actualUser.attr("id")
+            let idLikedUser = actualUser.attr("id")
+            console.log(idLikedUser)
+
+            $.post("/ajax.php?entity=user&action=like",
+                {
+                    idLikedUser: idLikedUser
+                })
+                .fail(function (e) {
+                    console.log("fail", e)
+                })
+                .done(function (e) {
+                    let data = JSON.parse(e)
+                    if (data.status == 'success') {
+                        $("#messageSuccess").html("Modification validée")
+                        $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                    }
+
+                })
 
             actualUser.append('<div class="status miam">Miam!</div>');
             actualUser.addClass('rotate-left').delay(500);
@@ -276,10 +289,23 @@ $(document).ready(function () {
         let actualUser = $('.buddy:last');
         if (!actualUser.is(':first-child')) {
 
-            //TODO AJAX
-            let idDislike = actualUser.attr("id")
+            let idDislikedUser = actualUser.attr("id")
 
+            $.post("/ajax.php?entity=user&action=dislike",
+                {
+                    idDislikedUser: idDislikedUser
+                })
+                .fail(function (e) {
+                    console.log("fail", e)
+                })
+                .done(function (e) {
+                    let data = JSON.parse(e)
+                    if (data.status == 'success') {
+                        $("#messageSuccess").html("Modification validée")
+                        $('#containerMessageSuccess').show(200).delay(2000).hide(200)
+                    }
 
+                })
             actualUser.append('<div class="status beurk">Beurk!</div>');
             actualUser.addClass('rotate-right').delay(500);
             setTimeout(function () {

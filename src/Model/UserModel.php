@@ -63,12 +63,35 @@ class UserModel extends DBConnection{
                                             u2.idUser not in (SELECT iduser_dislike from dislike WHERE iduser=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
                                             u1.idUser = ?");
-        //TODO FILTER DIET
-        /*
-                                            
-        */
-     $req->execute(array($idUser));
+        $req->execute(array($idUser));
         return $req->fetchAll();
+    }
+
+    public static function likeUser($idCurrentUser, $idLikedUser){
+        $req = self::$pdo->prepare("select count(iduser) from likeduser where iduser = ? and iduser_liked = ?");
+        $req->execute(array($idLikedUser, $idCurrentUser));
+        $res = $req->fetch(PDO::FETCH_COLUMN);
+
+
+        if($res==0){
+            var_dump("pas de match");
+            $req = self::$pdo->prepare("insert into likeduser values (?,?,null,false)");
+            return $req->execute(array($idCurrentUser, $idLikedUser));
+        }
+        //MATCH
+        else{
+            $req = self::$pdo->prepare("update likeduser set matched = true, dateMatch = now() where iduser_liked = ? and iduser = ?");
+            return $req->execute(array($idCurrentUser, $idLikedUser));
+        }
+
+    }
+    public static function dislikeUser($idCurrentUser, $idDislikedUser){
+        $req = self::$pdo->prepare("insert into dislike values (?,?)");
+        return $req->execute(array($idCurrentUser, $idDislikedUser));
+    }
+    public static function reportUser($idReportedUser){
+        $req = self::$pdo->prepare("update feediieuser set nbReport = nbReport + 1 where idUser = ?");
+        return $req->execute(array($idReportedUser));
     }
 
     public static function getAllUsers($idUser){
