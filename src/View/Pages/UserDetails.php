@@ -41,7 +41,7 @@ class UserDetails{
                 </div>
 
                 <?php if(!empty($this->user['hobbies'] )) {?>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div id="containerTitleHobby">
                         <h5 class="titleSection">Mes hobby: </h5>
                     </div>      

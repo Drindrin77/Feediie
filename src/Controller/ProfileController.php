@@ -31,7 +31,7 @@ class ProfileController extends Controller{
     private function viewProfile($uniqID){
         $user = UserModel::getUserByUniqID($uniqID);
         if(empty($user)){
-            return new ViewModel('UnknownUser');
+            return new ViewModel('Error404');
         }else{
             $isCurrentUser = AuthService::getCurrentUser()['uniqid'] == $uniqID;
             $idUser = $user['iduser'];

@@ -8,7 +8,7 @@ class CityModel extends DBConnection{
     }
   
     public static function getAllCity(){
-        $req = self::$pdo->prepare("select * from city");
+        $req = self::$pdo->prepare("select * from city order by name");
         $req->execute();    
         return $req->fetchAll();
     }

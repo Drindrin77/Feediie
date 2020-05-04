@@ -262,8 +262,11 @@ $(document).ready(function () {
         openPopOverPersonality = !openPopOverPersonality;
         if (openPopOverPersonality) {
             $("#containerUnusedPersonality").removeClass("invisible")
+            $(this).html(" <i class='fas fa-minus'></i> Fermer")
         } else {
             $("#containerUnusedPersonality").addClass("invisible")
+            $(this).html("<i class='fas fa-plus'></i> Ajouter une personnalité")
+
         }
     })
 
@@ -272,8 +275,10 @@ $(document).ready(function () {
         openPopOverHobby = !openPopOverHobby;
         if (openPopOverHobby) {
             $("#containerUnpracticedHobby").removeClass("invisible")
+            $(this).html(" <i class='fas fa-minus'></i> Fermer")
         } else {
             $("#containerUnpracticedHobby").addClass("invisible")
+            $(this).html("<i class='fas fa-plus'></i> Ajouter un hobby")
         }
     })
 
@@ -282,8 +287,10 @@ $(document).ready(function () {
         openPopOverDish = !openPopOverDish;
         if (openPopOverDish) {
             $("#containerUnusedDish").removeClass("invisible")
+            $(this).html(" <i class='fas fa-minus'></i> Fermer")
         } else {
             $("#containerUnusedDish").addClass("invisible")
+            $(this).html("<i class='fas fa-plus'></i> Ajouter un plat")
         }
     })
 
