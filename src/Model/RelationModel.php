@@ -5,7 +5,7 @@ class RelationModel extends DBConnection{
     }
 
     public static function getAllRelationType(){
-        $req = self::$pdo->prepare("select * from RelationType");
+        $req = self::$pdo->prepare("select * from RelationType order by name");
         $req->execute();
         return $req->fetchAll();
     }

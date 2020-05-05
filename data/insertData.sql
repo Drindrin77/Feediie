@@ -17,7 +17,7 @@ INSERT INTO diet VALUES(default, 'Casher');
 INSERT INTO RelationType VALUES(default,'/Images/Relation/hotdog.png','Plan HOT régulier','Tu cherches un plan HOT régulier car tu aimes croquer la vie à pleine dent !');
 INSERT INTO RelationType VALUES(default,'/Images/Relation/hotchocolate.png','Rencontre Amicale','Tu souhaites rencontrer de nouveaux amis pour des moments conviviaux !');
 INSERT INTO RelationType VALUES(default,'/Images/Relation/croquemonsieur.png','Relation sérieuse','Tu souhaite trouver la bonne personne qui comblera tes appétits !');
-INSERT INTO RelationType VALUES(default,'/Images/Relation/guacamole.png', 'Juste pour ce soir','Tu veux rencontrer quelqu un pour une nuit caliente !');
+INSERT INTO RelationType VALUES(default,'/Images/Relation/guacamole.png', 'Juste pour ce soir','Tu veux rencontrer quelqu''un pour une nuit caliente !');
 
 
 INSERT INTO city VALUES(default, 'Evry', '91000');
@@ -136,7 +136,6 @@ INSERT INTO Dish VALUES (default, 'Tacos Mexicains', '/Images/Dish/tacos.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
 INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
 INSERT INTO Dish VALUES (default, 'Pomme d amour', '/Images/Dish/pommeAmour.jpg');
-INSERT INTO Dish VALUES (default, 'Salade', '/Images/Dish/salad.png');
 INSERT INTO Dish VALUES (default, 'Burger', '/Images/Dish/burger.png');
 
 INSERT INTO PersonalityDish VALUES (default,  'Sportif', '/Images/Personality/salad.png');

@@ -16,7 +16,11 @@ class ConnectionController extends Controller{
                 if(AuthService::isAuthenticated()){
                     $this->redirectUser();
                 }else{
-                    return new ViewModel("Connection");
+                    $relations = RelationModel::getAllRelationType();
+                    $data = [
+                        'relations'=>$relations
+                    ];
+                    return new ViewModel("Connection",$data);
                 }
             break;
             default:
