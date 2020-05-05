@@ -6,7 +6,7 @@
     $relations = $this->data['relations'];
 ?>
 
-<div  id="background" class="container-fluid">
+<div id="background" class="container-fluid">
     <div class="row justify-content-center" id="rowLogo">
         <div id="containerLogo">
 
