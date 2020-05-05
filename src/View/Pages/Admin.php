@@ -12,7 +12,7 @@
 
 <div id="containerAdmin">
     <div class="container-fluid" style="margin-top: 50px;">
-        <div class="row">
+        <div class="row justify-content-center">
 
             <form action="" method="POST" enctype="multipart/form-data">
                 <input type="file" name="photo" class="uploadInput" data-content="Personality" style="display:none" />
@@ -20,7 +20,7 @@
                 <input type="file" name="photo" class="uploadInput" data-content="Relation" style="display:none" />
             </form>
 
-            <div class="col-lg-5 col-md-10 col-sm-10 tableBackground" style="padding-top:50px">
+            <div id="suggestionContainer" class="col-lg-5 col-md-10 col-sm-10 tableBackground white" style="padding-top:50px">
                 <h3 class="titleTab">Liste des suggestions</h3>               
 
                 <div class="table-responsive tableSize">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-lg-6 white" id="changeContainer">
                 <ul class="nav nav-tabs" style="margin-bottom:50px">
                     <li class="nav-item">
                         <span class="nav-link active activeNav" id="firstTab" targetIDContent='contentUser'>Utilisateurs</span>

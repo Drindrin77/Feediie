@@ -3,8 +3,8 @@
 }
 
 #matchedUserContainer{
-    background-color : #ffc107;
-    overflow-y : scroll;
+    background-color : #E86B51;
+    overflow-y : auto;
 }
 
 #matchedUserContainer img{
@@ -12,21 +12,28 @@
     width: 40px;
 }
 
+#userMessageArea{
+    background-color: white;
+}
+
 .matchedUser{
-    background-color: aqua;
+    background-color: rgb(231, 227, 227);
     margin-top: 5px;
+    border-radius:5px;
     margin-bottom: 5px;
     padding:5px 0px;
 }
 
 .matchedUser:hover{
-    background-color: #647ef0;
+    background-color: rgb(194, 190, 190);
     cursor:pointer;
 }
 
 .selectedMatchedUser{
-    background-color: #E86B51;
+    background-color: rgb(211, 57, 26);
     margin-top: 5px;
+    color:white;
+    border-radius:5px;
     margin-bottom: 5px;
     padding:5px 0px;
 }
@@ -38,7 +45,7 @@
 #chatSelectedContact{
     color : inherit;
     height: 70px;
-    background-color: #007bff;
+    background-color: rgb(231, 91, 63);
 }
 
 #chatSelectedContact a{
@@ -56,17 +63,21 @@
 }
 
 #chatBox{
-    background-color: #004085;
+    background-color: rgb(231, 228, 228);
     overflow-y: auto;
 }
 
 .userMessage{
-    background-color: #cce5ff;
+    background-color: #faaa91;
+    padding:5px;
+    border-radius: 5px;
     word-wrap:break-word;
 }
 
 .contactMessage{
-    background-color: gray;
+    background-color: rgb(255, 255, 255);
+    padding:5px;
+    border-radius:5px;
     word-wrap:break-word;
 }
 
@@ -96,6 +107,7 @@
 #inputMessage{
     resize: none;
     min-height: calc(1.5em + .75rem + 2px);
+    border:1px solid rgba(164, 164, 226, 0.404)
 }
 
 #sendMessageButton{

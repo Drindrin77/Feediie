@@ -7,6 +7,12 @@
     background: linear-gradient(to right, rgb(139, 2, 2), rgba(209, 1, 18, 0.89),rgba(195, 7, 7, 0.972));
 }
 
+#pageContainer{
+    background: #E86B51;
+    height: calc(100vh - 76px);
+    overflow: auto;
+}
+
 #containerHeaderPhoto,#dropdownProfilContainer{
     display:inline-block;
     vertical-align: bottom;
@@ -45,10 +51,6 @@
 
 #textIdea{
     width:100% !important;
-}
-
-#pageContainer{
-    height: calc(100vh - 76px);
 }
 
 .invisible{

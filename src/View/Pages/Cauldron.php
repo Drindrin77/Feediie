@@ -14,7 +14,7 @@ if (sizeof($usersMatchedArray) === 0) {
     ?>
 
 
-    <div class="container-fluid col-md-10">
+    <div class="container-fluid">
         <div class="row">
             <div id="matchedUserContainer" class="col-md-3 col-9 collapse">
                 <div id="matchedUserList" class="container-fluid">
@@ -116,8 +116,8 @@ if (sizeof($usersMatchedArray) === 0) {
                         </div>
                     </div>
                     <div id="userMessageArea" class="row align-items-center">
-                        <textarea id="inputMessage" class="col-10 col-md-11 form-control" maxlength="500" rows="1"></textarea>
-                        <div class="col-2 col-md-1 text-center">
+                        <textarea id="inputMessage" class="col-10 form-control" maxlength="500" rows="1"></textarea>
+                        <div class="col-2 text-center">
                             <button id="sendMessageButton" class="btn btn-primary" type="button"><i
                                         class="fas fa-paper-plane"></i></button>
                         </div>
