@@ -1,5 +1,5 @@
 .background {
-    background: #E86B51;
+    background: #e6563a;/*#E86B51*/
     user-select: none;
     height:100%;
     overflow-y: hidden;
@@ -35,11 +35,13 @@
     /* border-radius: 30px; */
     color: black;
     width: 300px;
-    height: 480px;
+    border-radius: 25px;
+    height: 475px;
     top: 20px;
     position: absolute;
 }
 .buddy img{
+    border-radius: 25px;
     width: 100%;
     height: 100%;
 }
@@ -83,7 +85,7 @@
     font-size:24px;
     color: white;
     border-radius: 0px 0px 15px 15px;
-    background: #AD270D;
+    background: #cd1608;
     padding-left: 10px;
     transform: translate(0,-42px);
     z-index: 100;
@@ -134,12 +136,23 @@
     z-index: 70;
 }
 
-.relationCase[data-selected="false"]{
-    opacity: 0.4;
+.relationCase[data-selected="false"] {
+    filter: grayscale(1);
+    transition: 1s;
 }
 
 .relationCase[data-selected="true"]{
-    background-color: rgba(255, 255, 255, 0.651);
+    filter: grayscale(0);
+    transition: 1s;
+}
+.meatCase[data-selected="false"] {
+    filter: grayscale(1);
+    transition: 1s;
+}
+
+.meatCase[data-selected="true"]{
+    filter: grayscale(0);
+    transition: 1s;
 }
 
 .meat{
@@ -150,19 +163,21 @@
     height: 14%;
     font-size:22px;
     color: white;
+    border-radius: 0px 0px 25px 25px;
     background: #cd1608;
     transform: translate(0,65px);
     justify-content: space-evenly;
 }
-.circle{
-    height: 60px;
-    width: 60px;
+.meatCase {
     border-radius: 50%;
-    margin: 5px 5px;
-}
-.circle img{
-    height: 60px;
     width: 60px;
+    height: 60px;
+    margin: 5px;
+}
+.meatCase img {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 .iconcard img {
     margin-left:20px;
@@ -194,7 +209,6 @@
     align-content: center;
     width: 100%;
     display: flex;
-    margin-top: 10px;
     justify-content: space-evenly;
 }
 .buttons {
@@ -213,9 +227,8 @@
 
 .buttons img {
     width: 70%;
+    margin: 8px;
     height: 70%;
-    margin-left: 8px;
-    margin-top: 9px;
 }
 
 .buttons:hover img {
@@ -242,7 +255,7 @@
     margin-top: 20px;
     height: 480px;
     width: 80px;
-    background: #AD270D;
+    background: #cd1608;
     border-radius: 40px;
     justify-content: space-between;
     transform: translate(-100px,0);
@@ -255,8 +268,8 @@
 }
 .relationCase img {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 70px;
+    height: 70px;
 }
 .watchProfile{
     pointer-events: none;
@@ -328,7 +341,7 @@
     .description {
         padding-top: 15px;
         line-height: 20px;
-        height: 23%;
+        height: 22%;
         width: 100%;
         font-size:20px;
         transform: translate(0,-55px);
@@ -409,4 +422,65 @@
 #submitParameter {
     width: 100%;
     margin-bottom: 10px;
+}
+
+/*MODIFICATION DU STYLE BOOTSTRAP*/
+.custom-switch .custom-control-label::after {
+    background-color: gray;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #d29f60;
+    background-color: #f3c385;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color:#adb5bd;
+    background-color: lightgray;
+}
+.custom-control-input:not(:checked) ~ .custom-control-label::before {
+    background-color: lightgray;
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    color: #fff;
+    background-color: #d29f60;
+    border-color: #f3c385;
+}
+
+.custom-range::-moz-range-thumb:active {
+    background-color: #f79b2b;
+}
+.custom-range::-moz-range-thumb{
+    background-color: #999999;
+}
+.custom-range::-moz-range-track {
+    background-color: #f3c385;
+}
+.custom-range-hide::-moz-range-track {
+    background-color: lightgray;
+}
+.custom-range-hide::-moz-range-thumb{
+    background-color: lightgray;
+}
+.custom-range-show::-moz-range-track {
+    background-color: #ff7357;
+}
+.custom-range-show::-moz-range-thumb{
+    background-color: #E86B51;
+}
+
+.custom-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+
+.custom-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+
+.custom-range:focus::-ms-thumb {
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0);
 }

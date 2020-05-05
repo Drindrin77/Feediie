@@ -83,14 +83,51 @@ $(document).ready(function () {
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
-
+    $('input[name="diet"]').each(function () {
+        if($(this).val()==='0')
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+            $(this).addClass('custom-range-hide');
+        }
+        else if($(this).val()==='2')
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+            $(this).addClass('custom-range-show');
+        }
+        else
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+        }
+    });
+    $('input[name="diet"]').click(function () {
+        if($(this).val()==='0')
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+            $(this).addClass('custom-range-hide');
+        }
+        else if($(this).val()==='2')
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+            $(this).addClass('custom-range-show');
+        }
+        else
+        {
+            $(this).removeClass();
+            $(this).addClass('custom-range');
+        }
+    });
 
     //ON RECUPERE LA RELATION SELECTIONNEE
     $('.selectRelationCase').click(function () {
-        let selected = $(this).attr("data-selected")
-        selected = selected == "true" ? "false" : "true"
-        $(this).attr("data-selected", selected)
-        let id = $(this).attr("id")
+        let selected = $(this).attr("data-selected");
+        selected = selected == "true" ? "false" : "true";
+        $(this).attr("data-selected", selected);
+        let id = $(this).attr("id");
 
         $.post("/ajax.php?entity=user&action=updateInterestedRelation",
             {

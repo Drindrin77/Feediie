@@ -70,21 +70,24 @@ include_once('../src/View/Pages/UserPhoto.php');
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
                                 <div >
-                                        <input type="range" class="custom-range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
+                                        <input type="range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
                                                id="<?= $diet['iddiet'] ?>" 
                                             <?php 
                                                 $value = '1';
+                                                $class = '"custom-range';
                                                 foreach ($userSelectedDiet as $userdiet) {
                                                     if ($userdiet['iddiet'] == $diet['iddiet']) {
                                                         if ($userdiet['status']=== false){
                                                             $value = '0';
+                                                            $class .= ' custom-range-hide';
                                                         }
                                                         else{
                                                             $value = '2';
+                                                            $class .= ' custom-range-show';
                                                         }
                                                     }
                                                 }
-                                                echo 'value='.$value;
+                                                echo 'class='.$class.'" value='.$value;
                                             ?>>
                                     <label for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
                                 </div>
@@ -152,7 +155,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                         
                                         ?>
 
-                                        <div class="relationCase" 
+                                        <div class="meatCase"
                                         <?php 
                                         
                                         if (in_array($relation['idrelationtype'], $user['relations'])) {
