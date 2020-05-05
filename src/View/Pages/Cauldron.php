@@ -16,7 +16,7 @@ if (sizeof($usersMatchedArray) === 0) {
 
     <div class="container-fluid col-md-10">
         <div class="row">
-            <div id="matchedUserContainer" class="col-md-3">
+            <div id="matchedUserContainer" class="col-md-3 col-9 collapse">
                 <div id="matchedUserList" class="container-fluid">
                     <?php
                     $isFirst = true;
@@ -54,22 +54,33 @@ if (sizeof($usersMatchedArray) === 0) {
                     ?>
                 </div>
             </div>
-            <div id="selectedChatContainer" class="col-md-9">
+
+            <div id="selectedChatContainer" class="col-12 col-md-9">
                 <div class="container-fluid">
-                    <a id="chatSelectedContact" class=" row align-items-center"
-                       href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>"
-                       data-uniqId="<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
-                        <div class="col-2">
-                            <img id="selectedContactPhoto"
-                                 src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
+                    <div id="chatSelectedContact" class="row align-items-center"
+                         data-uniqId="<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
+                        <a class="col-9 col-md-12" href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
+                            <div class="row align-items-center">
+                                <div class="col-md-2 col-4">
+                                    <img id="selectedContactPhoto"
+                                         src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
+                                </div>
+                                <span id="selectedContactName" class="col-3">
+                                    <?php echo $usersMatchedArray[0]["name"] ?>
+                                </span>
+                                <span id="selectedContactAge"
+                                      class="col-md-2"><?php echo $usersMatchedArray[0]["age"] ?> ans</span>
+                                <span id="selectedContactMatchDate"
+                                      class="col-md-4">Match le <?php echo $usersMatchedArray[0]["date_match"] ?></span>
+                            </div>
+                        </a>
+                        <div id="displayMatchListButton" class="col-3 col-md-0">
+                            <button data-toggle="collapse" data-target="#matchedUserContainer" class="btn btn-primary" type="button">
+                                <i class="fa fa-bars"></i>
+                            </button>
                         </div>
-                        <span id="selectedContactName"
-                              class="col-3"><?php echo $usersMatchedArray[0]["name"] ?>
-                        </span> <span id="selectedContactAge"
-                                      class="col-2"><?php echo $usersMatchedArray[0]["age"] ?> ans</span>
-                        <span id="selectedContactMatchDate"
-                              class="col-4">Match le <?php echo $usersMatchedArray[0]["date_match"] ?></span>
-                    </a>
+                    </div>
+
                     <div id="chatBox" class="row">
                         <div id="messageListContainer" class="container-fluid">
                             <?php
@@ -107,7 +118,8 @@ if (sizeof($usersMatchedArray) === 0) {
                     <div id="userMessageArea" class="row align-items-center">
                         <textarea id="inputMessage" class="col-10 form-control" maxlength="500" rows="1"></textarea>
                         <div class="col-2 text-center">
-                            <button id="sendMessageButton" class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i></button>
+                            <button id="sendMessageButton" class="btn btn-primary" type="button"><i
+                                        class="fas fa-paper-plane"></i></button>
                         </div>
                     </div>
                 </div>
