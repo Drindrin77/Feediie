@@ -5,7 +5,7 @@ $(window).load(function () {
     setChatBoxSize();
     scrollDownChatBox();
     matchedUserList = getActualMatchedUserList();
-    setInterval(updateMatchAndMessages, 1000)
+    setTimeout(updateMatchAndMessages, 1000);
 });
 
 $(window).resize(function () {
@@ -69,7 +69,7 @@ function fetchMessages(contactUniqId, offset) {
         url: "/ajax.php?entity=chat&action=fetchMessages",
         type: "POST",
         dataType: 'json',
-        timeout: 500,
+      //  timeout: 500,
         data: {
             "contactUniqId": contactUniqId,
             "offset": offset
@@ -78,7 +78,8 @@ function fetchMessages(contactUniqId, offset) {
         data = data.data;
         fillChatBox(data.messageList, data.userPhoto, contactUniqId);
     }).fail(function (e) {
-        console.log("fail", e);
+        //console.log("fail", e);
+        // fetchMessages(contactUniqId, offset);
     });
 
 }
@@ -87,6 +88,7 @@ function updateMatchAndMessages() {
     fetchUnreadMessages($("#chatSelectedContact").attr("data-uniqid"));
     fetchMatchList();
     fetchUnreadMessagesCount();
+    setTimeout(updateMatchAndMessages, 1000);
 }
 
 function fetchUnreadMessages(contactUniqId) {
@@ -94,7 +96,7 @@ function fetchUnreadMessages(contactUniqId) {
         url: "/ajax.php?entity=chat&action=fetchUnreadMessages",
         type: "POST",
         dataType: 'json',
-        timeout: 500,
+      //  timeout: 500,
         data: {
             "contactUniqId": contactUniqId
         }
@@ -102,7 +104,8 @@ function fetchUnreadMessages(contactUniqId) {
         let data = response.data;
         fillChatBox(data.messageList, null, contactUniqId);
     }).fail(function (e) {
-        console.log("fail", e);
+        //console.log("fail", e);
+        //fetchUnreadMessages(contactUniqId);
     });
 }
 
@@ -124,11 +127,11 @@ function createMessageDiv(messageText, userPhoto, isCurrentUser) {
     if (isCurrentUser) {
         messageDiv = $([
             "<div class='messageContainer row'>",
-            "   <div class='userMessage col-9 offset-2'>",
+            "   <div class='userMessage col-md-9 offset-md-2 col-6 offset-3'>",
             "       " + messageText,
             "   </div>",
-            "   <div class='col-1'>",
-            "       <img class='chatImage' src='" + userPhoto + "'>",
+            "   <div class='col-md-1 col-3'>",
+            "       <img class='chatImage float-right' src='" + userPhoto + "'>",
             "   </div>",
             "</div>"
         ].join("\n"));
@@ -136,10 +139,10 @@ function createMessageDiv(messageText, userPhoto, isCurrentUser) {
         const contactPhoto = $("#selectedContactPhoto").attr("src");
         messageDiv = $([
             "<div class='messageContainer row'>",
-            "   <div class='col-1'>",
+            "   <div class='col-md-1 col-3'>",
             "       <img class='chatImage' src='" + contactPhoto + "'>",
             "   </div>",
-            "   <div class='contactMessage col-9'>",
+            "   <div class='contactMessage col-md-9 col-6'>",
             "       " + messageText,
             "   </div>",
             "</div>"
@@ -153,13 +156,14 @@ function fetchMatchList() {
     $.ajax({
         url: "/ajax.php?entity=chat&action=fetchMatchList",
         type: "POST",
-        dataType: 'json',
-        timeout: 500
+        dataType: 'json'
+      //  timeout: 500
     }).done(function (response) {
         let data = response.data;
         fillMatchList(data.matchList);
     }).fail(function (e) {
-        console.log("fail", e);
+        //console.log("fail", e);
+        //fetchMatchList();
     });
 }
 
@@ -187,7 +191,7 @@ function fillMatchList(matchList) {
             nodeToInsert = createMatchedUserDiv(matchedUser);
             matchedUserList.add(matchedUser.uniqId);
         }
-        if(actualMatchedUserList[i] !== matchedUser.uniq_id) {
+        if (actualMatchedUserList[i] !== matchedUser.uniq_id) {
 
             if (isFirst) {
                 $("#matchedUserList").prepend(nodeToInsert);
@@ -225,16 +229,20 @@ function createMatchedUserDiv(matchedUser) {
     ].join("\n"));
 }
 
-$("#sendMessageButton").on("click", function () {
+$("#sendMessageButton").on("click", function(){
+    sendMessage();
+});
+
+function sendMessage() {
     const inputMessage = $("#inputMessage").val();
-    if (inputMessage !== "") {
+    if (!isBlank(inputMessage)) {
         const contactUniqId = $("#chatSelectedContact").attr("data-uniqid");
 
         $.ajax({
             url: "/ajax.php?entity=chat&action=sendMessage",
             type: "POST",
             dataType: 'json',
-            timeout: 500,
+           // timeout: 500,
             data: {
                 "contactUniqId": contactUniqId,
                 "inputMessage": inputMessage
@@ -250,14 +258,62 @@ $("#sendMessageButton").on("click", function () {
                 data.messageList.unshift(message);
             }
             fillChatBox(data.messageList, data.userPhoto, contactUniqId);
-            fetchMatchList();
+           // fetchMatchList();
         }).fail(function (e) {
-            console.log("fail", e);
+            //console.log("fail", e);
+            // sendMessage();
         });
         $("#inputMessage").val("");
+        $("#inputMessage").attr("rows", 1);
+        $("#inputMessage").trigger("rowsChange");
     }
-});
+}
+
+function isBlank(message) {
+    return (!message || /^\s*$/.test(message));
+}
 
 function scrollDownChatBox() {
     $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
 }
+
+
+function getCaret(el) {
+    if (el.selectionStart) {
+        return el.selectionStart;
+    } else if (document.selection) {
+        el.focus();
+        var r = document.selection.createRange();
+        if (r == null) {
+            return 0;
+        }
+        var re = el.createTextRange(), rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+        return rc.text.length;
+    }
+    return 0;
+}
+
+
+$('#inputMessage').keyup(function (event) {
+    if (event.keyCode === 13) {
+        let content = this.value;
+        let caret = getCaret(this);
+        if (event.shiftKey) {
+            this.value = content.substring(0, caret - 1) + "\n" + content.substring(caret, content.length);
+            const rowsNumber = parseInt($(this).attr("rows"));
+            if(rowsNumber<4){
+                $(this).attr("rows", rowsNumber + 1);
+                $(this).trigger("rowsChange");
+            }
+            event.stopPropagation();
+        } else {
+            sendMessage();
+        }
+    }
+});
+
+$("#inputMessage").on("rowsChange", function () {
+    setChatBoxSize();
+})

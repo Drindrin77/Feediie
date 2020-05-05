@@ -13,6 +13,21 @@
     margin-top:42px;
     border-right: 2px solid  rgb(241, 237, 237)
 }
+.white{
+    background-color: white;
+}
+
+#suggestionContainer{
+    margin-right:15px;
+    border-radius: 15px;
+    margin-bottom:20px;
+    padding-right:20px;
+    padding-left:20px;
+}
+#changeContainer{
+    border-radius:15px;
+    padding:15px;
+}
 
 /*PHOTO*/
 

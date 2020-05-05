@@ -1,5 +1,16 @@
+
+
+
+
+
 #navbar{
     background-color: #ac0303; /* #b55341*/
+}
+
+#pageContainer{
+    background: #E86B51;
+    height: calc(100vh - 76px);
+    overflow: auto;
 }
 
 #containerHeaderPhoto,#dropdownProfilContainer{
@@ -40,10 +51,6 @@
 
 #textIdea{
     width:100% !important;
-}
-
-#pageContainer{
-    height: calc(100vh - 66px);
 }
 
 .invisible{

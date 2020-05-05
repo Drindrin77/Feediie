@@ -23,7 +23,7 @@
 }
 
 #background{
-    background-color: rgb(248, 245, 245);
+    background: #E86B51;
     height: 100%;
     overflow: auto;
 }

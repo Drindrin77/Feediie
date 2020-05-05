@@ -97,7 +97,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                             </div>
                         </div>
                     </div>
-                    <button id="submitParameter" type="button" class="btn btn-primary">Valider
+                    <button id="submitParameter" type="button" class="btn btn-primary btn-parameters">Valider
                         les
                         réglages
                     </button>

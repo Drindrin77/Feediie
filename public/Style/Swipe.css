@@ -1,3 +1,8 @@
+
+
+
+
+
 .background {
     background: #e6563a;/*#E86B51*/
     user-select: none;
@@ -209,6 +214,7 @@
     align-content: center;
     width: 100%;
     display: flex;
+    margin-top: 10px;
     justify-content: space-evenly;
 }
 .buttons {
@@ -483,4 +489,41 @@
 
 .custom-range:focus::-ms-thumb {
     box-shadow: 0 0 0 0 #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0);
+}
+.btn-parameters {
+    color: #fff;
+    font-weight: bold;
+    background-color:#f9a53e;
+    border-color: #bb8a4e;
+}
+
+.btn-parameters:hover {
+    color: #fff;
+    background-color: #fb9921;
+    border-color: #bb8a4e;
+}
+
+.btn-parameters:focus, .btn-parameters.focus {
+    color: #fff;
+    background-color: #f9a53e;
+    border-color: #bb8a4e;
+    box-shadow: 0 0 0 0rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-parameters.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-parameters:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #0062cc;
+    border-color: #005cbf;
+}
+
+.btn-parameters:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }

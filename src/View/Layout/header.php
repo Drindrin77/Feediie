@@ -11,7 +11,7 @@
 
 <nav id="navbar" class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="/">
-        <img src="/Images/Icon/logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+        <img src="/Images/Icon/logo_header.png" width="180" height="auto" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="true" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
         <ul class="navbar-nav mr-auto">
             <?php if($isAdmin){ ?>
                 <li class="nav-item">
-                <a class="nav-link" href="/admin">Admin</a>
+                <a class="nav-link" style="color:white" href="/admin">Admin</a>
             </li>
             <?php } ?>  
         </ul>
@@ -31,7 +31,7 @@
 
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary"  style="margin-right: 30px" data-toggle="modal" data-target="#modalIdea">
+            <button type="button" class="btn btn-warning"  style="margin-right: 30px;" data-toggle="modal" data-target="#modalIdea">
             <i class="fas fa-lightbulb"></i> Suggestion
             </button>
 

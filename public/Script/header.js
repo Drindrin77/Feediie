@@ -35,13 +35,13 @@ function fetchUnreadMessagesCount() {
     $.ajax({
         url: "/ajax.php?entity=chat&action=getunreadmessagescount",
         type: "POST",
-        dataType: 'json',
-        timeout: 500
+        dataType: 'json'
     }).done(function (response) {
-        console.log(response.data.unreadmessages);
+        //console.log(response.data.unreadmessages);
         updateNotification(response.data.unreadmessages);
     }).fail(function (e) {
-        console.log("fail", e);
+       // console.log("fail", e);
+       // fetchUnreadMessagesCount();
     });
 }
 
