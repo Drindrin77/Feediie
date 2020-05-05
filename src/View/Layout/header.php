@@ -22,7 +22,7 @@
         <ul class="navbar-nav mr-auto">
             <?php if($isAdmin){ ?>
                 <li class="nav-item">
-                <a class="nav-link" style="color:white" href="/admin">Admin</a>
+                <a class="nav-link" style="color:#E86B51" href="/admin">Admin</a>
             </li>
             <?php } ?>  
         </ul>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <a id="btnChat" class="btn btn-primary" href="/cauldron" style="margin-right: 30px" role="button">
+            <a id="btnChat" class="btn" href="/cauldron" style="margin-right: 30px; background-color:#E86B51; color:white" role="button">
                 <i class="far fa-comments"></i>
                 <div id="containerNotif" class="<?php echo $notifCount === 0 ? 'invisible' : 'visible'?>">
                     <span id="nbNotif"><?php echo $notifCount ?></span>
@@ -74,7 +74,7 @@
             </div>
 
             <div id="dropdownProfilContainer" class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="btnDropdownProfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn dropdown-toggle" style="background-color:#E86B51" type="button" id="btnDropdownProfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo $firstName; ?>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

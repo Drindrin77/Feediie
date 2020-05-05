@@ -133,15 +133,21 @@ INSERT INTO Dish VALUES (default, 'Sushis', '/Images/Dish/sushis.png');
 INSERT INTO Dish VALUES (default, 'Tacos Mexicains', '/Images/Dish/tacos.png');
 INSERT INTO Dish VALUES (default, 'Chocolat', '/Images/Dish/chocolat.jpg');
 INSERT INTO Dish VALUES (default, 'Raclette', '/Images/Dish/raclette.jpg');
-INSERT INTO Dish VALUES (default, 'Pomme d amour', '/Images/Dish/pommeAmour.jpg');
+INSERT INTO Dish VALUES (default, 'Pomme d''amour', '/Images/Dish/pommeAmour.jpg');
 INSERT INTO Dish VALUES (default, 'Burger', '/Images/Dish/burger.png');
+INSERT INTO Dish VALUES (default, 'Pancakes', '/Images/Dish/pancake.png');
 
 INSERT INTO PersonalityDish VALUES (default,  'Sportif', '/Images/Personality/salad.png');
 INSERT INTO PersonalityDish VALUES (default,  'Gourmand', '/Images/Personality/chocolat.jpg');
-INSERT INTO PersonalityDish VALUES (default,  'Pas de prise de tête', '/Images/Personality/burger.png');
-INSERT INTO PersonalityDish VALUES (default,  'Partager avant tout', '/Images/Personality/pizza.png');
-INSERT INTO PersonalityDish VALUES (default,  'Sans ami? Impossible', '/Images/Personality/raclette.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Simple', '/Images/Personality/oeuf.png');
+INSERT INTO PersonalityDish VALUES (default,  'Généreux', '/Images/Personality/pizza.png');
 INSERT INTO PersonalityDish VALUES (default,  'Attentionné', '/Images/Personality/pommeAmour.jpg');
+INSERT INTO PersonalityDish VALUES (default,  'Jaloux', '/Images/Personality/jaloux.png');
+INSERT INTO PersonalityDish VALUES (default,  'Alcoolo', '/Images/Personality/vodka.png');
+INSERT INTO PersonalityDish VALUES (default,  'Coquin', '/Images/Personality/peche.png');
+INSERT INTO PersonalityDish VALUES (default,  'La famille c''est important', '/Images/Personality/dinde.png');
+INSERT INTO PersonalityDish VALUES (default,  'Un peu foufou', '/Images/Personality/folle.png');
+INSERT INTO PersonalityDish VALUES (default,  'Drole', '/Images/Personality/drole.png');
 
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');
