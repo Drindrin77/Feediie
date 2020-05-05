@@ -11,7 +11,7 @@
 
 <nav id="navbar" class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="/">
-        <img src="/Images/Icon/logofull.png" width="180" height="50" class="d-inline-block align-top" alt="">
+        <img src="/Images/Icon/logo_header.png" width="180" height="auto" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="true" aria-label="Toggle navigation">
