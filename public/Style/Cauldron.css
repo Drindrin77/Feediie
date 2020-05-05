@@ -85,4 +85,18 @@
     height: 20px;
 }
 
+#selectedChatContainer{
+    padding: 0px;
+}
+
+#inputMessage{
+    resize: none;
+    min-height: calc(1.5em + .75rem + 2px);
+}
+
+#sendMessageButton{
+    padding: 0.375em;
+    border-radius: 50%;
+}
+
 

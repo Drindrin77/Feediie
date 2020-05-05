@@ -54,7 +54,7 @@ if (sizeof($usersMatchedArray) === 0) {
                     ?>
                 </div>
             </div>
-            <div class=" col-md-9">
+            <div id="selectedChatContainer" class="col-md-9">
                 <div class="container-fluid">
                     <a id="chatSelectedContact" class=" row align-items-center"
                        href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>"
@@ -79,22 +79,22 @@ if (sizeof($usersMatchedArray) === 0) {
                                 if ($message["uniqid"] === $userUniqId) { //si utilisateur courant
                                     ?>
                                     <div class="messageContainer row">
-                                        <div class="userMessage col-9 offset-2">
+                                        <div class="userMessage col-md-9 offset-md-2 col-6 offset-3">
                                             <?php echo htmlspecialchars($message["message"]) ?>
                                         </div>
-                                        <div class="col-1">
-                                            <img class="chatImage" src="<?php echo $userPhoto ?>">
+                                        <div class="col-md-1 col-3 ">
+                                            <img class="chatImage float-right" src="<?php echo $userPhoto ?>">
                                         </div>
                                     </div>
                                     <?php
                                 } else {//si destinataire
                                     ?>
                                     <div class="messageContainer row">
-                                        <div class="col-1">
+                                        <div class="col-md-1 col-3">
                                             <img class="chatImage"
                                                  src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                                         </div>
-                                        <div class="contactMessage col-9">
+                                        <div class="contactMessage col-md-9 col-6">
                                             <?php echo htmlspecialchars($message["message"]) ?>
                                         </div>
                                     </div>
@@ -104,9 +104,11 @@ if (sizeof($usersMatchedArray) === 0) {
                             ?>
                         </div>
                     </div>
-                    <div id="userMessageArea" class="row ">
-                        <input id="inputMessage" class="col-10 form-control" maxlength="500">
-                        <button id="sendMessageButton" class="col-2 btn btn-primary" type="button">Envoyer</button>
+                    <div id="userMessageArea" class="row align-items-center">
+                        <textarea id="inputMessage" class="col-10 form-control" maxlength="500" rows="1"></textarea>
+                        <div class="col-2 text-center">
+                            <button id="sendMessageButton" class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>

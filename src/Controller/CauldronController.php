@@ -35,7 +35,6 @@ class CauldronController extends Controller
 
     public function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
     {
-      //  var_dump((PhotoModel::getPriorityPhoto($currentUser['iduser'])));
         $data = [
             "usersMatched" => $usersMatched,
             "defaultDiscussion" => $defaultDiscussion,
