@@ -30,10 +30,10 @@ class CauldronController extends Controller
         } else {
             $this->redirectUser();
         }
-
+        return null;
     }
 
-    public function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
+    private function pageCauldron($usersMatched, $defaultDiscussion, $currentUser)
     {
         $data = [
             "usersMatched" => $usersMatched,
@@ -43,6 +43,8 @@ class CauldronController extends Controller
         ];
         return new ViewModel("Cauldron", $data);
     }
+
+
 }
 
 ?>

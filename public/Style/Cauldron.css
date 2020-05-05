@@ -31,6 +31,7 @@
 
 .selectedMatchedUser{
     background-color: rgb(211, 57, 26);
+    font-weight: bold;
     margin-top: 5px;
     color:white;
     border-radius:5px;
@@ -49,11 +50,13 @@
 }
 
 #chatSelectedContact a{
-    color : inherit;
+    color : white;
+    font-weight: bold;
 }
 
 #chatSelectedContact a:hover{
-    color : inherit;
+    color : white;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -88,6 +91,11 @@
 .messageContainer img{
     height: 40px;
     width: 40px;
+}
+
+.messageDate{
+    font-size: small;
+
 }
 
 .matchNotification{
