@@ -75,7 +75,8 @@ if (sizeof($usersMatchedArray) === 0) {
                             </div>
                         </a>
                         <div id="displayMatchListButton" class="col-3 col-md-0">
-                            <button data-toggle="collapse" data-target="#matchedUserContainer" class="btn btn-primary" type="button">
+                            <button data-toggle="collapse" data-target="#matchedUserContainer" class="btn btn-primary"
+                                    type="button">
                                 <i class="fa fa-bars"></i>
                             </button>
                         </div>
@@ -91,7 +92,14 @@ if (sizeof($usersMatchedArray) === 0) {
                                     ?>
                                     <div class="messageContainer row">
                                         <div class="userMessage col-md-9 offset-md-2 col-6 offset-3">
-                                            <?php echo htmlspecialchars($message["message"]) ?>
+                                            <div class="container-fluid">
+                                                <div class="row messageContent">
+                                                    <?php echo htmlspecialchars($message["message"]) ?>
+                                                </div>
+                                                <div class="row messageDate">
+                                                    <?php echo $message["datemessage"] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-1 col-3 ">
                                             <img class="chatImage float-right" src="<?php echo $userPhoto ?>">
@@ -106,7 +114,14 @@ if (sizeof($usersMatchedArray) === 0) {
                                                  src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                                         </div>
                                         <div class="contactMessage col-md-9 col-6">
-                                            <?php echo htmlspecialchars($message["message"]) ?>
+                                            <div class="container-fluid">
+                                                <div class="row messageContent">
+                                                    <?php echo htmlspecialchars($message["message"]) ?>
+                                                </div>
+                                                <div class="row messageDate">
+                                                    <?php echo $message["datemessage"] ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <?php
@@ -116,7 +131,8 @@ if (sizeof($usersMatchedArray) === 0) {
                         </div>
                     </div>
                     <div id="userMessageArea" class="row align-items-center">
-                        <textarea id="inputMessage" class="col-10 col-md-11 form-control" maxlength="500" rows="1"></textarea>
+                        <textarea id="inputMessage" class="col-10 col-md-11 form-control" maxlength="500" rows="1"
+                                  placeholder="Entrez votre message ici..."></textarea>
                         <div class="col-2 col-md-1 text-center">
                             <button id="sendMessageButton" class="btn btn-primary" type="button"><i
                                         class="fas fa-paper-plane"></i></button>

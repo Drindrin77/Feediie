@@ -69,7 +69,7 @@ function fetchMessages(contactUniqId, offset) {
         url: "/ajax.php?entity=chat&action=fetchMessages",
         type: "POST",
         dataType: 'json',
-      //  timeout: 500,
+        //  timeout: 500,
         data: {
             "contactUniqId": contactUniqId,
             "offset": offset
@@ -96,7 +96,7 @@ function fetchUnreadMessages(contactUniqId) {
         url: "/ajax.php?entity=chat&action=fetchUnreadMessages",
         type: "POST",
         dataType: 'json',
-      //  timeout: 500,
+        //  timeout: 500,
         data: {
             "contactUniqId": contactUniqId
         }
@@ -113,7 +113,7 @@ function fillChatBox(messageList, userPhoto, contactUniqId) {
     let isScrollDown = $("#chatBox").scrollTop() == ($("#chatBox")[0].scrollHeight - $('#chatBox')[0].clientHeight);
     for (let i = messageList.length - 1; i >= 0; i--) {
         let isCurrentUser = contactUniqId !== messageList[i].uniqid;
-        $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser));
+        $("#messageListContainer").append(createMessageDiv(messageList[i].message, userPhoto, isCurrentUser,messageList[i].datemessage));
     }
     if (isScrollDown) {
         scrollDownChatBox();
@@ -121,14 +121,21 @@ function fillChatBox(messageList, userPhoto, contactUniqId) {
 
 }
 
-function createMessageDiv(messageText, userPhoto, isCurrentUser) {
+function createMessageDiv(messageText, userPhoto, isCurrentUser, messageDate) {
     let messageDiv;
 
     if (isCurrentUser) {
         messageDiv = $([
             "<div class='messageContainer row'>",
             "   <div class='userMessage col-md-9 offset-md-2 col-6 offset-3'>",
-            "       " + messageText,
+            "       <div class='container-fluid'>",
+            "           <div class='row messageContent'>",
+            "               " + messageText,
+            "           </div>",
+            "           <div class='row messageDate'>",
+            "               " + messageDate,
+            "           </div>",
+            "       </div>",
             "   </div>",
             "   <div class='col-md-1 col-3'>",
             "       <img class='chatImage float-right' src='" + userPhoto + "'>",
@@ -143,7 +150,14 @@ function createMessageDiv(messageText, userPhoto, isCurrentUser) {
             "       <img class='chatImage' src='" + contactPhoto + "'>",
             "   </div>",
             "   <div class='contactMessage col-md-9 col-6'>",
-            "       " + messageText,
+            "<div class='container-fluid'>",
+            "           <div class='row messageContent'>",
+            "               " + messageText,
+            "           </div>",
+            "           <div class='row messageDate'>",
+            "               " + messageDate,
+            "           </div>",
+            "       </div>",
             "   </div>",
             "</div>"
         ].join("\n"));
@@ -157,7 +171,7 @@ function fetchMatchList() {
         url: "/ajax.php?entity=chat&action=fetchMatchList",
         type: "POST",
         dataType: 'json'
-      //  timeout: 500
+        //  timeout: 500
     }).done(function (response) {
         let data = response.data;
         fillMatchList(data.matchList);
@@ -229,7 +243,7 @@ function createMatchedUserDiv(matchedUser) {
     ].join("\n"));
 }
 
-$("#sendMessageButton").on("click", function(){
+$("#sendMessageButton").on("click", function () {
     sendMessage();
 });
 
@@ -242,7 +256,7 @@ function sendMessage() {
             url: "/ajax.php?entity=chat&action=sendMessage",
             type: "POST",
             dataType: 'json',
-           // timeout: 500,
+            // timeout: 500,
             data: {
                 "contactUniqId": contactUniqId,
                 "inputMessage": inputMessage
@@ -253,12 +267,12 @@ function sendMessage() {
                 const message = {
                     "message": inputMessage,
                     "uniqId": "-1",// il s'agit d'avoir un uniq id différent de celui du contact pour être considéré comme user
-                    "datemessage": "null" //TODO
+                    "datemessage": data.currentDate
                 };
                 data.messageList.unshift(message);
             }
             fillChatBox(data.messageList, data.userPhoto, contactUniqId);
-           // fetchMatchList();
+            // fetchMatchList();
         }).fail(function (e) {
             //console.log("fail", e);
             // sendMessage();
@@ -303,7 +317,7 @@ $('#inputMessage').keyup(function (event) {
         if (event.shiftKey) {
             this.value = content.substring(0, caret - 1) + "\n" + content.substring(caret, content.length);
             const rowsNumber = parseInt($(this).attr("rows"));
-            if(rowsNumber<4){
+            if (rowsNumber < 4) {
                 $(this).attr("rows", rowsNumber + 1);
                 $(this).trigger("rowsChange");
             }

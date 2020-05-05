@@ -90,6 +90,7 @@ class ChatRequest extends RequestService
             if ($isInserted) {
                 $this->addData("isInserted", true);
                 $this->addData("userPhoto", PhotoModel::getPriorityPhoto($this->currentUser['iduser']));
+                $this->addData("currentDate", date("\L\\e d/m/Y à H:i"));
             }
         }
     }

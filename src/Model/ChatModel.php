@@ -64,7 +64,7 @@ class ChatModel extends DBConnection
         $req = self::$pdo->prepare("SELECT
                                         message,
                                         author.uniqid,
-                                        datemessage
+                                        to_char(datemessage, 'Le DD/MM/YYYY à   HH24:MI') AS datemessage
                                     
                                     FROM
                                         contact
@@ -81,26 +81,6 @@ class ChatModel extends DBConnection
         return $req->fetchAll();
     }
 
-    /*
-        public static function fetchUnreadMessages($userId, $contactId){
-            $req = self::$pdo->prepare("SELECT
-                                            message,
-                                            author.uniqid,
-                                            datemessage
-                                        FROM
-                                            contact
-                                            INNER JOIN feediieUser author ON author.iduser = ?
-                                        WHERE
-                                            idAuthor = ?
-                                            AND idRecipient = ?
-                                            AND isread = FALSE
-                                        ORDER BY idmessage DESC
-                                       ");
-
-            $req->execute(array($contactId, $contactId, $userId));
-            return $req->fetchAll();
-        }
-    */
     public static function addMessage($userId, $contactId, $message)
     {
 
@@ -130,7 +110,9 @@ class ChatModel extends DBConnection
                                         AND isread = FALSE
                                         
                                     RETURNING *)
-                                    SELECT message, datemessage, author.uniqid as uniqid
+                                    SELECT message, 
+                                     to_char(datemessage, 'Le DD/MM/YYYY à HH24:MI') AS datemessage, 
+                                    author.uniqid as uniqid
                                     FROM 
                                     updatedMessages
                                     INNER JOIN feediieuser AS author ON author.iduser = updatedMessages.idAuthor

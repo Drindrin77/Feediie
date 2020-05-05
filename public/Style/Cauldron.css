@@ -93,6 +93,11 @@
     width: 40px;
 }
 
+.messageDate{
+    font-size: small;
+
+}
+
 .matchNotification{
     background-color: red;
     color: white;
