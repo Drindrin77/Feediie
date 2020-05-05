@@ -1,5 +1,5 @@
 #navbar{
-    background-color: orange;
+	background-color:orange;
 }
 
 #containerHeaderPhoto,#dropdownProfilContainer{
@@ -43,7 +43,7 @@
 }
 
 #pageContainer{
-    height: calc(100vh - 66px);
+    height: calc(100vh - 76px);
 }
 
 .invisible{
