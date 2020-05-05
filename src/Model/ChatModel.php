@@ -20,11 +20,15 @@ class ChatModel extends DBConnection
                                       to_char(likedU.dateMatch, 'DD/MM/YYYY') AS date_match,
                                       CASE WHEN photo IS NOT NULL THEN photo.url ELSE 'Images/UserUpload/default.png' END AS photo_url,
                                       matchedUser.uniqId AS uniq_id,
-                                      count(DISTINCT CASE WHEN messageContact.isRead = FALSE THEN messageContact.idMessage END) as unreadMessages
+                                      count(
+                                        DISTINCT CASE WHEN messageContact.isRead = FALSE THEN messageContact.idMessage END
+                                      ) as unreadMessages
                                     FROM
                                       feediieuser matchedUser
                                       INNER JOIN likeduser likedU ON matchedUser.iduser = likedU.iduser_liked
+                                      OR matchedUser.iduser = likedU.iduser
                                       INNER JOIN feediieuser currentUser ON likedU.iduser = currentUser.iduser
+                                      OR likedU.iduser_liked = currentUser.iduser
                                       LEFT OUTER JOIN photo ON photo.idUser = matchedUser.idUser
                                       LEFT OUTER JOIN contact messageContact ON messageContact.idAuthor = matchedUser.idUser
                                       AND messageContact.idrecipient = currentuser.iduser
@@ -33,6 +37,7 @@ class ChatModel extends DBConnection
                                     WHERE
                                       matched = true
                                       AND currentUser.iduser = ?
+                                      AND matchedUser.iduser <> ?
                                       AND (
                                         photo.priority = true
                                         OR photo IS NULL
@@ -50,7 +55,7 @@ class ChatModel extends DBConnection
                                       ) END DESC,
                                       date_match DESC
                                     ");
-        $req->execute(array($userId));
+        $req->execute(array($userId, $userId));
         return $req->fetchAll();
     }
 

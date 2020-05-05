@@ -105,8 +105,6 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token13', default, 8, default, 'Animal');
 
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (3, 2, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (2, 4, '2020-04-18 13:54:36', true);
 INSERT INTO LikedUser VALUES (4, 2, '2020-04-18 13:54:36', true);
 INSERT INTO LikedUser VALUES (2, 7, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (1, 9, '2020-04-18 15:35:36', true);
