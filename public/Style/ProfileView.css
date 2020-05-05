@@ -17,15 +17,9 @@
     max-width:800px;
     margin:auto;
     position:relative;
-    background-color: white;
+    background: #E86B51;
     padding: 20px;
     min-height:100%;
-}
-
-#background{
-    background-color: rgb(248, 245, 245);
-    height: 100%;
-    overflow: auto;
 }
 
 

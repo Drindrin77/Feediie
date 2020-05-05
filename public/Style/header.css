@@ -1,13 +1,15 @@
+
+
+
+
+
 #navbar{
-    background-color: orange;
+    background: linear-gradient(to right, rgb(139, 2, 2), rgba(209, 1, 18, 0.89),rgba(195, 7, 7, 0.972));
 }
 
 #containerHeaderPhoto,#dropdownProfilContainer{
     display:inline-block;
     vertical-align: bottom;
-}
-
-#dropdownProfilContainer{
 }
 
 #headerProfilePhoto{
@@ -46,7 +48,7 @@
 }
 
 #pageContainer{
-    height: calc(100vh - 66px);
+    height: calc(100vh - 76px);
 }
 
 .invisible{
