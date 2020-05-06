@@ -59,7 +59,7 @@ if (sizeof($usersMatchedArray) === 0) {
                 <div class="container-fluid">
                     <div id="chatSelectedContact" class="row align-items-center"
                          data-uniqId="<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
-                        <a class="col-9 col-md-12" href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
+                        <a id="selectedContactLink" class="col-9 col-md-12" href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
                             <div class="row align-items-center">
                                 <div class="col-md-2 col-4">
                                     <img id="selectedContactPhoto"

@@ -49,12 +49,12 @@
     background-color: rgb(231, 91, 63);
 }
 
-#chatSelectedContact a{
+#selectedContactLink{
     color : white;
     font-weight: bold;
 }
 
-#chatSelectedContact a:hover{
+#selectedContactLink:hover{
     color : white;
     font-weight: bold;
     text-decoration: none;
