@@ -290,7 +290,7 @@ $(document).ready(function () {
     $('.seeProfil').click(function () {
         if ($('.watchProfile').css('opacity') === '0') {
             if(windowWidth<800){
-                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all','transform': ' translate(-370px,0)'});
+                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all','transform': ' translate(-400px,0)'});
                 $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
             }
             else {
@@ -300,7 +300,7 @@ $(document).ready(function () {
             }
         } else {
             if(windowWidth<800){
-                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform': ' translate(-370px,0)'});
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform': ' translate(-400px,0)'});
                 $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
                 $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
             }

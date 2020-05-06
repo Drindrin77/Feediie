@@ -389,7 +389,7 @@
 #closeBtn {
     position: absolute;
     /*transform: translate(255px,-20px);*/
-    transform: translate(370px,5px);
+    transform: translate(400px,5px);
     z-index:100;
 }
 .profilopen{
