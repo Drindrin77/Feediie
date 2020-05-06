@@ -19,9 +19,9 @@ include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
     <div class="buttonParameter"><h4>Paramètres</h4><img src="/Images/Icon/parameters.png" alt=""/></div>
-    <div class="animationParameters">
+    <div class="animationParameters"style="z-index: 3000;">
         <div id="closeBtn" class="buttonsClose"><img src="/Images/Icon/croix.png" alt=""/></div>
-        <div id="parameters" class="container">
+        <div id="parameters" class="container" >
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-9" id="containerParameter">
@@ -108,7 +108,7 @@ include_once('../src/View/Pages/UserPhoto.php');
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <div class="col-sm-1 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
                         <div id="<?= $relation['idrelationtype'] ?>" class="relationCase selectRelationCase cursorPointer" 
@@ -126,7 +126,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                     <? endforeach; ?>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
+            <div class="col-sm-2 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
                 <div class="row">
                     <div id="card">
                         <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png"

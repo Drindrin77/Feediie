@@ -1,12 +1,19 @@
 $(document).ready(function () {
 
     let statusBtnParameter = 'closed';
+
     let windowHeight = $(window).height();
-    if (windowHeight > 500) {
+    let windowWidth = $(window).width();
+    $(window).on('resize',function(){
+        windowHeight = $(window).height();
+        windowWidth = $(window).width();
+    });
+
+    if (windowHeight < 500 || windowWidth < 900) {
+        $(".buttonParameter").css('transform', 'translate(-260px,20px)');
+    } else {
         $(".animationParameters").css('transform', 'translate(-120px,0)');
         statusBtnParameter = 'opened';
-    } else {
-        $(".buttonParameter").css('transform', 'translate(-260px,20px)');
     }
 
     $(".seeProfil").click(function () {
@@ -30,14 +37,12 @@ $(document).ready(function () {
                     $("#messageSuccess").html("Cet utilisateur a bien été signalé")
                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
                 }
-
             })
-
 
     });
     $(".buttonParameter").click(function () {
         if (statusBtnParameter === 'closed') {
-            $(".buttonParameter").css('transform', 'translate(-420px,20px)');
+            $(".buttonParameter").css('transform', 'translate(-450px,20px)');
             setTimeout(function () {
 
                 $(".animationParameters").css('transform', 'translate(-120px,0)');
@@ -47,9 +52,9 @@ $(document).ready(function () {
             statusBtnParameter = 'opened';
         }
     });
-    $("#closeProfileBtn").click(function () {
+    $("#closeBtn").click(function () {
         if (statusBtnParameter === 'opened') {
-            $(".animationParameters").css('transform', 'translate(-420px,0)');
+            $(".animationParameters").css('transform', 'translate(-450px,0)');
             setTimeout(function () {
                 $(".buttonParameter").css('transform', 'translate(-260px,20px)');
             }, 400);
@@ -284,21 +289,51 @@ $(document).ready(function () {
     //AFFICHER PROFILE
     $('.seeProfil').click(function () {
         if ($('.watchProfile').css('opacity') === '0') {
+            if(windowWidth<700){
+                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all'});
+                $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
+            }
+            else {
             $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)'});
             $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
-            $('.moveOpenProfil').css({'transform': 'translate(0px,0)'});
+            $('.moveOpenProfil').addClass('profilopen');
+            }
         } else {
-            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
-            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
-            $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
-            $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+            if(windowWidth<700){
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+                $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+            }
+            else {
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
+                $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+                $('.moveOpenProfil').removeClass('profilopen');
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+            }
         }
     });
+    $(window).on('resize',function(){
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $(".animationParameters").css('transform', 'translate(-450px,0)');
+        setTimeout(function () {
+            $(".buttonParameter").css('transform', 'translate(-260px,20px)');
+        }, 400);
+            statusBtnParameter = 'closed';
+    });
     $('#closeProfileBtn').click(function () {
-        $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
-        $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
-        $('.moveOpenProfil').css({'transform': 'translate(150px,0)'});
-        $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        if(windowWidth<700) {
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        }
+        else
+        {
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $('.moveOpenProfil').removeClass('profilopen');
+            $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        }
     });
     // SWIPE
 
