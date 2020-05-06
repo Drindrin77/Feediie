@@ -242,7 +242,6 @@ INSERT INTO looklike VALUES (2,5);
 INSERT INTO looklike VALUES (2,6);
 
 INSERT INTO practice VALUES(1,1);
-/*INSERT INTO interesteddiet VALUES (1,1);*/
 
 INSERT INTO interestedsex VALUES (1,'Homme');
 INSERT INTO interestedsex VALUES (2,'Femme');

@@ -61,7 +61,9 @@ class UserModel extends DBConnection{
                                             ((SELECT COUNT(iddiet) from interesteddiet where interesteddiet.iduser=u2.iduser and status=true)=0 OR EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u2.iduser AND status=true) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u1.iduser))) AND
                                             NOT EXISTS((SELECT iddiet from interesteddiet WHERE interesteddiet.iduser=u2.iduser AND status=false) INTERSECT (SELECT iddiet FROM followdiet where followdiet.iduser=u1.iduser)) AND                                            
                                             u2.idUser not in (SELECT iduser_dislike from dislike WHERE iduser=u1.iduser) AND
+                                            u2.idUser not in (SELECT iduser from dislike WHERE iduser_dislike=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
+                                            u2.idUser not in (SELECT iduser from likedUser WHERE iduser_liked=u1.iduser and matched=true) AND
                                             u1.idUser = ?");
         $req->execute(array($idUser));
         return $req->fetchAll();
