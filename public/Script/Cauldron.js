@@ -46,7 +46,7 @@ $("#matchedUserContainer").on("click", ".matchedUser", function (event) {
     $("#user-" + uniqId).removeClass("matchedUser")
 
     $("#chatSelectedContact").attr("data-uniqid", uniqId);
-    $("#chatSelectedContact").attr("href", "/profile/" + uniqId);
+    $("#selectedContactLink").attr("href", "/profile/" + uniqId);
     $("#selectedContactPhoto").attr("src", photo);
     $("#selectedContactPhoto").attr("alt", photoDesciption);
     $("#selectedContactName").text(name);
