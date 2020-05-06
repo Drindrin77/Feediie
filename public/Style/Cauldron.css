@@ -74,8 +74,9 @@
     background-color: #faaa91;
     padding:5px;
     border-radius: 5px;
-    word-wrap:break-word;
+
 }
+
 
 .contactMessage{
     background-color: rgb(255, 255, 255);
@@ -93,9 +94,12 @@
     width: 40px;
 }
 
+.messageContent{
+    word-wrap: anywhere;
+}
+
 .messageDate{
     font-size: small;
-
 }
 
 .matchNotification{

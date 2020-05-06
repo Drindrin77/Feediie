@@ -50,10 +50,9 @@ class ChatModel extends DBConnection
                                       uniq_id
                                     ORDER BY
                                       CASE WHEN MAX(messageContact.dateMessage) is NULL
-                                      AND MAX(messageUser.dateMessage) is null THEN make_date(1, 1, 1) ELSE (
+                                      AND MAX(messageUser.dateMessage) is null THEN dateMatch ELSE (
                                         CASE WHEN MAX(messageUser.dateMessage) is NULL THEN MAX(messageContact.dateMessage) WHEN MAX(messageContact.dateMessage) is NULL THEN MAX(messageUser.dateMessage) WHEN MAX(messageContact.dateMessage) > MAX(messageUser.dateMessage) THEN MAX(messageContact.dateMessage) ELSE MAX(messageUser.dateMessage) END
-                                      ) END DESC,
-                                      date_match DESC
+                                      ) END DESC
                                     ");
         $req->execute(array($userId, $userId));
         return $req->fetchAll();
