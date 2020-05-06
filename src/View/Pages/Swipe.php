@@ -18,9 +18,10 @@ $ageMax = $userSelectAge['agemax'];
 include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
-    <div class="animationParameters">
-        <div id="closeBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
-        <div id="parameters" class="container">
+    <div class="buttonParameter"><h4>Paramètres</h4><img src="/Images/Icon/parameters.png" alt=""/></div>
+    <div class="animationParameters"style="z-index: 3000;">
+        <div id="closeBtn" class="buttonsClose"><img src="/Images/Icon/croix.png" alt=""/></div>
+        <div id="parameters" class="container" >
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-9" id="containerParameter">
@@ -69,8 +70,8 @@ include_once('../src/View/Pages/UserPhoto.php');
                         
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
-                                <div >
-                                        <input type="range" style="width: 80px;margin-right: 5px" min="0" max="2" name="diet"
+                                <div>
+                                        <input type="range" style="width: 80px;margin-right: 5px;" min="0" max="2" name="diet"
                                                id="<?= $diet['iddiet'] ?>" 
                                             <?php 
                                                 $value = '1';
@@ -89,7 +90,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                                 }
                                                 echo 'class='.$class.'" value='.$value;
                                             ?>>
-                                    <label for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
+                                    <label style="transform: translate(0,-5px)" for="<?= $diet['name'] ?>"><?= $diet['name'] ?></label>
                                 </div>
                                 <? endforeach; ?>
                             </div>
@@ -107,7 +108,7 @@ include_once('../src/View/Pages/UserPhoto.php');
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <div class="col-sm-1 col-md-2 col-lg-2 ">
                 <div class="relationPanel">
                     <?php foreach ($relations as $relation): ?>
                         <div id="<?= $relation['idrelationtype'] ?>" class="relationCase selectRelationCase cursorPointer" 
@@ -125,7 +126,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                     <? endforeach; ?>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
+            <div class="col-sm-2 col-md-4 col-lg-4 moveOpenProfil" style="z-index: 20">
                 <div class="row">
                     <div id="card">
                         <div class="buddy buddyEnd" style="display: block"><img src="/Images/Icon/endofbuddy.png"
@@ -147,7 +148,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                             <img src="/Images/Icon/alert.png" alt=""/>
                                         </div>
                                     </div>
-                                    <div class="description"><?= $user['description'] ?> ...</div>
+                                    <div class="description"><?= $user['description'] ?> </div>
                                     <div class="meat">
 
 
@@ -181,7 +182,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                 </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 watchProfile">
-                <div id="closeProfileBtn" class="buttons"><img src="/Images/Icon/croix.png" alt=""/></div>
+                <div id="closeProfileBtn" class="buttonsClose"><img src="/Images/Icon/croix.png" alt=""/></div>
                 <div class="moreinfoUser">
                     <div class="container-fluid">
                         <?php

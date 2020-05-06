@@ -1,6 +1,20 @@
 $(document).ready(function () {
 
-    let statusBtnParameter = 'opened';
+    let statusBtnParameter = 'closed';
+
+    let windowHeight = $(window).height();
+    let windowWidth = $(window).width();
+    $(window).on('resize',function(){
+        windowHeight = $(window).height();
+        windowWidth = $(window).width();
+    });
+
+    if (windowHeight < 500 || windowWidth < 900) {
+        $(".buttonParameter").css('transform', 'translate(-260px,20px)');
+    } else {
+        $(".animationParameters").css('transform', 'translate(-120px,0)');
+        statusBtnParameter = 'opened';
+    }
 
     $(".seeProfil").click(function () {
         let id = $(this).parent().parent().attr("id")
@@ -23,23 +37,33 @@ $(document).ready(function () {
                     $("#messageSuccess").html("Cet utilisateur a bien été signalé")
                     $('#containerMessageSuccess').show(200).delay(2000).hide(200)
                 }
-
             })
 
-    })
+    });
+    $(".buttonParameter").click(function () {
+        if (statusBtnParameter === 'closed') {
+            $(".buttonParameter").css('transform', 'translate(-450px,20px)');
+            setTimeout(function () {
 
-    $("#closeBtn").click(function () {
-        if (statusBtnParameter === 'opened') {
-            $(".animationParameters").css('transform', 'translate(-420px,0)');
-            statusBtnParameter = 'closed';
+                $(".animationParameters").css('transform', 'translate(-120px,0)');
+            }, 400);
 
-        } else {
-            $(".animationParameters").css('transform', 'translate(-120px,0)');
+
             statusBtnParameter = 'opened';
         }
     });
+    $("#closeBtn").click(function () {
+        if (statusBtnParameter === 'opened') {
+            $(".animationParameters").css('transform', 'translate(-450px,0)');
+            setTimeout(function () {
+                $(".buttonParameter").css('transform', 'translate(-260px,20px)');
+            }, 400);
+
+            statusBtnParameter = 'closed';
+        }
+    });
     //AFFICHER LES DIFFERENTES RELATIONS
-    $('[data-toggle="popover"]').popover({ trigger: 'hover' });
+    $('[data-toggle="popover"]').popover({trigger: 'hover'});
 
     $("#showMoreSex").click(function () {
         if (document.getElementById("boxSelectModifiedSex").style.height === "auto") {
@@ -48,8 +72,8 @@ $(document).ready(function () {
             $("#showMoreDiet").show();
             $("#boxSelectModifiedCat").show();
             $("#showMoreCat").show();
-            $("#boxSelectAge").css({ height: 'auto', opacity: '100' });
-            $("#boxSelectDistance").css({ height: 'auto', opacity: '100' });
+            $("#boxSelectAge").css({height: 'auto', opacity: '100'});
+            $("#boxSelectDistance").css({height: 'auto', opacity: '100'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
         } else {
             $("#boxSelectModifiedSex").css('height', 'auto');
@@ -57,8 +81,8 @@ $(document).ready(function () {
             $("#showMoreDiet").hide();
             $("#boxSelectModifiedCat").hide();
             $("#showMoreCat").hide();
-            $("#boxSelectAge").css({ height: '0', opacity: '0' });
-            $("#boxSelectDistance").css({ height: '0', opacity: '0' });
+            $("#boxSelectAge").css({height: '0', opacity: '0'});
+            $("#boxSelectDistance").css({height: '0', opacity: '0'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
@@ -69,8 +93,8 @@ $(document).ready(function () {
             $("#showMoreSex").show();
             $("#boxSelectModifiedCat").show();
             $("#showMoreCat").show();
-            $("#boxSelectAge").css({ height: 'auto', opacity: '100' });
-            $("#boxSelectDistance").css({ height: 'auto', opacity: '100' });
+            $("#boxSelectAge").css({height: 'auto', opacity: '100'});
+            $("#boxSelectDistance").css({height: 'auto', opacity: '100'});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf103;</i>');
         } else {
             $("#boxSelectModifiedDiet").css('height', 'auto');
@@ -78,23 +102,22 @@ $(document).ready(function () {
             $("#showMoreSex").hide();
             $("#boxSelectModifiedCat").hide();
             $("#showMoreCat").hide();
-            $("#boxSelectAge").css({ height: '0', opacity: '0', margin: 0 });
-            $("#boxSelectDistance").css({ height: '0', opacity: '0', margin: 0 });
+            $("#boxSelectAge").css({height: '0', opacity: '0', margin: 0});
+            $("#boxSelectDistance").css({height: '0', opacity: '0', margin: 0});
             $(this).html('<i style=\'font-size:18px;color:white\' class=\'fas\'>&#xf102;</i>');
         }
     });
+
     $('input[name="diet"]').each(function () {
         if ($(this).val() === '0') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-hide');
-        }
-        else if ($(this).val() === '2') {
+        } else if ($(this).val() === '2') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-show');
-        }
-        else {
+        } else {
             $(this).removeClass();
             $(this).addClass('custom-range');
         }
@@ -104,13 +127,11 @@ $(document).ready(function () {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-hide');
-        }
-        else if ($(this).val() === '2') {
+        } else if ($(this).val() === '2') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-show');
-        }
-        else {
+        } else {
             $(this).removeClass();
             $(this).addClass('custom-range');
         }
@@ -190,7 +211,7 @@ $(document).ready(function () {
         //FOUND
         if (jQuery.inArray(id, initialSelectedSex) !== -1) {
             if (!status) {
-                changesSex.push({ id: id, status: false })
+                changesSex.push({id: id, status: false})
             } else {
                 changesSex = $.grep(changesSex, function (e) {
                     return e.id != id;
@@ -200,7 +221,7 @@ $(document).ready(function () {
         //NOT FOUND
         else {
             if (status) {
-                changesSex.push({ id: id, status: true })
+                changesSex.push({id: id, status: true})
             } else {
                 changesSex = $.grep(changesSex, function (e) {
                     return e.id != id;
@@ -238,7 +259,7 @@ $(document).ready(function () {
             let value = $(this).val()
             if (value != 1) {
                 value = value == 0 ? false : true
-                argsJSON.valuesDiet.push({ id: id, value: value })
+                argsJSON.valuesDiet.push({id: id, value: value})
             }
         })
 
@@ -267,15 +288,52 @@ $(document).ready(function () {
 
     //AFFICHER PROFILE
     $('.seeProfil').click(function () {
-        $('.watchProfile').css({ opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)' });
-        $('#blockButtons').css({ 'pointer-events': 'none' }).fadeOut('slow');
-        $('.moveOpenProfil').css({ 'transform': 'translate(0px,0)' });
+        if ($('.watchProfile').css('opacity') === '0') {
+            if(windowWidth<700){
+                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all'});
+                $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
+            }
+            else {
+            $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)'});
+            $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
+            $('.moveOpenProfil').addClass('profilopen');
+            }
+        } else {
+            if(windowWidth<700){
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+                $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+            }
+            else {
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
+                $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+                $('.moveOpenProfil').removeClass('profilopen');
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+            }
+        }
+    });
+    $(window).on('resize',function(){
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $(".animationParameters").css('transform', 'translate(-450px,0)');
+        setTimeout(function () {
+            $(".buttonParameter").css('transform', 'translate(-260px,20px)');
+        }, 400);
+            statusBtnParameter = 'closed';
     });
     $('#closeProfileBtn').click(function () {
-        $('.watchProfile').css({ opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)' });
-        $('#blockButtons').css({ 'pointer-events': 'all' }).fadeIn('slow');
-        $('.moveOpenProfil').css({ 'transform': 'translate(150px,0)' });
-        $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        if(windowWidth<700) {
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        }
+        else
+        {
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
+            $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $('.moveOpenProfil').removeClass('profilopen');
+            $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+        }
     });
     // SWIPE
 
