@@ -109,7 +109,7 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token14', default, 8, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'lrjadze98e58conteazeazea5ab','Saitama', '1985-04-11','saitama@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Tu veux l''eau de mon bain?',
+    (default, 'lrjadze98e58conteazeazea5ab','Saitama', '1985-04-11','saitama@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je détruis les gens d''un seul poing',
         default, default, default, default, 'token1r', default, 8, default, 'Homme');
 
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);

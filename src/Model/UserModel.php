@@ -64,7 +64,8 @@ class UserModel extends DBConnection{
                                             u2.idUser not in (SELECT iduser from dislike WHERE iduser_dislike=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser_liked from likedUser WHERE iduser=u1.iduser) AND
                                             u2.idUser not in (SELECT iduser from likedUser WHERE iduser_liked=u1.iduser and matched=true) AND
-                                            u1.idUser = ?");
+                                            u1.idUser = ?
+                                            order by u2.firstname");
         $req->execute(array($idUser));
         return $req->fetchAll();
     }

@@ -134,7 +134,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
                                 <div id=<?= $user['iduser'] ?> class="buddy" style="display: block">
-                                    <div class="avatar">
+                                    <div class="avatar" style="background-color:white">
                                         <?php
                                         $userPhoto = new UserPhoto($user['photos']);
                                         $userPhoto->render(); ?>
