@@ -289,8 +289,8 @@ $(document).ready(function () {
     //AFFICHER PROFILE
     $('.seeProfil').click(function () {
         if ($('.watchProfile').css('opacity') === '0') {
-            if(windowWidth<700){
-                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all'});
+            if(windowWidth<800){
+                $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all','transform': ' translate(-370px,0)'});
                 $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
             }
             else {
@@ -299,8 +299,8 @@ $(document).ready(function () {
             $('.moveOpenProfil').addClass('profilopen');
             }
         } else {
-            if(windowWidth<700){
-                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+            if(windowWidth<800){
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform': ' translate(-370px,0)'});
                 $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
                 $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
             }
@@ -329,7 +329,7 @@ $(document).ready(function () {
         }
         else
         {
-            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'}).removeClass('profilsecondopen');
             $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
             $('.moveOpenProfil').removeClass('profilopen');
             $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
