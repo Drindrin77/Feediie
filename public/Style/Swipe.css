@@ -480,33 +480,22 @@
         width: 40px;
         height: 40px;
     }
-
-
 }
 @media ( max-width: 1000px) {
     .relationPanel {
         transform: translate(-360px,0);
     }
     .moveOpenProfil{
-        transform: translate(-200px,0);
+        transform: translate(-50px,0);
         transition: 0.5s;
     }
     #blockButtons {
         transform: translate(-20px,150px);
         min-width: 200px;
     }
-    .moveOpenProfil {
-        transform: translate(0,0);
-    }
     .watchProfile{
-        transform: translate(-370px,0);
+        transform: translate(-400px,0);
         z-index: 2000;
-    }
-}
-@media screen and ( max-width: 800px) {
-    .moveOpenProfil{
-        transform: translate(-120px,0);
-        transition: 0.5s;
     }
 }
 #submitParameter {

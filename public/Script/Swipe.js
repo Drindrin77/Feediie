@@ -289,30 +289,37 @@ $(document).ready(function () {
     //AFFICHER PROFILE
     $('.seeProfil').click(function () {
         if ($('.watchProfile').css('opacity') === '0') {
-            if(windowWidth<800){
+            if(windowWidth<900){
                 $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all','transform': ' translate(-400px,0)'});
                 $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
             }
             else {
             $('.watchProfile').css({opacity: '100%', 'pointer-events': 'all', 'transform': 'translate(0px,0)'});
             $('#blockButtons').css({'pointer-events': 'none'}).fadeOut('slow');
-            $('.moveOpenProfil').addClass('profilopen');
+            $('.moveOpenProfil').css( 'transform','translate(0px,0)');
             }
         } else {
-            if(windowWidth<800){
-                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform': ' translate(-400px,0)'});
+            if(windowWidth<900){
+                $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
                 $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
-                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true");
             }
             else {
                 $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none', 'transform': ' translate(-160px,0)'});
                 $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
                 $('.moveOpenProfil').removeClass('profilopen');
-                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
+                $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true");
             }
         }
     });
     $(window).on('resize',function(){
+        if(windowWidth<900){
+            $('.moveOpenProfil').css('transform','translate(-50px,0)');
+            $('.watchProfile').css('transform','translate(-400px,0)');
+        }
+        else {
+            $('.moveOpenProfil').css('transform','translate(150px,0)');
+        }
             $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
             $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
             $(".animationParameters").css('transform', 'translate(-450px,0)');
@@ -322,16 +329,17 @@ $(document).ready(function () {
             statusBtnParameter = 'closed';
     });
     $('#closeProfileBtn').click(function () {
-        if(windowWidth<700) {
-            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'});
+        if(windowWidth<900) {
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform':'translate(-400px,0)'});
             $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
+            $('.moveOpenProfil').css('transform','translate(-50px,0)');
             $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
         }
         else
         {
-            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none'}).removeClass('profilsecondopen');
+            $('.watchProfile').css({opacity: '0%', 'pointer-events': 'none','transform':'translate(-160px,0)'});
             $('#blockButtons').css({'pointer-events': 'all'}).fadeIn('slow');
-            $('.moveOpenProfil').removeClass('profilopen');
+            $('.moveOpenProfil').css('transform','translate(150px,0)');
             $('.moreinfoUser').find(".containerUserDetails").attr("data-hidden", "true")
         }
     });
