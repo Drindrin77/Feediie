@@ -224,6 +224,29 @@
     border-radius: 50px;
     cursor :pointer;
 }
+.buttonParameter{
+    position: absolute;
+    display: flex;
+    width: 300px;
+    justify-content: flex-end;
+    height: 45px;
+    background: white;
+    border-radius: 10px;
+    transform: translate(-420px,20px);
+    align-items: center;
+    transition: 0.5s;
+
+
+}
+.buttonParameter img{
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+}
+.buttonParameter h4{
+    margin-top: 5px;
+}
 
 .buttons:hover {
     background: white;
@@ -243,8 +266,23 @@
     margin-left: 3px;
     margin-top: 4px;
 }
+.buttonsClose {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50px;
+    cursor :pointer;
+}
+
+.buttonsClose img {
+    width: 70%;
+    height: 70%;
+    margin-left:6px ;
+    margin-top:6px ;
+}
 .animationParameters{
-    transform: translate(-120px,0);
+    transform: translate(-420px,0);
     transition: 0.5s;
 }
 #parameters {
@@ -421,7 +459,7 @@
 #closeBtn {
     position: absolute;
     /*transform: translate(255px,-20px);*/
-    transform: translate(375px,5px);
+    transform: translate(365px,5px);
     z-index:100;
 }
 
@@ -465,15 +503,43 @@
 }
 .custom-range::-moz-range-track {
     background-color: #f3c385;
+    transition: 0.5s;
+}
+.range-under::-moz-range-thumb:active {
+    background-color: #f79b2b;
+}
+.range-under::-moz-range-thumb{
+    background-color: #999999;
+}
+.range-under::-moz-range-track {
+    background-color: #f3c385;
+    transition: 0.5s;
+}
+.range-under {
+    pointer-events: none;
+}
+.range-over::-moz-range-thumb{
+    background-color: #999999;
+    pointer-events: none;
+}
+.range-over {
+    pointer-events: none;
+}
+
+.range-over::-moz-range-track{
+    opacity: 0;
+    pointer-events: none;
 }
 .custom-range-hide::-moz-range-track {
     background-color: lightgray;
+    transition: 0.5s;
 }
 .custom-range-hide::-moz-range-thumb{
     background-color: lightgray;
 }
 .custom-range-show::-moz-range-track {
     background-color: #ff7357;
+    transition: 0.5s;
 }
 .custom-range-show::-moz-range-thumb{
     background-color: #E86B51;
