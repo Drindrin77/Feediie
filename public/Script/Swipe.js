@@ -84,39 +84,33 @@ $(document).ready(function () {
         }
     });
     $('input[name="diet"]').each(function () {
-        if($(this).val()==='0')
-        {
+        if ($(this).val() === '0') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-hide');
         }
-        else if($(this).val()==='2')
-        {
+        else if ($(this).val() === '2') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-show');
         }
-        else
-        {
+        else {
             $(this).removeClass();
             $(this).addClass('custom-range');
         }
     });
     $('input[name="diet"]').click(function () {
-        if($(this).val()==='0')
-        {
+        if ($(this).val() === '0') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-hide');
         }
-        else if($(this).val()==='2')
-        {
+        else if ($(this).val() === '2') {
             $(this).removeClass();
             $(this).addClass('custom-range');
             $(this).addClass('custom-range-show');
         }
-        else
-        {
+        else {
             $(this).removeClass();
             $(this).addClass('custom-range');
         }
@@ -303,10 +297,6 @@ $(document).ready(function () {
                 })
                 .done(function (e) {
                     let data = JSON.parse(e)
-                    if (data.status == 'success') {
-                        $("#messageSuccess").html("Modification validée")
-                        $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                    }
 
                 })
 
@@ -337,10 +327,6 @@ $(document).ready(function () {
                 })
                 .done(function (e) {
                     let data = JSON.parse(e)
-                    if (data.status == 'success') {
-                        $("#messageSuccess").html("Modification validée")
-                        $('#containerMessageSuccess').show(200).delay(2000).hide(200)
-                    }
 
                 })
             actualUser.append('<div class="status beurk">Beurk!</div>');
