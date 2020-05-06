@@ -416,7 +416,7 @@
         top: 40px;
     }
     .name {
-        font-size:32px;
+        font-size:34px;
     }
     .avatar {
         width: 365px;
@@ -479,6 +479,18 @@
     .buttonParameter img{
         width: 40px;
         height: 40px;
+    }
+    .meatCase {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        margin: 5px;
+    }
+    .iconcard img {
+        margin-left:30px;
+        width: 50px;
+        height: auto;
+
     }
 }
 @media ( max-width: 1000px) {
