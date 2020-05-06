@@ -394,6 +394,9 @@
 .profilopen{
     transform: translate(0,0);
 }
+.profilsecondopen{
+    transform: translate(-160px,0);
+}
 
 @media screen and ( max-height: 800px ) {
     #parameters{
@@ -495,15 +498,13 @@
         transform: translate(0,0);
     }
     .watchProfile{
-        transform: translate(-400px,0);
+        transform: translate(-370px,0);
         z-index: 2000;
     }
-
-
 }
-@media screen and ( max-width: 700px) {
+@media screen and ( max-width: 800px) {
     .moveOpenProfil{
-        transform: translate(-130px,0);
+        transform: translate(-120px,0);
         transition: 0.5s;
     }
 }
