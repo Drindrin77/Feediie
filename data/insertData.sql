@@ -148,6 +148,7 @@ INSERT INTO PersonalityDish VALUES (default,  'Coquin', '/Images/Personality/pec
 INSERT INTO PersonalityDish VALUES (default,  'La famille c''est important', '/Images/Personality/dinde.png');
 INSERT INTO PersonalityDish VALUES (default,  'Un peu foufou', '/Images/Personality/folle.png');
 INSERT INTO PersonalityDish VALUES (default,  'Drole', '/Images/Personality/drole.png');
+INSERT INTO PersonalityDish VALUES (default,  'Tout mignon, tout gentil', '/Images/Personality/mignon.png');
 
 INSERT INTO Hobby VALUES(default, 'Animation japonaise');
 INSERT INTO Hobby VALUES(default, 'Jeux-vidéos');
