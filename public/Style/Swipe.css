@@ -301,6 +301,7 @@
     margin-top: 20px;
     height: 480px;
     width: 80px;
+    z-index: 10;
     background: #cd1608;
     border-radius: 40px;
     justify-content: space-between;
@@ -488,7 +489,7 @@
         transition: 0.5s;
     }
     #blockButtons {
-        transform: translate(-70px,0px);
+        transform: translate(-70px,150px);
         min-width: 200px;
     }
     .moveOpenProfil {
