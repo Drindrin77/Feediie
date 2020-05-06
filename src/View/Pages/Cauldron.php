@@ -93,12 +93,12 @@ if (sizeof($usersMatchedArray) === 0) {
                                     <div class="messageContainer row">
                                         <div class="userMessage col-md-9 offset-md-2 col-6 offset-3">
                                             <div class="container-fluid">
-                                                <div class="row messageContent">
+                                                <span class="row messageContent">
                                                     <?php echo htmlspecialchars($message["message"]) ?>
-                                                </div>
-                                                <div class="row messageDate">
+                                                </span>
+                                                <span class="row messageDate">
                                                     <?php echo $message["datemessage"] ?>
-                                                </div>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-md-1 col-3 ">
@@ -115,12 +115,12 @@ if (sizeof($usersMatchedArray) === 0) {
                                         </div>
                                         <div class="contactMessage col-md-9 col-6">
                                             <div class="container-fluid">
-                                                <div class="row messageContent">
+                                                <span class="row messageContent">
                                                     <?php echo htmlspecialchars($message["message"]) ?>
-                                                </div>
-                                                <div class="row messageDate">
+                                                </span>
+                                                <span class="row messageDate">
                                                     <?php echo $message["datemessage"] ?>
-                                                </div>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

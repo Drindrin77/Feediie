@@ -104,6 +104,14 @@ INSERT INTO FeediieUser VALUES
     (default, 'lrjaze98e58conta5ab','Pikachu', '1985-04-11','pikachu@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
         default, default, default, default, 'token13', default, 8, default, 'Animal');
 
+INSERT INTO FeediieUser VALUES
+    (default, 'lrjadze98e58conta5ab','Belle Delphine', '1985-04-11','belle@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Tu veux l''eau de mon bain?',
+        default, default, default, default, 'token14', default, 8, default, 'Femme');
+
+INSERT INTO FeediieUser VALUES
+    (default, 'lrjadze98e58conteazeazea5ab','Saitama', '1985-04-11','saitama@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Tu veux l''eau de mon bain?',
+        default, default, default, default, 'token1r', default, 8, default, 'Homme');
+
 INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
 INSERT INTO LikedUser VALUES (4, 2, '2020-04-18 13:54:36', true);
 INSERT INTO LikedUser VALUES (2, 7, '2020-04-18 15:35:36', true);
@@ -119,7 +127,7 @@ INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
 INSERT INTO Contact VALUES (default, 2, 3, 'Salut beau renard', '2020-04-18 17:35:36', true);
 INSERT INTO Contact VALUES (default, 3, 2, 'Salut dattebayo!', '2020-04-18 17:38:36', false);
 INSERT INTO Contact VALUES (default, 2, 4, 'Salut la planche!', '2020-04-18 17:35:36', true);
-INSERT INTO Contact VALUES (default, 1, 5, 'J adore ça !!', '2020-04-18 17:38:36', true);
+INSERT INTO Contact VALUES (default, 1, 5, 'J''adore ça !!', '2020-04-18 17:38:36', true);
 INSERT INTO Contact VALUES (default, 1, 9, 'Aimes-tu le gras ?', '2020-04-18 17:38:36', true);
 INSERT INTO Contact VALUES (default, 9, 1, 'T aimes quand la raclette dégoulinne ?', '2020-04-18 17:35:36', true);
 
@@ -243,26 +251,38 @@ INSERT INTO looklike VALUES (2,6);
 
 INSERT INTO practice VALUES(1,1);
 
-INSERT INTO interestedsex VALUES (1,'Homme');
+INSERT INTO interestedsex VALUES (1,'Femme');
 INSERT INTO interestedsex VALUES (2,'Femme');
-INSERT INTO interestedsex VALUES (3,'Homme');
+INSERT INTO interestedsex VALUES (3,'Femme');
 INSERT INTO interestedsex VALUES (4,'Femme');
-INSERT INTO interestedsex VALUES (5,'Homme');
+INSERT INTO interestedsex VALUES (5,'Femme');
 INSERT INTO interestedsex VALUES (6,'Femme');
 INSERT INTO interestedsex VALUES (7,'Femme');
 INSERT INTO interestedsex VALUES (8,'Homme');
 INSERT INTO interestedsex VALUES (9,'Femme');
 INSERT INTO interestedsex VALUES (9,'Animal');
 INSERT INTO interestedsex VALUES (13,'Animal');
+INSERT INTO interestedsex VALUES (14,'Femme');
+INSERT INTO interestedsex VALUES (15,'Femme');
 
-INSERT INTO interesteddiet VALUES(1,1,default );
-INSERT INTO interesteddiet VALUES(2,1,default);
+INSERT INTO followDiet VALUES (15,1);
 
-INSERT INTO followDiet VALUES(1,1);
-INSERT INTO followDiet VALUES(2,1);
+INSERT INTO interestedRelationType VALUES (1,'1');
+INSERT INTO interestedRelationType VALUES (2,'1');
+INSERT INTO interestedRelationType VALUES (3,'1');
+INSERT INTO interestedRelationType VALUES (4,'1');
+INSERT INTO interestedRelationType VALUES (5,'2');
+INSERT INTO interestedRelationType VALUES (6,'2');
+INSERT INTO interestedRelationType VALUES (7,'1');
+INSERT INTO interestedRelationType VALUES (8,'1');
+INSERT INTO interestedRelationType VALUES (9,'3');
+INSERT INTO interestedRelationType VALUES (10,'2');
+INSERT INTO interestedRelationType VALUES (14,'1');
+INSERT INTO interestedRelationType VALUES (15,'1');
 
-INSERT INTO interestedRelationType VALUES (1,'2');
-INSERT INTO interestedRelationType VALUES (2,'2');
+INSERT INTO photo VALUES (default, '/Images/UserUpload/lrjadze98e58conta5ab/1.jpg', true, 14);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/frjaze98e58conta5ab/1.png', true, 7);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/lrjadze98e58conteazeazea5ab/1.png', true, 15);
 
 
 

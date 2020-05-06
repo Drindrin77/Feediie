@@ -139,7 +139,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                                         $userPhoto = new UserPhoto($user['photos']);
                                         $userPhoto->render(); ?>
                                     </div>
-                                    <div class="name"><?= $user['firstname'] . ' ' . $user['age']?> 
+                                    <div class="name" style="font-size:23px"><?= $user['firstname'] . ', ' . $user['age']?> 
                                         ans
                                         <div class="iconcard cursorPointer seeProfil">
                                             <img src="/Images/Icon/eye.png" alt=""/>
