@@ -66,12 +66,21 @@ include_once('../src/View/Pages/UserPhoto.php');
                                 <input type="range" class="custom-range" min="18" max="60" value="<?= $ageMax ?>"
                                        id="ageRangemax">
                             </div>
-                            <div class="titleParameter"><h5>Régime Alimentaire</h5></div>
+                            <div class="titleParameter">
+                                <h5 style="display: inline-block">Régime Alimentaire</h5> 
+                                <span style="display: inline-block; cursor: pointer" data-toggle="popover" data-placement="right" data-trigger="hover" data-html="true" 
+                                                data-content="<span>
+                                                              <b>Gauche</b>: Je ne veux pas que les autres suivent ce régime <br>
+                                                              <b>Milieu</b>: Je suis indifférent <br>
+                                                              <b>Droite</b>: Je veux que les autres suivent ce régime </span>">
+                                <i class="fas fa-info-circle"></i>
+                                </span>
+                            </div>
                         
                             <div id="boxSelectModifiedDiet" class="boxSelectModified">
                                 <?php foreach ($diets as $diet): ?>
                                 <div>
-                                        <input type="range" style="width: 80px;margin-right: 5px;" min="0" max="2" name="diet"
+                                        <input type="range" style="width: 100px;margin-right: 5px;" min="0" max="2" name="diet"
                                                id="<?= $diet['iddiet'] ?>" 
                                             <?php 
                                                 $value = '1';

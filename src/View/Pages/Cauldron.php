@@ -28,7 +28,7 @@ if (sizeof($usersMatchedArray) === 0) {
                              data-matchDate="<?php echo $matchedUser["date_match"] ?>"
                              data-age="<?php echo $matchedUser["age"] ?>">
                             <div class="col-3">
-                                <img id="photo-<?php echo $matchedUser['uniq_id'] ?>"
+                                <img  style="background-color:white"  id="photo-<?php echo $matchedUser['uniq_id'] ?>"
                                      src="<?php echo $matchedUser['photo_url'] ?>"
                                      alt="Photo de profil de <?php echo $matchedUser["name"] ?>">
                             </div>
@@ -62,7 +62,7 @@ if (sizeof($usersMatchedArray) === 0) {
                         <a id="selectedContactLink" class="col-9 col-md-12" href="/profile/<?php echo $usersMatchedArray[0]['uniq_id'] ?>">
                             <div class="row align-items-center">
                                 <div class="col-md-2 col-4">
-                                    <img id="selectedContactPhoto"
+                                    <img style="background-color:white"  id="selectedContactPhoto"
                                          src="<?php echo $usersMatchedArray[0]['photo_url'] ?>">
                                 </div>
                                 <span id="selectedContactName" class="col-3">

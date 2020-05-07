@@ -9,7 +9,7 @@
 ?>
 
 
-<nav id="navbar" class="navbar navbar-expand-lg">
+<nav id="navbar" class="navbar navbar-expand-md">
     <a class="navbar-brand" href="/">
         <img src="/Images/Icon/logo_header.png" width="180" height="auto" class="d-inline-block align-top" alt="">
     </a>
@@ -70,7 +70,7 @@
 
 
             <div id="containerHeaderPhoto">
-                <?php echo '<img id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
+                <?php echo '<img style="background-color:white"  id="headerProfilePhoto" onclick="window.location=\'/profile/'.$uniqID.'\';" src="'.$photo.'">';?>
             </div>
 
             <div id="dropdownProfilContainer" class="dropdown">
