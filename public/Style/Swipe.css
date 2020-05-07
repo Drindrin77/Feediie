@@ -286,6 +286,7 @@
     transform: translate(-450px,0);
     transition: 0.5s;
     z-index: 400;
+    position:relative
 }
 #parameters {
     margin-top: 20px;

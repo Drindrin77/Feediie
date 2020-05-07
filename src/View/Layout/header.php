@@ -22,7 +22,7 @@
         <ul class="navbar-nav mr-auto">
             <?php if($isAdmin){ ?>
                 <li class="nav-item">
-                <a class="nav-link" style="color:#E86B51" href="/admin">Admin</a>
+                <a class="nav-link" style="color:white" href="/admin">Admin</a>
             </li>
             <?php } ?>  
         </ul>
