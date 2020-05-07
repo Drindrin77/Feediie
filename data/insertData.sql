@@ -52,32 +52,32 @@ INSERT INTO city VALUES(default, 'Perpignan', '66000');
 
 
 INSERT INTO FeediieUser VALUES
-    (default, 'jzpeerz58aze', 'Leanna', '1999-04-11','leiina77410@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 
+    (default, 'jzpeerz58aze', 'Drindrin', '1999-04-11','leiina77410@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 
     'balbalbal', default, default, default, default, 'token', true, 1, default, 'Femme');
 
 
 INSERT INTO FeediieUser VALUES
-    (default, 'arjaze98e58a5ab','Valentin', '1998-02-14','valentinbgdu54@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je suis valentin je viens de Nancy',
+    (default, 'arjaze98e58a5ab','Valentin', '1998-02-14','valentinbgdu54@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Rejoins moi sur http://sitedemerde.com',
         default, default, default , default,'token2', true, 1, 5, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'brjaze98e58a5ab','Naruto', '1992-01-30','naruto@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'brjaze98e58a5ab','Naruto', '1992-01-30','naruto@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je suis aussi futé qu''un renard. Et j''aime les ramen',
         default, default, default, default,'token3', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'crjaze98e58a5ab','Sakura', '1999-04-11','Sakura@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'crjaze98e58a5ab','Sakura', '1999-04-11','Sakura@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Tapper fort',
         default, default, default, default,'token4', default, 1, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'drjaze98e58a5ab','Sasuke', '1999-04-11','sasuke@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'drjaze98e58a5ab','Sasuke', '1999-04-11','sasuke@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'J''adore le gras',
         default, default, default, default,'token5', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'erjaze98e58conta5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'erjaze98e58conta5ab','Itachi', '1985-04-11','itachi@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'J''aime quand la sauce dégoulinne',
         default, default, default, default, 'token6', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'frjaze98e58conta5ab','Pierre', '1985-04-11','pierre@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'frjaze98e58conta5ab','Pierre', '1985-04-11','pierre@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je suis ingénieur informaticien. Non je suis pas cliché',
         default, default, default, default, 'token7', default, 1, default, 'Homme');
 
 INSERT INTO FeediieUser VALUES
@@ -85,7 +85,7 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token8', default, 1, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'hrjaze98e58conta5ab','Fred', '1985-04-11','fred@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'hrjaze98e58conta5ab','Nezuko', '1985-04-11','nezuko@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Graou je suis un démon gentil. J''aime pas parler',
         default, default, default, default, 'token9', default, 8, default, 'Transgender');
 
 INSERT INTO FeediieUser VALUES
@@ -93,15 +93,15 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token10', default, 8, default, 'Animal');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'jrjaze98e58conta5ab','Monique', '1985-04-11','monique@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'jrjaze98e58conta5ab','Miss Jirachi', '1985-04-11','monique@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
         default, default, default, default, 'token11', default, 8, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'krjaze98e58conta5ab','Sacha', '1985-04-11','sacha@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'krjaze98e58conta5ab','Tibo inshape', '1985-04-11','sacha@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
         default, default, default, default, 'token12', default, 7, default, 'Transgender');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'lrjaze98e58conta5ab','Pikachu', '1985-04-11','pikachu@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
+    (default, 'lrjaze98e58conta5ab','David Lafarge', '1985-04-11','pikachu@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'balbalbal',
         default, default, default, default, 'token13', default, 8, default, 'Animal');
 
 INSERT INTO FeediieUser VALUES
@@ -109,27 +109,19 @@ INSERT INTO FeediieUser VALUES
         default, default, default, default, 'token14', default, 8, default, 'Femme');
 
 INSERT INTO FeediieUser VALUES
-    (default, 'lrjadze98e58conteazeazea5ab','Saitama', '1985-04-11','saitama@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Tu veux l''eau de mon bain?',
+    (default, 'lrjadze98e58conteazeazea5ab','Saitama', '1985-04-11','saitama@gmail.com','$2y$10$DMjYUV76Y7GYJlC45pTOKOG8UjFw.tnEfm1WgIqlLzoiImYEKf4ra', 'Je détruis les gens d''un seul poing',
         default, default, default, default, 'token1r', default, 8, default, 'Homme');
 
-INSERT INTO LikedUser VALUES (2, 3, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (4, 2, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (2, 7, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (1, 9, '2020-04-18 15:35:36', true);
-INSERT INTO LikedUser VALUES (7, 5, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (6, 1, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (5, 1, '2020-04-18 13:54:36', true);
-INSERT INTO LikedUser VALUES (2, 5, '2020-04-18 13:54:36', false);
-INSERT INTO LikedUser VALUES (5, 3, '2020-04-18 13:54:36', false);
-INSERT INTO LikedUser VALUES (6, 2, '2020-04-18 13:54:36', false);
+INSERT INTO LikedUser VALUES (15, 3, '2020-04-18 15:35:36', true);
+INSERT INTO LikedUser VALUES (4, 15, '2020-04-18 13:54:36', true);
+INSERT INTO LikedUser VALUES (9, 15, '2020-04-18 13:54:36', true);
 
-
-INSERT INTO Contact VALUES (default, 2, 3, 'Salut beau renard', '2020-04-18 17:35:36', true);
-INSERT INTO Contact VALUES (default, 3, 2, 'Salut dattebayo!', '2020-04-18 17:38:36', false);
-INSERT INTO Contact VALUES (default, 2, 4, 'Salut la planche!', '2020-04-18 17:35:36', true);
-INSERT INTO Contact VALUES (default, 1, 5, 'J''adore ça !!', '2020-04-18 17:38:36', true);
-INSERT INTO Contact VALUES (default, 1, 9, 'Aimes-tu le gras ?', '2020-04-18 17:38:36', true);
-INSERT INTO Contact VALUES (default, 9, 1, 'T aimes quand la raclette dégoulinne ?', '2020-04-18 17:35:36', true);
+INSERT INTO Contact VALUES (default, 15, 3, 'Salut beau renard', '2020-04-18 17:35:36', true);
+INSERT INTO Contact VALUES (default, 3, 15, 'Salut dattebayo!', '2020-04-18 17:38:36', false);
+INSERT INTO Contact VALUES (default, 15, 4, 'Salut la planche!', '2020-04-18 17:35:36', true);
+INSERT INTO Contact VALUES (default, 1, 15, 'J''adore ça !!', '2020-04-18 17:38:36', true);
+INSERT INTO Contact VALUES (default, 15, 9, 'Aimes-tu le gras ?', '2020-04-18 17:38:36', true);
+INSERT INTO Contact VALUES (default, 9, 15, 'T aimes quand la raclette dégoulinne ?', '2020-04-18 17:35:36', true);
 
 
 INSERT INTO Dish VALUES (default, 'Pizza', '/Images/Dish/pizza.png');
@@ -283,7 +275,19 @@ INSERT INTO interestedRelationType VALUES (15,'1');
 INSERT INTO photo VALUES (default, '/Images/UserUpload/lrjadze98e58conta5ab/1.jpg', true, 14);
 INSERT INTO photo VALUES (default, '/Images/UserUpload/frjaze98e58conta5ab/1.png', true, 7);
 INSERT INTO photo VALUES (default, '/Images/UserUpload/lrjadze98e58conteazeazea5ab/1.png', true, 15);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/brjaze98e58a5ab/1.png', true, 3);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/crjaze98e58a5ab/1.png', true, 4);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/hrjaze98e58conta5ab/1.jpg', true, 9);
+INSERT INTO photo VALUES (default, '/Images/UserUpload/grjaze98e58conta5ab/1.jpg', true, 8);
 
 
+
+INSERT INTO idea VALUES (default, 1, 'On devrait ajouter l''hobby Badminton');
+INSERT INTO idea VALUES (default, 1, 'Ajouter l''hobby Piscine lol');
+INSERT INTO idea VALUES (default, 13, 'Salut à tous les amiiiiiiiiiiis');
+INSERT INTO idea VALUES (default, 2, 'On devrait ajouter la relation Partenaire de sport');
+INSERT INTO idea VALUES (default, 1, 'Elle est où ma baguette?');
+INSERT INTO idea VALUES (default, 11, 'Coucou !');
+INSERT INTO idea VALUES (default, 12, 'Damn les gens !!!');
 
 

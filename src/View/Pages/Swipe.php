@@ -18,8 +18,8 @@ $ageMax = $userSelectAge['agemax'];
 include_once('../src/View/Pages/UserPhoto.php');
 ?>
 <div class="container-fluid background">
-    <div class="buttonParameter"><h4>Paramètres</h4><img src="/Images/Icon/parameters.png" alt=""/></div>
-    <div class="animationParameters"style="z-index: 3000;">
+    <div class="buttonParameter" style="cursor:pointer"><img src="/Images/Icon/parameters.png" alt=""/></div>
+    <div class="animationParameters">
         <div id="closeBtn" class="buttonsClose"><img src="/Images/Icon/croix.png" alt=""/></div>
         <div id="parameters" class="container" >
             <div class="row">
@@ -134,7 +134,7 @@ include_once('../src/View/Pages/UserPhoto.php');
                         <?php if (!empty($users)) {
                             foreach ($users as $user): ?>
                                 <div id=<?= $user['iduser'] ?> class="buddy" style="display: block">
-                                    <div class="avatar">
+                                    <div class="avatar" style="background-color:white">
                                         <?php
                                         $userPhoto = new UserPhoto($user['photos']);
                                         $userPhoto->render(); ?>
