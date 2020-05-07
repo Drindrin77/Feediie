@@ -559,14 +559,31 @@
 .range-under::-moz-range-thumb{
     background-color: #999999;
 }
+.custom-range::-webkit-slider-thumb:active {
+    background-color: #f79b2b;
+}
+.custom-range::-webkit-slider-thumb {
+    background-color: #999999;
+}
 .range-under::-moz-range-track {
     background-color: #f3c385;
     transition: 0.5s;
+}
+.range-under::-moz-range-track {
+    background-color: #f3c385;
+    transition: 0.5s;
+}
+.custom-range::-webkit-slider-runnable-track {
+    background-color: #f3c385;
 }
 .range-under {
     pointer-events: none;
 }
 .range-over::-moz-range-thumb{
+    background-color: #999999;
+    pointer-events: none;
+}
+.range-over::-webkit-slider-thumb{
     background-color: #999999;
     pointer-events: none;
 }
@@ -578,6 +595,7 @@
     opacity: 0;
     pointer-events: none;
 }
+/*FIREFOX*/
 .custom-range-hide::-moz-range-track {
     background-color: #ff7357;
     transition: 0.5s;
@@ -592,6 +610,23 @@
 .custom-range-show::-moz-range-thumb{
     background-color: #2ecc71;
 }
+/*CHROME*/
+.custom-range-hide::-webkit-slider-runnable-track {
+    background-color: #ff7357;
+    transition: 0.5s;
+}
+.custom-range-hide::-webkit-slider-thumb{
+    background-color: #E86B51;
+}
+.custom-range-show::-webkit-slider-runnable-track {
+    background-color: #2ecc71;
+    transition: 0.5s;
+}
+.custom-range-show::-webkit-slider-thumb{
+    background-color: #2ecc71;
+}
+
+
 
 .custom-range:focus::-webkit-slider-thumb {
     box-shadow: 0 0 0 0 #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0);
