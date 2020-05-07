@@ -578,18 +578,18 @@
     pointer-events: none;
 }
 .custom-range-hide::-moz-range-track {
-    background-color: lightgray;
-    transition: 0.5s;
-}
-.custom-range-hide::-moz-range-thumb{
-    background-color: lightgray;
-}
-.custom-range-show::-moz-range-track {
     background-color: #ff7357;
     transition: 0.5s;
 }
-.custom-range-show::-moz-range-thumb{
+.custom-range-hide::-moz-range-thumb{
     background-color: #E86B51;
+}
+.custom-range-show::-moz-range-track {
+    background-color: #2ecc71;
+    transition: 0.5s;
+}
+.custom-range-show::-moz-range-thumb{
+    background-color: #2ecc71;
 }
 
 .custom-range:focus::-webkit-slider-thumb {
